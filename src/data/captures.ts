@@ -1,7 +1,8 @@
-import { CASE_ORDER, CASE_SLUG, STEP_ORDER, type CaseId, type Device, type Lang, type Media, type StepId } from '../lib/types';
+import { CASE_ORDER, STEP_ORDER, type CaseId, type Device, type Lang, type Media, type StepId } from '../lib/types';
+import manifest from './captures.manifest.json';
 
 /**
- * Which real app screen each step shows. Screens are captured from the emulator (plan 2);
+ * Which real app screen each step shows. Screens are captured from the emulator (capture/run.ts);
  * until a screen exists its cell is 'pending' and a release build refuses to ship.
  * `src` values are paths under src/assets (resolved by MediaView), so this file stays free of image imports.
  */
@@ -26,47 +27,11 @@ function pendingEntry(lang: Lang, device: Device): CaptureEntry {
   return { status: 'pending', media: { kind: 'image', src: `/captures/_pending/${device}.svg`, alt: PENDING_ALT[lang] } };
 }
 
-/** Folder that holds one case's screens. A case may only use files from its own folder. */
-function dir(lang: Lang, c: CaseId, device: Device): string {
-  return `/captures/${lang}/${CASE_SLUG[c]}/${device}/`;
-}
-
-type Overrides = Partial<Record<`${Lang}/${CaseId}/${Device}/${StepId}`, CaptureEntry>>;
-
 /**
- * Development stand-ins: the existing college-data captures, mapped onto the eight-step skeleton.
- * They stay 'pending' because plan 2 re-captures every step with the final data.
+ * The screens that exist, keyed 'ko/university/phone/fill'. capture/run.ts rewrites this file after a capture
+ * run (one case on one device at a time); cells it does not list show the placeholder.
  */
-const uniPhone = dir('ko', 'university', 'phone');
-const OVERRIDES: Overrides = {
-  'ko/university/phone/fill': {
-    status: 'pending',
-    media: { kind: 'image', src: `${uniPhone}fill.png`, alt: '대학 시간표 예시 화면. 월요일부터 금요일까지 수업 열 개가 색으로 구분되어 있다.' },
-  },
-  'ko/university/phone/unique': {
-    status: 'pending',
-    media: { kind: 'image', src: `${uniPhone}unique.png`, alt: '자료구조 수업을 누른 화면. 요일, 시간, 강의실, 교수님과 연결된 To-Do가 보인다.' },
-  },
-  'ko/university/phone/todo': {
-    status: 'pending',
-    media: { kind: 'image', src: `${uniPhone}todo.png`, alt: '새 To-Do 화면. 제목 자료구조 실습 제출이 자료구조 수업에 연결되어 있다.' },
-  },
-  'ko/university/phone/remind': {
-    status: 'pending',
-    media: {
-      kind: 'sequence',
-      frameMs: 2500,
-      frames: [
-        { src: `${uniPhone}remind-1.png`, alt: '리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 고를 수 있다.' },
-        { src: `${uniPhone}remind-2.png`, alt: '리마인더 시간이 되어 뜬 알람 화면. To-Do 제목과 다시 알림, 끄기 단추가 보인다.' },
-      ],
-    },
-  },
-  'ko/university/phone/widgets': {
-    status: 'pending',
-    media: { kind: 'image', src: `${uniPhone}widgets.png`, alt: '홈 화면의 오늘 통합 위젯. 오늘 수업 두 개와 할 일 세 개가 함께 보인다.' },
-  },
-};
+const MANIFEST = manifest as Partial<Record<`${Lang}/${CaseId}/${Device}/${StepId}`, CaptureEntry>>;
 
 function build(): Record<Lang, Record<CaseId, Record<Device, Record<StepId, CaptureEntry>>>> {
   const out = {} as Record<Lang, Record<CaseId, Record<Device, Record<StepId, CaptureEntry>>>>;
@@ -77,7 +42,7 @@ function build(): Record<Lang, Record<CaseId, Record<Device, Record<StepId, Capt
       for (const device of DEVICES) {
         out[lang][c][device] = {} as Record<StepId, CaptureEntry>;
         for (const step of STEP_ORDER)
-          out[lang][c][device][step] = OVERRIDES[`${lang}/${c}/${device}/${step}`] ?? pendingEntry(lang, device);
+          out[lang][c][device][step] = MANIFEST[`${lang}/${c}/${device}/${step}`] ?? pendingEntry(lang, device);
       }
     }
   }

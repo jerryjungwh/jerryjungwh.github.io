@@ -9,6 +9,7 @@
       "startHour": 8,
       "endHour": 18,
       "timeFormat": "12h",
+      "cellHeightDp": 64,
       "unique": {
         "days": "weekdays_sat"
       },

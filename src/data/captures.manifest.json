@@ -1,0 +1,51 @@
+{
+  "ko/university/phone/fill": {
+    "status": "pending",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/fill.png",
+      "alt": "대학 시간표 예시 화면. 월요일부터 금요일까지 수업 열 개가 색으로 구분되어 있다."
+    }
+  },
+  "ko/university/phone/unique": {
+    "status": "pending",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/unique.png",
+      "alt": "자료구조 수업을 누른 화면. 요일, 시간, 강의실, 교수님과 연결된 To-Do가 보인다."
+    }
+  },
+  "ko/university/phone/todo": {
+    "status": "pending",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/todo.png",
+      "alt": "새 To-Do 화면. 제목 자료구조 실습 제출이 자료구조 수업에 연결되어 있다."
+    }
+  },
+  "ko/university/phone/remind": {
+    "status": "pending",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/university/phone/remind-1.png",
+          "alt": "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 고를 수 있다."
+        },
+        {
+          "src": "/captures/ko/university/phone/remind-2.png",
+          "alt": "리마인더 시간이 되어 뜬 알람 화면. To-Do 제목과 다시 알림, 끄기 단추가 보인다."
+        }
+      ]
+    }
+  },
+  "ko/university/phone/widgets": {
+    "status": "pending",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/widgets.png",
+      "alt": "홈 화면의 오늘 통합 위젯. 오늘 수업 두 개와 할 일 세 개가 함께 보인다."
+    }
+  }
+}

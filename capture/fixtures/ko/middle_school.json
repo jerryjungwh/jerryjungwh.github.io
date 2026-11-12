@@ -9,6 +9,8 @@
       "startHour": 8,
       "endHour": 20,
       "timeFormat": "24h",
+      "textSizeSp": 10,
+      "cellHeightDp": 54,
       "unique": {
         "days": "weekdays_sat"
       },

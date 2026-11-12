@@ -38,3 +38,19 @@ test('pendingCaptures는 임시 화면인 칸의 열쇠만 돌려준다', () => 
   expect(keys).toEqual(allEntries().filter(([, e]) => e.status === 'pending').map(([key]) => key));
   for (const k of keys) expect(k).toMatch(/^(ko|en)\/[a-z_]+\/(phone|tablet)\/[a-z_]+$/);
 });
+
+test('화면 목록 파일에 있는 칸은 그 값이고, 없는 칸은 임시 화면이다', async () => {
+  const manifest = (await import('../../src/data/captures.manifest.json')).default as Record<string, unknown>;
+  const listed = Object.keys(manifest);
+  expect(listed.length).toBeGreaterThan(0);
+  for (const [key, entry] of allEntries()) {
+    if (listed.includes(key)) expect(entry, key).toEqual(manifest[key]);
+    else {
+      expect(entry.status, key).toBe('pending');
+      expect(mediaSources(entry.media).every((src) => src.includes('/captures/_pending/')), key).toBe(true);
+    }
+  }
+  // Every listed key is a real cell: a typo in the file must not silently drop a screen.
+  const cells = allEntries().map(([key]) => key);
+  for (const key of listed) expect(cells, key).toContain(key);
+});

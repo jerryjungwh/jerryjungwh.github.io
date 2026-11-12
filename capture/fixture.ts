@@ -33,6 +33,9 @@ export interface FixtureTimetable {
   startHour: number;
   endHour: number;
   timeFormat: '24h' | '12h';
+  /** Class text size and row height, when the app's defaults do not fit this timetable on the screen. */
+  textSizeSp?: number;
+  cellHeightDp?: number;
   /** A second timetable that appears at the "unique" step. */
   since?: 'unique';
   /** What the "unique" step changes on this timetable. */
