@@ -144,3 +144,19 @@ test('글에 적은 점심시간에는 수업이 없다', () => {
     expect(busy.map((s) => s.key), lang).toEqual([]);
   }
 });
+
+test('하루가 기기 한 화면에 들어간다: 폰 650dp, 태블릿 545dp(실측), 칸 높이는 따로 정할 수 있다', () => {
+  // 9 hours at the app's default row (60dp) fit both.
+  expect(fixtureProblems(valid())).toEqual([]);
+  expect(broken((f) => (f.timetables[0].cellHeightDp = 80)).join('\n')).toMatch(/폰/);
+  expect(broken((f) => (f.timetables[0].cellHeightDp = 70)).join('\n')).toMatch(/태블릿/);
+  expect(broken((f) => Object.assign(f.timetables[0], { cellHeightDp: 70, tablet: { cellHeightDp: 60 } }))).toEqual([]);
+  expect(broken((f) => (f.timetables[0].tablet = { cellHeightDp: 61 })).join('\n')).toMatch(/태블릿/);
+});
+
+test('칸 높이와 글씨 크기는 앱이 받는 범위 안이다(밖이면 앱이 말없이 바꾼다)', () => {
+  expect(broken((f) => (f.timetables[0].cellHeightDp = 30)).join('\n')).toMatch(/36~120/);
+  expect(broken((f) => (f.timetables[0].tablet = { cellHeightDp: 121 })).join('\n')).toMatch(/36~120/);
+  expect(broken((f) => (f.timetables[0].textSizeSp = 4)).join('\n')).toMatch(/5~24/);
+  expect(broken((f) => (f.timetables[0].tablet = { textSizeSp: 25 })).join('\n')).toMatch(/5~24/);
+});

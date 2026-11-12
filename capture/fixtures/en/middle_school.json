@@ -14,6 +14,9 @@
       "unique": {
         "days": "weekdays_sat"
       },
+      "tablet": {
+        "cellHeightDp": 54
+      },
       "schedules": [
         {
           "key": "mon1",

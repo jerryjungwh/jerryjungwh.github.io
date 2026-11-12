@@ -11,6 +11,9 @@
       "timeFormat": "12h",
       "cellHeightDp": 87,
       "unique": {},
+      "tablet": {
+        "cellHeightDp": 77
+      },
       "schedules": [
         {
           "key": "mon1",

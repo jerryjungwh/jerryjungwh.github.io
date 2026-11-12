@@ -114,6 +114,10 @@ async function captureCase(c: CaseId): Promise<Manifest> {
   const archive = execFileSync(ADB, ['-s', serial, 'exec-out', 'run-as', PKG, 'tar', 'cf', '-', '-C', `files/${remote}`, '.'], { maxBuffer: 256 * 1024 * 1024 });
   execFileSync('/usr/bin/tar', ['xf', '-', '-C', raw], { input: archive });
   adb('pull', `/sdcard/Android/data/${PKG}/files/${remote}/widget_done.mp4`, join(raw, 'widget_done.mp4'));
+  // The raw screens and the full-rate recording take tens of MB on the device, and the tablet image is nearly
+  // full. A failed run never gets here, so its files stay on the device for a look.
+  shell(`run-as ${PKG} rm -rf files/${remote}`);
+  shell(`rm -rf /sdcard/Android/data/${PKG}/files/${remote}`);
   const session = JSON.parse(readFileSync(join(raw, 'capture-session.json'), 'utf8'));
   if (session.status !== 'complete' || session.versionCode !== APP_VERSION_CODE) throw new Error(`${remote}: ${JSON.stringify(session)}`);
   const present = readdirSync(raw);

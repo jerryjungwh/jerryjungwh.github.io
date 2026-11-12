@@ -36,6 +36,8 @@ export interface FixtureTimetable {
   /** Class text size and row height, when the app's defaults do not fit this timetable on the screen. */
   textSizeSp?: number;
   cellHeightDp?: number;
+  /** The same two on the tablet, whose landscape screen has less height for rows. Unset: the values above. */
+  tablet?: { textSizeSp?: number; cellHeightDp?: number };
   /** A second timetable that appears at the "unique" step. */
   since?: 'unique';
   /** What the "unique" step changes on this timetable. */
@@ -84,6 +86,12 @@ const VISIBLE: Record<DayRange, number[]> = {
   all: [0, 1, 2, 3, 4, 5, 6],
 };
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
+/**
+ * Height for the rows of the weekly table, measured on the capture emulators (Pixel 9 portrait, Pixel Tablet
+ * landscape). Taller and the last hours scroll out of the screen. The app's default row is 60dp an hour.
+ */
+const ROWS_DP = { phone: 650, tablet: 545 } as const;
+const DEFAULT_ROW_DP = 60;
 const minutes = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
 const MIN_ALT = 10;
 
@@ -98,6 +106,16 @@ export function fixtureProblems(f: CaptureFixture): string[] {
 
   for (const t of f.timetables) {
     twice(t.schedules.map((s) => s.key), `시간표 ${t.key}`);
+    for (const [where, v] of [['', t], ['tablet.', t.tablet ?? {}]] as const) {
+      // The app clamps to these ranges without a word, which would make the fit check below wrong.
+      if (v.cellHeightDp !== undefined && !(v.cellHeightDp >= 36 && v.cellHeightDp <= 120)) out.push(`${t.key}: ${where}cellHeightDp는 36~120이다`);
+      if (v.textSizeSp !== undefined && !(v.textSizeSp >= 5 && v.textSizeSp <= 24)) out.push(`${t.key}: ${where}textSizeSp는 5~24다`);
+    }
+    const hours = t.endHour - t.startHour;
+    const phoneRows = hours * (t.cellHeightDp ?? DEFAULT_ROW_DP);
+    const tabletRows = hours * (t.tablet?.cellHeightDp ?? t.cellHeightDp ?? DEFAULT_ROW_DP);
+    if (phoneRows > ROWS_DP.phone) out.push(`${t.key}: 폰에서 하루가 한 화면에 들어가지 않는다 (${phoneRows}dp > ${ROWS_DP.phone}dp)`);
+    if (tabletRows > ROWS_DP.tablet) out.push(`${t.key}: 태블릿에서 하루가 한 화면에 들어가지 않는다 (${tabletRows}dp > ${ROWS_DP.tablet}dp, tablet.cellHeightDp를 정한다)`);
     for (const s of t.schedules) {
       const at = `${t.key}/${s.key}`;
       if (!TIME.test(s.start) || !TIME.test(s.end)) {

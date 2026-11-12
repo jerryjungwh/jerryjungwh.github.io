@@ -11,6 +11,9 @@
       "timeFormat": "12h",
       "textSizeSp": 10,
       "cellHeightDp": 46,
+      "tablet": {
+        "cellHeightDp": 41
+      },
       "schedules": [
         {
           "key": "mon1",

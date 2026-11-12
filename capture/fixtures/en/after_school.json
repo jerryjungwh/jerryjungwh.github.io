@@ -11,6 +11,9 @@
       "timeFormat": "12h",
       "textSizeSp": 10,
       "cellHeightDp": 67,
+      "tablet": {
+        "cellHeightDp": 60
+      },
       "schedules": [
         {
           "key": "art_mon",

@@ -12,6 +12,9 @@
       "textSizeSp": 10,
       "cellHeightDp": 43,
       "unique": {},
+      "tablet": {
+        "cellHeightDp": 36
+      },
       "schedules": [
         {
           "key": "m2_mon",
