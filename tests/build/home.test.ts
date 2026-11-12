@@ -87,9 +87,9 @@ test('리뷰 절은 답글 수로 시작하고, 건의 리뷰 묶음마다 반�
     const data = shipped.groups[i];
     expect($(el).find('figure').length, data.note).toBe(data.reviews.length);
     expect($(el).find('.shipped-note').length, data.note).toBe(1);
-    // Read as plain text: the label, the date and the note stay separate words without styles.
+    // Read as plain text: the label and the note stay separate words without styles.
     const note = $(el).find('.shipped-note').text().replace(/\s+/g, ' ').trim();
-    expect(note).toBe(`${shipped.label} ${data.when} ${data.note}`);
+    expect(note).toBe(`${shipped.label} ${data.note}`);
   });
   // The note is the site speaking, not a quote.
   expect($('#reviews .shipped-note blockquote, #reviews blockquote .shipped-note').length).toBe(0);

@@ -46,12 +46,11 @@ test('답글 수는 Play 리뷰 내보내기에서 센 값이고 기준 달을 �
   expect(SITE_EN.reviews.lead).toContain('as of September 2026');
 });
 
-// 7.5.4 (173) reached production on 2026-11-07. The setting is named in strings_week_start.xml.
-test('주 시작 요일 건의는 7.5.4에 들어갔다고 적는다', () => {
-  const ko = SITE_KO.reviews.shipped.groups.find((g) => g.note.includes('한 주의 시작 요일'))!;
-  expect(ko.when).toBe('2026년 11월, 버전 7.5.4');
-  const en = SITE_EN.reviews.shipped.groups.find((g) => g.note.includes('First day of the week'))!;
-  expect(en.when).toBe('November 2026, version 7.5.4');
+// The week start setting shipped in 7.5.4 (173), in production since 2026-11-07 (strings_week_start.xml).
+// Both English reviews asked for it, so they share one note.
+test('주 시작 요일 건의에는 반영했다고 적는다', () => {
+  expect(SITE_KO.reviews.shipped.groups.some((g) => g.note.includes('시작 요일'))).toBe(true);
+  const en = SITE_EN.reviews.shipped.groups.find((g) => g.note.includes('first day of the week'))!;
   expect(en.reviews.length).toBe(2);
 });
 

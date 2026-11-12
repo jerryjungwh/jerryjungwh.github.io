@@ -108,7 +108,8 @@ export interface SiteStrings {
       heading: string;
       /** The word every note starts with. */
       label: string;
-      groups: { reviews: Review[]; when: string; note: string }[];
+      /** `note`: one short sentence. No versions or dates: the point is that reviews steer the app. */
+      groups: { reviews: Review[]; note: string }[];
     };
     caption(year: number, month: number): string;
   };

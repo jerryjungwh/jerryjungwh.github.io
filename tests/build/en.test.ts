@@ -30,7 +30,7 @@ test('영어 홈의 리뷰는 영어 원문이고 출처는 영어로 적는다'
   expect($('#reviews .shipped-group').length).toBe(1);
   expect($('#reviews .shipped-group figure').length).toBe(2);
   expect($('#reviews .shipped-note').length).toBe(1);
-  expect($('#reviews .shipped-note').text()).toContain('First day of the week');
+  expect($('#reviews .shipped-note').text()).toContain('first day of the week');
   expect($('#reviews').text()).not.toMatch(/[가-힣]/);
 });
 

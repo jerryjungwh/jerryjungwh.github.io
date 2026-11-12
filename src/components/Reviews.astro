@@ -39,12 +39,9 @@ const quote = (r: Review) => ({ text: r.text, caption: t.caption(r.year, r.month
             <figcaption>{r.caption}</figcaption>
           </figure>
         ))}
-        <div class="shipped-note">
-          <p class="shipped-when">
-            <strong>{t.shipped.label}</strong> <span>{g.when}</span>
-          </p>{' '}
-          <p>{g.note}</p>
-        </div>
+        <p class="shipped-note">
+          <strong>{t.shipped.label}</strong> <span>{g.note}</span>
+        </p>
       </div>
     ))
   }
@@ -82,23 +79,25 @@ const quote = (r: Review) => ({ text: r.text, caption: t.caption(r.year, r.month
   }
   .shipped-group {
     display: grid;
-    gap: 22px;
+    gap: 14px;
   }
-  /* The answer to the request above it: starts where the quoted text starts. */
+  .shipped-group figure + figure {
+    margin-top: 22px;
+  }
+  /* The answer to the request above it: one line, starting where the quoted text starts. */
   .shipped-note {
-    margin-left: 21px;
-    padding: 14px 18px;
-    border-radius: 12px;
-    background: var(--brand-tint);
-    font-size: clamp(15px, 1.3vw, 16px);
-    line-height: 1.65;
-  }
-  .shipped-when {
-    font-size: 14px;
+    padding-left: 21px;
+    font-size: 15px;
+    line-height: 1.7;
     color: var(--body);
   }
-  .shipped-when strong {
-    margin-right: 6px;
+  .shipped-note strong {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 1px 10px;
+    border-radius: 999px;
+    background: var(--brand-tint);
+    font-size: 13px;
     font-weight: 700;
     color: var(--brand);
   }
