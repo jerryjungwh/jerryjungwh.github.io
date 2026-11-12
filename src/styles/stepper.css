@@ -12,11 +12,11 @@
  */
 
 .stepper {
-  --phone-w: min(50vw, 230px);
+  --phone-w: min(42vw, 210px);
   --tablet-w: 100%;
-  --pad: 24px;
+  --pad: 10px;
   --switch-h: 40px;
-  --stage-top: 24px;
+  --stage-top: 20px;
   /* phone screen is 1080 x 2424 */
   --stage-h: calc(var(--phone-w) * 2.2445 + var(--pad) * 2);
 }
@@ -148,6 +148,7 @@
   font-weight: 600;
   line-height: 25px;
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 .step-title button {
   appearance: none;
@@ -168,9 +169,22 @@
 }
 
 .stepper-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
   font-size: 13px;
+  line-height: 20px;
   color: var(--body);
+}
+/* Name of the widget on screen during the widgets step. Empty for every other step. */
+.stepper-frame-label {
+  min-height: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+html:not(.js) .stepper-frame-label {
+  display: none;
 }
 
 .stepper-controls {
@@ -202,10 +216,18 @@ html:not(.js) .stepper-controls {
 
 /* ── with the script: one case, one step, one screen ─────────────────────── */
 
+/* Small screens: the phone stands beside the step list, so pressing a step and seeing the screen
+   change happen in one view. */
 html.js .stepper {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: 'lead' 'tabs' 'stage' 'text' 'controls' 'cta';
+  grid-template-columns: calc(var(--phone-w) + var(--pad) * 2) minmax(0, 1fr);
+  grid-template-areas:
+    'lead lead'
+    'tabs tabs'
+    'stage text'
+    'controls controls'
+    'cta cta';
+  column-gap: 14px;
 }
 html.js .stepper-lead {
   grid-area: lead;
@@ -245,6 +267,7 @@ html.js .stepper-note {
 }
 html.js .stepper .case-text {
   grid-area: text;
+  margin-top: var(--stage-top);
 }
 
 html.js .stepper article[data-case] {
@@ -325,10 +348,52 @@ html.js .stepper li[data-step][data-active] .step-text {
   color: var(--ink);
 }
 
+@media (max-width: 959.98px) {
+  html.js .stepper .case-screens {
+    border-radius: 0;
+    background: none;
+  }
+  html.js .stepper li[data-step] {
+    padding-left: 24px;
+  }
+  html.js .stepper li[data-step]::before {
+    width: 16px;
+    font-size: 13px;
+  }
+  html.js .stepper .step-cell {
+    padding: 11px 10px;
+  }
+  html.js .stepper .step-title {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  html.js .stepper li[data-step]::before {
+    top: 11px;
+    line-height: 22px;
+  }
+  html.js .stepper li[data-step][data-active]::before {
+    top: 17px;
+  }
+  html.js .stepper .step-text {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  /* A tablet screen is wide: it takes the full width and the steps go below it. */
+  html.js .stepper[data-device='tablet'] {
+    --stage-h: calc((100vw - var(--gutter) * 2 - var(--pad) * 2) * 0.625 + var(--pad) * 2);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'lead' 'tabs' 'stage' 'text' 'controls' 'cta';
+  }
+  html.js .stepper[data-device='tablet'] .case-text {
+    margin-top: 20px;
+  }
+}
+
 @media (min-width: 960px) {
   .stepper {
     --phone-w: 280px;
     --tablet-w: 472px;
+    --pad: 24px;
     --stage-top: 0px;
   }
   html.js .stepper {
@@ -341,5 +406,8 @@ html.js .stepper li[data-step][data-active] .step-text {
       'stage cta';
     grid-template-rows: auto auto auto auto 1fr;
     column-gap: clamp(40px, 6vw, 96px);
+  }
+  html.js .stepper .case-text {
+    margin-top: 28px;
   }
 }

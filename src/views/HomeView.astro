@@ -15,7 +15,7 @@ const t = siteStrings(lang);
 const cases = CASES_KO;
 ---
 
-<Layout lang={lang} title={t.home.title} description={t.home.description} path={pagePath(lang, 'home')}>
+<Layout lang={lang} title={t.home.title} description={t.home.description} path={pagePath(lang, 'home')} stepper="random">
   <main class="page">
     <CaseStepper lang={lang} cases={cases} detail="short" headingLevel={2}>
       <Fragment slot="lead">

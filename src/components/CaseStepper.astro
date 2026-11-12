@@ -2,6 +2,7 @@
 import '../styles/stepper.css';
 import { getCapture } from '../data/captures';
 import { siteStrings } from '../data/site';
+import { stepDurationMs } from '../lib/stepper-state';
 import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
 import MediaView from './MediaView.astro';
 
@@ -49,22 +50,22 @@ const DEVICES: Device[] = ['phone', 'tablet'];
       <article data-case={c.id}>
         <div class="case-screens">
           {c.steps.flatMap((s, stepIndex) =>
-            DEVICES.map((device) => (
-              <figure
-                data-media
-                data-case={c.id}
-                data-step={s.id}
-                data-device={device}
-                data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
-                aria-labelledby={`step-${c.id}-${s.id}`}
-              >
-                <MediaView
-                  entry={getCapture(lang, c.id, device, s.id)}
-                  device={device}
-                  eager={caseIndex === 0 && stepIndex === 0 && device === 'phone'}
-                />
-              </figure>
-            )),
+            DEVICES.map((device) => {
+              const entry = getCapture(lang, c.id, device, s.id);
+              return (
+                <figure
+                  data-media
+                  data-case={c.id}
+                  data-step={s.id}
+                  data-device={device}
+                  data-duration={stepDurationMs(entry.media)}
+                  data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
+                  aria-labelledby={`step-${c.id}-${s.id}`}
+                >
+                  <MediaView entry={entry} device={device} eager={caseIndex === 0 && stepIndex === 0 && device === 'phone'} />
+                </figure>
+              );
+            }),
           )}
         </div>
         <div class="case-text">
@@ -88,7 +89,10 @@ const DEVICES: Device[] = ['phone', 'tablet'];
     ))
   }
 
-  <p class="stepper-note">{t.androidNote}</p>
+  <p class="stepper-note">
+    <span class="stepper-frame-label" data-frame-label></span>
+    <span>{t.androidNote}</span>
+  </p>
 
   <div class="stepper-controls">
     <button type="button" data-action="toggle-pause" aria-pressed="false" data-label-pause={t.pause} data-label-resume={t.resume}>
@@ -98,3 +102,9 @@ const DEVICES: Device[] = ['phone', 'tablet'];
 
   {Astro.slots.has('cta') && <div class="stepper-cta"><slot name="cta" /></div>}
 </section>
+
+<script>
+  import { mountSteppers } from './case-stepper.client';
+
+  mountSteppers();
+</script>

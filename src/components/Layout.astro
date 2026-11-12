@@ -3,6 +3,8 @@ import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 
+import { CASE_ORDER, type CaseId } from '../lib/types';
+
 type Lang = 'ko' | 'en';
 interface Props {
   lang: Lang;
@@ -10,14 +12,19 @@ interface Props {
   description: string;
   /** Site path of this page, with leading and trailing slash. */
   path: string;
+  /** Pages with a case stepper: 'random' picks the start case per visit, a case id fixes it. */
+  stepper?: 'random' | CaseId;
 }
 
-const { lang, title, description, path } = Astro.props;
+const { lang, title, description, path, stepper } = Astro.props;
+// Runs before the first paint, so the stepper never shows one case and then jumps to another.
+// If the stepper script has not attached after 3 seconds, the page goes back to the plain document.
+const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringify(CASE_ORDER)};d.classList.add('js');if(!d.dataset.startCase)d.dataset.startCase=c[Math.floor(Math.random()*c.length)];setTimeout(function(){if(!document.querySelector('[data-stepper][data-ready]'))d.classList.remove('js')},3000)})();`;
 const canonical = new URL(path, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-start-case={stepper && stepper !== 'random' ? stepper : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +32,7 @@ const canonical = new URL(path, Astro.site).href;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {stepper && <script is:inline set:html={stepperBoot} />}
     <slot name="head" />
   </head>
   <body>
