@@ -4,6 +4,7 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import '../styles/doc.css';
 
+import { IS_RELEASE, robotsFor } from '../lib/release';
 import { pageJsonLd, pageMeta } from '../lib/seo';
 import { CASE_ORDER, type CaseId, type FaqItem, type Lang, type PageKey } from '../lib/types';
 import { alternates, pagePath } from '../lib/urls';
@@ -27,6 +28,7 @@ const meta = page ? pageMeta(lang, page) : notFound!;
 const canonical = page ? new URL(pagePath(lang, page), Astro.site).href : undefined;
 const alt = page ? alternates(page) : undefined;
 const jsonLd = page ? pageJsonLd(lang, page, faq) : [];
+const robots = robotsFor({ release: IS_RELEASE, notFound: !page });
 // Runs before the first paint, so the stepper never shows one case and then jumps to another.
 // If the stepper script has not attached after 3 seconds, the page goes back to the plain document.
 const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringify(CASE_ORDER)};d.classList.add('js');if(!d.dataset.startCase)d.dataset.startCase=c[Math.floor(Math.random()*c.length)];setTimeout(function(){if(!document.querySelector('[data-stepper][data-ready]'))d.classList.remove('js')},3000)})();`;
@@ -39,8 +41,9 @@ const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringi
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
+    {robots && <meta name="robots" content={robots} />}
     {
-      canonical && alt ? (
+      canonical && alt && (
         <>
           <link rel="canonical" href={canonical} />
           <link rel="alternate" hreflang="ko" href={alt.ko} />
@@ -53,8 +56,6 @@ const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringi
           <meta property="og:url" content={canonical} />
           <meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'} />
         </>
-      ) : (
-        <meta name="robots" content="noindex" />
       )
     }
     <link rel="icon" type="image/png" href="/favicon.png" />
