@@ -1,0 +1,77 @@
+---
+import type { CtaId } from '../data/cta';
+import { siteStrings } from '../data/site';
+import { APP_STORE_URL, staticPlayUrl } from '../lib/urls';
+import type { Lang, PageKey } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  cta: CtaId;
+}
+
+const { lang, page, cta } = Astro.props;
+const t = siteStrings(lang).install;
+---
+
+{/* Both are real links written at build time. Tags read data-track / data-store / data-cta and the fixed ids. */}
+<div class="install">
+  <div class="install-buttons">
+    <a
+      id={`cta-play-${cta}`}
+      class="store store-play"
+      href={staticPlayUrl(lang, page, cta)}
+      data-track="store_click"
+      data-store="google_play"
+      data-cta={cta}>{t.play}</a
+    >
+    <a
+      id={`cta-ios-${cta}`}
+      class="store store-ios"
+      href={APP_STORE_URL}
+      data-track="store_click"
+      data-store="app_store"
+      data-cta={cta}>{t.appStore}</a
+    >
+  </div>
+  <p class="install-note">{t.iosNote}</p>
+</div>
+
+<style>
+  .install-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .store {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 24px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .store-play {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .store-play:hover {
+    background: var(--brand);
+  }
+  .store-ios {
+    box-shadow: inset 0 0 0 1.5px var(--ink);
+  }
+  .store-ios:hover {
+    box-shadow: inset 0 0 0 1.5px var(--brand);
+    color: var(--brand);
+  }
+  .install-note {
+    margin-top: 12px;
+    max-width: 34em;
+    font-size: 13.5px;
+    color: var(--body);
+  }
+</style>

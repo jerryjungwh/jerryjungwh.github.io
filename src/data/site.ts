@@ -1,8 +1,19 @@
-import type { Lang } from '../lib/types';
-import { SITE_KO, type SiteStrings } from './site.ko';
+import type { CaseDef, FaqItem, Lang, SiteStrings } from '../lib/types';
+import { CASES_KO } from './cases.ko';
+import { FAQ_KO, type FaqGroup } from './faq.ko';
+import { SITE_KO } from './site.ko';
 
-/** Site strings for a language. English arrives with the English pages. */
-export function siteStrings(lang: Lang): SiteStrings {
-  if (lang === 'ko') return SITE_KO;
-  throw new Error(`siteStrings: '${lang}' 문구가 아직 없다`);
+/** One place that maps a language to its copy. English arrives with the English pages. */
+function only<T>(lang: Lang, ko: T): T {
+  if (lang === 'ko') return ko;
+  throw new Error(`'${lang}' 문구가 아직 없다`);
+}
+
+export const siteStrings = (lang: Lang): SiteStrings => only(lang, SITE_KO);
+export const caseDefs = (lang: Lang): CaseDef[] => only(lang, CASES_KO);
+export const faqGroups = (lang: Lang): FaqGroup[] => only(lang, FAQ_KO);
+
+/** The few questions shown on the home page. */
+export function homeFaq(lang: Lang): FaqItem[] {
+  return faqGroups(lang).flatMap((g) => g.items.filter((i) => i.home).map(({ q, a }) => ({ q, a })));
 }

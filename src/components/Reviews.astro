@@ -1,0 +1,45 @@
+---
+import { siteStrings } from '../data/site';
+import type { Lang } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = siteStrings(Astro.props.lang).reviews;
+---
+
+<div class="reviews">
+  {
+    t.items.map((r) => (
+      <figure>
+        <blockquote>
+          <p>{r.text}</p>
+        </blockquote>
+        <figcaption>{t.caption(r.year, r.month)}</figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .reviews {
+    display: grid;
+    gap: 36px;
+    max-width: 760px;
+  }
+  blockquote {
+    margin: 0;
+    padding-left: 18px;
+    border-left: 3px solid var(--brand);
+    font-size: clamp(17px, 1.7vw, 21px);
+    font-weight: 500;
+    line-height: 1.65;
+  }
+  figcaption {
+    margin-top: 10px;
+    padding-left: 21px;
+    font-size: 14px;
+    color: var(--body);
+  }
+</style>

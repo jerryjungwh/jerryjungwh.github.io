@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import icon from '../assets/brand/app-icon.png';
+import { siteStrings } from '../data/site';
+import { pagePath } from '../lib/urls';
+import type { Lang, PageKey } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+
+const { lang, page } = Astro.props;
+const t = siteStrings(lang);
+const other: Lang = lang === 'ko' ? 'en' : 'ko';
+---
+
+<header class="site-header">
+  <a class="brand" href={pagePath(lang, 'home')} aria-label={t.header.homeLabel}>
+    <Image src={icon} alt="" width={32} height={32} loading="eager" />
+    <span>{t.appName}</span>
+  </a>
+  <nav aria-label={t.header.navLabel}>
+    <a href={pagePath(lang, 'faq')}>{t.header.faq}</a>
+    <a href={pagePath(other, page)} hreflang={other} lang={other}>{t.header.otherLang}</a>
+    {/* Two stores, so this goes to the install section, not to a store. It is not a store click. */}
+    <a class="get-app" href="#install">{t.header.getApp}</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: 14px var(--gutter);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .brand img {
+    border-radius: 8px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2.4vw, 28px);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    color: var(--body);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    color: var(--ink);
+  }
+  nav .get-app {
+    padding: 0 16px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  nav .get-app:hover {
+    color: var(--paper);
+    background: var(--brand);
+  }
+  @media (max-width: 420px) {
+    .brand span {
+      display: none;
+    }
+    nav {
+      font-size: 14px;
+    }
+    nav .get-app {
+      padding: 0 12px;
+    }
+  }
+</style>

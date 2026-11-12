@@ -1,0 +1,85 @@
+---
+import { caseDefs, siteStrings } from '../data/site';
+import { SITE_ORIGIN, pagePath } from '../lib/urls';
+import type { Lang, PageKey } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+
+const { lang, page } = Astro.props;
+const t = siteStrings(lang);
+const other: Lang = lang === 'ko' ? 'en' : 'ko';
+// The policy pages stay in the old repository and are served under the same domain.
+const POLICY = `${SITE_ORIGIN}/SimpleScheduler-Android/`;
+const EMAIL = 'jerryjung2929@gmail.com';
+---
+
+<footer class="site-footer">
+  <nav aria-label={t.footer.navLabel}>
+    <div>
+      <p class="foot-title">{t.footer.casesHeading}</p>
+      <ul>
+        {caseDefs(lang).map((c) => <li><a href={pagePath(lang, `for_${c.id}`)}>{c.name}</a></li>)}
+      </ul>
+    </div>
+    <div>
+      <p class="foot-title">{t.footer.siteHeading}</p>
+      <ul>
+        <li><a href={pagePath(lang, 'about')}>{t.footer.about}</a></li>
+        <li><a href={pagePath(lang, 'faq')}>{t.footer.faq}</a></li>
+        <li><a href={POLICY}>{t.footer.privacy}</a></li>
+        <li><a href={`${POLICY}terms`}>{t.footer.terms}</a></li>
+        <li><a href={pagePath(other, page)} hreflang={other} lang={other}>{t.header.otherLang}</a></li>
+      </ul>
+    </div>
+  </nav>
+  <p class="contact">
+    {t.footer.contact} <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+  </p>
+  <p class="maker">{t.footer.maker}</p>
+</footer>
+
+<style>
+  .site-footer {
+    max-width: var(--page);
+    margin: clamp(96px, 12vw, 160px) auto 0;
+    padding: 40px var(--gutter) 56px;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--body);
+  }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 14em));
+    gap: 32px clamp(24px, 8vw, 96px);
+  }
+  .foot-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  ul {
+    margin-top: 10px;
+    padding: 0;
+    list-style: none;
+  }
+  li a {
+    display: inline-block;
+    padding: 5px 0;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .contact {
+    margin-top: 36px;
+  }
+  .maker {
+    margin-top: 6px;
+    font-size: 13px;
+  }
+</style>

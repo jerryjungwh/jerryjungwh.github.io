@@ -1,0 +1,42 @@
+/* Page frame and the document-style sections under the stepper. No card grids: text, lists, one table. */
+.page {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 56px) var(--gutter) 0;
+}
+
+.doc {
+  margin-top: clamp(72px, 10vw, 128px);
+  padding-top: clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--line);
+}
+.doc > h2 {
+  font-size: clamp(26px, 3.2vw, 38px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+.doc > h2 + * {
+  margin-top: clamp(20px, 3vw, 32px);
+}
+.doc-text {
+  max-width: 36em;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.75;
+  color: var(--body);
+}
+.doc-more {
+  display: inline-block;
+  margin-top: 24px;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

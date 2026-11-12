@@ -1,0 +1,14 @@
+---
+interface Props {
+  text: string;
+}
+---
+
+{/* The paragraph an answer engine can quote whole: what the app is, in two or three sentences. */}
+<p class="doc-text definition">{Astro.props.text}</p>
+
+<style>
+  .definition {
+    color: var(--ink);
+  }
+</style>

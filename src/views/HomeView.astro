@@ -1,8 +1,15 @@
 ---
 import CaseStepper from '../components/CaseStepper.astro';
+import Definition from '../components/Definition.astro';
+import FactsTable from '../components/FactsTable.astro';
+import FaqList from '../components/FaqList.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import InstallBlock from '../components/InstallBlock.astro';
 import Layout from '../components/Layout.astro';
-import { CASES_KO } from '../data/cases.ko';
-import { siteStrings } from '../data/site';
+import LinkList from '../components/LinkList.astro';
+import Reviews from '../components/Reviews.astro';
+import { caseDefs, homeFaq, siteStrings } from '../data/site';
 import { pagePath } from '../lib/urls';
 import type { Lang } from '../lib/types';
 
@@ -12,10 +19,12 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = siteStrings(lang);
-const cases = CASES_KO;
+const cases = caseDefs(lang);
+const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title: c.name, text: t.byCase.blurbs[c.id] }));
 ---
 
 <Layout lang={lang} title={t.home.title} description={t.home.description} path={pagePath(lang, 'home')} stepper="random">
+  <Header lang={lang} page="home" />
   <main class="page">
     <CaseStepper lang={lang} cases={cases} detail="short" headingLevel={2}>
       <Fragment slot="lead">
@@ -25,18 +34,42 @@ const cases = CASES_KO;
         </h1>
         <p class="home-lead">{t.home.lead}</p>
       </Fragment>
+      <InstallBlock slot="cta" lang={lang} page="home" cta="hero" />
     </CaseStepper>
+
+    <section id="what" class="doc">
+      <h2>{t.what.heading}</h2>
+      <Definition text={t.what.definition} />
+      <FactsTable lang={lang} />
+    </section>
+
+    <section id="by-case" class="doc">
+      <h2>{t.byCase.heading}</h2>
+      <LinkList items={caseLinks} />
+    </section>
+
+    <section id="reviews" class="doc">
+      <h2>{t.reviews.heading}</h2>
+      <Reviews lang={lang} />
+    </section>
+
+    <section id="faq" class="doc">
+      <h2>{t.faq.heading}</h2>
+      <FaqList items={homeFaq(lang)} />
+      <a class="doc-more" href={pagePath(lang, 'faq')}>{t.faq.all}</a>
+    </section>
+
+    <section id="install" class="doc">
+      <h2>{t.install.heading}</h2>
+      <InstallBlock lang={lang} page="home" cta="page_end" />
+    </section>
   </main>
+  <Footer lang={lang} page="home" />
 </Layout>
 
 <style>
-  .page {
-    max-width: var(--page);
-    margin: 0 auto;
-    padding: clamp(24px, 5vw, 64px) var(--gutter) 96px;
-  }
   .home-h1 {
-    font-size: clamp(32px, 4.6vw, 54px);
+    font-size: clamp(30px, 4.6vw, 54px);
     font-weight: 800;
     line-height: 1.18;
     letter-spacing: -0.035em;

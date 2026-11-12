@@ -1,0 +1,40 @@
+---
+import type { FaqItem } from '../lib/types';
+
+interface Props {
+  items: FaqItem[];
+}
+---
+
+{/* Answers are always open: nothing to expand, and the text is there for readers without scripts. */}
+<dl class="faq">
+  {
+    Astro.props.items.map((item) => (
+      <div>
+        <dt>{item.q}</dt>
+        <dd>{item.a}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .faq {
+    max-width: 760px;
+    border-top: 1px solid var(--line);
+  }
+  .faq > div {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  dt {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  dd {
+    margin: 6px 0 0;
+    max-width: 38em;
+    color: var(--body);
+  }
+</style>

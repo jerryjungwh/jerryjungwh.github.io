@@ -1,0 +1,49 @@
+---
+interface Props {
+  items: { href: string; title: string; text: string }[];
+}
+---
+
+<ul class="links">
+  {
+    Astro.props.items.map((item) => (
+      <li>
+        <a href={item.href}>{item.title}</a>
+        <span>{item.text}</span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .links {
+    max-width: 760px;
+    padding: 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 11em minmax(0, 1fr);
+    gap: 4px 16px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  a {
+    font-size: 17px;
+    font-weight: 700;
+    text-underline-offset: 4px;
+  }
+  a:hover {
+    color: var(--brand);
+  }
+  span {
+    color: var(--body);
+  }
+  @media (max-width: 520px) {
+    li {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

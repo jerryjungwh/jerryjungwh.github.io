@@ -61,3 +61,53 @@ export interface CaseDef {
 }
 
 export type PageKey = 'home' | 'faq' | 'about' | `for_${CaseId}`;
+
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+/** Everything a page says that is not case copy. One object per language. */
+export interface SiteStrings {
+  appName: string;
+  home: { title: string; description: string; h1: [string, string]; lead: string };
+  header: { homeLabel: string; faq: string; otherLang: string; getApp: string; navLabel: string };
+  stepper: {
+    sectionLabel: string;
+    casesLabel: string;
+    deviceLabel: string;
+    phone: string;
+    tablet: string;
+    pause: string;
+    resume: string;
+    androidNote: string;
+  };
+  what: {
+    heading: string;
+    definition: string;
+    factsHeading: string;
+    facts: { term: string; desc: string }[];
+    updatedTerm: string;
+    formatDate(isoDate: string): string;
+  };
+  byCase: { heading: string; blurbs: Record<CaseId, string> };
+  reviews: {
+    heading: string;
+    /** Original text, unedited. No author names. */
+    items: { text: string; year: number; month: number }[];
+    caption(year: number, month: number): string;
+  };
+  faq: { heading: string; all: string };
+  install: { heading: string; play: string; appStore: string; iosNote: string };
+  footer: {
+    navLabel: string;
+    casesHeading: string;
+    siteHeading: string;
+    about: string;
+    faq: string;
+    contact: string;
+    privacy: string;
+    terms: string;
+    maker: string;
+  };
+}

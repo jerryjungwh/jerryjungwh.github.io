@@ -1,0 +1,62 @@
+---
+import { BUILD_DATE } from '../lib/build-date';
+import { siteStrings } from '../data/site';
+import type { Lang } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = siteStrings(Astro.props.lang).what;
+---
+
+<h3 class="facts-heading">{t.factsHeading}</h3>
+<dl class="facts">
+  {
+    t.facts.map((f) => (
+      <div>
+        <dt>{f.term}</dt>
+        <dd>{f.desc}</dd>
+      </div>
+    ))
+  }
+  <div>
+    <dt>{t.updatedTerm}</dt>
+    <dd><time datetime={BUILD_DATE}>{t.formatDate(BUILD_DATE)}</time></dd>
+  </div>
+</dl>
+
+<style>
+  .facts-heading {
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  /* Rows and a term column, ruled like the timetable grid. */
+  .facts {
+    max-width: 760px;
+    margin-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .facts > div {
+    display: grid;
+    grid-template-columns: 9em minmax(0, 1fr);
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  dt {
+    font-weight: 700;
+  }
+  dd {
+    margin: 0;
+    color: var(--body);
+  }
+  @media (max-width: 520px) {
+    .facts > div {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2px;
+    }
+  }
+</style>

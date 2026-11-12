@@ -2,6 +2,7 @@
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import '../styles/doc.css';
 
 import { CASE_ORDER, type CaseId } from '../lib/types';
 
@@ -31,7 +32,8 @@ const canonical = new URL(path, Astro.site).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {stepper && <script is:inline set:html={stepperBoot} />}
     <slot name="head" />
   </head>
