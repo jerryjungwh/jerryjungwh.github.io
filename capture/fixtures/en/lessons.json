@@ -1,0 +1,138 @@
+{
+  "case": "lessons",
+  "lang": "en",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "My lessons",
+      "days": "weekdays_sat",
+      "startHour": 7,
+      "endHour": 22,
+      "timeFormat": "12h",
+      "unique": {},
+      "schedules": [
+        {
+          "key": "g8_mon",
+          "day": 0,
+          "start": "16:00",
+          "end": "17:30",
+          "title": "Grade 8 math",
+          "color": 0
+        },
+        {
+          "key": "g8_wed",
+          "day": 2,
+          "start": "16:00",
+          "end": "17:30",
+          "title": "Grade 8 math",
+          "color": 0
+        },
+        {
+          "key": "g10_tue",
+          "day": 1,
+          "start": "17:00",
+          "end": "18:30",
+          "title": "Grade 10 math",
+          "color": 1
+        },
+        {
+          "key": "g10_thu",
+          "day": 3,
+          "start": "17:00",
+          "end": "18:30",
+          "title": "Grade 10 math",
+          "color": 1
+        },
+        {
+          "key": "review_sat",
+          "day": 5,
+          "start": "10:00",
+          "end": "12:00",
+          "title": "Review session",
+          "color": 2
+        },
+        {
+          "key": "gym_tue",
+          "day": 1,
+          "start": "07:00",
+          "end": "08:00",
+          "title": "Gym",
+          "color": 6
+        },
+        {
+          "key": "gym_thu",
+          "day": 3,
+          "start": "07:00",
+          "end": "08:00",
+          "title": "Gym",
+          "color": 6
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "sheet",
+      "title": "Make midterm review sheet",
+      "timetable": "main",
+      "schedule": "g8_wed",
+      "due": {
+        "day": 2,
+        "time": "16:00"
+      },
+      "reminderMinutes": 60,
+      "color": 0
+    },
+    {
+      "key": "grading",
+      "title": "Grade the Grade 10 homework",
+      "timetable": "main",
+      "schedule": "g10_tue",
+      "color": 1
+    },
+    {
+      "key": "problems",
+      "title": "Pick problems for the review session",
+      "timetable": "main",
+      "schedule": "review_sat",
+      "color": 2
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "Timetable settings screen. The name is My lessons, the days are Monday to Saturday and the hours are 7 am to 10 pm."
+    },
+    "fill": {
+      "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+    },
+    "unique": {
+      "screen": "background",
+      "alt": "My lessons weekly timetable with a photo as its background. Lessons show on top of the photo in color."
+    },
+    "todo": {
+      "todo": "sheet",
+      "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
+    },
+    "remind": {
+      "todo": "sheet",
+      "alts": [
+        "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before.",
+        "Alarm screen that opened at the reminder time, showing Make midterm review sheet with snooze and dismiss buttons."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "Weekly widget on the home screen showing the week of the My lessons timetable.",
+        "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+        "To-Do widget on the home screen listing tasks, including Make midterm review sheet."
+      ]
+    },
+    "widget_done": {
+      "todo": "sheet",
+      "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen."
+    },
+    "lock_screen": {
+      "alt": "Lock screen showing the My lessons weekly timetable, with an unlock button below it."
+    }
+  }
+}

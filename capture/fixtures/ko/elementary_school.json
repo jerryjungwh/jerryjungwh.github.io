@@ -1,0 +1,290 @@
+{
+  "case": "elementary_school",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "하윤 4학년",
+      "days": "weekdays",
+      "startHour": 9,
+      "endHour": 15,
+      "timeFormat": "24h",
+      "unique": {},
+      "schedules": [
+        {
+          "key": "mon1",
+          "day": 0,
+          "start": "09:00",
+          "end": "09:40",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "mon2",
+          "day": 0,
+          "start": "09:50",
+          "end": "10:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "mon3",
+          "day": 0,
+          "start": "10:40",
+          "end": "11:20",
+          "title": "사회",
+          "color": 2
+        },
+        {
+          "key": "mon4",
+          "day": 0,
+          "start": "11:30",
+          "end": "12:10",
+          "title": "체육",
+          "color": 5
+        },
+        {
+          "key": "mon5",
+          "day": 0,
+          "start": "13:00",
+          "end": "13:40",
+          "title": "영어",
+          "color": 4
+        },
+        {
+          "key": "tue1",
+          "day": 1,
+          "start": "09:00",
+          "end": "09:40",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "tue2",
+          "day": 1,
+          "start": "09:50",
+          "end": "10:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "tue3",
+          "day": 1,
+          "start": "10:40",
+          "end": "11:20",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "tue4",
+          "day": 1,
+          "start": "11:30",
+          "end": "12:10",
+          "title": "음악",
+          "color": 6
+        },
+        {
+          "key": "tue5",
+          "day": 1,
+          "start": "13:00",
+          "end": "13:40",
+          "title": "도덕",
+          "color": 8
+        },
+        {
+          "key": "wed1",
+          "day": 2,
+          "start": "09:00",
+          "end": "09:40",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "wed2",
+          "day": 2,
+          "start": "09:50",
+          "end": "10:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "wed3",
+          "day": 2,
+          "start": "10:40",
+          "end": "11:20",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "wed4",
+          "day": 2,
+          "start": "11:30",
+          "end": "12:10",
+          "title": "영어",
+          "color": 4
+        },
+        {
+          "key": "wed5",
+          "day": 2,
+          "start": "13:00",
+          "end": "13:40",
+          "title": "체육",
+          "color": 5
+        },
+        {
+          "key": "thu1",
+          "day": 3,
+          "start": "09:00",
+          "end": "09:40",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "thu2",
+          "day": 3,
+          "start": "09:50",
+          "end": "10:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "thu3",
+          "day": 3,
+          "start": "10:40",
+          "end": "11:20",
+          "title": "사회",
+          "color": 2
+        },
+        {
+          "key": "thu4",
+          "day": 3,
+          "start": "11:30",
+          "end": "12:10",
+          "title": "음악",
+          "color": 6
+        },
+        {
+          "key": "thu5",
+          "day": 3,
+          "start": "13:00",
+          "end": "13:40",
+          "title": "미술",
+          "color": 7
+        },
+        {
+          "key": "thu6",
+          "day": 3,
+          "start": "13:50",
+          "end": "14:30",
+          "title": "미술",
+          "color": 7
+        },
+        {
+          "key": "fri1",
+          "day": 4,
+          "start": "09:00",
+          "end": "09:40",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "fri2",
+          "day": 4,
+          "start": "09:50",
+          "end": "10:30",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "fri3",
+          "day": 4,
+          "start": "10:40",
+          "end": "11:20",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "fri4",
+          "day": 4,
+          "start": "11:30",
+          "end": "12:10",
+          "title": "사회",
+          "color": 2
+        },
+        {
+          "key": "fri5",
+          "day": 4,
+          "start": "13:00",
+          "end": "13:40",
+          "title": "영어",
+          "color": 4
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "pencils",
+      "title": "색연필 챙기기",
+      "timetable": "main",
+      "schedule": "thu5",
+      "due": {
+        "day": 2,
+        "time": "19:00"
+      },
+      "reminderMinutes": 30,
+      "color": 7
+    },
+    {
+      "key": "spelling",
+      "title": "받아쓰기 연습",
+      "timetable": "main",
+      "schedule": "mon1",
+      "color": 0
+    },
+    {
+      "key": "gym",
+      "title": "체육복 챙기기",
+      "timetable": "main",
+      "schedule": "wed5",
+      "color": 5
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 하윤 4학년, 요일은 월요일부터 금요일, 시간은 9시부터 15시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "하윤 4학년 주간표. 월요일부터 금요일까지 40분 수업이 과목마다 다른 색으로 들어가 있다."
+    },
+    "unique": {
+      "screen": "background",
+      "alt": "배경에 사진을 넣은 하윤 4학년 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    },
+    "todo": {
+      "todo": "pencils",
+      "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 미술 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "pencils",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 색연필 챙기기 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 하윤 4학년 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 색연필 챙기기를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "pencils",
+      "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 하윤 4학년 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

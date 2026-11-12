@@ -1,0 +1,228 @@
+{
+  "case": "after_school",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "지우",
+      "days": "weekdays_sat",
+      "startHour": 10,
+      "endHour": 19,
+      "timeFormat": "24h",
+      "schedules": [
+        {
+          "key": "art_mon",
+          "day": 0,
+          "start": "13:50",
+          "end": "14:40",
+          "title": "방과후 미술",
+          "color": 0
+        },
+        {
+          "key": "art_wed",
+          "day": 2,
+          "start": "13:50",
+          "end": "14:40",
+          "title": "방과후 미술",
+          "color": 0
+        },
+        {
+          "key": "piano_tue",
+          "day": 1,
+          "start": "15:00",
+          "end": "15:50",
+          "title": "피아노",
+          "color": 1
+        },
+        {
+          "key": "piano_thu",
+          "day": 3,
+          "start": "15:00",
+          "end": "15:50",
+          "title": "피아노",
+          "color": 1
+        },
+        {
+          "key": "tkd_mon",
+          "day": 0,
+          "start": "16:30",
+          "end": "17:20",
+          "title": "태권도",
+          "color": 2
+        },
+        {
+          "key": "tkd_wed",
+          "day": 2,
+          "start": "16:30",
+          "end": "17:20",
+          "title": "태권도",
+          "color": 2
+        },
+        {
+          "key": "tkd_fri",
+          "day": 4,
+          "start": "16:30",
+          "end": "17:20",
+          "title": "태권도",
+          "color": 2
+        },
+        {
+          "key": "eng_tue",
+          "day": 1,
+          "start": "17:30",
+          "end": "18:30",
+          "title": "영어학원",
+          "color": 3
+        },
+        {
+          "key": "eng_thu",
+          "day": 3,
+          "start": "17:30",
+          "end": "18:30",
+          "title": "영어학원",
+          "color": 3
+        },
+        {
+          "key": "swim_sat",
+          "day": 5,
+          "start": "10:00",
+          "end": "11:00",
+          "title": "수영",
+          "color": 4
+        }
+      ]
+    },
+    {
+      "key": "second",
+      "title": "민우",
+      "days": "weekdays",
+      "startHour": 13,
+      "endHour": 17,
+      "timeFormat": "24h",
+      "since": "unique",
+      "schedules": [
+        {
+          "key": "care_mon",
+          "day": 0,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "돌봄교실",
+          "color": 5
+        },
+        {
+          "key": "care_tue",
+          "day": 1,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "돌봄교실",
+          "color": 5
+        },
+        {
+          "key": "care_wed",
+          "day": 2,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "돌봄교실",
+          "color": 5
+        },
+        {
+          "key": "care_thu",
+          "day": 3,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "돌봄교실",
+          "color": 5
+        },
+        {
+          "key": "care_fri",
+          "day": 4,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "돌봄교실",
+          "color": 5
+        },
+        {
+          "key": "soccer_tue",
+          "day": 1,
+          "start": "15:30",
+          "end": "16:30",
+          "title": "축구교실",
+          "color": 6
+        },
+        {
+          "key": "soccer_thu",
+          "day": 3,
+          "start": "15:30",
+          "end": "16:30",
+          "title": "축구교실",
+          "color": 6
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "bag",
+      "title": "수영 가방 챙기기",
+      "timetable": "main",
+      "schedule": "swim_sat",
+      "due": {
+        "day": 5,
+        "time": "09:30"
+      },
+      "reminderMinutes": 30,
+      "color": 4
+    },
+    {
+      "key": "words",
+      "title": "영어 단어 숙제 확인",
+      "timetable": "main",
+      "schedule": "eng_tue",
+      "color": 3
+    },
+    {
+      "key": "uniform",
+      "title": "태권도 도복 세탁",
+      "timetable": "main",
+      "schedule": "tkd_mon",
+      "color": 2
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 지우, 요일은 월요일부터 토요일, 시간은 10시부터 19시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "지우 주간표. 방과후 미술, 피아노, 태권도, 영어학원, 토요일 수영이 학원마다 다른 색으로 들어가 있다."
+    },
+    "unique": {
+      "screen": "second_timetable",
+      "alt": "시간표를 바꾸는 목록. 지우와 민우 두 시간표가 보인다."
+    },
+    "todo": {
+      "todo": "bag",
+      "alt": "To-Do 편집 화면. 제목은 수영 가방 챙기기이고 수영 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "bag",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 수영 가방 챙기기 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 지우 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 수영 가방 챙기기를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "bag",
+      "alt": "홈 화면의 To-Do 위젯에서 수영 가방 챙기기를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 지우 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

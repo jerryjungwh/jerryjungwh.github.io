@@ -1,0 +1,183 @@
+{
+  "case": "university",
+  "lang": "en",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "Fall semester",
+      "days": "weekdays",
+      "startHour": 9,
+      "endHour": 18,
+      "timeFormat": "12h",
+      "schedules": [
+        {
+          "key": "ds_mon",
+          "day": 0,
+          "start": "09:00",
+          "end": "10:30",
+          "title": "Data Structures",
+          "place": "Engineering Hall 301",
+          "person": "Alex Kim",
+          "color": 0
+        },
+        {
+          "key": "os_mon",
+          "day": 0,
+          "start": "13:00",
+          "end": "14:30",
+          "title": "Operating Systems",
+          "place": "Engineering Hall 302",
+          "person": "Dana Lee",
+          "color": 6
+        },
+        {
+          "key": "db_tue",
+          "day": 1,
+          "start": "10:00",
+          "end": "11:30",
+          "title": "Databases",
+          "place": "Engineering Hall 303",
+          "person": "Chris Park",
+          "color": 2
+        },
+        {
+          "key": "eng_tue",
+          "day": 1,
+          "start": "14:00",
+          "end": "15:30",
+          "title": "English",
+          "place": "Engineering Hall 304",
+          "person": "Jamie Cole",
+          "color": 5
+        },
+        {
+          "key": "sw_wed",
+          "day": 2,
+          "start": "09:30",
+          "end": "11:00",
+          "title": "Software Design",
+          "place": "Engineering Hall 305",
+          "person": "Robin Hayes",
+          "color": 4
+        },
+        {
+          "key": "proj_wed",
+          "day": 2,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "Team Project",
+          "place": "Engineering Hall 306",
+          "person": "Alex Kim",
+          "color": 1
+        },
+        {
+          "key": "ds_thu",
+          "day": 3,
+          "start": "10:00",
+          "end": "11:30",
+          "title": "Data Structures",
+          "place": "Engineering Hall 301",
+          "person": "Alex Kim",
+          "color": 0
+        },
+        {
+          "key": "ui_thu",
+          "day": 3,
+          "start": "14:00",
+          "end": "15:30",
+          "title": "UI Design",
+          "place": "Engineering Hall 307",
+          "person": "Morgan Reed",
+          "color": 3
+        },
+        {
+          "key": "stat_fri",
+          "day": 4,
+          "start": "09:00",
+          "end": "10:30",
+          "title": "Statistics",
+          "place": "Engineering Hall 308",
+          "person": "Taylor Brooks",
+          "color": 8
+        },
+        {
+          "key": "seminar_fri",
+          "day": 4,
+          "start": "13:00",
+          "end": "14:00",
+          "title": "Seminar",
+          "place": "Engineering Hall 309",
+          "person": "Dana Lee",
+          "color": 7
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "lab",
+      "title": "Submit Data Structures lab",
+      "note": "Include the code and results.",
+      "timetable": "main",
+      "schedule": "ds_mon",
+      "due": {
+        "day": 2,
+        "time": "18:00"
+      },
+      "reminderMinutes": 60,
+      "color": 0
+    },
+    {
+      "key": "slides",
+      "title": "Prepare English slides",
+      "timetable": "main",
+      "schedule": "eng_tue",
+      "color": 5
+    },
+    {
+      "key": "meeting",
+      "title": "Team project meeting",
+      "timetable": "main",
+      "schedule": "proj_wed",
+      "color": 1
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 6 pm."
+    },
+    "fill": {
+      "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+    },
+    "unique": {
+      "screen": "schedule_detail",
+      "schedule": "ds_mon",
+      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor and linked assignment."
+    },
+    "todo": {
+      "todo": "lab",
+      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Data Structures."
+    },
+    "remind": {
+      "todo": "lab",
+      "alts": [
+        "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before.",
+        "Alarm screen that opened at the reminder time, showing Submit Data Structures lab with snooze and dismiss buttons."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "Weekly widget on the home screen showing the week of the Fall semester timetable.",
+        "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+        "To-Do widget on the home screen listing tasks, including Submit Data Structures lab."
+      ]
+    },
+    "widget_done": {
+      "todo": "lab",
+      "alt": "Marking Submit Data Structures lab as complete in the To-Do widget on the home screen."
+    },
+    "lock_screen": {
+      "alt": "Lock screen showing the Fall semester weekly timetable, with an unlock button below it."
+    }
+  }
+}

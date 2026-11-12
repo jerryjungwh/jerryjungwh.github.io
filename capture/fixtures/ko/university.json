@@ -1,0 +1,183 @@
+{
+  "case": "university",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "이번 학기",
+      "days": "weekdays",
+      "startHour": 9,
+      "endHour": 18,
+      "timeFormat": "24h",
+      "schedules": [
+        {
+          "key": "ds_mon",
+          "day": 0,
+          "start": "09:00",
+          "end": "10:30",
+          "title": "자료구조",
+          "place": "공학관 301",
+          "person": "김민수",
+          "color": 0
+        },
+        {
+          "key": "os_mon",
+          "day": 0,
+          "start": "13:00",
+          "end": "14:30",
+          "title": "운영체제",
+          "place": "공학관 302",
+          "person": "이서연",
+          "color": 6
+        },
+        {
+          "key": "db_tue",
+          "day": 1,
+          "start": "10:00",
+          "end": "11:30",
+          "title": "DB 설계",
+          "place": "공학관 303",
+          "person": "박지훈",
+          "color": 2
+        },
+        {
+          "key": "eng_tue",
+          "day": 1,
+          "start": "14:00",
+          "end": "15:30",
+          "title": "영어회화",
+          "place": "공학관 304",
+          "person": "최유진",
+          "color": 5
+        },
+        {
+          "key": "sw_wed",
+          "day": 2,
+          "start": "09:30",
+          "end": "11:00",
+          "title": "소프트웨어",
+          "place": "공학관 305",
+          "person": "정하늘",
+          "color": 4
+        },
+        {
+          "key": "proj_wed",
+          "day": 2,
+          "start": "13:00",
+          "end": "15:00",
+          "title": "프로젝트",
+          "place": "공학관 306",
+          "person": "김민수",
+          "color": 1
+        },
+        {
+          "key": "ds_thu",
+          "day": 3,
+          "start": "10:00",
+          "end": "11:30",
+          "title": "자료구조",
+          "place": "공학관 301",
+          "person": "김민수",
+          "color": 0
+        },
+        {
+          "key": "ui_thu",
+          "day": 3,
+          "start": "14:00",
+          "end": "15:30",
+          "title": "UI 디자인",
+          "place": "공학관 307",
+          "person": "한소희",
+          "color": 3
+        },
+        {
+          "key": "stat_fri",
+          "day": 4,
+          "start": "09:00",
+          "end": "10:30",
+          "title": "통계학",
+          "place": "공학관 308",
+          "person": "오세훈",
+          "color": 8
+        },
+        {
+          "key": "seminar_fri",
+          "day": 4,
+          "start": "13:00",
+          "end": "14:00",
+          "title": "세미나",
+          "place": "공학관 309",
+          "person": "이서연",
+          "color": 7
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "lab",
+      "title": "자료구조 실습 제출",
+      "note": "실습 코드와 결과를 함께 제출해요.",
+      "timetable": "main",
+      "schedule": "ds_mon",
+      "due": {
+        "day": 2,
+        "time": "18:00"
+      },
+      "reminderMinutes": 60,
+      "color": 0
+    },
+    {
+      "key": "slides",
+      "title": "영어 발표 자료 준비",
+      "timetable": "main",
+      "schedule": "eng_tue",
+      "color": 5
+    },
+    {
+      "key": "meeting",
+      "title": "팀 프로젝트 회의",
+      "timetable": "main",
+      "schedule": "proj_wed",
+      "color": 1
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 18시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
+    },
+    "unique": {
+      "screen": "schedule_detail",
+      "schedule": "ds_mon",
+      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 연결된 과제가 보인다."
+    },
+    "todo": {
+      "todo": "lab",
+      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 자료구조 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "lab",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 자료구조 실습 제출 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 이번 학기 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 자료구조 실습 제출를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "lab",
+      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 이번 학기 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

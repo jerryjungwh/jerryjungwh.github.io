@@ -1,0 +1,138 @@
+{
+  "case": "lessons",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "수업표",
+      "days": "weekdays_sat",
+      "startHour": 7,
+      "endHour": 22,
+      "timeFormat": "24h",
+      "unique": {},
+      "schedules": [
+        {
+          "key": "m2_mon",
+          "day": 0,
+          "start": "16:00",
+          "end": "17:30",
+          "title": "중2 수학",
+          "color": 0
+        },
+        {
+          "key": "m2_wed",
+          "day": 2,
+          "start": "16:00",
+          "end": "17:30",
+          "title": "중2 수학",
+          "color": 0
+        },
+        {
+          "key": "h1_tue",
+          "day": 1,
+          "start": "17:00",
+          "end": "18:30",
+          "title": "고1 수학",
+          "color": 1
+        },
+        {
+          "key": "h1_thu",
+          "day": 3,
+          "start": "17:00",
+          "end": "18:30",
+          "title": "고1 수학",
+          "color": 1
+        },
+        {
+          "key": "extra_sat",
+          "day": 5,
+          "start": "10:00",
+          "end": "12:00",
+          "title": "보충 수업",
+          "color": 2
+        },
+        {
+          "key": "gym_tue",
+          "day": 1,
+          "start": "07:00",
+          "end": "08:00",
+          "title": "운동",
+          "color": 6
+        },
+        {
+          "key": "gym_thu",
+          "day": 3,
+          "start": "07:00",
+          "end": "08:00",
+          "title": "운동",
+          "color": 6
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "sheet",
+      "title": "중간고사 대비 자료 만들기",
+      "timetable": "main",
+      "schedule": "m2_wed",
+      "due": {
+        "day": 2,
+        "time": "16:00"
+      },
+      "reminderMinutes": 60,
+      "color": 0
+    },
+    {
+      "key": "grading",
+      "title": "고1 수학 숙제 채점",
+      "timetable": "main",
+      "schedule": "h1_tue",
+      "color": 1
+    },
+    {
+      "key": "problems",
+      "title": "보충 수업 문제 고르기",
+      "timetable": "main",
+      "schedule": "extra_sat",
+      "color": 2
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 수업표, 요일은 월요일부터 토요일, 시간은 7시부터 22시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "수업표 주간표. 중2 수학, 고1 수학, 토요일 보충 수업과 아침 운동이 서로 다른 색으로 들어가 있다."
+    },
+    "unique": {
+      "screen": "background",
+      "alt": "배경에 사진을 넣은 수업표 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    },
+    "todo": {
+      "todo": "sheet",
+      "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "sheet",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 중간고사 대비 자료 만들기 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 수업표 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 중간고사 대비 자료 만들기를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "sheet",
+      "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 수업표 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

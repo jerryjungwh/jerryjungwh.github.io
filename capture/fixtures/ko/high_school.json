@@ -1,0 +1,390 @@
+{
+  "case": "high_school",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "2학년 2학기",
+      "days": "weekdays",
+      "startHour": 8,
+      "endHour": 22,
+      "timeFormat": "24h",
+      "schedules": [
+        {
+          "key": "mon1",
+          "day": 0,
+          "start": "08:40",
+          "end": "09:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "mon2",
+          "day": 0,
+          "start": "09:40",
+          "end": "10:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "mon3",
+          "day": 0,
+          "start": "10:40",
+          "end": "11:30",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "mon4",
+          "day": 0,
+          "start": "11:40",
+          "end": "12:30",
+          "title": "물리",
+          "color": 4
+        },
+        {
+          "key": "mon5",
+          "day": 0,
+          "start": "13:30",
+          "end": "14:20",
+          "title": "한국사",
+          "color": 3
+        },
+        {
+          "key": "mon6",
+          "day": 0,
+          "start": "14:30",
+          "end": "15:20",
+          "title": "체육",
+          "color": 6
+        },
+        {
+          "key": "mon7",
+          "day": 0,
+          "start": "15:30",
+          "end": "16:20",
+          "title": "문학",
+          "color": 8
+        },
+        {
+          "key": "tue1",
+          "day": 1,
+          "start": "08:40",
+          "end": "09:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "tue2",
+          "day": 1,
+          "start": "09:40",
+          "end": "10:30",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "tue3",
+          "day": 1,
+          "start": "10:40",
+          "end": "11:30",
+          "title": "화학",
+          "color": 5
+        },
+        {
+          "key": "tue4",
+          "day": 1,
+          "start": "11:40",
+          "end": "12:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "tue5",
+          "day": 1,
+          "start": "13:30",
+          "end": "14:20",
+          "title": "음악",
+          "color": 7
+        },
+        {
+          "key": "tue6",
+          "day": 1,
+          "start": "14:30",
+          "end": "15:20",
+          "title": "한국사",
+          "color": 3
+        },
+        {
+          "key": "tue7",
+          "day": 1,
+          "start": "15:30",
+          "end": "16:20",
+          "title": "물리",
+          "color": 4
+        },
+        {
+          "key": "wed1",
+          "day": 2,
+          "start": "08:40",
+          "end": "09:30",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "wed2",
+          "day": 2,
+          "start": "09:40",
+          "end": "10:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "wed3",
+          "day": 2,
+          "start": "10:40",
+          "end": "11:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "wed4",
+          "day": 2,
+          "start": "11:40",
+          "end": "12:30",
+          "title": "화학",
+          "color": 5
+        },
+        {
+          "key": "wed5",
+          "day": 2,
+          "start": "13:30",
+          "end": "14:20",
+          "title": "체육",
+          "color": 6
+        },
+        {
+          "key": "wed6",
+          "day": 2,
+          "start": "14:30",
+          "end": "15:20",
+          "title": "문학",
+          "color": 8
+        },
+        {
+          "key": "wed7",
+          "day": 2,
+          "start": "15:30",
+          "end": "16:20",
+          "title": "한국사",
+          "color": 3
+        },
+        {
+          "key": "thu1",
+          "day": 3,
+          "start": "08:40",
+          "end": "09:30",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "thu2",
+          "day": 3,
+          "start": "09:40",
+          "end": "10:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "thu3",
+          "day": 3,
+          "start": "10:40",
+          "end": "11:30",
+          "title": "물리",
+          "color": 4
+        },
+        {
+          "key": "thu4",
+          "day": 3,
+          "start": "11:40",
+          "end": "12:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "thu5",
+          "day": 3,
+          "start": "13:30",
+          "end": "14:20",
+          "title": "화학",
+          "color": 5
+        },
+        {
+          "key": "thu6",
+          "day": 3,
+          "start": "14:30",
+          "end": "15:20",
+          "title": "음악",
+          "color": 7
+        },
+        {
+          "key": "thu7",
+          "day": 3,
+          "start": "15:30",
+          "end": "16:20",
+          "title": "문학",
+          "color": 8
+        },
+        {
+          "key": "fri1",
+          "day": 4,
+          "start": "08:40",
+          "end": "09:30",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "fri2",
+          "day": 4,
+          "start": "09:40",
+          "end": "10:30",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "fri3",
+          "day": 4,
+          "start": "10:40",
+          "end": "11:30",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "fri4",
+          "day": 4,
+          "start": "11:40",
+          "end": "12:30",
+          "title": "물리",
+          "color": 4
+        },
+        {
+          "key": "fri5",
+          "day": 4,
+          "start": "13:30",
+          "end": "14:20",
+          "title": "한국사",
+          "color": 3
+        },
+        {
+          "key": "fri6",
+          "day": 4,
+          "start": "14:30",
+          "end": "15:20",
+          "title": "화학",
+          "color": 5
+        },
+        {
+          "key": "study_mon",
+          "day": 0,
+          "start": "19:00",
+          "end": "22:00",
+          "title": "자율학습",
+          "color": 9,
+          "alarm": true
+        },
+        {
+          "key": "study_tue",
+          "day": 1,
+          "start": "19:00",
+          "end": "22:00",
+          "title": "자율학습",
+          "color": 9,
+          "alarm": true
+        },
+        {
+          "key": "study_wed",
+          "day": 2,
+          "start": "19:00",
+          "end": "22:00",
+          "title": "자율학습",
+          "color": 9,
+          "alarm": true
+        },
+        {
+          "key": "study_thu",
+          "day": 3,
+          "start": "19:00",
+          "end": "22:00",
+          "title": "자율학습",
+          "color": 9,
+          "alarm": true
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "talk",
+      "title": "영어 발표 준비",
+      "timetable": "main",
+      "schedule": "thu1",
+      "due": {
+        "day": 3,
+        "time": "08:40"
+      },
+      "reminderMinutes": 1440,
+      "color": 2
+    },
+    {
+      "key": "math",
+      "title": "수학 문제집 3단원",
+      "timetable": "main",
+      "schedule": "mon2",
+      "color": 1
+    },
+    {
+      "key": "reading",
+      "title": "독서 기록 쓰기",
+      "timetable": "main",
+      "schedule": "mon7",
+      "color": 8
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 2학년 2학기, 요일은 월요일부터 금요일, 시간은 8시부터 22시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "2학년 2학기 주간표. 50분 수업이 7교시까지 들어가 있고 월요일부터 목요일 저녁에는 자율학습이 있다."
+    },
+    "unique": {
+      "screen": "schedule_alarm",
+      "schedule": "study_mon",
+      "alt": "자율학습 일정의 편집 화면. 알람이 켜져 있어 시작 시간에 알람이 울린다."
+    },
+    "todo": {
+      "todo": "talk",
+      "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 영어 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "talk",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 영어 발표 준비 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 2학년 2학기 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 영어 발표 준비를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "talk",
+      "alt": "홈 화면의 To-Do 위젯에서 영어 발표 준비를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 2학년 2학기 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

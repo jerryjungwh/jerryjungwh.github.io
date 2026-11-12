@@ -25,7 +25,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'fill',
         title: 'Add classes at their real times',
         short: 'Reading 8:30–9:15, Math 9:20–10:05. Times are set to the minute.',
-        long: 'Class times are set to the minute, so a 45-minute class and a 5-minute break go in exactly as the school has them. Reading, Math, Science and Art each get their own color. Lunch from 11:40 to 12:25 is left empty.',
+        long: 'Class times are set to the minute, so a 45-minute class and a 5-minute break go in exactly as the school has them. Reading, Math, Science and Art each get their own color. Lunch from 11:45 to 12:20 is left empty.',
       },
       {
         id: 'unique',

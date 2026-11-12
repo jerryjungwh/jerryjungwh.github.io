@@ -1,0 +1,373 @@
+{
+  "case": "middle_school",
+  "lang": "ko",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "서준 2학년 2학기",
+      "days": "weekdays",
+      "startHour": 8,
+      "endHour": 20,
+      "timeFormat": "24h",
+      "unique": {
+        "days": "weekdays_sat"
+      },
+      "schedules": [
+        {
+          "key": "mon1",
+          "day": 0,
+          "start": "08:40",
+          "end": "09:25",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "mon2",
+          "day": 0,
+          "start": "09:35",
+          "end": "10:20",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "mon3",
+          "day": 0,
+          "start": "10:30",
+          "end": "11:15",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "mon4",
+          "day": 0,
+          "start": "11:25",
+          "end": "12:10",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "mon5",
+          "day": 0,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "역사",
+          "color": 4
+        },
+        {
+          "key": "mon6",
+          "day": 0,
+          "start": "14:05",
+          "end": "14:50",
+          "title": "체육",
+          "color": 6
+        },
+        {
+          "key": "mon7",
+          "day": 0,
+          "start": "15:00",
+          "end": "15:45",
+          "title": "도덕",
+          "color": 5
+        },
+        {
+          "key": "tue1",
+          "day": 1,
+          "start": "08:40",
+          "end": "09:25",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "tue2",
+          "day": 1,
+          "start": "09:35",
+          "end": "10:20",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "tue3",
+          "day": 1,
+          "start": "10:30",
+          "end": "11:15",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "tue4",
+          "day": 1,
+          "start": "11:25",
+          "end": "12:10",
+          "title": "기술·가정",
+          "color": 8
+        },
+        {
+          "key": "tue5",
+          "day": 1,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "음악",
+          "color": 7
+        },
+        {
+          "key": "tue6",
+          "day": 1,
+          "start": "14:05",
+          "end": "14:50",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "wed1",
+          "day": 2,
+          "start": "08:40",
+          "end": "09:25",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "wed2",
+          "day": 2,
+          "start": "09:35",
+          "end": "10:20",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "wed3",
+          "day": 2,
+          "start": "10:30",
+          "end": "11:15",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "wed4",
+          "day": 2,
+          "start": "11:25",
+          "end": "12:10",
+          "title": "역사",
+          "color": 4
+        },
+        {
+          "key": "wed5",
+          "day": 2,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "체육",
+          "color": 6
+        },
+        {
+          "key": "wed6",
+          "day": 2,
+          "start": "14:05",
+          "end": "14:50",
+          "title": "기술·가정",
+          "color": 8
+        },
+        {
+          "key": "thu1",
+          "day": 3,
+          "start": "08:40",
+          "end": "09:25",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "thu2",
+          "day": 3,
+          "start": "09:35",
+          "end": "10:20",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "thu3",
+          "day": 3,
+          "start": "10:30",
+          "end": "11:15",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "thu4",
+          "day": 3,
+          "start": "11:25",
+          "end": "12:10",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "thu5",
+          "day": 3,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "도덕",
+          "color": 5
+        },
+        {
+          "key": "thu6",
+          "day": 3,
+          "start": "14:05",
+          "end": "14:50",
+          "title": "음악",
+          "color": 7
+        },
+        {
+          "key": "thu7",
+          "day": 3,
+          "start": "15:00",
+          "end": "15:45",
+          "title": "역사",
+          "color": 4
+        },
+        {
+          "key": "fri1",
+          "day": 4,
+          "start": "08:40",
+          "end": "09:25",
+          "title": "과학",
+          "color": 3
+        },
+        {
+          "key": "fri2",
+          "day": 4,
+          "start": "09:35",
+          "end": "10:20",
+          "title": "영어",
+          "color": 2
+        },
+        {
+          "key": "fri3",
+          "day": 4,
+          "start": "10:30",
+          "end": "11:15",
+          "title": "수학",
+          "color": 1
+        },
+        {
+          "key": "fri4",
+          "day": 4,
+          "start": "11:25",
+          "end": "12:10",
+          "title": "국어",
+          "color": 0
+        },
+        {
+          "key": "fri5",
+          "day": 4,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "역사",
+          "color": 4
+        },
+        {
+          "key": "fri6",
+          "day": 4,
+          "start": "14:05",
+          "end": "14:50",
+          "title": "체육",
+          "color": 6
+        },
+        {
+          "key": "academy_mon",
+          "day": 0,
+          "start": "18:00",
+          "end": "20:00",
+          "title": "수학학원",
+          "color": 9
+        },
+        {
+          "key": "academy_wed",
+          "day": 2,
+          "start": "18:00",
+          "end": "20:00",
+          "title": "수학학원",
+          "color": 9
+        },
+        {
+          "key": "academy_fri",
+          "day": 4,
+          "start": "18:00",
+          "end": "20:00",
+          "title": "수학학원",
+          "color": 9
+        },
+        {
+          "key": "english_sat",
+          "day": 5,
+          "start": "10:00",
+          "end": "12:00",
+          "title": "영어학원",
+          "color": 10,
+          "since": "unique"
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "report",
+      "title": "과학 수행평가 보고서",
+      "timetable": "main",
+      "schedule": "fri1",
+      "due": {
+        "day": 4,
+        "time": "08:40"
+      },
+      "reminderMinutes": 1440,
+      "color": 3
+    },
+    {
+      "key": "words",
+      "title": "영어 단어 외우기",
+      "timetable": "main",
+      "schedule": "mon3",
+      "color": 2
+    },
+    {
+      "key": "gym",
+      "title": "체육복 챙기기",
+      "timetable": "main",
+      "schedule": "mon6",
+      "color": 6
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "시간표 설정 화면. 이름은 서준 2학년 2학기, 요일은 월요일부터 금요일, 시간은 8시부터 20시까지로 정해져 있다."
+    },
+    "fill": {
+      "alt": "서준 2학년 2학기 주간표. 45분 수업이 7교시까지 들어가 있고 월·수·금 저녁에는 수학학원이 있다."
+    },
+    "unique": {
+      "screen": "saturday",
+      "alt": "토요일 열이 더해진 서준 2학년 2학기 주간표. 토요일 10시부터 12시까지 영어학원이 보인다."
+    },
+    "todo": {
+      "todo": "report",
+      "alt": "To-Do 편집 화면. 제목은 과학 수행평가 보고서이고 과학 일정에 연결되어 있다."
+    },
+    "remind": {
+      "todo": "report",
+      "alts": [
+        "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다.",
+        "리마인더 시간이 되어 뜬 알람 화면. 과학 수행평가 보고서 제목과 다시 울리기, 끄기 단추가 보인다."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "홈 화면의 주간표 위젯. 서준 2학년 2학기 시간표의 한 주가 보인다.",
+        "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+        "홈 화면의 To-Do 위젯. 과학 수행평가 보고서를 비롯한 할 일이 목록으로 보인다."
+      ]
+    },
+    "widget_done": {
+      "todo": "report",
+      "alt": "홈 화면의 To-Do 위젯에서 과학 수행평가 보고서를 완료로 표시하는 모습."
+    },
+    "lock_screen": {
+      "alt": "잠금화면에 서준 2학년 2학기 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
+    }
+  }
+}

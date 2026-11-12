@@ -1,0 +1,330 @@
+{
+  "case": "elementary_school",
+  "lang": "en",
+  "timetables": [
+    {
+      "key": "main",
+      "title": "Emma · Grade 4",
+      "days": "weekdays",
+      "startHour": 8,
+      "endHour": 15,
+      "timeFormat": "12h",
+      "unique": {},
+      "schedules": [
+        {
+          "key": "mon1",
+          "day": 0,
+          "start": "08:30",
+          "end": "09:15",
+          "title": "Reading",
+          "color": 0
+        },
+        {
+          "key": "mon2",
+          "day": 0,
+          "start": "09:20",
+          "end": "10:05",
+          "title": "Math",
+          "color": 1
+        },
+        {
+          "key": "mon3",
+          "day": 0,
+          "start": "10:10",
+          "end": "10:55",
+          "title": "Science",
+          "color": 2
+        },
+        {
+          "key": "mon4",
+          "day": 0,
+          "start": "11:00",
+          "end": "11:45",
+          "title": "Writing",
+          "color": 4
+        },
+        {
+          "key": "mon5",
+          "day": 0,
+          "start": "12:20",
+          "end": "13:05",
+          "title": "Social Studies",
+          "color": 3
+        },
+        {
+          "key": "mon6",
+          "day": 0,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "PE",
+          "color": 5
+        },
+        {
+          "key": "tue1",
+          "day": 1,
+          "start": "08:30",
+          "end": "09:15",
+          "title": "Reading",
+          "color": 0
+        },
+        {
+          "key": "tue2",
+          "day": 1,
+          "start": "09:20",
+          "end": "10:05",
+          "title": "Math",
+          "color": 1
+        },
+        {
+          "key": "tue3",
+          "day": 1,
+          "start": "10:10",
+          "end": "10:55",
+          "title": "Writing",
+          "color": 4
+        },
+        {
+          "key": "tue4",
+          "day": 1,
+          "start": "11:00",
+          "end": "11:45",
+          "title": "Music",
+          "color": 6
+        },
+        {
+          "key": "tue5",
+          "day": 1,
+          "start": "12:20",
+          "end": "13:05",
+          "title": "Science",
+          "color": 2
+        },
+        {
+          "key": "tue6",
+          "day": 1,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "Library",
+          "color": 8
+        },
+        {
+          "key": "wed1",
+          "day": 2,
+          "start": "08:30",
+          "end": "09:15",
+          "title": "Reading",
+          "color": 0
+        },
+        {
+          "key": "wed2",
+          "day": 2,
+          "start": "09:20",
+          "end": "10:05",
+          "title": "Math",
+          "color": 1
+        },
+        {
+          "key": "wed3",
+          "day": 2,
+          "start": "10:10",
+          "end": "10:55",
+          "title": "Science",
+          "color": 2
+        },
+        {
+          "key": "wed4",
+          "day": 2,
+          "start": "11:00",
+          "end": "11:45",
+          "title": "Social Studies",
+          "color": 3
+        },
+        {
+          "key": "wed5",
+          "day": 2,
+          "start": "12:20",
+          "end": "13:05",
+          "title": "PE",
+          "color": 5
+        },
+        {
+          "key": "wed6",
+          "day": 2,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "Writing",
+          "color": 4
+        },
+        {
+          "key": "thu1",
+          "day": 3,
+          "start": "08:30",
+          "end": "09:15",
+          "title": "Reading",
+          "color": 0
+        },
+        {
+          "key": "thu2",
+          "day": 3,
+          "start": "09:20",
+          "end": "10:05",
+          "title": "Math",
+          "color": 1
+        },
+        {
+          "key": "thu3",
+          "day": 3,
+          "start": "10:10",
+          "end": "10:55",
+          "title": "Writing",
+          "color": 4
+        },
+        {
+          "key": "thu4",
+          "day": 3,
+          "start": "11:00",
+          "end": "11:45",
+          "title": "Science",
+          "color": 2
+        },
+        {
+          "key": "thu5",
+          "day": 3,
+          "start": "12:20",
+          "end": "13:05",
+          "title": "Music",
+          "color": 6
+        },
+        {
+          "key": "thu6",
+          "day": 3,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "Art",
+          "color": 7
+        },
+        {
+          "key": "thu7",
+          "day": 3,
+          "start": "14:00",
+          "end": "14:45",
+          "title": "Art",
+          "color": 7
+        },
+        {
+          "key": "fri1",
+          "day": 4,
+          "start": "08:30",
+          "end": "09:15",
+          "title": "Reading",
+          "color": 0
+        },
+        {
+          "key": "fri2",
+          "day": 4,
+          "start": "09:20",
+          "end": "10:05",
+          "title": "Math",
+          "color": 1
+        },
+        {
+          "key": "fri3",
+          "day": 4,
+          "start": "10:10",
+          "end": "10:55",
+          "title": "Social Studies",
+          "color": 3
+        },
+        {
+          "key": "fri4",
+          "day": 4,
+          "start": "11:00",
+          "end": "11:45",
+          "title": "Writing",
+          "color": 4
+        },
+        {
+          "key": "fri5",
+          "day": 4,
+          "start": "12:20",
+          "end": "13:05",
+          "title": "Science",
+          "color": 2
+        },
+        {
+          "key": "fri6",
+          "day": 4,
+          "start": "13:10",
+          "end": "13:55",
+          "title": "PE",
+          "color": 5
+        }
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "key": "pencils",
+      "title": "Pack colored pencils",
+      "timetable": "main",
+      "schedule": "thu6",
+      "due": {
+        "day": 2,
+        "time": "19:00"
+      },
+      "reminderMinutes": 30,
+      "color": 7
+    },
+    {
+      "key": "spelling",
+      "title": "Practice spelling words",
+      "timetable": "main",
+      "schedule": "mon1",
+      "color": 0
+    },
+    {
+      "key": "gym",
+      "title": "Pack gym clothes",
+      "timetable": "main",
+      "schedule": "wed5",
+      "color": 5
+    }
+  ],
+  "steps": {
+    "create": {
+      "alt": "Timetable settings screen. The name is Emma · Grade 4, the days are Monday to Friday and the hours are 8 am to 3 pm."
+    },
+    "fill": {
+      "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+    },
+    "unique": {
+      "screen": "background",
+      "alt": "Emma · Grade 4 weekly timetable with a photo as its background. Classes show on top of the photo in color."
+    },
+    "todo": {
+      "todo": "pencils",
+      "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
+    },
+    "remind": {
+      "todo": "pencils",
+      "alts": [
+        "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before.",
+        "Alarm screen that opened at the reminder time, showing Pack colored pencils with snooze and dismiss buttons."
+      ]
+    },
+    "widgets": {
+      "alts": [
+        "Weekly widget on the home screen showing the week of the Emma · Grade 4 timetable.",
+        "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+        "To-Do widget on the home screen listing tasks, including Pack colored pencils."
+      ]
+    },
+    "widget_done": {
+      "todo": "pencils",
+      "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen."
+    },
+    "lock_screen": {
+      "alt": "Lock screen showing the Emma · Grade 4 weekly timetable, with an unlock button below it."
+    }
+  }
+}
