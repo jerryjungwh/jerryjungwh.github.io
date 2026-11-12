@@ -21,12 +21,12 @@ const ALL = ['create.png', 'fill.png', 'unique.png', 'todo.png', 'remind-1.png',
 
 test('한 사례가 내야 하는 파일: 배경 사진이 없는 사례는 고유 단계 그림을 빼고 센다', () => {
   expect(expectedFiles(loadFixture('ko', 'university')).sort()).toEqual([...ALL].sort());
-  const noPhoto = loadFixture('ko', 'elementary_school');
-  expect(noPhoto.timetables[0].unique?.backgroundImage).toBeUndefined();
-  expect(expectedFiles(noPhoto).sort()).toEqual(ALL.filter((f) => f !== 'unique.png').sort());
-  const withPhoto = structuredClone(noPhoto);
-  withPhoto.timetables[0].unique = { backgroundImage: 'elementary.jpg' };
+  const withPhoto = loadFixture('ko', 'elementary_school');
+  expect(withPhoto.steps.unique.screen).toBe('background');
   expect(expectedFiles(withPhoto).sort()).toEqual([...ALL].sort());
+  const noPhoto = structuredClone(withPhoto);
+  noPhoto.timetables[0].unique = {};
+  expect(expectedFiles(noPhoto).sort()).toEqual(ALL.filter((f) => f !== 'unique.png').sort());
 });
 
 test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언어·사례·기기가 들어간다', () => {
@@ -67,7 +67,8 @@ test('파일이 하나라도 빠지면 그 사례는 한 칸도 바뀌지 않는
 });
 
 test('배경 사진이 없는 사례는 고유 단계만 빼고 일곱 칸이 최종이 된다', () => {
-  const f = loadFixture('ko', 'lessons');
+  const f = structuredClone(loadFixture('ko', 'lessons'));
+  f.timetables[0].unique = {};
   const cells = completeCells(f, 'phone', ALL.filter((x) => x !== 'unique.png'), { durationMs: 5800 });
   expect(Object.keys(cells).length).toBe(7);
   expect(cells['ko/lessons/phone/unique']).toBeUndefined();

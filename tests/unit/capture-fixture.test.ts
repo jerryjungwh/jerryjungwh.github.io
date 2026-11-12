@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { expect, test } from 'vitest';
 import { fixtureProblems, loadFixture, type CaptureFixture } from '../../capture/fixture.ts';
 import { caseDefs } from '../../src/data/site';
@@ -159,4 +161,18 @@ test('칸 높이와 글씨 크기는 앱이 받는 범위 안이다(밖이면 �
   expect(broken((f) => (f.timetables[0].tablet = { cellHeightDp: 121 })).join('\n')).toMatch(/36~120/);
   expect(broken((f) => (f.timetables[0].textSizeSp = 4)).join('\n')).toMatch(/5~24/);
   expect(broken((f) => (f.timetables[0].tablet = { textSizeSp: 25 })).join('\n')).toMatch(/5~24/);
+});
+
+test('배경 사진 단계의 사례는 사진 파일을 가리키고, 그 파일이 capture/fixtures/images에 있다', () => {
+  for (const lang of LANGS)
+    for (const c of CASE_ORDER) {
+      const f = loadFixture(lang, c);
+      const photo = f.timetables[0].unique?.backgroundImage;
+      if (f.steps.unique.screen !== 'background') {
+        expect(photo, `${lang}/${c}`).toBeUndefined();
+        continue;
+      }
+      expect(photo, `${lang}/${c}`).toMatch(/^[a-z0-9_-]+\.jpg$/);
+      expect(existsSync(fileURLToPath(new URL(`../../capture/fixtures/images/${photo}`, import.meta.url))), `${lang}/${c}`).toBe(true);
+    }
 });

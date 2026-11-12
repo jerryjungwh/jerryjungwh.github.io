@@ -230,6 +230,14 @@
       "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
     }
   },
+  "en/elementary_school/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/phone/unique.webp",
+      "alt": "Emma · Grade 4 weekly timetable with a photo as its background. Classes show on top of the photo in color."
+    }
+  },
   "en/elementary_school/phone/widget_done": {
     "status": "final",
     "media": {
@@ -237,7 +245,7 @@
       "src": "/captures/en/elementary-school/phone/widget_done.mp4",
       "poster": "/captures/en/elementary-school/phone/widget_done.webp",
       "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
-      "durationMs": 5600
+      "durationMs": 5833
     }
   },
   "en/elementary_school/phone/widgets": {
@@ -313,6 +321,14 @@
       "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
     }
   },
+  "en/elementary_school/tablet/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/tablet/unique.webp",
+      "alt": "Emma · Grade 4 weekly timetable with a photo as its background. Classes show on top of the photo in color."
+    }
+  },
   "en/elementary_school/tablet/widget_done": {
     "status": "final",
     "media": {
@@ -320,7 +336,7 @@
       "src": "/captures/en/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/en/elementary-school/tablet/widget_done.webp",
       "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
-      "durationMs": 5700
+      "durationMs": 5567
     }
   },
   "en/elementary_school/tablet/widgets": {
@@ -578,6 +594,14 @@
       "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
     }
   },
+  "en/lessons/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/phone/unique.webp",
+      "alt": "My lessons weekly timetable with a photo as its background. Lessons show on top of the photo in color."
+    }
+  },
   "en/lessons/phone/widget_done": {
     "status": "final",
     "media": {
@@ -661,6 +685,14 @@
       "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
     }
   },
+  "en/lessons/tablet/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/tablet/unique.webp",
+      "alt": "My lessons weekly timetable with a photo as its background. Lessons show on top of the photo in color."
+    }
+  },
   "en/lessons/tablet/widget_done": {
     "status": "final",
     "media": {
@@ -668,7 +700,7 @@
       "src": "/captures/en/lessons/tablet/widget_done.mp4",
       "poster": "/captures/en/lessons/tablet/widget_done.webp",
       "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
-      "durationMs": 5767
+      "durationMs": 5600
     }
   },
   "en/lessons/tablet/widgets": {
@@ -1290,6 +1322,14 @@
       "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 미술 일정에 연결되어 있다."
     }
   },
+  "ko/elementary_school/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/elementary-school/phone/unique.webp",
+      "alt": "배경에 사진을 넣은 하윤 4학년 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    }
+  },
   "ko/elementary_school/phone/widget_done": {
     "status": "final",
     "media": {
@@ -1297,7 +1337,7 @@
       "src": "/captures/ko/elementary-school/phone/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5600
+      "durationMs": 5567
     }
   },
   "ko/elementary_school/phone/widgets": {
@@ -1373,6 +1413,14 @@
       "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 미술 일정에 연결되어 있다."
     }
   },
+  "ko/elementary_school/tablet/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/elementary-school/tablet/unique.webp",
+      "alt": "배경에 사진을 넣은 하윤 4학년 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    }
+  },
   "ko/elementary_school/tablet/widget_done": {
     "status": "final",
     "media": {
@@ -1380,7 +1428,7 @@
       "src": "/captures/ko/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5567
+      "durationMs": 5633
     }
   },
   "ko/elementary_school/tablet/widgets": {
@@ -1638,6 +1686,14 @@
       "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
     }
   },
+  "ko/lessons/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/lessons/phone/unique.webp",
+      "alt": "배경에 사진을 넣은 수업표 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    }
+  },
   "ko/lessons/phone/widget_done": {
     "status": "final",
     "media": {
@@ -1645,7 +1701,7 @@
       "src": "/captures/ko/lessons/phone/widget_done.mp4",
       "poster": "/captures/ko/lessons/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습.",
-      "durationMs": 5733
+      "durationMs": 5667
     }
   },
   "ko/lessons/phone/widgets": {
@@ -1721,6 +1777,14 @@
       "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
     }
   },
+  "ko/lessons/tablet/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/lessons/tablet/unique.webp",
+      "alt": "배경에 사진을 넣은 수업표 주간표. 수업 칸이 사진 위에 색으로 보인다."
+    }
+  },
   "ko/lessons/tablet/widget_done": {
     "status": "final",
     "media": {
@@ -1728,7 +1792,7 @@
       "src": "/captures/ko/lessons/tablet/widget_done.mp4",
       "poster": "/captures/ko/lessons/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습.",
-      "durationMs": 5633
+      "durationMs": 5767
     }
   },
   "ko/lessons/tablet/widgets": {

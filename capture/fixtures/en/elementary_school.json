@@ -10,7 +10,9 @@
       "endHour": 15,
       "timeFormat": "12h",
       "cellHeightDp": 87,
-      "unique": {},
+      "unique": {
+        "backgroundImage": "elementary.jpg"
+      },
       "tablet": {
         "cellHeightDp": 77
       },

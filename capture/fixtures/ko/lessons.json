@@ -11,7 +11,9 @@
       "timeFormat": "24h",
       "textSizeSp": 10,
       "cellHeightDp": 43,
-      "unique": {},
+      "unique": {
+        "backgroundImage": "lessons.jpg"
+      },
       "tablet": {
         "cellHeightDp": 36
       },

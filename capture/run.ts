@@ -79,6 +79,8 @@ function prepare() {
 function restore() {
   const steps: [string, () => void][] = [
     ['배경 화면', () => instrument('setWallpaper', { siteWallpaper: 'default' })],
+    // An emulator without telephony (Pixel Tablet) does not take network time back by itself: set it first.
+    ['시계', () => shell(`cmd alarm set-time ${Date.now()}`)],
     ['자동 시간', () => shell('settings put global auto_time 1')],
     ['권한', () => (shell(`appops set ${PKG} SYSTEM_ALERT_WINDOW default`), shell(`appops set ${PKG} SCHEDULE_EXACT_ALARM default`))],
     // DEV diagnostics recorded during the run must not reach the real Crashlytics on the next app start.
