@@ -26,6 +26,12 @@ test('영어 홈의 리뷰는 영어 원문이고 출처는 영어로 적는다'
   expect($('#reviews blockquote').length).toBeGreaterThan(0);
   $('#reviews blockquote').each((_, b) => expect($(b).text()).not.toMatch(/[가-힣]/));
   $('#reviews figcaption').each((_, f) => expect($(f).text().trim()).toMatch(/^Google Play review · [A-Z][a-z]+ \d{4}$/));
+  // Two reviews asked for the same thing: one note under both.
+  expect($('#reviews .shipped-group').length).toBe(1);
+  expect($('#reviews .shipped-group figure').length).toBe(2);
+  expect($('#reviews .shipped-note').length).toBe(1);
+  expect($('#reviews .shipped-note').text()).toContain('First day of the week');
+  expect($('#reviews').text()).not.toMatch(/[가-힣]/);
 });
 
 test('영어 페이지 본문의 한글은 언어 전환 링크와 앱의 한국어 이름뿐이다', () => {

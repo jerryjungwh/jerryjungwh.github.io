@@ -82,10 +82,24 @@ export const SITE_EN: SiteStrings = {
   },
   reviews: {
     heading: 'Google Play reviews',
+    lead: 'The developer has replied to 783 of the 1,012 written reviews on Google Play (as of September 2026).',
     items: [
-      { text: 'it’s easy and nice to use.', year: 2026, month: 8 },
       { text: 'Easy to use & simple', year: 2018, month: 9 },
     ],
+    shipped: {
+      heading: 'Updates that started with a review',
+      label: 'Added',
+      groups: [
+        {
+          reviews: [
+            { text: 'it\'s easy and nice to use. would like to suggest though to have an option if the first day of the week would be sunday or monday. :))', year: 2026, month: 8 },
+            { text: 'Lovee the app, it\'s exactly how I want, but just a small issue that I\'ve personally come across is that I can\'t choose to make the week start on Sunday (the convention in my country). I hope it\'s added, but other than that it\'s a lovely app.', year: 2026, month: 9 },
+          ],
+          when: 'November 2026, version 7.5.4',
+          note: 'Every timetable now has a “First day of the week” setting, and any of the seven days can come first.',
+        },
+      ],
+    },
     caption: (year, month) => `Google Play review · ${MONTHS[month - 1]} ${year}`,
   },
   faq: { heading: 'Frequently asked questions', all: 'See all questions' },

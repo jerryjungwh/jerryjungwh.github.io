@@ -68,6 +68,13 @@ export interface FaqItem {
 }
 
 /** Everything a page says that is not case copy. One object per language. */
+/** A Google Play review. Original text, unedited. No author names. */
+export interface Review {
+  text: string;
+  year: number;
+  month: number;
+}
+
 export interface SiteStrings {
   appName: string;
   home: { title: string; description: string; h1: [string, string]; lead: string };
@@ -93,8 +100,16 @@ export interface SiteStrings {
   byCase: { heading: string; blurbs: Record<CaseId, string> };
   reviews: {
     heading: string;
-    /** Original text, unedited. No author names. */
-    items: { text: string; year: number; month: number }[];
+    /** How many written reviews got a developer reply. Counted in the Play review export; says its base month. */
+    lead: string;
+    items: Review[];
+    /** Reviews that asked for something the app now has. The note under them is the site speaking, not a quote. */
+    shipped: {
+      heading: string;
+      /** The word every note starts with. */
+      label: string;
+      groups: { reviews: Review[]; when: string; note: string }[];
+    };
     caption(year: number, month: number): string;
   };
   faq: { heading: string; all: string };

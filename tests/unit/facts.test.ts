@@ -38,6 +38,23 @@ test('표의 날짜 항목은 페이지를 고친 날이라고 적는다', () =>
   expect(SITE_EN.what.updatedTerm).toBe('Page last updated');
 });
 
+// Counted in the Play review export (2017-03 to 2026-09-23): reviews with text, and those with a developer reply.
+test('답글 수는 Play 리뷰 내보내기에서 센 값이고 기준 달을 적는다', () => {
+  expect(SITE_KO.reviews.lead).toContain('1,012건 가운데 783건');
+  expect(SITE_KO.reviews.lead).toContain('2026년 9월 기준');
+  expect(SITE_EN.reviews.lead).toContain('783 of the 1,012');
+  expect(SITE_EN.reviews.lead).toContain('as of September 2026');
+});
+
+// 7.5.4 (173) reached production on 2026-11-07. The setting is named in strings_week_start.xml.
+test('주 시작 요일 건의는 7.5.4에 들어갔다고 적는다', () => {
+  const ko = SITE_KO.reviews.shipped.groups.find((g) => g.note.includes('한 주의 시작 요일'))!;
+  expect(ko.when).toBe('2026년 11월, 버전 7.5.4');
+  const en = SITE_EN.reviews.shipped.groups.find((g) => g.note.includes('First day of the week'))!;
+  expect(en.when).toBe('November 2026, version 7.5.4');
+  expect(en.reviews.length).toBe(2);
+});
+
 test('홈의 큰 제목에 검색어와 앱 이름이 들어간다', () => {
   expect(SITE_KO.home.h1).toEqual(['시간표 앱 심간표', '수업도 과제도 홈 화면에서 바로']);
   expect(SITE_EN.home.h1[0]).toBe('SimpleScheduler timetable app');
