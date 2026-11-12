@@ -38,20 +38,15 @@ test('표의 날짜 항목은 페이지를 고친 날이라고 적는다', () =>
   expect(SITE_EN.what.updatedTerm).toBe('Page last updated');
 });
 
-// Counted in the Play review export (2017-03 to 2026-09-23): reviews with text, and those with a developer reply.
-test('답글 수는 Play 리뷰 내보내기에서 센 값이고 기준 달을 적는다', () => {
-  expect(SITE_KO.reviews.lead).toContain('1,012건 가운데 783건');
-  expect(SITE_KO.reviews.lead).toContain('2026년 9월 기준');
-  expect(SITE_EN.reviews.lead).toContain('783 of the 1,012');
-  expect(SITE_EN.reviews.lead).toContain('as of September 2026');
-});
-
-// The week start setting shipped in 7.5.4 (173), in production since 2026-11-07 (strings_week_start.xml).
-// Both English reviews asked for it, so they share one note.
-test('주 시작 요일 건의에는 반영했다고 적는다', () => {
-  expect(SITE_KO.reviews.shipped.groups.some((g) => g.note.includes('시작 요일'))).toBe(true);
-  const en = SITE_EN.reviews.shipped.groups.find((g) => g.note.includes('first day of the week'))!;
-  expect(en.reviews.length).toBe(2);
+// Every review under "updates that started with a review" asks for something the app has now. Checked
+// against the app's strings and source: To-Do and the week start setting shipped in 7.5.4 (production since
+// 2026-11-07); timetable copy, per-widget timetables, the red "now" line and backup in 7.0 to 7.1 (2026-04/05).
+test('건의 리뷰 묶음에는 지금 앱에 있는 것을 건의한 리뷰만 싣는다', () => {
+  expect(SITE_KO.reviews.shipped.intro).toContain('지금 앱에 들어 있어요');
+  expect(SITE_KO.reviews.shipped.reviews.map((r) => `${r.year}-${r.month}`)).toEqual(['2023-7', '2022-4', '2023-9', '2023-2', '2021-12']);
+  expect(SITE_EN.reviews.shipped.intro).toContain('now in the app');
+  expect(SITE_EN.reviews.shipped.reviews.map((r) => `${r.year}-${r.month}`)).toEqual(['2026-8', '2026-9']);
+  for (const r of SITE_EN.reviews.shipped.reviews) expect(r.text).toMatch(/week/);
 });
 
 test('홈의 큰 제목에 검색어와 앱 이름이 들어간다', () => {

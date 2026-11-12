@@ -1,58 +1,42 @@
 ---
 import { siteStrings } from '../data/site';
-import type { Lang, Review } from '../lib/types';
+import type { Lang } from '../lib/types';
 
 interface Props {
   lang: Lang;
 }
 
 const t = siteStrings(Astro.props.lang).reviews;
-const quote = (r: Review) => ({ text: r.text, caption: t.caption(r.year, r.month) });
+const lists = [
+  { intro: undefined, reviews: t.items },
+  { intro: t.shipped, reviews: t.shipped.reviews },
+];
 ---
 
-<p class="doc-text">{t.lead}</p>
-
-<div class="reviews">
-  {
-    t.items.map(quote).map((r) => (
-      <figure>
-        <blockquote>
-          <p>{r.text}</p>
-        </blockquote>
-        <figcaption>{r.caption}</figcaption>
-      </figure>
-    ))
-  }
-</div>
-
-<h3>{t.shipped.heading}</h3>
-
-<div class="reviews">
-  {
-    t.shipped.groups.map((g) => (
-      <div class="shipped-group">
-        {g.reviews.map(quote).map((r) => (
+{
+  lists.map(({ intro, reviews }) => (
+    <>
+      {intro && <h3>{intro.heading}</h3>}
+      {intro && <p class="doc-text">{intro.intro}</p>}
+      <div class="reviews">
+        {reviews.map((r) => (
           <figure>
             <blockquote>
               <p>{r.text}</p>
             </blockquote>
-            <figcaption>{r.caption}</figcaption>
+            <figcaption>{t.caption(r.year, r.month)}</figcaption>
           </figure>
         ))}
-        <p class="shipped-note">
-          <strong>{t.shipped.label}</strong> <span>{g.note}</span>
-        </p>
       </div>
-    ))
-  }
-</div>
+    </>
+  ))
+}
 
 <style>
   .reviews {
     display: grid;
     gap: 36px;
     max-width: 760px;
-    margin-top: clamp(24px, 3vw, 36px);
   }
   h3 {
     margin-top: clamp(56px, 7vw, 88px);
@@ -60,6 +44,12 @@ const quote = (r: Review) => ({ text: r.text, caption: t.caption(r.year, r.month
     font-weight: 800;
     line-height: 1.3;
     letter-spacing: -0.025em;
+  }
+  h3 + p {
+    margin-top: 12px;
+  }
+  p + .reviews {
+    margin-top: clamp(24px, 3vw, 36px);
   }
   blockquote {
     margin: 0;
@@ -76,29 +66,5 @@ const quote = (r: Review) => ({ text: r.text, caption: t.caption(r.year, r.month
     padding-left: 21px;
     font-size: 14px;
     color: var(--body);
-  }
-  .shipped-group {
-    display: grid;
-    gap: 14px;
-  }
-  .shipped-group figure + figure {
-    margin-top: 22px;
-  }
-  /* The answer to the request above it: one line, starting where the quoted text starts. */
-  .shipped-note {
-    padding-left: 21px;
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--body);
-  }
-  .shipped-note strong {
-    display: inline-block;
-    margin-right: 8px;
-    padding: 1px 10px;
-    border-radius: 999px;
-    background: var(--brand-tint);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--brand);
   }
 </style>

@@ -100,17 +100,12 @@ export interface SiteStrings {
   byCase: { heading: string; blurbs: Record<CaseId, string> };
   reviews: {
     heading: string;
-    /** How many written reviews got a developer reply. Counted in the Play review export; says its base month. */
-    lead: string;
     items: Review[];
-    /** Reviews that asked for something the app now has. The note under them is the site speaking, not a quote. */
-    shipped: {
-      heading: string;
-      /** The word every note starts with. */
-      label: string;
-      /** `note`: one short sentence. No versions or dates: the point is that reviews steer the app. */
-      groups: { reviews: Review[]; note: string }[];
-    };
+    /**
+     * Reviews that asked for something the app now has. `intro` says so once, above them: no note under
+     * each review, no versions, dates or reply counts. The point is only that reviews steer the app.
+     */
+    shipped: { heading: string; intro: string; reviews: Review[] };
     caption(year: number, month: number): string;
   };
   faq: { heading: string; all: string };

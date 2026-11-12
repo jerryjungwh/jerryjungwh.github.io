@@ -69,30 +69,22 @@ test('사례별로 자세히: 사례 페이지 여섯 개로 가는 링크', () 
 
 test('리뷰에는 출처와 연월이 있고 작성자 이름이 없다', () => {
   const r = SITE_KO.reviews;
-  expect($('#reviews figure').length).toBe(r.items.length + r.shipped.groups.reduce((n, g) => n + g.reviews.length, 0));
+  expect($('#reviews figure').length).toBe(r.items.length + r.shipped.reviews.length);
   $('#reviews figure').each((_, f) => {
     expect($(f).find('blockquote').text().trim().length).toBeGreaterThan(10);
     expect($(f).find('figcaption').text().trim()).toMatch(/^Google Play 리뷰 · \d{4}년 \d{1,2}월$/);
   });
 });
 
-test('리뷰 절은 답글 수로 시작하고, 건의 리뷰 묶음마다 반영 글이 하나씩 붙는다', () => {
-  const { lead, shipped } = SITE_KO.reviews;
-  expect($('#reviews .doc-text').text().trim()).toBe(lead);
+test('건의 리뷰 묶음: 제목 아래 한 번만 말하고, 리뷰마다 붙는 글과 답글 수는 없다', () => {
+  const { shipped } = SITE_KO.reviews;
   expect($('#reviews h3').length).toBe(1);
   expect($('#reviews h3').text().trim()).toBe(shipped.heading);
-  const groups = $('#reviews .shipped-group');
-  expect(groups.length).toBe(shipped.groups.length);
-  groups.each((i, el) => {
-    const data = shipped.groups[i];
-    expect($(el).find('figure').length, data.note).toBe(data.reviews.length);
-    expect($(el).find('.shipped-note').length, data.note).toBe(1);
-    // Read as plain text: the label and the note stay separate words without styles.
-    const note = $(el).find('.shipped-note').text().replace(/\s+/g, ' ').trim();
-    expect(note).toBe(`${shipped.label} ${data.note}`);
-  });
-  // The note is the site speaking, not a quote.
-  expect($('#reviews .shipped-note blockquote, #reviews blockquote .shipped-note').length).toBe(0);
+  expect($('#reviews h3 + p').text().trim()).toBe(shipped.intro);
+  expect($('#reviews h3 ~ .reviews figure').length).toBe(shipped.reviews.length);
+  // Outside the quotes the section has two things to read: the heading and that one sentence.
+  expect($('#reviews p').not('blockquote p').length).toBe(1);
+  expect($('#reviews').text()).not.toMatch(/반영했어요|783/);
 });
 
 test('자주 묻는 질문은 답을 펼친 목록이고 전체 보기 링크가 있다', () => {

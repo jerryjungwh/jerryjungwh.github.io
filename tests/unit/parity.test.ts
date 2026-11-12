@@ -55,7 +55,7 @@ test('영어 단계 글: 제목 40자, 한 문장 130자 이하, 긴 설명이 �
 
 test('영어 문구는 한국어와 같은 항목을 모두 갖고 있다', () => {
   // Array lengths may differ where the content differs by language (reviews).
-  const strip = (paths: string[]) => paths.map((p) => p.replace(/^(\.reviews\.(?:items|shipped\.groups))\[\d+\]$/, '$1[]'));
+  const strip = (paths: string[]) => paths.map((p) => p.replace(/^(\.reviews\.(?:items|shipped\.reviews))\[\d+\]$/, '$1[]'));
   expect(strip(shape(SITE_EN))).toEqual(strip(shape(SITE_KO)));
   expect(Object.keys(SITE_EN.byCase.blurbs).sort()).toEqual([...CASE_ORDER].sort());
 });
