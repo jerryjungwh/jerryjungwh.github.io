@@ -6,7 +6,7 @@
 ## 지금 상태 (2026-11-13)
 
 - 한국어 9쪽과 영어 9쪽(`/en/`), 404 한 장이 빌드된다. 홈, 시간표 종류 6쪽, 자주 묻는 질문, 소개.
-- 앱 화면은 에뮬레이터의 실제 앱 7.5.7에서 찍은 것이다(아래 「다시 찍는 방법」). 아직 찍지 못한 칸은 「촬영 예정」 임시 그림이고, 임시 그림이 남아 있으면 공개용 빌드가 실패한다.
+- 앱 화면 192칸은 모두 에뮬레이터의 실제 앱 7.5.7에서 찍은 것이다(아래 「다시 찍는 방법」). 찍지 않은 칸이 생기면 「촬영 예정」 임시 그림이 보이고 공개용 빌드가 실패한다.
 - 측정(GTM), QR, 동의 배너는 아직 없다. 스토어 링크는 빌드 때 적는 기본 주소다.
 
 ## 실행
@@ -70,11 +70,11 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 화면은 모두 Android 에뮬레이터의 실제 앱(DEV 디버그 빌드)에서 찍는다. **실제 폰에서는 찍지 않는다.** 스크립트는 켜져 있는 에뮬레이터가 정확히 하나일 때만 돌고, USB나 무선으로 붙은 실제 기기는 고르지 않는다.
 
-기기마다 처음 한 번:
+에뮬레이터를 켤 때마다(스냅숏을 저장하지 않고 켰다면 끌 때 아래 준비가 모두 사라진다. `-no-snapshot-save`로 켰을 때가 그렇다):
 
 1. 에뮬레이터 하나만 띄운다. 폰은 `Pixel_9_API_35_2`(1080×2424), 태블릿은 `Pixel_Tablet`(2560×1600).
-2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고, 두 APK를 `adb -s emulator-5554 install -r`로 넣는다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다.
-3. 런처에 위젯 세 개를 붙인다. 위젯마다 `adb -s emulator-5554 shell am instrument -w -e siteCapture true -e siteWidget weekly -e class com.jjsoft.android.simplescheduler.ui.SiteCaptureInstrumentedTest#requestWidget com.jjsoft.android.simplescheduler.test/androidx.test.runner.AndroidJUnitRunner`(`weekly`, `today`, `todo`)를 돌리고, 뜨는 창에서 「Add to home screen」을 누른다. 길게 눌러 손잡이로 화면 폭에 맞게 키운다. 한 쪽에 위젯 하나씩 둔다.
+2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고, 두 APK를 `adb -s <에뮬레이터> install -r`로 **둘 다** 넣는다. 한 빌드에서 나온 짝이어야 한다. 앱만 예전 빌드면 검사가 `INSTRUMENTATION_RESULT: shortMsg=Process crashed.`로 끝난다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다. 에뮬레이터 이름은 `adb devices`로 본다(태블릿을 끄고 바로 폰을 켜면 `emulator-5556`이 될 수 있다).
+3. 런처에 위젯 세 개를 붙인다. 위젯마다 `adb -s <에뮬레이터> shell am instrument -w -e siteCapture true -e siteWidget weekly -e class com.jjsoft.android.simplescheduler.ui.SiteCaptureInstrumentedTest#requestWidget com.jjsoft.android.simplescheduler.test/androidx.test.runner.AndroidJUnitRunner`(`weekly`, `today`, `todo`)를 돌리고, 뜨는 창에서 「Add to home screen」을 누른다. 한 쪽에 위젯 하나씩 두고, 길게 눌러 나오는 손잡이로 쪽을 가득 채우게 키운다(폰 4칸 × 5줄, 태블릿 6칸 × 5줄). 손잡이는 `input swipe`로는 잘 잡히지 않는다. `adb shell "input motionevent DOWN x y; sleep 0.3; input motionevent MOVE …; input motionevent UP …"`처럼 천천히 끈다. 키운 위젯이 쪽을 채워야 다음 위젯이 새 쪽에 놓인다.
 4. 런처의 Home settings > Suggestions > 「Suggestions on Home screen」을 끈다(아래 줄에 추천 앱이 끼어들지 않게).
 
 찍기:
@@ -106,7 +106,6 @@ npm run check
 
 ## 아직 없는 것
 
-- 초등학교·레슨 사례의 「배경 사진」 단계 화면(언어·기기마다 2칸). 사진 파일을 받아야 찍는다.
 - GTM, Play 주소를 방문 정보로 만드는 함수, QR, 동의 배너(측정 계획).
 - 영어 정책 페이지, 도메인 연결, 검색 도구 등록(공개 계획).
 - 공유용 그림(`og:image`), 기능 페이지 5개.
