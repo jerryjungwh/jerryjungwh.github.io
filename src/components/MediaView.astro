@@ -40,6 +40,9 @@ const isSequence = media.kind === 'sequence';
 const widths = device === 'phone' ? [360, 540, 720, 1080] : [640, 960, 1280, 1920];
 const sizes = device === 'phone' ? '(max-width: 480px) 62vw, 300px' : '(max-width: 760px) 92vw, 640px';
 const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예정';
+// Flat app screens stay sharp at this setting, and the densest one (an English weekly widget) stays under
+// the size budget the build tests hold: 60KB a phone screen, 150KB a tablet screen.
+const QUALITY = 70;
 ---
 
 <div
@@ -66,7 +69,7 @@ const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예�
       return placeholder ? (
         <img src={placeholder.url} width={placeholder.width} height={placeholder.height} {...common} />
       ) : (
-        <Image src={capture(frame.src)} widths={widths} sizes={sizes} {...common} />
+        <Image src={capture(frame.src)} widths={widths} sizes={sizes} quality={QUALITY} {...common} />
       );
     })
   }
