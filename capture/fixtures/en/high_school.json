@@ -9,7 +9,8 @@
       "startHour": 8,
       "endHour": 21,
       "timeFormat": "12h",
-      "cellHeightDp": 50,
+      "textSizeSp": 10,
+      "cellHeightDp": 46,
       "schedules": [
         {
           "key": "mon1",

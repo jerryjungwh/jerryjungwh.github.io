@@ -1,4 +1,534 @@
 {
+  "en/after_school/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/after-school/phone/create.webp",
+      "alt": "Timetable settings screen. The name is Lily, the days are Monday to Saturday and the hours are 10 am to 7 pm."
+    }
+  },
+  "en/after_school/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/after-school/phone/fill.webp",
+      "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+    }
+  },
+  "en/after_school/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/after-school/phone/lock_screen.webp",
+      "alt": "Lock screen showing the Lily weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/after_school/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/after-school/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Pack swim bag with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/after_school/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/after-school/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to the swim lesson."
+    }
+  },
+  "en/after_school/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/after-school/phone/unique.webp",
+      "alt": "List for switching timetables, showing two of them: Lily and Max."
+    }
+  },
+  "en/after_school/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/after-school/phone/widget_done.mp4",
+      "poster": "/captures/en/after-school/phone/widget_done.webp",
+      "alt": "Marking Pack swim bag as complete in the To-Do widget on the home screen.",
+      "durationMs": 5633
+    }
+  },
+  "en/after_school/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the Lily timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/after-school/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/after-school/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Pack swim bag.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
+  "en/elementary_school/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/phone/create.webp",
+      "alt": "Timetable settings screen. The name is Emma · Grade 4, the days are Monday to Friday and the hours are 8 am to 3 pm."
+    }
+  },
+  "en/elementary_school/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/phone/fill.webp",
+      "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+    }
+  },
+  "en/elementary_school/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/phone/lock_screen.webp",
+      "alt": "Lock screen showing the Emma · Grade 4 weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/elementary_school/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Pack colored pencils with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/elementary_school/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/elementary-school/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
+    }
+  },
+  "en/elementary_school/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/elementary-school/phone/widget_done.mp4",
+      "poster": "/captures/en/elementary-school/phone/widget_done.webp",
+      "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
+      "durationMs": 5600
+    }
+  },
+  "en/elementary_school/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the Emma · Grade 4 timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Pack colored pencils.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
+  "en/high_school/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/high-school/phone/create.webp",
+      "alt": "Timetable settings screen. The name is Junior year · Fall, the days are Monday to Friday and the hours are 8 am to 9 pm."
+    }
+  },
+  "en/high_school/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/high-school/phone/fill.webp",
+      "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+    }
+  },
+  "en/high_school/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/high-school/phone/lock_screen.webp",
+      "alt": "Lock screen showing the Junior year · Fall weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/high_school/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/high-school/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Prepare English presentation with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/high_school/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/high-school/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to English."
+    }
+  },
+  "en/high_school/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/high-school/phone/unique.webp",
+      "alt": "Editing screen for the study block. Its alarm is on, so an alarm rings at the start time."
+    }
+  },
+  "en/high_school/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/high-school/phone/widget_done.mp4",
+      "poster": "/captures/en/high-school/phone/widget_done.webp",
+      "alt": "Marking Prepare English presentation as complete in the To-Do widget on the home screen.",
+      "durationMs": 5833
+    }
+  },
+  "en/high_school/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the Junior year · Fall timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/high-school/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/high-school/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Prepare English presentation.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
+  "en/lessons/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/phone/create.webp",
+      "alt": "Timetable settings screen. The name is My lessons, the days are Monday to Saturday and the hours are 7 am to 10 pm."
+    }
+  },
+  "en/lessons/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/phone/fill.webp",
+      "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+    }
+  },
+  "en/lessons/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/phone/lock_screen.webp",
+      "alt": "Lock screen showing the My lessons weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/lessons/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/lessons/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Make midterm review sheet with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/lessons/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/lessons/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
+    }
+  },
+  "en/lessons/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/lessons/phone/widget_done.mp4",
+      "poster": "/captures/en/lessons/phone/widget_done.webp",
+      "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
+      "durationMs": 5667
+    }
+  },
+  "en/lessons/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the My lessons timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/lessons/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/lessons/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Make midterm review sheet.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
+  "en/middle_school/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/middle-school/phone/create.webp",
+      "alt": "Timetable settings screen. The name is Noah · Grade 7 Fall, the days are Monday to Friday and the hours are 8 am to 6 pm."
+    }
+  },
+  "en/middle_school/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/middle-school/phone/fill.webp",
+      "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+    }
+  },
+  "en/middle_school/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/middle-school/phone/lock_screen.webp",
+      "alt": "Lock screen showing the Noah · Grade 7 Fall weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/middle_school/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/middle-school/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Science project report with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/middle_school/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/middle-school/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Science project report and it is linked to Science."
+    }
+  },
+  "en/middle_school/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/middle-school/phone/unique.webp",
+      "alt": "Noah · Grade 7 Fall weekly timetable with a Saturday column added. Math tutoring runs from 10 am to noon on Saturday."
+    }
+  },
+  "en/middle_school/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/middle-school/phone/widget_done.mp4",
+      "poster": "/captures/en/middle-school/phone/widget_done.webp",
+      "alt": "Marking Science project report as complete in the To-Do widget on the home screen.",
+      "durationMs": 5667
+    }
+  },
+  "en/middle_school/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the Noah · Grade 7 Fall timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/middle-school/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/middle-school/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Science project report.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
+  "en/university/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/university/phone/create.webp",
+      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 6 pm."
+    }
+  },
+  "en/university/phone/fill": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/university/phone/fill.webp",
+      "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+    }
+  },
+  "en/university/phone/lock_screen": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/university/phone/lock_screen.webp",
+      "alt": "Lock screen showing the Fall semester weekly timetable, with an unlock button below it."
+    }
+  },
+  "en/university/phone/remind": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/university/phone/remind-1.webp",
+          "alt": "Screen for choosing when to be reminded, with five choices from 5 minutes to 1 day before."
+        },
+        {
+          "src": "/captures/en/university/phone/remind-2.webp",
+          "alt": "Alarm screen that opened at the reminder time, showing Submit Data Structures lab with snooze and dismiss buttons."
+        }
+      ]
+    }
+  },
+  "en/university/phone/todo": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/university/phone/todo.webp",
+      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Data Structures."
+    }
+  },
+  "en/university/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/en/university/phone/unique.webp",
+      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor and linked assignment."
+    }
+  },
+  "en/university/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/en/university/phone/widget_done.mp4",
+      "poster": "/captures/en/university/phone/widget_done.webp",
+      "alt": "Marking Submit Data Structures lab as complete in the To-Do widget on the home screen.",
+      "durationMs": 5667
+    }
+  },
+  "en/university/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/university/phone/widgets-1.webp",
+          "alt": "Weekly widget on the home screen showing the week of the Fall semester timetable.",
+          "label": "Weekly"
+        },
+        {
+          "src": "/captures/en/university/phone/widgets-2.webp",
+          "alt": "Today overview widget on the home screen, with today's schedule and tasks side by side.",
+          "label": "Today overview"
+        },
+        {
+          "src": "/captures/en/university/phone/widgets-3.webp",
+          "alt": "To-Do widget on the home screen listing tasks, including Submit Data Structures lab.",
+          "label": "To-Do"
+        }
+      ]
+    }
+  },
   "ko/after_school/phone/create": {
     "status": "final",
     "media": {

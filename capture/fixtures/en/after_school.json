@@ -9,7 +9,8 @@
       "startHour": 10,
       "endHour": 19,
       "timeFormat": "12h",
-      "cellHeightDp": 72,
+      "textSizeSp": 10,
+      "cellHeightDp": 67,
       "schedules": [
         {
           "key": "art_mon",

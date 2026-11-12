@@ -9,7 +9,7 @@
       "startHour": 8,
       "endHour": 15,
       "timeFormat": "12h",
-      "cellHeightDp": 92,
+      "cellHeightDp": 87,
       "unique": {},
       "schedules": [
         {
