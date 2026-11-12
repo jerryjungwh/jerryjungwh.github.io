@@ -25,7 +25,7 @@ export const SITE_EN: SiteStrings = {
     title: 'SimpleScheduler (Simganpyo) - Timetable app for classes, homework and widgets',
     description:
       'SimpleScheduler (Simganpyo) is an Android timetable app. Build a weekly timetable for classes and activities, link homework and tasks to each class, and check it all in home screen widgets.',
-    h1: ['Your school week, as it really runs.', 'Timetable and tasks in one app'],
+    h1: ['SimpleScheduler timetable app', 'Classes and homework, right on your home screen'],
     lead: 'Enter a 45-minute class or a 75-minute lecture to the minute, and link homework to the class. See it in home screen widgets and on the lock screen.',
   },
   header: {
@@ -59,11 +59,11 @@ export const SITE_EN: SiteStrings = {
       },
       { term: 'Sign-up', desc: 'None' },
       { term: 'Your data', desc: 'Stored on your device; moved with a password-protected backup file' },
-      { term: 'Widgets', desc: 'Weekly, Today, To-Do' },
+      { term: 'Widgets', desc: 'Weekly, Today overview, To-Do' },
       { term: 'Languages', desc: 'Korean, English, Japanese, Simplified Chinese' },
       { term: 'Running since', desc: '2017' },
     ],
-    updatedTerm: 'Last updated',
+    updatedTerm: 'Page last updated',
     formatDate: (iso) => {
       const [y, m, d] = iso.split('-').map(Number);
       return `${MONTHS[m - 1]} ${d}, ${y}`;

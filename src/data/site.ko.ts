@@ -7,7 +7,7 @@ export const SITE_KO: SiteStrings = {
     title: '심간표 - 시간표 앱 | 학교·학원 시간표, 과제, 위젯',
     description:
       '심간표(SimpleScheduler)는 매주 반복되는 수업과 학원 일정을 주간 시간표로 만들고, 과제와 할 일을 수업에 연결해 관리하는 Android 시간표 앱이에요.',
-    h1: ['우리 학교 시간 그대로,', '시간표와 할 일을 한 앱에서'],
+    h1: ['시간표 앱 심간표', '수업도 과제도 홈 화면에서 바로'],
     lead: '40분 수업도 75분 강의도 1분 단위로 넣고, 과제는 수업에 연결해요. 홈 화면 위젯과 잠금화면에서 바로 봐요.',
   },
   header: {
@@ -45,7 +45,7 @@ export const SITE_KO: SiteStrings = {
       { term: '언어', desc: '한국어, 영어, 일본어, 중국어 간체' },
       { term: '운영 시작', desc: '2017년' },
     ],
-    updatedTerm: '최근 업데이트',
+    updatedTerm: '페이지 최근 업데이트',
     formatDate: (iso) => {
       const [y, m, d] = iso.split('-').map(Number);
       return `${y}년 ${m}월 ${d}일`;
@@ -106,7 +106,7 @@ export const SITE_KO: SiteStrings = {
       '지금 Android 앱에는 수업에 연결하는 To-Do, 홈 화면 위젯 세 가지, 잠금화면 주간표, 암호를 건 백업 파일이 있어요. 회원가입을 받지 않고, 시간표와 할 일은 휴대폰 안에 저장해요.',
     ],
     makerHeading: '만든 사람',
-    maker: '심간표는 Jerry Jung이 만들고 운영해요.',
+    maker: '심간표는 정우현(Jerry Jung)이 만들고 운영해요.',
     contactHeading: '문의',
     contact: '고칠 점이나 바라는 기능은 메일로 알려 주세요.',
   },
@@ -125,6 +125,6 @@ export const SITE_KO: SiteStrings = {
     contact: '문의',
     privacy: '개인정보처리방침',
     terms: '이용약관',
-    maker: '만든 사람 Jerry Jung',
+    maker: '만든 사람 정우현(Jerry Jung)',
   },
 };

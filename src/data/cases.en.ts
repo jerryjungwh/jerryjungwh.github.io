@@ -48,8 +48,8 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today and To-Do widgets. See Emma’s day without opening the app.',
-        long: 'The weekly widget shows Emma’s week, and the Today widget shows today’s classes together with what to pack. The To-Do widget lists only the tasks. On a parent’s phone they show a child’s day at a glance.',
+        short: 'Weekly, Today overview and To-Do widgets. See Emma’s day without opening the app.',
+        long: 'The weekly widget shows Emma’s week, and the Today overview widget shows today’s classes together with what to pack. The To-Do widget lists only the tasks. On a parent’s phone they show a child’s day at a glance.',
       },
       {
         id: 'widget_done',
@@ -120,14 +120,14 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'The weekly widget shows the week, the Today widget shows today, and the To-Do widget shows homework.',
-        long: 'There are three widgets: weekly, Today and To-Do. Choose Noah’s timetable when you place the weekly widget, and the home screen tells you whether today is a practice day.',
+        short: 'The weekly widget shows the week, the Today overview widget shows today, and the To-Do widget shows homework.',
+        long: 'There are three widgets: weekly, Today overview and To-Do. Choose Noah’s timetable when you place the weekly widget, and the home screen tells you whether today is a practice day.',
       },
       {
         id: 'widget_done',
         title: 'Check off homework in the widget',
         short: 'Report finished? Mark it complete right in the widget.',
-        long: 'Mark the report complete in the Today widget or the To-Do widget. The app’s To-Do list updates with it, so there is nothing to check off twice.',
+        long: 'Mark the report complete in the Today overview widget or the To-Do widget. The app’s To-Do list updates with it, so there is nothing to check off twice.',
       },
       {
         id: 'lock_screen',
@@ -192,8 +192,8 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today and To-Do widgets. Check today’s classes and what is due from the home screen.',
-        long: 'A look at the home screen in the morning is enough to know which class is in which period. The Today widget puts today’s classes and tasks in one place.',
+        short: 'Weekly, Today overview and To-Do widgets. Check today’s classes and what is due from the home screen.',
+        long: 'A look at the home screen in the morning is enough to know which class is in which period. The Today overview widget puts today’s classes and tasks in one place.',
       },
       {
         id: 'widget_done',
@@ -264,14 +264,14 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today and To-Do widgets. Check today’s classes and assignments from the home screen.',
-        long: 'Use the weekly widget for this week’s classes and the To-Do widget for assignments. The Today widget alone shows today’s classes and assignments together.',
+        short: 'Weekly, Today overview and To-Do widgets. Check today’s classes and assignments from the home screen.',
+        long: 'Use the weekly widget for this week’s classes and the To-Do widget for assignments. The Today overview widget alone shows today’s classes and assignments together.',
       },
       {
         id: 'widget_done',
         title: 'Check off assignments in the widget',
         short: 'Lab submitted? Mark it complete right in the widget.',
-        long: 'After handing in the lab, mark it complete in the widget. Either widget works: the To-Do widget or the Today widget.',
+        long: 'After handing in the lab, mark it complete in the widget. Either widget works: the To-Do widget or the Today overview widget.',
       },
       {
         id: 'lock_screen',
@@ -336,7 +336,7 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today and To-Do widgets. See where the children go today from the home screen.',
+        short: 'Weekly, Today overview and To-Do widgets. See where the children go today from the home screen.',
         long: 'Each time you place a weekly widget you choose the timetable it shows. That way Lily’s week and Max’s week can each have a widget on the home screen.',
       },
       {
@@ -403,12 +403,12 @@ export const CASES_EN: CaseDef[] = [
         id: 'remind',
         title: 'A reminder before the lesson',
         short: 'Set a due time and a “1 hour before” reminder. An alarm screen tells you in time.',
-        long: 'The due time is the start of the lesson, with a “1 hour before” reminder. When the alarm screen opens an hour ahead, there is time for a last look at the sheet. A To-Do needs a due date before a reminder can be turned on.',
+        long: 'The due time is the start of the lesson, with a “1 hour before” reminder. When the alarm screen opens an hour ahead, there is time for a last look at the sheet. A To-Do needs a due date and a due time before a reminder can be turned on.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today and To-Do widgets. Check today’s lessons and prep from the home screen.',
+        short: 'Weekly, Today overview and To-Do widgets. Check today’s lessons and prep from the home screen.',
         long: 'The weekly widget on the home screen shows this week’s lessons, and the To-Do widget shows your prep tasks. There is no need to open the app between lessons.',
       },
       {

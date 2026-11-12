@@ -9,7 +9,7 @@ export interface PageMeta {
 }
 
 const CONTEXT = 'https://schema.org';
-const MAKER = { '@type': 'Person', name: 'Jerry Jung' };
+const MAKER = { '@type': 'Person', name: 'Jerry Jung', alternateName: '정우현' };
 /** Every name people search for. A page lists the ones that are not its own name. */
 const ALTERNATE_NAMES = ['심간표', '심플시간표', 'SimpleScheduler', 'Simganpyo'];
 

@@ -102,7 +102,9 @@ test('CSS 없이 읽어도 제목 두 줄과 링크 목록의 낱말이 붙지 �
     expect($('h1').text().replace(/\s+/g, ' ').trim()).toBe(`${def.h1[0]} ${def.h1[1]}`);
   }
   const home = load(read('dist/index.html'));
-  expect(home('h1').text().replace(/\s+/g, ' ').trim()).toBe('우리 학교 시간 그대로, 시간표와 할 일을 한 앱에서');
+  expect(home('h1').text().replace(/\s+/g, ' ').trim()).toBe('시간표 앱 심간표 수업도 과제도 홈 화면에서 바로');
+  expect(home('#what dt').last().text()).toBe('페이지 최근 업데이트');
+  expect(home('footer').text()).toContain('정우현(Jerry Jung)');
   const first = home('#by-case li').first().text().replace(/\s+/g, ' ').trim();
   expect(first).toBe('초등학교 시간표 40분 수업과 준비물을 부모가 아이 대신 챙겨요.');
   const en = load(read('dist/en/for/university/index.html'));

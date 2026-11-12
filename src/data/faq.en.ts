@@ -72,11 +72,11 @@ export const FAQ_EN: FaqGroup[] = [
     items: [
       {
         q: 'Which widgets are there?',
-        a: 'Three. The weekly widget shows the week, the Today widget shows today’s classes and tasks together, and the To-Do widget shows the task list.',
+        a: 'Three. The weekly widget shows the week, the Today overview widget shows today’s classes and tasks together, and the To-Do widget shows the task list.',
       },
       {
         q: 'Can I complete a task from a widget?',
-        a: 'Yes. Mark a task complete right in the To-Do widget or the Today widget, without opening the app.',
+        a: 'Yes. Mark a task complete right in the To-Do widget or the Today overview widget, without opening the app.',
       },
       {
         q: 'Can I choose which timetable a widget shows?',
@@ -104,7 +104,7 @@ export const FAQ_EN: FaqGroup[] = [
       },
       {
         q: 'How do I remove ads?',
-        a: 'Subscribe to Premium and ads no longer appear. You can cancel the subscription on Google Play at any time.',
+        a: 'Subscribe to Premium and ads no longer appear. Without subscribing, you can watch one ad under “Remove Ads” in settings and ads stay off for 24 hours. A subscription can be canceled on Google Play at any time.',
       },
     ],
   },
