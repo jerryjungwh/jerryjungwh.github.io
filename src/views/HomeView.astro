@@ -23,7 +23,7 @@ const cases = caseDefs(lang);
 const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title: c.name, text: t.byCase.blurbs[c.id] }));
 ---
 
-<Layout lang={lang} title={t.home.title} description={t.home.description} path={pagePath(lang, 'home')} stepper="random">
+<Layout lang={lang} page="home" stepper="random">
   <Header lang={lang} page="home" />
   <main class="page">
     <CaseStepper lang={lang} cases={cases} detail="short" headingLevel={2}>

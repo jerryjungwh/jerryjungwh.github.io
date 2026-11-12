@@ -5,7 +5,6 @@ import Header from '../components/Header.astro';
 import InstallBlock from '../components/InstallBlock.astro';
 import Layout from '../components/Layout.astro';
 import { faqGroups, siteStrings } from '../data/site';
-import { pagePath } from '../lib/urls';
 import type { Lang } from '../lib/types';
 
 interface Props {
@@ -17,7 +16,7 @@ const t = siteStrings(lang);
 const groups = faqGroups(lang);
 ---
 
-<Layout lang={lang} title={t.faqPage.title} description={t.faqPage.description} path={pagePath(lang, 'faq')}>
+<Layout lang={lang} page="faq" faq={groups.flatMap((g) => g.items.map(({ q, a }) => ({ q, a })))}>
   <Header lang={lang} page="faq" />
   <main class="page">
     <h1 class="page-h1">{t.faqPage.h1}</h1>

@@ -4,26 +4,32 @@ import '../styles/tokens.css';
 import '../styles/global.css';
 import '../styles/doc.css';
 
-import { CASE_ORDER, type CaseId } from '../lib/types';
+import { pageJsonLd, pageMeta } from '../lib/seo';
+import { CASE_ORDER, type CaseId, type FaqItem, type Lang, type PageKey } from '../lib/types';
+import { alternates, pagePath } from '../lib/urls';
+import JsonLd from './JsonLd.astro';
 
-type Lang = 'ko' | 'en';
 interface Props {
   lang: Lang;
-  title: string;
-  description: string;
-  /** Site path of this page, with leading and trailing slash. */
-  path: string;
+  /** A page of the site: title, description, canonical, hreflang and structured data follow from it. */
+  page?: PageKey;
+  /** The questions this page shows as its own list (case pages, the questions page). */
+  faq?: FaqItem[];
   /** Pages with a case stepper: 'random' picks the start case per visit, a case id fixes it. */
   stepper?: 'random' | CaseId;
-  /** The not-found page: kept out of search and given no canonical address. */
-  noindex?: boolean;
+  /** The not-found page: no `page`, its own title and text, kept out of search. */
+  notFound?: { title: string; description: string };
 }
 
-const { lang, title, description, path, stepper, noindex } = Astro.props;
+const { lang, page, faq, stepper, notFound } = Astro.props;
+if (!page && !notFound) throw new Error('Layout: page 또는 notFound가 필요하다');
+const meta = page ? pageMeta(lang, page) : notFound!;
+const canonical = page ? new URL(pagePath(lang, page), Astro.site).href : undefined;
+const alt = page ? alternates(page) : undefined;
+const jsonLd = page ? pageJsonLd(lang, page, faq) : [];
 // Runs before the first paint, so the stepper never shows one case and then jumps to another.
 // If the stepper script has not attached after 3 seconds, the page goes back to the plain document.
 const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringify(CASE_ORDER)};d.classList.add('js');if(!d.dataset.startCase)d.dataset.startCase=c[Math.floor(Math.random()*c.length)];setTimeout(function(){if(!document.querySelector('[data-stepper][data-ready]'))d.classList.remove('js')},3000)})();`;
-const canonical = new URL(path, Astro.site).href;
 ---
 
 <!doctype html>
@@ -31,11 +37,29 @@ const canonical = new URL(path, Astro.site).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    {
+      canonical && alt ? (
+        <>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="ko" href={alt.ko} />
+          <link rel="alternate" hreflang="en" href={alt.en} />
+          <link rel="alternate" hreflang="x-default" href={alt.xDefault} />
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="심간표 SimpleScheduler" />
+          <meta property="og:title" content={meta.title} />
+          <meta property="og:description" content={meta.description} />
+          <meta property="og:url" content={canonical} />
+          <meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'} />
+        </>
+      ) : (
+        <meta name="robots" content="noindex" />
+      )
+    }
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {jsonLd.map((data) => <JsonLd data={data} />)}
     {stepper && <script is:inline set:html={stepperBoot} />}
     <slot name="head" />
   </head>

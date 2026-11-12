@@ -4,7 +4,7 @@ import type { SiteStrings } from '../lib/types';
 export const SITE_KO: SiteStrings = {
   appName: '심간표',
   home: {
-    title: '심간표 - 학교·학원 시간표와 과제를 한 앱에서',
+    title: '심간표 - 시간표 앱 | 학교·학원 시간표, 과제, 위젯',
     description:
       '심간표(SimpleScheduler)는 매주 반복되는 수업과 학원 일정을 주간 시간표로 만들고, 과제와 할 일을 수업에 연결해 관리하는 Android 시간표 앱이에요.',
     h1: ['우리 학교 시간 그대로,', '시간표와 할 일을 한 앱에서'],

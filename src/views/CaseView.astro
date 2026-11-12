@@ -26,7 +26,7 @@ const others = cases
   .map((x) => ({ href: pagePath(lang, `for_${x.id}`), title: x.name, text: t.byCase.blurbs[x.id] }));
 ---
 
-<Layout lang={lang} title={t.casePage.title(c.name)} description={c.intro} path={pagePath(lang, page)} stepper={caseId}>
+<Layout lang={lang} page={page} faq={c.faq} stepper={caseId}>
   <Header lang={lang} page={page} />
   <main class="page">
     <Crumbs label={t.casePage.crumbsLabel} home={{ href: pagePath(lang, 'home'), name: t.appName }} current={c.name} />

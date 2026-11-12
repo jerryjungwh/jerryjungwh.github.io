@@ -41,3 +41,12 @@ export function staticPlayUrl(lang: Lang, page: PageKey, cta: CtaId): string {
   const referrer = `utm_source=static&utm_medium=web&utm_campaign=site_${lang}_${label}&utm_content=${label}.${cta}`;
   return `${PLAY_URL}&referrer=${encodeURIComponent(referrer)}`;
 }
+
+/**
+ * Play link for places a machine reads rather than a person clicks: structured data and /llms.txt.
+ * Each has its own source so installs that come through them can be told apart.
+ */
+export function machinePlayUrl(lang: Lang, source: 'jsonld' | 'llms_txt'): string {
+  const referrer = `utm_source=${source}&utm_medium=web&utm_campaign=site_${lang}_${source}&utm_content=${source}`;
+  return `${PLAY_URL}&referrer=${encodeURIComponent(referrer)}`;
+}
