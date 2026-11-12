@@ -71,3 +71,15 @@ test('이어 보기는 경과 시간으로 보일 장을 고르고 마지막 장
   expect(sequenceFrameIndex(4, 700, 2800)).toBe(3);
   expect(sequenceFrameIndex(4, 700, 5000)).toBe(3);
 });
+
+test('긴 설명이 붙은 단계는 읽을 시간만큼 더 머문다', async () => {
+  const { stepStayMs } = await import('../../src/lib/stepper-state');
+  const image = { kind: 'image', src: 'a', alt: 'a' } as const;
+  // 짧은 글은 화면 길이(5초)를 그대로 쓴다
+  expect(stepStayMs(image, '짧은 글')).toBe(5000);
+  // 100자는 2초 + 100 × 60ms = 8초
+  expect(stepStayMs(image, '가'.repeat(100))).toBe(8000);
+  // 화면이 더 길면 화면 길이를 쓴다
+  const long = { kind: 'sequence', frameMs: 2500, frames: [1, 2, 3, 4].map(() => ({ src: 'a', alt: 'a' })) } as const;
+  expect(stepStayMs(long, '가'.repeat(100))).toBe(10000);
+});

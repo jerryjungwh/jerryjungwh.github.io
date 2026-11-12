@@ -1,11 +1,12 @@
 ---
 import { caseDefs, siteStrings } from '../data/site';
+import { BUILD_DATE } from '../lib/build-date';
 import { SITE_ORIGIN, pagePath } from '../lib/urls';
 import type { Lang, PageKey } from '../lib/types';
 
 interface Props {
   lang: Lang;
-  page: PageKey;
+  page?: PageKey;
 }
 
 const { lang, page } = Astro.props;
@@ -31,14 +32,16 @@ const EMAIL = 'jerryjung2929@gmail.com';
         <li><a href={pagePath(lang, 'faq')}>{t.footer.faq}</a></li>
         <li><a href={POLICY}>{t.footer.privacy}</a></li>
         <li><a href={`${POLICY}terms`}>{t.footer.terms}</a></li>
-        <li><a href={pagePath(other, page)} hreflang={other} lang={other}>{t.header.otherLang}</a></li>
+        <li><a href={pagePath(other, page ?? 'home')} hreflang={other} lang={other}>{t.header.otherLang}</a></li>
       </ul>
     </div>
   </nav>
   <p class="contact">
     {t.footer.contact} <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
   </p>
-  <p class="maker">{t.footer.maker}</p>
+  <p class="maker">
+    {t.footer.maker} · {t.what.updatedTerm} <time datetime={BUILD_DATE}>{t.what.formatDate(BUILD_DATE)}</time>
+  </p>
 </footer>
 
 <style>

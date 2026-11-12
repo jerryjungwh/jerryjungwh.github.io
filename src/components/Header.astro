@@ -7,7 +7,8 @@ import type { Lang, PageKey } from '../lib/types';
 
 interface Props {
   lang: Lang;
-  page: PageKey;
+  /** Omitted on the not-found page: no install section there, and the language link goes home. */
+  page?: PageKey;
 }
 
 const { lang, page } = Astro.props;
@@ -22,9 +23,9 @@ const other: Lang = lang === 'ko' ? 'en' : 'ko';
   </a>
   <nav aria-label={t.header.navLabel}>
     <a href={pagePath(lang, 'faq')}>{t.header.faq}</a>
-    <a href={pagePath(other, page)} hreflang={other} lang={other}>{t.header.otherLang}</a>
+    <a href={pagePath(other, page ?? 'home')} hreflang={other} lang={other}>{t.header.otherLang}</a>
     {/* Two stores, so this goes to the install section, not to a store. It is not a store click. */}
-    <a class="get-app" href="#install">{t.header.getApp}</a>
+    {page && <a class="get-app" href="#install">{t.header.getApp}</a>}
   </nav>
 </header>
 

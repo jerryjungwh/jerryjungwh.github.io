@@ -80,6 +80,42 @@ export const SITE_KO: SiteStrings = {
     appStore: 'App Store에서 받기',
     iosNote: 'iPhone 앱은 새 버전을 준비하고 있어요. 지금 버전은 Android 앱보다 기능이 적어요.',
   },
+  casePage: {
+    crumbsLabel: '현재 위치',
+    title: (name) => `${name} 만들기 - 심간표`,
+    stepsHeading: '여덟 단계로 보기',
+    faqHeading: (name) => `${name}, 자주 묻는 질문`,
+    moreHeading: '함께 보면 좋아요',
+  },
+  faqPage: {
+    title: '자주 묻는 질문 - 심간표',
+    description:
+      '심간표 시간표 앱에 대해 자주 묻는 질문과 답이에요. 수업 시간 맞추기, 위젯, 알람, 가격, 백업, iPhone과 태블릿 지원을 다뤄요.',
+    h1: '자주 묻는 질문',
+    lead: '심간표를 쓰기 전에, 쓰면서 자주 묻는 것을 주제별로 모았어요.',
+  },
+  about: {
+    title: '심간표 소개 - 2017년부터 만들어 온 시간표 앱',
+    description:
+      '심간표(심플시간표, SimpleScheduler)는 2017년부터 운영해 온 Android 시간표 앱이에요. 어떤 앱인지, 누가 만드는지, 어디로 문의하는지 적었어요.',
+    h1: '심간표 소개',
+    storyHeading: '2017년부터 지금까지',
+    story: [
+      '심간표는 2017년에 Android 앱으로 시작했어요. 이름은 「심플시간표」를 줄인 말이고, 영어 이름은 SimpleScheduler예요.',
+      '2018년에는 iPhone 앱을 냈어요. iPhone 앱은 지금 새 버전을 준비하고 있어요.',
+      '지금 Android 앱에는 수업에 연결하는 To-Do, 홈 화면 위젯 세 가지, 잠금화면 주간표, 암호를 건 백업 파일이 있어요. 회원가입을 받지 않고, 시간표와 할 일은 휴대폰 안에 저장해요.',
+    ],
+    makerHeading: '만든 사람',
+    maker: '심간표는 Jerry Jung이 만들고 운영해요.',
+    contactHeading: '문의',
+    contact: '고칠 점이나 바라는 기능은 메일로 알려 주세요.',
+  },
+  notFound: {
+    title: '페이지를 찾지 못했어요 - 심간표',
+    h1: '페이지를 찾지 못했어요',
+    text: '주소가 바뀌었거나 없는 페이지예요. 아래에서 찾는 시간표 종류를 골라 보세요.',
+    home: '심간표 홈으로 가기',
+  },
   footer: {
     navLabel: '사이트 안내',
     casesHeading: '시간표 종류',

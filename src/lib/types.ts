@@ -99,6 +99,26 @@ export interface SiteStrings {
   };
   faq: { heading: string; all: string };
   install: { heading: string; play: string; appStore: string; iosNote: string };
+  casePage: {
+    crumbsLabel: string;
+    title(caseName: string): string;
+    stepsHeading: string;
+    faqHeading(caseName: string): string;
+    moreHeading: string;
+  };
+  faqPage: { title: string; description: string; h1: string; lead: string };
+  about: {
+    title: string;
+    description: string;
+    h1: string;
+    storyHeading: string;
+    story: string[];
+    makerHeading: string;
+    maker: string;
+    contactHeading: string;
+    contact: string;
+  };
+  notFound: { title: string; h1: string; text: string; home: string };
   footer: {
     navLabel: string;
     casesHeading: string;

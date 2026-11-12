@@ -1,0 +1,57 @@
+---
+import Definition from '../components/Definition.astro';
+import FactsTable from '../components/FactsTable.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import InstallBlock from '../components/InstallBlock.astro';
+import Layout from '../components/Layout.astro';
+import { siteStrings } from '../data/site';
+import { pagePath } from '../lib/urls';
+import type { Lang } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteStrings(lang);
+const EMAIL = 'jerryjung2929@gmail.com';
+---
+
+<Layout lang={lang} title={t.about.title} description={t.about.description} path={pagePath(lang, 'about')}>
+  <Header lang={lang} page="about" />
+  <main class="page">
+    <h1 class="page-h1">{t.about.h1}</h1>
+    <div class="page-lead"><Definition text={t.what.definition} /></div>
+    <FactsTable lang={lang} />
+
+    <section id="story" class="doc">
+      <h2>{t.about.storyHeading}</h2>
+      <div class="doc-text">
+        {t.about.story.map((p) => <p>{p}</p>)}
+      </div>
+    </section>
+
+    <section id="maker" class="doc">
+      <h2>{t.about.makerHeading}</h2>
+      <p class="doc-text">{t.about.maker}</p>
+    </section>
+
+    <section id="contact" class="doc">
+      <h2>{t.about.contactHeading}</h2>
+      <p class="doc-text">{t.about.contact} <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+    </section>
+
+    <section id="install" class="doc">
+      <h2>{t.install.heading}</h2>
+      <InstallBlock lang={lang} page="about" cta="page_end" />
+    </section>
+  </main>
+  <Footer lang={lang} page="about" />
+</Layout>
+
+<style>
+  .doc-text p + p {
+    margin-top: 12px;
+  }
+</style>

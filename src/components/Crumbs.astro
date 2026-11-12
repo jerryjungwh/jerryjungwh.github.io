@@ -1,0 +1,28 @@
+---
+interface Props {
+  label: string;
+  home: { href: string; name: string };
+  current: string;
+}
+
+const { label, home, current } = Astro.props;
+---
+
+<nav class="crumbs" aria-label={label}>
+  <a href={home.href}>{home.name}</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{current}</span>
+</nav>
+
+<style>
+  .crumbs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: clamp(16px, 3vw, 28px);
+    font-size: 14px;
+    color: var(--body);
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+import CaseView from '../../views/CaseView.astro';
+import { CASE_ORDER, CASE_SLUG, type CaseId } from '../../lib/types';
+
+export function getStaticPaths() {
+  return CASE_ORDER.map((caseId) => ({ params: { case: CASE_SLUG[caseId] }, props: { caseId } }));
+}
+
+interface Props {
+  caseId: CaseId;
+}
+---
+
+<CaseView lang="ko" caseId={Astro.props.caseId} />

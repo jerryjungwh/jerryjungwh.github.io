@@ -1,0 +1,79 @@
+---
+import CaseStepper from '../components/CaseStepper.astro';
+import Crumbs from '../components/Crumbs.astro';
+import FaqList from '../components/FaqList.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import InstallBlock from '../components/InstallBlock.astro';
+import Layout from '../components/Layout.astro';
+import LinkList from '../components/LinkList.astro';
+import { caseDefs, siteStrings } from '../data/site';
+import { pagePath } from '../lib/urls';
+import type { CaseId, Lang, PageKey } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+  caseId: CaseId;
+}
+
+const { lang, caseId } = Astro.props;
+const t = siteStrings(lang);
+const cases = caseDefs(lang);
+const c = cases.find((x) => x.id === caseId)!;
+const page: PageKey = `for_${caseId}`;
+const others = cases
+  .filter((x) => x.id !== caseId)
+  .map((x) => ({ href: pagePath(lang, `for_${x.id}`), title: x.name, text: t.byCase.blurbs[x.id] }));
+---
+
+<Layout lang={lang} title={t.casePage.title(c.name)} description={c.intro} path={pagePath(lang, page)} stepper={caseId}>
+  <Header lang={lang} page={page} />
+  <main class="page">
+    <Crumbs label={t.casePage.crumbsLabel} home={{ href: pagePath(lang, 'home'), name: t.appName }} current={c.name} />
+    <CaseStepper lang={lang} cases={cases} fixedCase={caseId} detail="long" headingLevel={2} stepsHeading={t.casePage.stepsHeading}>
+      <Fragment slot="lead">
+        <h1 class="case-h1">
+          <span>{c.h1[0]}</span>
+          <span>{c.h1[1]}</span>
+        </h1>
+        <p class="case-intro">{c.intro}</p>
+      </Fragment>
+      <InstallBlock slot="cta" lang={lang} page={page} cta="hero" />
+    </CaseStepper>
+
+    <section id="faq" class="doc">
+      <h2>{t.casePage.faqHeading(c.name)}</h2>
+      <FaqList items={c.faq} />
+      <a class="doc-more" href={pagePath(lang, 'faq')}>{t.faq.all}</a>
+    </section>
+
+    <section id="more" class="doc">
+      <h2>{t.casePage.moreHeading}</h2>
+      <LinkList items={others} />
+    </section>
+
+    <section id="install" class="doc">
+      <h2>{t.install.heading}</h2>
+      <InstallBlock lang={lang} page={page} cta="page_end" />
+    </section>
+  </main>
+  <Footer lang={lang} page={page} />
+</Layout>
+
+<style>
+  .case-h1 {
+    font-size: clamp(28px, 4.2vw, 48px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+  }
+  .case-h1 span {
+    display: block;
+  }
+  .case-intro {
+    margin-top: 16px;
+    max-width: 32em;
+    font-size: clamp(16px, 1.5vw, 18px);
+    color: var(--body);
+  }
+</style>

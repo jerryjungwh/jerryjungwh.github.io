@@ -73,6 +73,14 @@ export function stepDurationMs(m: Media): number {
   }
 }
 
+/**
+ * Case pages put two or three sentences on a step. The step stays long enough to read them:
+ * 2 seconds plus 60 ms per character, and never shorter than the screen itself needs.
+ */
+export function stepStayMs(m: Media, text: string): number {
+  return Math.max(stepDurationMs(m), 2000 + 60 * text.length);
+}
+
 /** Which frame of a sequence is showing after `elapsedMs` (last frame holds). */
 export function sequenceFrameIndex(frames: number, frameMs: number, elapsedMs: number): number {
   return Math.min(frames - 1, Math.max(0, Math.floor(elapsedMs / frameMs)));

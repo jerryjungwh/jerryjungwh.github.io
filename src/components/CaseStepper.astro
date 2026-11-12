@@ -2,7 +2,7 @@
 import '../styles/stepper.css';
 import { getCapture } from '../data/captures';
 import { siteStrings } from '../data/site';
-import { stepDurationMs } from '../lib/stepper-state';
+import { stepDurationMs, stepStayMs } from '../lib/stepper-state';
 import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
 import MediaView from './MediaView.astro';
 
@@ -14,9 +14,11 @@ interface Props {
   detail: 'short' | 'long';
   /** Level of the case heading. Step headings sit one level below. */
   headingLevel: 2 | 3;
+  /** Case pages name the case in their H1, so the heading above the steps says something else. */
+  stepsHeading?: string;
 }
 
-const { lang, cases, fixedCase, detail, headingLevel } = Astro.props;
+const { lang, cases, fixedCase, detail, headingLevel, stepsHeading } = Astro.props;
 const t = siteStrings(lang).stepper;
 const shown = fixedCase ? cases.filter((c) => c.id === fixedCase) : cases;
 const CaseHeading = `h${headingLevel}`;
@@ -58,7 +60,7 @@ const DEVICES: Device[] = ['phone', 'tablet'];
                   data-case={c.id}
                   data-step={s.id}
                   data-device={device}
-                  data-duration={stepDurationMs(entry.media)}
+                  data-duration={detail === 'long' ? stepStayMs(entry.media, s.long) : stepDurationMs(entry.media)}
                   data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
                   aria-labelledby={`step-${c.id}-${s.id}`}
                 >
@@ -69,7 +71,7 @@ const DEVICES: Device[] = ['phone', 'tablet'];
           )}
         </div>
         <div class="case-text">
-          <CaseHeading class="case-name">{c.name}</CaseHeading>
+          <CaseHeading class="case-name">{stepsHeading ?? c.name}</CaseHeading>
           <ol data-steps>
             {c.steps.map((s, stepIndex) => (
               <li data-step={s.id} data-active={stepIndex === 0 ? '' : undefined}>

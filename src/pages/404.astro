@@ -1,0 +1,30 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Layout from '../components/Layout.astro';
+import LinkList from '../components/LinkList.astro';
+import { caseDefs, siteStrings } from '../data/site';
+import { pagePath } from '../lib/urls';
+
+// One not-found page for the whole site (GitHub Pages serves /404.html for every missing address).
+const lang = 'ko';
+const t = siteStrings(lang);
+const links = caseDefs(lang).map((c) => ({ href: pagePath(lang, `for_${c.id}`), title: c.name, text: t.byCase.blurbs[c.id] }));
+---
+
+<Layout lang={lang} title={t.notFound.title} description={t.notFound.text} path="/404.html" noindex>
+  <Header lang={lang} />
+  <main class="page">
+    <h1 class="page-h1">{t.notFound.h1}</h1>
+    <p class="doc-text page-lead">{t.notFound.text}</p>
+    <a class="doc-more" href={pagePath(lang, 'home')}>{t.notFound.home}</a>
+    <div class="not-found-links"><LinkList items={links} /></div>
+  </main>
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  .not-found-links {
+    margin-top: 40px;
+  }
+</style>
