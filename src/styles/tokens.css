@@ -1,0 +1,14 @@
+/* Colors follow the approved Play store images (ink + brand). Light theme only for now. */
+:root {
+  --ink: #272733;
+  --brand: #625ED8;
+  --body: #5A5F6E;
+  --line: #E4E4EC;
+  --soft: #F2F2F9;
+  --now: #D9534F;
+  --paper: #FFFFFF;
+  --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  --gutter: clamp(16px, 4vw, 48px);
+  --page: 1240px;
+}

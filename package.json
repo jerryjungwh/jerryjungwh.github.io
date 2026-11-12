@@ -1,0 +1,29 @@
+{
+  "name": "jerryjungwh.github.io",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test:unit": "vitest run tests/unit --passWithNoTests",
+    "test:build": "vitest run tests/build",
+    "test:e2e": "playwright test",
+    "check": "npm run test:unit && npm run build && npm run test:build && npm run test:e2e"
+  },
+  "dependencies": {
+    "astro": "7.4.11",
+    "pretendard": "1.3.9"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "@playwright/test": "1.65.0",
+    "cheerio": "1.2.0",
+    "vitest": "5.1.0"
+  },
+  "private": true
+}

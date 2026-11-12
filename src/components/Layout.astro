@@ -1,0 +1,33 @@
+---
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+
+type Lang = 'ko' | 'en';
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Site path of this page, with leading and trailing slash. */
+  path: string;
+}
+
+const { lang, title, description, path } = Astro.props;
+const canonical = new URL(path, Astro.site).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
