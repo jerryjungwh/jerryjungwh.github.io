@@ -1,51 +1,93 @@
 {
+  "ko/university/phone/create": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/create.webp",
+      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 18시까지로 정해져 있다."
+    }
+  },
   "ko/university/phone/fill": {
-    "status": "pending",
+    "status": "final",
     "media": {
       "kind": "image",
-      "src": "/captures/ko/university/phone/fill.png",
-      "alt": "대학 시간표 예시 화면. 월요일부터 금요일까지 수업 열 개가 색으로 구분되어 있다."
+      "src": "/captures/ko/university/phone/fill.webp",
+      "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
     }
   },
-  "ko/university/phone/unique": {
-    "status": "pending",
+  "ko/university/phone/lock_screen": {
+    "status": "final",
     "media": {
       "kind": "image",
-      "src": "/captures/ko/university/phone/unique.png",
-      "alt": "자료구조 수업을 누른 화면. 요일, 시간, 강의실, 교수님과 연결된 To-Do가 보인다."
-    }
-  },
-  "ko/university/phone/todo": {
-    "status": "pending",
-    "media": {
-      "kind": "image",
-      "src": "/captures/ko/university/phone/todo.png",
-      "alt": "새 To-Do 화면. 제목 자료구조 실습 제출이 자료구조 수업에 연결되어 있다."
+      "src": "/captures/ko/university/phone/lock_screen.webp",
+      "alt": "잠금화면에 이번 학기 주간표가 보이는 화면. 아래에 잠금해제 단추가 있다."
     }
   },
   "ko/university/phone/remind": {
-    "status": "pending",
+    "status": "final",
     "media": {
       "kind": "sequence",
       "frameMs": 2500,
       "frames": [
         {
-          "src": "/captures/ko/university/phone/remind-1.png",
-          "alt": "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 고를 수 있다."
+          "src": "/captures/ko/university/phone/remind-1.webp",
+          "alt": "리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 다섯 가지가 보인다."
         },
         {
-          "src": "/captures/ko/university/phone/remind-2.png",
-          "alt": "리마인더 시간이 되어 뜬 알람 화면. To-Do 제목과 다시 알림, 끄기 단추가 보인다."
+          "src": "/captures/ko/university/phone/remind-2.webp",
+          "alt": "리마인더 시간이 되어 뜬 알람 화면. 자료구조 실습 제출 제목과 다시 울리기, 끄기 단추가 보인다."
         }
       ]
     }
   },
-  "ko/university/phone/widgets": {
-    "status": "pending",
+  "ko/university/phone/todo": {
+    "status": "final",
     "media": {
       "kind": "image",
-      "src": "/captures/ko/university/phone/widgets.png",
-      "alt": "홈 화면의 오늘 통합 위젯. 오늘 수업 두 개와 할 일 세 개가 함께 보인다."
+      "src": "/captures/ko/university/phone/todo.webp",
+      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 자료구조 일정에 연결되어 있다."
+    }
+  },
+  "ko/university/phone/unique": {
+    "status": "final",
+    "media": {
+      "kind": "image",
+      "src": "/captures/ko/university/phone/unique.webp",
+      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 연결된 과제가 보인다."
+    }
+  },
+  "ko/university/phone/widget_done": {
+    "status": "final",
+    "media": {
+      "kind": "video",
+      "src": "/captures/ko/university/phone/widget_done.mp4",
+      "poster": "/captures/ko/university/phone/widget_done.webp",
+      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출를 완료로 표시하는 모습.",
+      "durationMs": 5600
+    }
+  },
+  "ko/university/phone/widgets": {
+    "status": "final",
+    "media": {
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/university/phone/widgets-1.webp",
+          "alt": "홈 화면의 주간표 위젯. 이번 학기 시간표의 한 주가 보인다.",
+          "label": "주간표"
+        },
+        {
+          "src": "/captures/ko/university/phone/widgets-2.webp",
+          "alt": "홈 화면의 오늘 통합 위젯. 오늘 일정과 할 일이 나란히 보인다.",
+          "label": "오늘 통합"
+        },
+        {
+          "src": "/captures/ko/university/phone/widgets-3.webp",
+          "alt": "홈 화면의 To-Do 위젯. 자료구조 실습 제출를 비롯한 할 일이 목록으로 보인다.",
+          "label": "To-Do"
+        }
+      ]
     }
   }
 }

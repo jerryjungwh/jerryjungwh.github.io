@@ -234,3 +234,67 @@ test('문서 모드로 돌아간 뒤에 늦게 온 스크립트는 붙지 않는
   await expect(page.locator('[data-stepper][data-ready]')).toHaveCount(0);
   await expect(page.locator('article[data-case]:visible')).toHaveCount(6);
 });
+
+// Headless Chromium has no H.264 decoder, so these watch what the page asks the video to do, not the picture.
+async function watchVideos(page: Page) {
+  await page.addInitScript(() => {
+    const calls: string[] = [];
+    (window as unknown as { __videoCalls: string[] }).__videoCalls = calls;
+    const name = (v: HTMLMediaElement) => v.closest('figure')?.getAttribute('data-step') ?? '?';
+    HTMLMediaElement.prototype.play = function () {
+      calls.push(`play:${name(this)}`);
+      return Promise.resolve();
+    };
+    HTMLMediaElement.prototype.pause = function () {
+      calls.push(`pause:${name(this)}`);
+    };
+  });
+}
+const videoCalls = (page: Page) => page.evaluate(() => (window as unknown as { __videoCalls: string[] }).__videoCalls);
+const doneVideo = (page: Page) => page.locator('figure[data-case="university"][data-step="widget_done"][data-device="phone"] video');
+
+test('녹화 단계가 켜지면 영상을 처음부터 재생하고, 다른 단계로 가면 멈춘다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  expect(await videoCalls(page)).toEqual([]);
+  await visibleSteps(page).nth(6).click();
+  await expect(doneVideo(page)).toHaveAttribute('data-playing', '');
+  expect(await videoCalls(page)).toEqual(['play:widget_done']);
+  await visibleSteps(page).nth(1).click();
+  await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
+  expect(await videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done']);
+});
+
+test('자동 넘김을 멈추면 영상도 멈추고, 다시 켜면 이어서 재생한다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  await page.locator('[data-action="toggle-pause"]').click();
+  expect(await videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done']);
+  // Paused, the poster-like still frame stays on screen: the video is not hidden again.
+  await expect(doneVideo(page)).toHaveAttribute('data-playing', '');
+  await page.locator('[data-action="toggle-pause"]').click();
+  expect(await videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done', 'play:widget_done']);
+});
+
+test('움직임 줄이기 설정이면 녹화 단계에서도 영상을 재생하지 않는다', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  await expect(visibleSteps(page).nth(6)).toHaveAttribute('aria-current', 'step');
+  expect(await videoCalls(page)).toEqual([]);
+  await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
+});
+
+test('녹화 단계는 영상 길이만큼 머문 뒤 다음 단계로 간다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  const stay = Number(await page.locator('figure[data-case="university"][data-step="widget_done"][data-device="phone"]').getAttribute('data-duration'));
+  expect(stay).toBeGreaterThan(5000);
+  await page.clock.runFor(stay - 400);
+  await expect(visibleSteps(page).nth(6)).toHaveAttribute('aria-current', 'step');
+  await page.clock.runFor(700);
+  await expect(visibleSteps(page).nth(7)).toHaveAttribute('aria-current', 'step');
+});

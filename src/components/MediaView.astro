@@ -29,12 +29,13 @@ function capture(src: string): ImageMetadata {
   return found.default;
 }
 
-if (media.kind === 'video') {
-  // Plan 2 adds this branch together with the first recording, so it ships with a test.
-  throw new Error('MediaView: 녹화(video)는 아직 그리지 않는다. 첫 녹화를 넣을 때 함께 구현한다.');
-}
-
-const frames = media.kind === 'image' ? [{ src: media.src, alt: media.alt, label: undefined }] : media.frames;
+// A recording is its first frame as an ordinary image (the description lives on it, and it is all there is
+// without the script or with reduced motion) with the video on top, shown only while it plays.
+const video = media.kind === 'video' ? { ...capture(media.poster), src: media.src } : undefined;
+const frames =
+  media.kind === 'sequence'
+    ? media.frames
+    : [{ src: media.kind === 'video' ? media.poster : media.src, alt: media.alt, label: undefined }];
 const isSequence = media.kind === 'sequence';
 const widths = device === 'phone' ? [360, 540, 720, 1080] : [640, 960, 1280, 1920];
 const sizes = device === 'phone' ? '(max-width: 480px) 62vw, 300px' : '(max-width: 760px) 92vw, 640px';
@@ -69,6 +70,11 @@ const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예�
       );
     })
   }
+  {
+    video && (
+      <video data-video src={video.src} width={video.width} height={video.height} muted playsinline preload="none" aria-hidden="true" tabindex="-1" />
+    )
+  }
   {pending && <span class="media-note">{note}</span>}
 </div>
 
@@ -88,6 +94,17 @@ const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예�
     opacity: 0;
   }
   .media img[data-on] {
+    opacity: 1;
+  }
+  .media video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+  .media video[data-playing] {
     opacity: 1;
   }
   .media-note {

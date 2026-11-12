@@ -11,7 +11,8 @@ import type { Device } from '../lib/types';
 
 /**
  * Behaviour of the case stepper. All content is already in the HTML; this only moves `data-active`,
- * `aria-current`, `aria-pressed`, the frame of a sequence and the progress marker.
+ * `aria-current`, `aria-pressed`, the frame of a sequence, the progress marker, and plays the recording
+ * of the step in view.
  * It never calls focus() and never touches history or the URL.
  */
 
@@ -76,6 +77,7 @@ function mount(root: HTMLElement): void {
   const pauseButton = root.querySelector<HTMLElement>('[data-action="toggle-pause"]');
   const deviceButtons = [...root.querySelectorAll<HTMLElement>('[data-action="device"]')];
   const frameLabel = root.querySelector<HTMLElement>('[data-frame-label]');
+  const videos = [...root.querySelectorAll<HTMLVideoElement>('video[data-video]')];
 
   const startId = document.documentElement.dataset.startCase;
   const startIndex = Math.max(0, cases.findIndex((c) => c.id === startId));
@@ -87,6 +89,28 @@ function mount(root: HTMLElement): void {
   const stepAt = (s: StepperState) => cases[s.caseIndex].steps[s.stepIndex];
   const figureAt = (s: StepperState) => stepAt(s).figures[s.device];
   const durationOf = (s: StepperState) => Number(figureAt(s)?.dataset.duration) || DEFAULT_STEP_MS;
+
+  /**
+   * Only the recording of the step in view plays, from its start, and only while the stepper runs. Pausing
+   * freezes it on the frame it reached. A visitor who asked for less motion starts paused, so sees the still.
+   */
+  function syncVideos(placeChanged: boolean): void {
+    const active = figureAt(state)?.querySelector<HTMLVideoElement>('video[data-video]') ?? null;
+    for (const video of videos) {
+      if (video === active || !video.hasAttribute('data-playing')) continue;
+      video.pause();
+      video.removeAttribute('data-playing');
+    }
+    if (!active) return;
+    if (state.paused) {
+      if (active.hasAttribute('data-playing')) active.pause();
+      return;
+    }
+    if (placeChanged) active.currentTime = 0;
+    active.setAttribute('data-playing', '');
+    // A browser that cannot play it keeps showing the still image underneath.
+    active.play()?.catch(() => active.removeAttribute('data-playing'));
+  }
 
   function render(): void {
     const prev = shown;
@@ -122,6 +146,7 @@ function mount(root: HTMLElement): void {
       }
       setFlag(root, 'data-paused', state.paused);
     }
+    if (placeChanged || prev?.paused !== state.paused) syncVideos(placeChanged);
 
     const figure = figureAt(state);
     const frames = figure ? [...figure.querySelectorAll<HTMLElement>('img[data-frame]')] : [];

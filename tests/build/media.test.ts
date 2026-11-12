@@ -72,3 +72,25 @@ test('실제 캡처는 여러 너비로 내보낸다', () => {
     expect($(img).attr('sizes')).toBeTruthy();
   });
 });
+
+test('녹화 칸: 포스터 그림 위에 소리 없는 영상이 하나 있고, 저절로 재생되지 않는다', () => {
+  const boxes = $('[data-media-kind="video"]');
+  expect(boxes.length).toBeGreaterThan(0);
+  boxes.each((_, box) => {
+    const video = $(box).find('video');
+    expect(video.length).toBe(1);
+    for (const attr of ['muted', 'playsinline', 'data-video']) expect(video.attr(attr), attr).toBeDefined();
+    expect(video.attr('preload')).toBe('none');
+    for (const attr of ['autoplay', 'controls', 'loop']) expect(video.attr(attr), attr).toBeUndefined();
+    // The image under it carries the description; the video is the same screen moving.
+    expect(video.attr('aria-hidden')).toBe('true');
+    expect(video.attr('tabindex')).toBe('-1');
+    const src = video.attr('src') ?? '';
+    expect(src).toMatch(/^\/captures\/(ko|en)\/[a-z-]+\/(phone|tablet)\/widget_done\.mp4$/);
+    expect(() => read(`dist${src}`)).not.toThrow();
+    const poster = $(box).find('img');
+    expect(poster.length).toBe(1);
+    expect((poster.attr('alt') ?? '').length).toBeGreaterThan(10);
+    expect(poster.attr('data-on')).toBeDefined();
+  });
+});
