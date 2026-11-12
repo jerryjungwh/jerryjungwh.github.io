@@ -12,7 +12,7 @@ function section(lang: Lang): string {
   const t = siteStrings(lang);
   const url = (page: Parameters<typeof pagePath>[1]) => absoluteUrl(pagePath(lang, page));
   const lines: string[] = [
-    `# ${t.appName} (SimpleScheduler)`,
+    lang === 'ko' ? `# ${t.appName} (SimpleScheduler)` : `# ${t.appName} (Simganpyo)`,
     '',
     `> ${t.what.definition}`,
     '',
@@ -38,4 +38,4 @@ function section(lang: Lang): string {
 }
 
 export const GET: APIRoute = () =>
-  new Response(section('ko'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+  new Response(`${section('ko')}\n---\n\n${section('en')}`, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

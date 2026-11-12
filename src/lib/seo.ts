@@ -10,8 +10,8 @@ export interface PageMeta {
 
 const CONTEXT = 'https://schema.org';
 const MAKER = { '@type': 'Person', name: 'Jerry Jung' };
-/** Other names people search for. The app's own name comes from the site strings. */
-const ALTERNATE_NAMES = ['심플시간표', 'SimpleScheduler', 'Simganpyo'];
+/** Every name people search for. A page lists the ones that are not its own name. */
+const ALTERNATE_NAMES = ['심간표', '심플시간표', 'SimpleScheduler', 'Simganpyo'];
 
 function caseOf(lang: Lang, page: PageKey): CaseDef | undefined {
   return caseDefs(lang).find((c) => `for_${c.id}` === page);

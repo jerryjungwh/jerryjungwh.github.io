@@ -85,9 +85,8 @@ test('404: 홈으로 가는 링크가 있고 검색에 넣지 않는다', () => 
 
 test('모든 페이지에 「최근 업데이트」 날짜와 머리글·바닥글이 있다', () => {
   const pages = allHtml();
-  expect(pages.map((p) => p.path).sort()).toEqual(
-    ['/', '/about/', '/faq/', ...CASE_ORDER.map((c) => `/for/${CASE_SLUG[c]}/`)].sort(),
-  );
+  const ko = ['/', '/about/', '/faq/', ...CASE_ORDER.map((c) => `/for/${CASE_SLUG[c]}/`)];
+  expect(pages.map((p) => p.path).sort()).toEqual([...ko, ...ko.map((path) => '/en' + path)].sort());
   for (const p of pages) {
     expect(p.$('footer time[datetime]').length, p.path).toBe(1);
     expect(p.$('header a[href="#install"]').length, p.path).toBe(1);
