@@ -1,5 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
+import MediaView from '../components/MediaView.astro';
+import { getCapture } from '../data/captures';
 ---
 
 <Layout
@@ -10,5 +12,12 @@ import Layout from '../components/Layout.astro';
 >
   <main>
     <h1>심간표</h1>
+    <!-- Task 5 replaces this block with the case stepper. -->
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'fill')} device="phone" eager={true} /></div>
+      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'remind')} device="phone" eager={false} /></div>
+      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'create')} device="phone" eager={false} /></div>
+      <div style="width:480px"><MediaView entry={getCapture('ko', 'university', 'tablet', 'fill')} device="tablet" eager={false} /></div>
+    </div>
   </main>
 </Layout>

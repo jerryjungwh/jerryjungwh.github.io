@@ -13,7 +13,8 @@
     "test:unit": "vitest run tests/unit --passWithNoTests",
     "test:build": "vitest run tests/build",
     "test:e2e": "playwright test",
-    "check": "npm run test:unit && npm run build && npm run test:build && npm run test:e2e"
+    "check": "npm run test:unit && npm run build && npm run test:build && npm run test:e2e",
+    "build:release": "RELEASE=1 npm run check"
   },
   "dependencies": {
     "astro": "7.4.11",

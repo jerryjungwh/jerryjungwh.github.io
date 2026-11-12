@@ -1,0 +1,105 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { DEVICE_ASPECT, type CaptureEntry } from '../data/captures';
+import type { Device } from '../lib/types';
+import pendingPhone from '../assets/captures/_pending/phone.svg?url&no-inline';
+import pendingTablet from '../assets/captures/_pending/tablet.svg?url&no-inline';
+
+interface Props {
+  entry: CaptureEntry;
+  device: Device;
+  /** True for the one screen shown first; every other screen loads lazily. */
+  eager: boolean;
+}
+
+const { entry, device, eager } = Astro.props;
+const { media } = entry;
+const pending = entry.status === 'pending';
+
+const captures = import.meta.glob<{ default: ImageMetadata }>('/src/assets/captures/**/*.{png,jpg,webp}', { eager: true });
+const PLACEHOLDER: Record<string, { url: string; width: number; height: number }> = {
+  '/captures/_pending/phone.svg': { url: pendingPhone, width: 1080, height: 2424 },
+  '/captures/_pending/tablet.svg': { url: pendingTablet, width: 2560, height: 1600 },
+};
+
+function capture(src: string): ImageMetadata {
+  const found = captures[`/src/assets${src}`];
+  if (!found) throw new Error(`화면 파일이 없다: src/assets${src}`);
+  return found.default;
+}
+
+if (media.kind === 'video') {
+  // Plan 2 adds this branch together with the first recording, so it ships with a test.
+  throw new Error('MediaView: 녹화(video)는 아직 그리지 않는다. 첫 녹화를 넣을 때 함께 구현한다.');
+}
+
+const frames = media.kind === 'image' ? [{ src: media.src, alt: media.alt, label: undefined }] : media.frames;
+const isSequence = media.kind === 'sequence';
+const widths = device === 'phone' ? [360, 540, 720, 1080] : [640, 960, 1280, 1920];
+const sizes = device === 'phone' ? '(max-width: 480px) 62vw, 300px' : '(max-width: 760px) 92vw, 640px';
+const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예정';
+---
+
+<div
+  class="media"
+  data-media-kind={media.kind}
+  data-device={device}
+  data-pending={pending ? '' : undefined}
+  data-frame-ms={isSequence ? media.frameMs : undefined}
+  style={`aspect-ratio: ${DEVICE_ASPECT[device]}`}
+>
+  {
+    frames.map((frame, i) => {
+      const first = i === 0;
+      const common = {
+        alt: frame.alt,
+        loading: eager && first ? ('eager' as const) : ('lazy' as const),
+        decoding: 'async' as const,
+        fetchpriority: eager && first ? ('high' as const) : undefined,
+        'data-frame': isSequence ? i : undefined,
+        'data-label': frame.label,
+        'data-on': !isSequence || first ? '' : undefined,
+      };
+      const placeholder = PLACEHOLDER[frame.src];
+      return placeholder ? (
+        <img src={placeholder.url} width={placeholder.width} height={placeholder.height} {...common} />
+      ) : (
+        <Image src={capture(frame.src)} widths={widths} sizes={sizes} {...common} />
+      );
+    })
+  }
+  {pending && <span class="media-note">{note}</span>}
+</div>
+
+<style>
+  .media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--soft);
+  }
+  .media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+  }
+  .media img[data-on] {
+    opacity: 1;
+  }
+  .media-note {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+</style>
