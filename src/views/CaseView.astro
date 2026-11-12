@@ -33,8 +33,7 @@ const others = cases
     <CaseStepper lang={lang} cases={cases} fixedCase={caseId} detail="long" headingLevel={2} stepsHeading={t.casePage.stepsHeading}>
       <Fragment slot="lead">
         <h1 class="case-h1">
-          <span>{c.h1[0]}</span>
-          <span>{c.h1[1]}</span>
+          <span>{c.h1[0]}</span>{' '}<span>{c.h1[1]}</span>
         </h1>
         <p class="case-intro">{c.intro}</p>
       </Fragment>

@@ -33,12 +33,8 @@ test('대체 문장이 비어 있지 않다', () => {
   for (const [key, e] of allEntries()) for (const alt of mediaAlts(e.media)) expect(alt.length, key).toBeGreaterThan(10);
 });
 
-test('pendingCaptures는 임시 화면의 열쇠를 돌려준다', () => {
+test('pendingCaptures는 임시 화면인 칸의 열쇠만 돌려준다', () => {
   const keys = pendingCaptures();
-  expect(keys).toContain('en/lessons/tablet/lock_screen');
+  expect(keys).toEqual(allEntries().filter(([, e]) => e.status === 'pending').map(([key]) => key));
   for (const k of keys) expect(k).toMatch(/^(ko|en)\/[a-z_]+\/(phone|tablet)\/[a-z_]+$/);
-});
-
-test('배포용 빌드는 임시 화면이 남아 있으면 실패한다', () => {
-  if (process.env.RELEASE === '1') expect(pendingCaptures()).toEqual([]);
 });

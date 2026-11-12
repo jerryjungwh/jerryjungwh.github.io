@@ -1,7 +1,8 @@
 ---
 import '../styles/stepper.css';
-import { getCapture } from '../data/captures';
+import { getCapture, pendingCaptures } from '../data/captures';
 import { siteStrings } from '../data/site';
+import { IS_RELEASE, assertReleasable } from '../lib/release';
 import { stepDurationMs, stepStayMs } from '../lib/stepper-state';
 import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
 import MediaView from './MediaView.astro';
@@ -24,10 +25,14 @@ const shown = fixedCase ? cases.filter((c) => c.id === fixedCase) : cases;
 const CaseHeading = `h${headingLevel}`;
 const StepHeading = `h${headingLevel + 1}`;
 const DEVICES: Device[] = ['phone', 'tablet'];
+assertReleasable(pendingCaptures(), IS_RELEASE);
+// The home page starts at a random case, so no image can be marked "first" in the HTML. This runs as
+// soon as the stepper is parsed and asks for the chosen case's first screen right away.
+const firstScreen = `(function(){var c=document.documentElement.dataset.startCase;if(!c)return;var i=document.querySelector('[data-stepper] figure[data-media][data-case="'+c+'"][data-step="create"][data-device="phone"] img');if(i){i.loading='eager';i.fetchPriority='high';i.setAttribute('fetchpriority','high')}})();`;
 ---
 
 {/* Every case, step and screen is in the HTML. The script only switches which one is shown. */}
-<section id="cases" class="stepper" data-stepper data-fixed-case={fixedCase} aria-label={t.sectionLabel}>
+<section id="cases" class="stepper" data-stepper data-fixed-case={fixedCase} data-detail={detail} aria-label={t.sectionLabel}>
   {Astro.slots.has('lead') && <div class="stepper-lead"><slot name="lead" /></div>}
 
   {
@@ -64,7 +69,7 @@ const DEVICES: Device[] = ['phone', 'tablet'];
                   data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
                   aria-labelledby={`step-${c.id}-${s.id}`}
                 >
-                  <MediaView entry={entry} device={device} eager={caseIndex === 0 && stepIndex === 0 && device === 'phone'} />
+                  <MediaView entry={entry} device={device} eager={Boolean(fixedCase) && caseIndex === 0 && stepIndex === 0 && device === 'phone'} />
                 </figure>
               );
             }),
@@ -104,6 +109,7 @@ const DEVICES: Device[] = ['phone', 'tablet'];
 
   {Astro.slots.has('cta') && <div class="stepper-cta"><slot name="cta" /></div>}
 </section>
+{!fixedCase && <script is:inline set:html={firstScreen} />}
 
 <script>
   import { mountSteppers } from './case-stepper.client';

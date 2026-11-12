@@ -1,4 +1,5 @@
 import { expect, test } from 'vitest';
+import { CASES_EN } from '../../src/data/cases.en';
 import { CASES_KO } from '../../src/data/cases.ko';
 import { findForbidden } from '../../src/lib/forbidden';
 import { CASE_ORDER, STEP_ORDER } from '../../src/lib/types';
@@ -48,4 +49,17 @@ test('사례마다 이름, 두 줄 제목, 소개, 질문 세 개 이상이 있�
 
 test('쓰지 않기로 한 말이 없다', () => {
   for (const c of CASES_KO) expect(findForbidden(JSON.stringify(c), 'ko'), c.id).toEqual([]);
+});
+
+test('사례 페이지의 긴 설명은 사례마다 다르다: 같은 문장이 두 사례에 나오지 않는다', () => {
+  for (const [lang, cases] of [['ko', CASES_KO], ['en', CASES_EN]] as const) {
+    const seen = new Map<string, string>();
+    for (const c of cases)
+      for (const s of c.steps)
+        for (const sentence of s.long.split(/(?<=[.?!])\s+/).map((x) => x.trim()).filter((x) => x.length > 0)) {
+          const first = seen.get(sentence);
+          expect(first === undefined || first === c.id, `${lang}: 「${sentence}」 (${first} / ${c.id})`).toBe(true);
+          seen.set(sentence, c.id);
+        }
+  }
 });

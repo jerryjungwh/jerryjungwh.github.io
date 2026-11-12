@@ -333,7 +333,7 @@ html.js .stepper li[data-step][data-active] .step-cell {
   margin: 6px 0;
   overflow: hidden;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--brand) 12%, var(--paper));
+  background: var(--brand-tint);
 }
 html.js .stepper li[data-step][data-active] .step-cell::after {
   content: '';
@@ -386,6 +386,35 @@ html.js .stepper li[data-step][data-active] .step-text {
   }
   html.js .stepper[data-device='tablet'] .case-text {
     margin-top: 20px;
+  }
+}
+
+/* Case pages on a phone: each step has two or three sentences, too much for a narrow column.
+   The screen stays stuck to the top and the steps run full width below it. The section is a plain
+   block here (not a grid) so that the stuck screen can travel the whole length of the step list. */
+@media (max-width: 719.98px) {
+  html.js .stepper[data-detail='long'] {
+    --phone-w: min(34vw, 150px);
+    display: block;
+  }
+  html.js .stepper[data-detail='long'] .stepper-switch {
+    display: flex;
+    width: max-content;
+    margin: var(--stage-top) auto 0;
+  }
+  html.js .stepper[data-detail='long'] .case-screens {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-top: 12px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  html.js .stepper[data-detail='long'] .case-text {
+    margin-top: 16px;
+  }
+  html.js .stepper[data-detail='long'] .stepper-note {
+    margin-top: 12px;
   }
 }
 

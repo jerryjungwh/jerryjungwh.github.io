@@ -86,3 +86,18 @@ test('영어 사례 페이지에서 한국어로 바꾸면 같은 사례의 한�
   await expect(page).toHaveURL(/\/for\/after-school\/$/);
   await expect(page.locator('h1')).toContainText('아이 학원 시간표');
 });
+
+test('휴대폰 폭의 사례 페이지는 화면을 위에 붙여 두고 긴 설명을 화면 폭으로 보인다', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/for/university/');
+  await expect(page.locator('[data-stepper][data-ready]')).toHaveCount(1);
+  await page.locator('[data-action="toggle-pause"]').click();
+  const text = page.locator('article[data-case]:visible li[data-step][data-active] .step-text');
+  expect((await text.boundingBox())!.width).toBeGreaterThanOrEqual(240);
+  // The last step is far down the list. Its screen must still be in view after scrolling to it.
+  const last = page.locator('article[data-case]:visible li[data-step] button').nth(7);
+  await last.click();
+  await last.scrollIntoViewIfNeeded();
+  await expect(page.locator('figure[data-step="lock_screen"][data-device="phone"]')).toBeInViewport({ ratio: 0.9 });
+  await expect(last).toBeInViewport();
+});

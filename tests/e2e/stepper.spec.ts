@@ -182,3 +182,55 @@ test.describe('스크립트가 꺼져 있을 때', () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 });
+
+test('홈에서는 고른 사례의 첫 화면을 먼저 받는다', async ({ page }) => {
+  await openAtUniversity(page);
+  const first = page.locator('figure[data-case="university"][data-step="create"][data-device="phone"] img').first();
+  await expect(first).toHaveAttribute('loading', 'eager');
+  await expect(first).toHaveAttribute('fetchpriority', 'high');
+  // Hidden cases stay lazy: nothing is fetched for a case the visitor is not looking at.
+  await expect(page.locator('figure[data-case="lessons"][data-step="create"][data-device="phone"] img').first()).toHaveAttribute('loading', 'lazy');
+});
+
+test('키보드 초점이 단계 목록에 있으면 넘어가지 않고, 초점이 나가면 다시 넘어간다', async ({ page }) => {
+  await openAtUniversity(page);
+  const last = visibleSteps(page).nth(7);
+  await last.focus();
+  await page.keyboard.press('Enter');
+  await expect(last).toHaveAttribute('aria-current', 'step');
+  await page.clock.runFor(12000);
+  await expect(page.locator('article[data-case="university"]')).toBeVisible();
+  await expect(last).toBeFocused();
+  await expect(last).toHaveAttribute('aria-current', 'step');
+  await page.locator('[data-action="toggle-pause"]').focus();
+  await page.clock.runFor(5200);
+  await expect(page.locator('article[data-case="after_school"]')).toBeVisible();
+});
+
+test('멈춘 채로 켜진 단계를 다시 누르면 이어 보기의 다음 장이 보인다', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openAtUniversity(page);
+  const remind = visibleSteps(page).nth(4);
+  await remind.click();
+  const frames = page.locator('figure[data-case="university"][data-step="remind"][data-device="phone"] img[data-frame]');
+  await expect(frames.nth(0)).toHaveAttribute('data-on', '');
+  await remind.click();
+  await expect(frames.nth(1)).toHaveAttribute('data-on', '');
+  await expect(frames.nth(0)).not.toHaveAttribute('data-on', '');
+  await remind.click();
+  await expect(frames.nth(0)).toHaveAttribute('data-on', '');
+  await expect(currentStep(page)).toHaveAttribute('data-step', 'remind');
+});
+
+test('문서 모드로 돌아간 뒤에 늦게 온 스크립트는 붙지 않는다', async ({ page }) => {
+  await page.route('**/_astro/*.js', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+    await route.continue();
+  });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('html')).not.toHaveClass(/\bjs\b/, { timeout: 6000 });
+  await page.waitForLoadState('load');
+  await page.waitForTimeout(500);
+  await expect(page.locator('[data-stepper][data-ready]')).toHaveCount(0);
+  await expect(page.locator('article[data-case]:visible')).toHaveCount(6);
+});

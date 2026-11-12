@@ -83,3 +83,17 @@ test('긴 설명이 붙은 단계는 읽을 시간만큼 더 머문다', async (
   const long = { kind: 'sequence', frameMs: 2500, frames: [1, 2, 3, 4].map(() => ({ src: 'a', alt: 'a' })) } as const;
   expect(stepStayMs(long, '가'.repeat(100))).toBe(10000);
 });
+
+test('멈춘 채로 이어 보기를 손으로 넘기면 다음 장으로 가고, 마지막 장 뒤에는 첫 장으로 돌아간다', async () => {
+  const { sequenceFrameIndex } = await import('../../src/lib/stepper-state');
+  let s = { ...initialState(0, true), stepIndex: 5 };
+  const next = { type: 'nextFrame', frames: 3, frameMs: 2500 } as const;
+  s = reduce(s, next, d);
+  expect(sequenceFrameIndex(3, 2500, s.elapsedMs)).toBe(1);
+  s = reduce(s, next, d);
+  expect(sequenceFrameIndex(3, 2500, s.elapsedMs)).toBe(2);
+  s = reduce(s, next, d);
+  expect(sequenceFrameIndex(3, 2500, s.elapsedMs)).toBe(0);
+  expect(s.stepIndex).toBe(5);
+  expect(s.paused).toBe(true);
+});

@@ -94,3 +94,17 @@ test('모든 페이지에 「최근 업데이트」 날짜와 머리글·바닥�
     expect(p.$('h1').length, p.path).toBe(1);
   }
 });
+
+test('CSS 없이 읽어도 제목 두 줄과 링크 목록의 낱말이 붙지 않는다', () => {
+  for (const c of CASE_ORDER) {
+    const def = CASES_KO.find((x) => x.id === c)!;
+    const $ = load(read(`dist/for/${CASE_SLUG[c]}/index.html`));
+    expect($('h1').text().replace(/\s+/g, ' ').trim()).toBe(`${def.h1[0]} ${def.h1[1]}`);
+  }
+  const home = load(read('dist/index.html'));
+  expect(home('h1').text().replace(/\s+/g, ' ').trim()).toBe('우리 학교 시간 그대로, 시간표와 할 일을 한 앱에서');
+  const first = home('#by-case li').first().text().replace(/\s+/g, ' ').trim();
+  expect(first).toBe('초등학교 시간표 40분 수업과 준비물을 부모가 아이 대신 챙겨요.');
+  const en = load(read('dist/en/for/university/index.html'));
+  expect(en('h1').text().replace(/\s+/g, ' ').trim()).toBe('College class schedule Rooms and assignments on one page');
+});

@@ -5,6 +5,8 @@
   --body: #5A5F6E;
   --line: #E4E4EC;
   --soft: #F2F2F9;
+  /* brand at about 12% on white: the step in view */
+  --brand-tint: #ECEBFA;
   --now: #D9534F;
   --paper: #FFFFFF;
   --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',

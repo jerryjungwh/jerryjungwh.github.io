@@ -27,17 +27,28 @@ test('모든 화면 그림에 대체 문장이 있다', () => {
   });
 });
 
-test('먼저 받는 그림은 한 장이고 나머지는 늦게 받는다', () => {
+test('홈은 시작 사례가 방문마다 달라서 HTML에 먼저 받는 그림을 정해 두지 않는다', () => {
   const imgs = $('[data-media-kind] img');
-  expect(imgs.filter('[loading="eager"]').length).toBe(1);
-  expect(imgs.filter('[loading="lazy"]').length).toBe(imgs.length - 1);
+  expect(imgs.filter('[loading="eager"]').length).toBe(0);
+  expect(imgs.filter('[loading="lazy"]').length).toBe(imgs.length);
 });
 
-test('임시 화면에는 「촬영 예정」이 적혀 있다', () => {
-  const pending = $('[data-media-kind][data-pending]');
-  expect(pending.length).toBeGreaterThan(0);
-  pending.each((_, el) => {
+test('사례 페이지는 첫 단계의 폰 화면 한 장만 먼저 받는다', () => {
+  const page = load(read('dist/for/university/index.html'));
+  const eager = page('[data-media-kind] img[loading="eager"]');
+  expect(eager.length).toBe(1);
+  expect(eager.attr('fetchpriority')).toBe('high');
+  expect(eager.closest('figure').attr('data-step')).toBe('create');
+  expect(eager.closest('figure').attr('data-device')).toBe('phone');
+});
+
+test('임시 화면에는 「촬영 예정」이 적혀 있고, 최종 화면에는 없다', () => {
+  // Once every screen is final there is nothing pending; the rule still has to hold for the rest.
+  $('[data-media-kind][data-pending]').each((_, el) => {
     expect($(el).text()).toContain('촬영 예정');
+  });
+  $('[data-media-kind]:not([data-pending])').each((_, el) => {
+    expect($(el).text()).not.toContain('촬영 예정');
   });
 });
 

@@ -6,13 +6,6 @@ import type { CaseDef } from '../lib/types';
  * Every sentence states something the app does today. Elementary, middle school and kids' activities
  * are told by a parent (the app's stated audience is 16+).
  */
-const REMINDER_LONG =
-  'A reminder can go off 5 minutes, 10 minutes, 30 minutes, 1 hour or 1 day before the due time. It opens as an alarm screen. Tap “Snooze for 5 minutes” to hear it once more five minutes later.';
-const WIDGET_DONE_LONG =
-  'You can mark a task complete in the To-Do widget and in the Today widget. It shows as complete in the app’s To-Do list as well.';
-const LOCK_LONG =
-  'Turn on “Show weekly table on lock screen” and the weekly timetable appears when you wake the phone. It is view-only: nothing can be edited or deleted while the phone is locked.';
-
 export const CASES_EN: CaseDef[] = [
   {
     id: 'elementary_school',
@@ -26,7 +19,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make a timetable for Emma',
         short: 'Name it “Emma · Grade 4”. Show Monday to Friday, from 8 am to 3 pm.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. Emma goes to school Monday to Friday and is done at 2:45 pm, so this one shows 8 am to 3 pm only.',
+        long: 'Each timetable has its own name, days and hours. Emma goes to school Monday to Friday and is done at 2:45 pm, so this one shows 8 am to 3 pm only.',
       },
       {
         id: 'fill',
@@ -44,31 +37,31 @@ export const CASES_EN: CaseDef[] = [
         id: 'todo',
         title: 'Link things to pack to a class',
         short: 'Link “Pack colored pencils” to Art. Tap Art and the task shows with it.',
-        long: 'When you add a To-Do you choose the class it belongs to. Link “Pack colored pencils” to Art and it appears whenever you tap Art on the timetable. There is no need to write which class it is for.',
+        long: 'Write what to pack as a To-Do and link it to the class that needs it. Link “Pack colored pencils” to Art and it appears whenever you tap Art on the timetable. There is no need to write which class it is for.',
       },
       {
         id: 'remind',
         title: 'Get a reminder before it is due',
         short: 'Set a due time and turn on a reminder. An alarm screen tells you before it is due.',
-        long: REMINDER_LONG,
+        long: 'The due time is the evening before Art, with a “30 minutes before” reminder. When the time comes an alarm screen opens on the phone, in time to pack the pencils.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'Weekly, Today and To-Do widgets. See Emma’s day without opening the app.',
-        long: 'The weekly widget shows the week. The Today widget shows today’s classes and tasks together, and the To-Do widget shows the task list. On a parent’s phone they show a child’s day at a glance.',
+        long: 'The weekly widget shows Emma’s week, and the Today widget shows today’s classes together with what to pack. The To-Do widget lists only the tasks. On a parent’s phone they show a child’s day at a glance.',
       },
       {
         id: 'widget_done',
         title: 'Check off tasks in the widget',
         short: 'Pencils in the bag? Mark the task complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'Put the pencils in the bag, mark the task complete in the widget, and it is done. Open the app later and the To-Do list shows it as complete too.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Turn on the lock screen timetable and it is there when you wake the phone.',
-        long: `${LOCK_LONG} In the morning, today’s classes are right there.`,
+        long: 'The lock screen timetable is view-only. Nothing can be edited or deleted while the phone is locked. In the morning, today’s classes are right there when the phone wakes.',
       },
     ],
     faq: [
@@ -98,7 +91,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make a timetable with Noah',
         short: 'Name it “Noah · Grade 7 Fall”. Show hours up to 6 pm, when practice ends.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. First period starts at 8:15 am and soccer practice ends at 6 pm, so this one shows 8 am to 6 pm.',
+        long: 'Noah’s timetable covers 8 am to 6 pm. First period starts at 8:15 am and soccer practice ends at 6 pm. For now it shows Monday to Friday.',
       },
       {
         id: 'fill',
@@ -122,25 +115,25 @@ export const CASES_EN: CaseDef[] = [
         id: 'remind',
         title: 'A reminder the day before',
         short: 'Set the reminder to “1 day before” and an alarm screen tells you a day ahead.',
-        long: REMINDER_LONG,
+        long: 'The report is due Friday morning, with a “1 day before” reminder. On Thursday morning an alarm screen opens. Tap “Snooze for 5 minutes” and it rings once more five minutes later.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'The weekly widget shows the week, the Today widget shows today, and the To-Do widget shows homework.',
-        long: 'There are three widgets: weekly, Today and To-Do. You choose which timetable the weekly widget shows. With one on the home screen you can tell whether today is a practice day without opening the app.',
+        long: 'There are three widgets: weekly, Today and To-Do. Choose Noah’s timetable when you place the weekly widget, and the home screen tells you whether today is a practice day.',
       },
       {
         id: 'widget_done',
         title: 'Check off homework in the widget',
         short: 'Report finished? Mark it complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'Mark the report complete in the Today widget or the To-Do widget. The app’s To-Do list updates with it, so there is nothing to check off twice.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Wake the phone and the timetable is there. Check the next period without opening the app.',
-        long: LOCK_LONG,
+        long: 'Turn on “Show weekly table on lock screen” in settings and Noah’s timetable appears every time the phone wakes. It only shows the timetable; nothing changes until the phone is unlocked.',
       },
     ],
     faq: [
@@ -170,7 +163,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make a timetable for the semester',
         short: 'Name it “Junior year · Fall”. Show hours up to 9 pm, when the study block ends.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. First period starts at 8:00 am and the evening study block ends at 9 pm, so this one shows 8 am to 9 pm.',
+        long: 'Give the new semester’s timetable a name, then pick its days and hours. First period starts at 8:00 am and the evening study block ends at 9 pm, so this one shows 8 am to 9 pm.',
       },
       {
         id: 'fill',
@@ -188,31 +181,31 @@ export const CASES_EN: CaseDef[] = [
         id: 'todo',
         title: 'Link presentation prep to English',
         short: 'Link “Prepare English presentation” to English. Tap English and the task shows with it.',
-        long: 'When you add a To-Do you choose the class it belongs to. Link projects, presentations and homework to their subjects, and tapping a subject on the timetable shows what is due for it.',
+        long: 'Add projects, presentations and homework as To-Dos and link each to its subject. Tap a subject on the timetable to see what is due for it.',
       },
       {
         id: 'remind',
         title: 'Know the day before it is due',
         short: 'Set a due time and a “1 day before” reminder. An alarm screen opens a day ahead.',
-        long: REMINDER_LONG,
+        long: 'The due time is the start of first period on presentation day, with a “1 day before” reminder. The alarm screen opens at the same time the day before. A reminder can be set from 5 minutes to 1 day ahead.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'Weekly, Today and To-Do widgets. Check today’s classes and what is due from the home screen.',
-        long: 'The weekly widget shows the week. The Today widget shows today’s classes and tasks together, and the To-Do widget shows the task list. All of it is on the home screen, without opening the app.',
+        long: 'A look at the home screen in the morning is enough to know which class is in which period. The Today widget puts today’s classes and tasks in one place.',
       },
       {
         id: 'widget_done',
         title: 'Check off finished work in the widget',
         short: 'Done preparing? Mark it complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'When something like presentation prep is finished, mark it complete right in the widget. Completed tasks can be found again in the app’s completed list.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Wake the phone between classes and the timetable is there. See the next period right away.',
-        long: LOCK_LONG,
+        long: 'Wake the phone between classes and the weekly timetable shows before you unlock. Check the next period and put the phone away. Classes cannot be edited from the lock screen.',
       },
     ],
     faq: [
@@ -242,7 +235,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make this semester’s schedule',
         short: 'Name it “Fall semester”. Show only the days and hours you have class.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. Leaving out days and hours with no class makes everything else bigger. You can keep one timetable per semester.',
+        long: 'You can make a new timetable every semester. Name this one “Fall semester” and leave out the days and hours when you have no class.',
       },
       {
         id: 'fill',
@@ -266,25 +259,25 @@ export const CASES_EN: CaseDef[] = [
         id: 'remind',
         title: 'A reminder before the deadline',
         short: 'Set the reminder to “1 hour before” and an alarm screen opens at 5:00 pm.',
-        long: REMINDER_LONG,
+        long: 'The lab is due at 6:00 pm, so “1 hour before” opens an alarm screen at 5:00 pm. Switch to “1 day before” for more room. On the alarm screen you can dismiss it or snooze it for five minutes.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'Weekly, Today and To-Do widgets. Check today’s classes and assignments from the home screen.',
-        long: 'The weekly widget shows the week. The Today widget shows today’s classes and tasks together, and the To-Do widget shows your assignments. All of it is on the home screen, without opening the app.',
+        long: 'Use the weekly widget for this week’s classes and the To-Do widget for assignments. The Today widget alone shows today’s classes and assignments together.',
       },
       {
         id: 'widget_done',
         title: 'Check off assignments in the widget',
         short: 'Lab submitted? Mark it complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'After handing in the lab, mark it complete in the widget. Either widget works: the To-Do widget or the Today widget.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Wake the phone on the way to class and the timetable is there. See your next class right away.',
-        long: LOCK_LONG,
+        long: 'With the lock screen timetable on, you can check your next class while walking. It is for viewing only: to change something, unlock the phone and open the app.',
       },
     ],
     faq: [
@@ -314,13 +307,13 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make a timetable for Lily',
         short: 'Name it “Lily”. Show Monday to Saturday so the Saturday swim lesson fits.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. Lily has activities after school and a swim lesson on Saturday morning, so this one shows Monday to Saturday.',
+        long: 'Make a timetable under the child’s name and choose its days and hours. Lily has activities after school and a swim lesson on Saturday morning, so hers shows Monday to Saturday.',
       },
       {
         id: 'fill',
         title: 'Add after-school activities',
         short: 'Piano on Tuesday and Thursday 4:30–5:15, karate on Monday, Wednesday and Friday 5:00–6:00.',
-        long: 'Times are set to the minute. Art club on Monday and Wednesday 3:15–4:15 and the Saturday swim lesson 10:00–11:00 are in too. Each activity has its own color, so it is clear at a glance where to go today.',
+        long: 'Start and end times for each activity are set to the minute. Art club on Monday and Wednesday 3:15–4:15 and the Saturday swim lesson 10:00–11:00 are in too. Each activity has its own color, so it is clear at a glance where to go today.',
       },
       {
         id: 'unique',
@@ -338,25 +331,25 @@ export const CASES_EN: CaseDef[] = [
         id: 'remind',
         title: 'A reminder before you leave',
         short: 'Set a due time and a “30 minutes before” reminder. An alarm screen tells you in time.',
-        long: REMINDER_LONG,
+        long: 'The due time is when you leave for the swim lesson, with a “30 minutes before” reminder. The alarm screen opens half an hour before you go, which leaves time to pack the bag.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'Weekly, Today and To-Do widgets. See where the children go today from the home screen.',
-        long: 'There are three widgets: weekly, Today and To-Do. You choose which timetable the weekly widget shows, so Lily’s week and Max’s week can each have a widget on the home screen.',
+        long: 'Each time you place a weekly widget you choose the timetable it shows. That way Lily’s week and Max’s week can each have a widget on the home screen.',
       },
       {
         id: 'widget_done',
         title: 'Check off what is packed',
         short: 'Swim bag packed? Mark it complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'Once the swim bag is packed, tap complete in the widget. It can be done on the way out the door, without opening the app.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Wake the phone and the timetable is there. Check pick-up time without opening the app.',
-        long: LOCK_LONG,
+        long: 'Before leaving to pick up the children, wake the phone and the timetable is there. The lock screen timetable is turned on and off in settings, and nothing can be changed while the phone is locked.',
       },
     ],
     faq: [
@@ -386,13 +379,13 @@ export const CASES_EN: CaseDef[] = [
         id: 'create',
         title: 'Make your lesson timetable',
         short: 'Name it “My lessons”. Show Monday to Saturday, from 7 am to 10 pm.',
-        long: 'When you make a timetable you choose its name, the days it shows and the hours it covers. To fit the morning gym and evening lessons on one page, this one shows 7 am to 10 pm.',
+        long: 'To fit lessons and personal plans on one page, this timetable covers a wide range: 7 am to 10 pm, Monday to Saturday. The morning gym and the evening lessons both fit.',
       },
       {
         id: 'fill',
         title: 'Add lessons and your own plans',
         short: 'Grade 8 math Monday and Wednesday 4:00–5:30, Grade 10 math Tuesday and Thursday 5:00–6:30, plus the gym.',
-        long: 'Times are set to the minute. A Saturday review session 10:00–12:00 and the gym on Tuesday and Thursday at 7 am are in too. Give lessons and personal plans different colors and free time is easy to spot.',
+        long: 'Lesson times can be set to the minute. A Saturday review session 10:00–12:00 and the gym on Tuesday and Thursday at 7 am are in too. Give lessons and personal plans different colors and free time is easy to spot.',
       },
       {
         id: 'unique',
@@ -410,25 +403,25 @@ export const CASES_EN: CaseDef[] = [
         id: 'remind',
         title: 'A reminder before the lesson',
         short: 'Set a due time and a “1 hour before” reminder. An alarm screen tells you in time.',
-        long: REMINDER_LONG,
+        long: 'The due time is the start of the lesson, with a “1 hour before” reminder. When the alarm screen opens an hour ahead, there is time for a last look at the sheet. A To-Do needs a due date before a reminder can be turned on.',
       },
       {
         id: 'widgets',
         title: 'Three home screen widgets',
         short: 'Weekly, Today and To-Do widgets. Check today’s lessons and prep from the home screen.',
-        long: 'The weekly widget shows the week. The Today widget shows today’s lessons and tasks together, and the To-Do widget shows the task list. All of it is on the home screen, without opening the app.',
+        long: 'The weekly widget on the home screen shows this week’s lessons, and the To-Do widget shows your prep tasks. There is no need to open the app between lessons.',
       },
       {
         id: 'widget_done',
         title: 'Check off prep in the widget',
         short: 'Review sheet done? Mark it complete right in the widget.',
-        long: WIDGET_DONE_LONG,
+        long: 'When the review sheet is finished, mark it complete in the home screen widget. It stays marked as complete in the app’s To-Do list.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
         short: 'Wake the phone and your lessons are there. See when the next one starts right away.',
-        long: LOCK_LONG,
+        long: 'The lock screen timetable helps on days with several lessons. Wake the phone to see when the next one starts. On the locked screen you can look, not edit.',
       },
     ],
     faq: [

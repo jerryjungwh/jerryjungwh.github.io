@@ -13,6 +13,8 @@ export type StepperEvent =
   | { type: 'selectStep'; stepIndex: number }
   | { type: 'selectCase'; caseIndex: number }
   | { type: 'togglePause' }
+  /** A paused visitor asks for the next frame of a sequence. After the last frame comes the first. */
+  | { type: 'nextFrame'; frames: number; frameMs: number }
   | { type: 'setDevice'; device: Device };
 
 export interface StepperDims {
@@ -54,6 +56,11 @@ export function reduce(s: StepperState, e: StepperEvent, d: StepperDims): Steppe
       return { ...s, caseIndex: e.caseIndex, stepIndex: 0, elapsedMs: 0 };
     case 'togglePause':
       return { ...s, paused: !s.paused };
+    case 'nextFrame': {
+      if (e.frames < 2 || e.frameMs <= 0) return s;
+      const next = (sequenceFrameIndex(e.frames, e.frameMs, s.elapsedMs) + 1) % e.frames;
+      return { ...s, elapsedMs: next * e.frameMs };
+    }
     case 'setDevice':
       return { ...s, device: e.device };
   }

@@ -29,8 +29,7 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
     <CaseStepper lang={lang} cases={cases} detail="short" headingLevel={2}>
       <Fragment slot="lead">
         <h1 class="home-h1">
-          <span>{t.home.h1[0]}</span>
-          <span>{t.home.h1[1]}</span>
+          <span>{t.home.h1[0]}</span>{' '}<span>{t.home.h1[1]}</span>
         </h1>
         <p class="home-lead">{t.home.lead}</p>
       </Fragment>

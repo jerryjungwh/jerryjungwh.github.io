@@ -62,6 +62,9 @@ function fetchNow(figure: HTMLElement | null): void {
 }
 
 function mount(root: HTMLElement): void {
+  // The page already went back to the plain document (this script arrived too late). Stay out of it:
+  // running hidden would still advance and download screens nobody sees.
+  if (!document.documentElement.classList.contains('js')) return;
   const cases = readCases(root);
   if (cases.length === 0 || cases.some((c) => c.steps.length === 0)) return;
 
@@ -135,6 +138,25 @@ function mount(root: HTMLElement): void {
     shown = state;
   }
 
+  /** Frames of the sequence on screen now, or null when the screen is a single image. */
+  function sequenceNow(): { frames: number; frameMs: number } | null {
+    const figure = figureAt(state);
+    const frames = figure ? figure.querySelectorAll('img[data-frame]').length : 0;
+    if (frames < 2) return null;
+    const frameMs = Number(figure!.querySelector<HTMLElement>('[data-frame-ms]')?.dataset.frameMs) || DEFAULT_STEP_MS;
+    return { frames, frameMs };
+  }
+
+  /**
+   * Someone is reading the steps with the keyboard. Advancing would hide the element they are on
+   * (the case changes) and drop their focus, so the stepper waits until focus leaves the steps.
+   * A mouse click does not count: buttons do not match :focus-visible after a click.
+   */
+  function keyboardInSteps(): boolean {
+    const el = document.activeElement;
+    return el instanceof HTMLElement && cases[state.caseIndex].article.contains(el) && el.matches(':focus-visible');
+  }
+
   function send(event: StepperEvent): void {
     state = reduce(state, event, dims);
     render();
@@ -150,10 +172,13 @@ function mount(root: HTMLElement): void {
     if (action?.dataset.action === 'device') return send({ type: 'setDevice', device: action.dataset.device as Device });
 
     const item = target.closest<HTMLElement>('li[data-step]');
-    if (item) {
-      const stepIndex = cases[state.caseIndex].steps.findIndex((s) => s.item === item);
-      send({ type: 'selectStep', stepIndex });
-    }
+    const onScreen = target.closest<HTMLElement>('figure[data-media][data-active]');
+    const stepIndex = item ? cases[state.caseIndex].steps.findIndex((s) => s.item === item) : -1;
+    // While paused nothing moves by itself, so pressing the step in view (or its screen) again
+    // shows the next frame of a sequence: otherwise the second and third widget would never show.
+    const sequence = state.paused && (onScreen || stepIndex === state.stepIndex) ? sequenceNow() : null;
+    if (sequence) return send({ type: 'nextFrame', ...sequence });
+    if (item) send({ type: 'selectStep', stepIndex });
   });
 
   if ('IntersectionObserver' in window) {
@@ -170,7 +195,7 @@ function mount(root: HTMLElement): void {
     } else {
       const dtMs = last === null ? 0 : Math.min(now - last, MAX_TICK_MS);
       last = now;
-      if (!state.paused) send({ type: 'tick', dtMs, stepDurationMs: durationOf(state) });
+      if (!state.paused && !keyboardInSteps()) send({ type: 'tick', dtMs, stepDurationMs: durationOf(state) });
     }
     window.requestAnimationFrame(frame);
   }

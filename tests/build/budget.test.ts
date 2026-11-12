@@ -1,6 +1,7 @@
 import { statSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
+import { load } from 'cheerio';
 import { expect, test } from 'vitest';
 import { allHtml, filesUnder } from './helpers';
 
@@ -58,7 +59,17 @@ test('페이지가 처음 받는 것의 크기: HTML 20KB(gzip), 스크립트 12
   }
 });
 
-test('시험 주소로 올리는 빌드는 검색에 넣지 않는다', () => {
-  // The release build (RELEASE=1) drops this tag; lib/release.ts decides, and its unit test covers both.
-  for (const p of pages) expect(p.$('meta[name="robots"]').attr('content'), p.path).toBe('noindex');
+test('시험 빌드는 모든 페이지를 검색에서 빼고, 배포용 빌드는 404만 뺀다', () => {
+  const release = process.env.RELEASE === '1';
+  for (const p of pages) expect(p.$('meta[name="robots"]').attr('content'), p.path).toBe(release ? undefined : 'noindex');
+  expect(load(readFileSync('dist/404.html', 'utf8'))('meta[name="robots"]').attr('content')).toBe('noindex');
+});
+
+test('내보낸 CSS에 오래된 Safari가 못 읽는 문법이 없다', () => {
+  // Safari before 16.4 drops a whole @media block written in range syntax, and before 16.2 ignores color-mix().
+  for (const css of filesUnder('dist', /\.css$/)) {
+    const text = readFileSync(css, 'utf8');
+    expect(text, css).not.toMatch(/@media[^{]*\(\s*(width|height)\s*[<>]/);
+    expect(text, css).not.toContain('color-mix(');
+  }
 });

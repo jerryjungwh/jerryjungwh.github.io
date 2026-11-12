@@ -8,8 +8,7 @@ interface Props {
   {
     Astro.props.items.map((item) => (
       <li>
-        <a href={item.href}>{item.title}</a>
-        <span>{item.text}</span>
+        <a href={item.href}>{item.title}</a>{' '}<span>{item.text}</span>
       </li>
     ))
   }
