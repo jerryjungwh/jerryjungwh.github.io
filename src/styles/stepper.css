@@ -1,0 +1,345 @@
+/*
+ * The case stepper.
+ *
+ * Without the `js` class on <html> this is a plain document: six cases, each with a strip of screens
+ * and an ordered list of steps, all visible. Every rule that hides a case, a step text or a screen
+ * starts with `html.js`, so a visitor (or crawler) without scripts never loses content.
+ *
+ * With `js`, one case, one step and one screen show at a time. Before the client script attaches,
+ * `html[data-start-case]` (set by an inline script in <head>) picks the case, and the markup already
+ * marks step 1 and its phone screen with `data-active`. After it attaches, the section carries
+ * `data-ready` and the script moves `data-active` around.
+ */
+
+.stepper {
+  --phone-w: min(50vw, 230px);
+  --tablet-w: 100%;
+  --pad: 24px;
+  --switch-h: 40px;
+  --stage-top: 24px;
+  /* phone screen is 1080 x 2424 */
+  --stage-h: calc(var(--phone-w) * 2.2445 + var(--pad) * 2);
+}
+
+/* ── shared look ─────────────────────────────────────────────────────────── */
+
+.stepper-lead {
+  margin-bottom: 32px;
+}
+
+.stepper-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+}
+.stepper-tabs button {
+  appearance: none;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--body);
+  cursor: pointer;
+}
+.stepper-tabs button[aria-pressed='true'] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.stepper-switch {
+  display: inline-flex;
+  align-items: center;
+  height: var(--switch-h);
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--soft);
+}
+.stepper-switch button {
+  appearance: none;
+  height: 100%;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--body);
+  cursor: pointer;
+}
+.stepper-switch button[aria-pressed='true'] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.case-screens {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: var(--pad);
+  overflow-x: auto;
+  border-radius: 28px;
+  background: var(--soft);
+}
+.case-screens figure {
+  flex: 0 0 auto;
+  width: 150px;
+}
+.case-screens figure[data-device='tablet'] {
+  width: 330px;
+}
+/* The captures are bare screens. A ring stands in for the device without changing the box size. */
+.case-screens .media {
+  border-radius: 18px;
+  box-shadow: 0 0 0 5px var(--ink);
+}
+.case-screens figure[data-device='tablet'] .media {
+  border-radius: 10px;
+}
+
+.stepper article + article {
+  margin-top: 72px;
+}
+.case-text {
+  margin-top: 28px;
+}
+.case-name {
+  font-size: clamp(21px, 2.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+/* The step list reads like one day column of a timetable: numbered rows separated by grid lines. */
+.stepper ol[data-steps] {
+  margin-top: 14px;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  counter-reset: step;
+}
+.stepper li[data-step] {
+  position: relative;
+  padding-left: 38px;
+  border-bottom: 1px solid var(--line);
+  counter-increment: step;
+}
+.stepper li[data-step]::before {
+  content: counter(step);
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 25px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--body);
+}
+.step-cell {
+  padding: 14px;
+}
+.step-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 25px;
+  letter-spacing: -0.01em;
+}
+.step-title button {
+  appearance: none;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+}
+.step-text {
+  margin-top: 4px;
+  max-width: 34em;
+  font-size: 15px;
+  color: var(--body);
+}
+
+.stepper-note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--body);
+}
+
+.stepper-controls {
+  margin-top: 18px;
+}
+.stepper-controls button {
+  appearance: none;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--body);
+  cursor: pointer;
+}
+
+.stepper-cta {
+  margin-top: 28px;
+}
+
+/* Buttons that only do something with the script stay out of the script-less document. */
+html:not(.js) .stepper-tabs,
+html:not(.js) .stepper-switch,
+html:not(.js) .stepper-controls {
+  display: none;
+}
+
+/* ── with the script: one case, one step, one screen ─────────────────────── */
+
+html.js .stepper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'lead' 'tabs' 'stage' 'text' 'controls' 'cta';
+}
+html.js .stepper-lead {
+  grid-area: lead;
+}
+html.js .stepper-tabs {
+  grid-area: tabs;
+}
+html.js .stepper-controls {
+  grid-area: controls;
+}
+html.js .stepper-cta {
+  grid-area: cta;
+}
+
+/* The device switch, the screen and the note share the stage area. Their heights are fixed, so each
+   one is placed by margin and nothing moves when the step or the device changes. */
+html.js .stepper-switch {
+  grid-area: stage;
+  align-self: start;
+  justify-self: center;
+  margin-top: var(--stage-top);
+}
+html.js .stepper .case-screens {
+  grid-area: stage;
+  align-self: start;
+  display: grid;
+  place-items: center;
+  height: var(--stage-h);
+  margin-top: calc(var(--stage-top) + var(--switch-h) + 12px);
+  overflow: visible;
+}
+html.js .stepper-note {
+  grid-area: stage;
+  align-self: start;
+  margin-top: calc(var(--stage-top) + var(--switch-h) + 12px + var(--stage-h) + 10px);
+  text-align: center;
+}
+html.js .stepper .case-text {
+  grid-area: text;
+}
+
+html.js .stepper article[data-case] {
+  display: none;
+}
+html.js .stepper[data-ready] article[data-case][data-active],
+html.js[data-start-case='elementary_school'] .stepper:not([data-ready]) article[data-case='elementary_school'],
+html.js[data-start-case='middle_school'] .stepper:not([data-ready]) article[data-case='middle_school'],
+html.js[data-start-case='high_school'] .stepper:not([data-ready]) article[data-case='high_school'],
+html.js[data-start-case='university'] .stepper:not([data-ready]) article[data-case='university'],
+html.js[data-start-case='after_school'] .stepper:not([data-ready]) article[data-case='after_school'],
+html.js[data-start-case='lessons'] .stepper:not([data-ready]) article[data-case='lessons'],
+html.js:not([data-start-case]) .stepper:not([data-ready]) article[data-case]:first-of-type {
+  display: contents;
+}
+html.js[data-start-case='elementary_school'] .stepper:not([data-ready]) .stepper-tabs button[data-case='elementary_school'],
+html.js[data-start-case='middle_school'] .stepper:not([data-ready]) .stepper-tabs button[data-case='middle_school'],
+html.js[data-start-case='high_school'] .stepper:not([data-ready]) .stepper-tabs button[data-case='high_school'],
+html.js[data-start-case='university'] .stepper:not([data-ready]) .stepper-tabs button[data-case='university'],
+html.js[data-start-case='after_school'] .stepper:not([data-ready]) .stepper-tabs button[data-case='after_school'],
+html.js[data-start-case='lessons'] .stepper:not([data-ready]) .stepper-tabs button[data-case='lessons'] {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+html.js .stepper figure[data-media] {
+  grid-area: 1 / 1;
+  display: none;
+  width: var(--phone-w);
+}
+html.js .stepper figure[data-media][data-device='tablet'] {
+  width: min(100%, var(--tablet-w));
+}
+html.js .stepper figure[data-media][data-active] {
+  display: block;
+}
+html.js .stepper .case-screens .media {
+  border-radius: 26px;
+  box-shadow: 0 0 0 7px var(--ink);
+}
+html.js .stepper .case-screens figure[data-device='tablet'] .media {
+  border-radius: 14px;
+}
+
+html.js .stepper li[data-step] {
+  cursor: pointer;
+}
+html.js .stepper .step-title button {
+  cursor: pointer;
+}
+html.js .stepper li[data-step]:not([data-active]) .step-text {
+  display: none;
+}
+/* The step in view is a filled cell, like a class on the timetable. The red bar on its left edge is the
+   timetable's "now" marker: it runs down the cell as the step's time passes (--p goes 0 → 1). A line
+   across the cell would strike through the text, so the marker stays on the edge. */
+html.js .stepper li[data-step][data-active]::before {
+  top: 20px;
+  color: var(--brand);
+}
+html.js .stepper li[data-step][data-active] .step-cell {
+  position: relative;
+  margin: 6px 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--brand) 12%, var(--paper));
+}
+html.js .stepper li[data-step][data-active] .step-cell::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: calc(var(--p, 0) * 100%);
+  background: var(--now);
+}
+html.js .stepper li[data-step][data-active] .step-text {
+  color: var(--ink);
+}
+
+@media (min-width: 960px) {
+  .stepper {
+    --phone-w: 280px;
+    --tablet-w: 472px;
+    --stage-top: 0px;
+  }
+  html.js .stepper {
+    grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+    grid-template-areas:
+      'stage lead'
+      'stage tabs'
+      'stage text'
+      'stage controls'
+      'stage cta';
+    grid-template-rows: auto auto auto auto 1fr;
+    column-gap: clamp(40px, 6vw, 96px);
+  }
+}

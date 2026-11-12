@@ -1,0 +1,100 @@
+---
+import '../styles/stepper.css';
+import { getCapture } from '../data/captures';
+import { siteStrings } from '../data/site';
+import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
+import MediaView from './MediaView.astro';
+
+interface Props {
+  lang: Lang;
+  cases: CaseDef[];
+  /** Case pages show one case and no case buttons. */
+  fixedCase?: CaseId;
+  detail: 'short' | 'long';
+  /** Level of the case heading. Step headings sit one level below. */
+  headingLevel: 2 | 3;
+}
+
+const { lang, cases, fixedCase, detail, headingLevel } = Astro.props;
+const t = siteStrings(lang).stepper;
+const shown = fixedCase ? cases.filter((c) => c.id === fixedCase) : cases;
+const CaseHeading = `h${headingLevel}`;
+const StepHeading = `h${headingLevel + 1}`;
+const DEVICES: Device[] = ['phone', 'tablet'];
+---
+
+{/* Every case, step and screen is in the HTML. The script only switches which one is shown. */}
+<section id="cases" class="stepper" data-stepper data-fixed-case={fixedCase} aria-label={t.sectionLabel}>
+  {Astro.slots.has('lead') && <div class="stepper-lead"><slot name="lead" /></div>}
+
+  {
+    !fixedCase && (
+      <div class="stepper-tabs" role="group" aria-label={t.casesLabel}>
+        {shown.map((c) => (
+          <button type="button" data-track="case_select" data-case={c.id} aria-pressed="false">
+            {c.tab}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <div class="stepper-switch" role="group" aria-label={t.deviceLabel}>
+    <button type="button" data-action="device" data-device="phone" aria-pressed="true">{t.phone}</button>
+    <button type="button" data-action="device" data-device="tablet" aria-pressed="false">{t.tablet}</button>
+  </div>
+
+  {
+    shown.map((c, caseIndex) => (
+      <article data-case={c.id}>
+        <div class="case-screens">
+          {c.steps.flatMap((s, stepIndex) =>
+            DEVICES.map((device) => (
+              <figure
+                data-media
+                data-case={c.id}
+                data-step={s.id}
+                data-device={device}
+                data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
+                aria-labelledby={`step-${c.id}-${s.id}`}
+              >
+                <MediaView
+                  entry={getCapture(lang, c.id, device, s.id)}
+                  device={device}
+                  eager={caseIndex === 0 && stepIndex === 0 && device === 'phone'}
+                />
+              </figure>
+            )),
+          )}
+        </div>
+        <div class="case-text">
+          <CaseHeading class="case-name">{c.name}</CaseHeading>
+          <ol data-steps>
+            {c.steps.map((s, stepIndex) => (
+              <li data-step={s.id} data-active={stepIndex === 0 ? '' : undefined}>
+                <div class="step-cell">
+                  <StepHeading class="step-title" id={`step-${c.id}-${s.id}`}>
+                    <button type="button" aria-current={stepIndex === 0 ? 'step' : 'false'}>
+                      {s.title}
+                    </button>
+                  </StepHeading>
+                  <p class="step-text">{detail === 'long' ? s.long : s.short}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </article>
+    ))
+  }
+
+  <p class="stepper-note">{t.androidNote}</p>
+
+  <div class="stepper-controls">
+    <button type="button" data-action="toggle-pause" aria-pressed="false" data-label-pause={t.pause} data-label-resume={t.resume}>
+      {t.pause}
+    </button>
+  </div>
+
+  {Astro.slots.has('cta') && <div class="stepper-cta"><slot name="cta" /></div>}
+</section>

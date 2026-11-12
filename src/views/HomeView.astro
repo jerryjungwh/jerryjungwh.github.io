@@ -1,0 +1,53 @@
+---
+import CaseStepper from '../components/CaseStepper.astro';
+import Layout from '../components/Layout.astro';
+import { CASES_KO } from '../data/cases.ko';
+import { siteStrings } from '../data/site';
+import { pagePath } from '../lib/urls';
+import type { Lang } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteStrings(lang);
+const cases = CASES_KO;
+---
+
+<Layout lang={lang} title={t.home.title} description={t.home.description} path={pagePath(lang, 'home')}>
+  <main class="page">
+    <CaseStepper lang={lang} cases={cases} detail="short" headingLevel={2}>
+      <Fragment slot="lead">
+        <h1 class="home-h1">
+          <span>{t.home.h1[0]}</span>
+          <span>{t.home.h1[1]}</span>
+        </h1>
+        <p class="home-lead">{t.home.lead}</p>
+      </Fragment>
+    </CaseStepper>
+  </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: var(--page);
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 64px) var(--gutter) 96px;
+  }
+  .home-h1 {
+    font-size: clamp(32px, 4.6vw, 54px);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.035em;
+  }
+  .home-h1 span {
+    display: block;
+  }
+  .home-lead {
+    margin-top: 18px;
+    max-width: 30em;
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--body);
+  }
+</style>

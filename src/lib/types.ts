@@ -50,7 +50,10 @@ export interface StepDef {
 
 export interface CaseDef {
   id: CaseId;
+  /** Full name, used as the case heading and in links: '초등학교 시간표'. */
   name: string;
+  /** Short label for the case button: '초등학교'. */
+  tab: string;
   h1: [string, string];
   intro: string;
   steps: StepDef[];

@@ -1,23 +1,5 @@
 ---
-import Layout from '../components/Layout.astro';
-import MediaView from '../components/MediaView.astro';
-import { getCapture } from '../data/captures';
+import HomeView from '../views/HomeView.astro';
 ---
 
-<Layout
-  lang="ko"
-  title="심간표 - 시간표 앱"
-  description="심간표(SimpleScheduler)는 수업과 학원 일정을 주간 시간표로 만들고 과제를 수업에 연결하는 Android 시간표 앱이에요."
-  path="/"
->
-  <main>
-    <h1>심간표</h1>
-    <!-- Task 5 replaces this block with the case stepper. -->
-    <div style="display:flex;gap:16px;align-items:flex-start">
-      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'fill')} device="phone" eager={true} /></div>
-      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'remind')} device="phone" eager={false} /></div>
-      <div style="width:240px"><MediaView entry={getCapture('ko', 'university', 'phone', 'create')} device="phone" eager={false} /></div>
-      <div style="width:480px"><MediaView entry={getCapture('ko', 'university', 'tablet', 'fill')} device="tablet" eager={false} /></div>
-    </div>
-  </main>
-</Layout>
+<HomeView lang="ko" />

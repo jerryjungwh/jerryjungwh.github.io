@@ -57,7 +57,7 @@ const OVERRIDES: Overrides = {
       kind: 'sequence',
       frameMs: 2500,
       frames: [
-        { src: `${uniPhone}remind-1.png`, alt: '리마인더를 언제 받을지 고르는 화면. 마감 시간부터 며칠 전까지 고를 수 있다.' },
+        { src: `${uniPhone}remind-1.png`, alt: '리마인더를 언제 받을지 고르는 화면. 5분 전부터 1일 전까지 고를 수 있다.' },
         { src: `${uniPhone}remind-2.png`, alt: '리마인더 시간이 되어 뜬 알람 화면. To-Do 제목과 다시 알림, 끄기 단추가 보인다.' },
       ],
     },
