@@ -29,8 +29,8 @@ function capture(src: string): ImageMetadata {
   return found.default;
 }
 
-// A recording is its first frame as an ordinary image (the description lives on it, and it is all there is
-// without the script or with reduced motion) with the video on top, shown only while it plays.
+// A recording is its still, the To-Do completed, as an ordinary image (the description lives on it, and it is
+// all there is without the script or with reduced motion) with the video on top, shown only while it plays.
 const video = media.kind === 'video' ? { ...capture(media.poster), src: media.src } : undefined;
 const frames =
   media.kind === 'sequence'

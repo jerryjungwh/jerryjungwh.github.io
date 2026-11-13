@@ -9,10 +9,12 @@
       "startHour": 8,
       "endHour": 21,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 50,
       "textSizeSp": 10,
       "cellHeightDp": 46,
       "tablet": {
-        "cellHeightDp": 41
+        "cellHeightDp": 39
       },
       "schedules": [
         {
@@ -36,7 +38,7 @@
           "day": 0,
           "start": "09:50",
           "end": "10:40",
-          "title": "Chemistry",
+          "title": "Biology",
           "color": 2
         },
         {
@@ -100,7 +102,7 @@
           "day": 1,
           "start": "10:45",
           "end": "11:35",
-          "title": "Chemistry",
+          "title": "Biology",
           "color": 2
         },
         {
@@ -124,7 +126,7 @@
           "day": 1,
           "start": "14:05",
           "end": "14:55",
-          "title": "Economics",
+          "title": "Civics",
           "color": 8
         },
         {
@@ -172,7 +174,7 @@
           "day": 2,
           "start": "13:10",
           "end": "14:00",
-          "title": "Chemistry",
+          "title": "Biology",
           "color": 2
         },
         {
@@ -196,7 +198,7 @@
           "day": 3,
           "start": "08:55",
           "end": "09:45",
-          "title": "Chemistry",
+          "title": "Biology",
           "color": 2
         },
         {
@@ -220,7 +222,7 @@
           "day": 3,
           "start": "12:15",
           "end": "13:05",
-          "title": "Economics",
+          "title": "Civics",
           "color": 8
         },
         {
@@ -276,7 +278,7 @@
           "day": 4,
           "start": "12:15",
           "end": "13:05",
-          "title": "Chemistry",
+          "title": "Biology",
           "color": 2
         },
         {
@@ -286,6 +288,14 @@
           "end": "14:00",
           "title": "PE",
           "color": 5
+        },
+        {
+          "key": "fri7",
+          "day": 4,
+          "start": "14:05",
+          "end": "14:55",
+          "title": "Art",
+          "color": 6
         },
         {
           "key": "study_mon",
@@ -364,11 +374,16 @@
     "unique": {
       "screen": "schedule_alarm",
       "schedule": "study_mon",
-      "alt": "Editing screen for the study block. Its alarm is on, so an alarm rings at the start time."
+      "alts": [
+        "Junior year · Fall weekly timetable with an alarm mark on the Monday to Thursday evening study blocks."
+      ]
     },
     "todo": {
       "todo": "talk",
-      "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to English."
+      "alts": [
+        "To-Do editing screen. The title is Prepare English presentation and it is linked to Thursday's English class.",
+        "Screen after tapping Thursday's English class on the timetable, with Prepare English presentation among its linked To-Dos."
+      ]
     },
     "remind": {
       "todo": "talk",

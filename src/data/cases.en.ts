@@ -36,8 +36,8 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'todo',
         title: 'Link things to pack to a class',
-        short: 'Link “Pack colored pencils” to Art. Tap Art and the task shows with it.',
-        long: 'Write what to pack as a To-Do and link it to the class that needs it. Link “Pack colored pencils” to Art and it appears whenever you tap Art on the timetable. There is no need to write which class it is for.',
+        short: 'Link “Pack colored pencils” to Thursday’s Art class. Tap that class and the task shows with it.',
+        long: 'Write what to pack as a To-Do and link it to the class that needs it. Link “Pack colored pencils” to Thursday’s Art class and it appears when you tap that class on the timetable. There is no need to write which class it is for.',
       },
       {
         id: 'remind',
@@ -107,9 +107,9 @@ export const CASES_EN: CaseDef[] = [
       },
       {
         id: 'todo',
-        title: 'Link a project to its subject',
-        short: 'Link “Science project report” to Science and set it due on Friday.',
-        long: 'A To-Do has a due date and a class it is linked to. Tap Science on the timetable and the project shows with it, so it is always clear which subject a task belongs to.',
+        title: 'Link a project to its class',
+        short: 'Link “Science project report” to Friday’s Science class and set it due on Friday.',
+        long: 'A To-Do has a due date and a class it is linked to. Tap that Science class on the timetable and the project shows with it, so it is always clear which class a task belongs to.',
       },
       {
         id: 'remind',
@@ -127,7 +127,7 @@ export const CASES_EN: CaseDef[] = [
         id: 'widget_done',
         title: 'Check off homework in the widget',
         short: 'Report finished? Mark it complete right in the widget.',
-        long: 'Mark the report complete in the Today overview widget or the To-Do widget. The app’s To-Do list updates with it, so there is nothing to check off twice.',
+        long: 'Mark the report complete in the To-Do widget. Tasks due today can be completed in the Today overview widget too. The app’s To-Do list updates with it, so there is nothing to check off twice.',
       },
       {
         id: 'lock_screen',
@@ -157,7 +157,7 @@ export const CASES_EN: CaseDef[] = [
     tab: 'High school',
     h1: ['High school timetable', 'Seven periods and study time at a glance'],
     intro:
-      'An example of a high school junior making their own timetable: seven 50-minute periods, an evening study block, and projects and presentations linked to their subjects.',
+      'An example of a high school junior making their own timetable: seven 50-minute periods, an evening study block, and projects and presentations linked to the classes they are for.',
     steps: [
       {
         id: 'create',
@@ -180,8 +180,8 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'todo',
         title: 'Link presentation prep to English',
-        short: 'Link “Prepare English presentation” to English. Tap English and the task shows with it.',
-        long: 'Add projects, presentations and homework as To-Dos and link each to its subject. Tap a subject on the timetable to see what is due for it.',
+        short: 'Link “Prepare English presentation” to Thursday’s English class. Tap that class and the task shows with it.',
+        long: 'Add projects, presentations and homework as To-Dos and link each to the class it is for. Tap that class on the timetable to see what is due for it.',
       },
       {
         id: 'remind',
@@ -246,14 +246,14 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'unique',
         title: 'Tap a class to see it all',
-        short: 'Tap Data Structures to see its room, professor and linked assignments on one screen.',
+        short: 'Tap Monday’s Data Structures to see its room, professor and linked assignments on one screen.',
         long: 'Tap a class on the timetable to see its day and time, room, professor and note. Assignments linked to that class are on the same screen, so there is no need to look for them separately.',
       },
       {
         id: 'todo',
         title: 'Link an assignment to its class',
-        short: 'Link “Submit Data Structures lab” to Data Structures and set it due at 6:00 pm.',
-        long: 'A To-Do has a due date, a due time and a class it is linked to. Once an assignment is linked, the class name does not have to go in the title.',
+        short: 'Link “Submit Data Structures lab” to Monday’s Data Structures and set it due at 6:00 pm.',
+        long: 'A To-Do has a due date, a due time and a class it is linked to. Once an assignment is linked, it shows up when you tap that class.',
       },
       {
         id: 'remind',
@@ -336,7 +336,7 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widgets',
         title: 'Three home screen widgets',
-        short: 'Weekly, Today overview and To-Do widgets. See where the children go today from the home screen.',
+        short: 'Weekly, Today overview and To-Do widgets. See where Lily goes today from the home screen.',
         long: 'Each time you place a weekly widget you choose the timetable it shows. That way Lily’s week and Max’s week can each have a widget on the home screen.',
       },
       {
@@ -396,7 +396,7 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'todo',
         title: 'Link prep work to a lesson',
-        short: 'Link “Make midterm review sheet” to Grade 8 math. Tap the lesson to see what to prepare.',
+        short: 'Link “Make midterm review sheet” to Wednesday’s Grade 8 math. Tap that lesson to see what to prepare.',
         long: 'When you add a To-Do you choose the lesson it belongs to. Link prep work to each lesson, and tapping a lesson on the timetable shows what there is to do for it.',
       },
       {

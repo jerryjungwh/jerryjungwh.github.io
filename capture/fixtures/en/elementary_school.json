@@ -9,12 +9,14 @@
       "startHour": 8,
       "endHour": 15,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 45,
       "cellHeightDp": 87,
       "unique": {
         "backgroundImage": "elementary.jpg"
       },
       "tablet": {
-        "cellHeightDp": 77
+        "cellHeightDp": 73
       },
       "schedules": [
         {
@@ -66,6 +68,14 @@
           "color": 5
         },
         {
+          "key": "mon7",
+          "day": 0,
+          "start": "14:00",
+          "end": "14:45",
+          "title": "Music",
+          "color": 6
+        },
+        {
           "key": "tue1",
           "day": 1,
           "start": "08:30",
@@ -112,6 +122,14 @@
           "end": "13:55",
           "title": "Library",
           "color": 8
+        },
+        {
+          "key": "tue7",
+          "day": 1,
+          "start": "14:00",
+          "end": "14:45",
+          "title": "Social Studies",
+          "color": 3
         },
         {
           "key": "wed1",
@@ -162,6 +180,14 @@
           "color": 4
         },
         {
+          "key": "wed7",
+          "day": 2,
+          "start": "14:00",
+          "end": "14:45",
+          "title": "Music",
+          "color": 6
+        },
+        {
           "key": "thu1",
           "day": 3,
           "start": "08:30",
@@ -207,15 +233,15 @@
           "start": "13:10",
           "end": "13:55",
           "title": "Art",
-          "color": 7
+          "color": 9
         },
         {
           "key": "thu7",
           "day": 3,
           "start": "14:00",
           "end": "14:45",
-          "title": "Art",
-          "color": 7
+          "title": "Library",
+          "color": 8
         },
         {
           "key": "fri1",
@@ -264,6 +290,14 @@
           "end": "13:55",
           "title": "PE",
           "color": 5
+        },
+        {
+          "key": "fri7",
+          "day": 4,
+          "start": "14:00",
+          "end": "14:45",
+          "title": "Library",
+          "color": 8
         }
       ]
     }
@@ -279,7 +313,7 @@
         "time": "19:00"
       },
       "reminderMinutes": 30,
-      "color": 7
+      "color": 9
     },
     {
       "key": "spelling",
@@ -305,11 +339,16 @@
     },
     "unique": {
       "screen": "background",
-      "alt": "Emma · Grade 4 weekly timetable with a photo as its background. Classes show on top of the photo in color."
+      "alts": [
+        "Emma · Grade 4 weekly timetable with a photo as its background. Classes show on top of the photo in color."
+      ]
     },
     "todo": {
       "todo": "pencils",
-      "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
+      "alts": [
+        "To-Do editing screen. The title is Pack colored pencils and it is linked to Thursday's Art class.",
+        "Screen after tapping Thursday's Art class on the timetable, with Pack colored pencils among its linked To-Dos."
+      ]
     },
     "remind": {
       "todo": "pencils",

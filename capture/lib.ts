@@ -21,17 +21,31 @@ export function pickEmulator(adbDevicesOutput: string): string {
   return ready[0];
 }
 
-/** Files the instrumented test leaves for each step (SiteCaptureInstrumentedTest in the app repository). */
-const STEP_FILES: Record<StepId, string[]> = {
-  create: ['create.png'],
-  fill: ['fill.png'],
-  unique: ['unique.png'],
-  todo: ['todo.png'],
-  remind: ['remind-1.png', 'remind-2.png'],
-  widgets: ['widgets-1.png', 'widgets-2.png', 'widgets-3.png'],
-  widget_done: ['widget_done-before.png', 'widget_done.mp4'],
-  lock_screen: ['lock_screen.png'],
-};
+const STEPS: StepId[] = ['create', 'fill', 'unique', 'todo', 'remind', 'widgets', 'widget_done', 'lock_screen'];
+
+/**
+ * Files the instrumented test leaves for each step (SiteCaptureInstrumentedTest in the app repository):
+ * '<step>.png' for one screen, '<step>-1.png', '<step>-2.png', … for several. The recording's still is
+ * a screenshot right after its last tap (the To-Do completed, with the app's toast), so a visitor without the
+ * video still sees it done.
+ */
+function stepFiles(f: CaptureFixture, step: StepId): string[] {
+  const frames = (n: number) => (n === 1 ? [`${step}.png`] : Array.from({ length: n }, (_, i) => `${step}-${i + 1}.png`));
+  switch (step) {
+    case 'unique':
+      return frames(f.steps.unique.alts.length);
+    case 'todo':
+      return frames(f.steps.todo.alts.length);
+    case 'remind':
+      return frames(2);
+    case 'widgets':
+      return frames(3);
+    case 'widget_done':
+      return ['widget_done-after.png', 'widget_done.mp4'];
+    default:
+      return frames(1);
+  }
+}
 
 const WIDGET_LABELS: Record<Lang, [string, string, string]> = {
   ko: ['주간표', '오늘 통합', 'To-Do'],
@@ -42,11 +56,11 @@ const FRAME_MS = 2500;
 /** The steps this fixture can be captured for. A background step without a photo is left as a placeholder. */
 function capturedSteps(f: CaptureFixture): StepId[] {
   const noPhoto = f.steps.unique.screen === 'background' && !f.timetables[0].unique?.backgroundImage;
-  return (Object.keys(STEP_FILES) as StepId[]).filter((step) => !(step === 'unique' && noPhoto));
+  return STEPS.filter((step) => !(step === 'unique' && noPhoto));
 }
 
 export function expectedFiles(f: CaptureFixture): string[] {
-  return capturedSteps(f).flatMap((step) => STEP_FILES[step]);
+  return capturedSteps(f).flatMap((step) => stepFiles(f, step));
 }
 
 /**
@@ -57,16 +71,17 @@ export function completeCells(f: CaptureFixture, device: Device, presentFiles: s
   if (expectedFiles(f).some((file) => !presentFiles.includes(file))) return {};
   const dir = `/captures/${f.lang}/${CASE_SLUG[f.case]}/${device}/`;
   const image = (name: string, alt: string) => ({ kind: 'image' as const, src: `${dir}${name}.webp`, alt });
+  /** One alt: a single screen. More: a sequence, one frame per alt, in the files' order. */
+  const screens = (step: StepId, alts: string[]): CaptureEntry['media'] =>
+    alts.length === 1
+      ? image(step, alts[0])
+      : { kind: 'sequence', frameMs: FRAME_MS, frames: alts.map((alt, i) => ({ src: `${dir}${step}-${i + 1}.webp`, alt })) };
   const media: Record<StepId, CaptureEntry['media']> = {
     create: image('create', f.steps.create.alt),
     fill: image('fill', f.steps.fill.alt),
-    unique: image('unique', f.steps.unique.alt),
-    todo: image('todo', f.steps.todo.alt),
-    remind: {
-      kind: 'sequence',
-      frameMs: FRAME_MS,
-      frames: f.steps.remind.alts.map((alt, i) => ({ src: `${dir}remind-${i + 1}.webp`, alt })),
-    },
+    unique: screens('unique', f.steps.unique.alts),
+    todo: screens('todo', f.steps.todo.alts),
+    remind: screens('remind', f.steps.remind.alts),
     widgets: {
       kind: 'sequence',
       frameMs: FRAME_MS,

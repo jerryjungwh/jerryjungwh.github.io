@@ -9,9 +9,11 @@
       "startHour": 8,
       "endHour": 22,
       "timeFormat": "24h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 50,
       "cellHeightDp": 46,
       "tablet": {
-        "cellHeightDp": 38
+        "cellHeightDp": 36
       },
       "schedules": [
         {
@@ -363,11 +365,16 @@
     "unique": {
       "screen": "schedule_alarm",
       "schedule": "study_mon",
-      "alt": "자율학습 일정의 편집 화면. 알람이 켜져 있어 시작 시간에 알람이 울린다."
+      "alts": [
+        "2학년 2학기 주간표. 월요일부터 목요일 저녁 자율학습 칸에 알람 표시가 있다."
+      ]
     },
     "todo": {
       "todo": "talk",
-      "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 영어 일정에 연결되어 있다."
+      "alts": [
+        "To-Do 편집 화면. 제목은 영어 발표 준비이고 목요일 영어 일정에 연결되어 있다.",
+        "주간표에서 목요일 영어 칸을 누른 화면. 연결된 To-Do에 영어 발표 준비가 보인다."
+      ]
     },
     "remind": {
       "todo": "talk",

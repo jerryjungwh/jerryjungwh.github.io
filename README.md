@@ -73,9 +73,8 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 에뮬레이터를 켤 때마다(스냅숏을 저장하지 않고 켰다면 끌 때 아래 준비가 모두 사라진다. `-no-snapshot-save`로 켰을 때가 그렇다):
 
 1. 에뮬레이터 하나만 띄운다. 폰은 `Pixel_9_API_35_2`(1080×2424), 태블릿은 `Pixel_Tablet`(2560×1600).
-2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고, 두 APK를 `adb -s <에뮬레이터> install -r`로 **둘 다** 넣는다. 한 빌드에서 나온 짝이어야 한다. 앱만 예전 빌드면 검사가 `INSTRUMENTATION_RESULT: shortMsg=Process crashed.`로 끝난다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다. 에뮬레이터 이름은 `adb devices`로 본다(태블릿을 끄고 바로 폰을 켜면 `emulator-5556`이 될 수 있다).
-3. 런처에 위젯 세 개를 붙인다. 위젯마다 `adb -s <에뮬레이터> shell am instrument -w -e siteCapture true -e siteWidget weekly -e class com.jjsoft.android.simplescheduler.ui.SiteCaptureInstrumentedTest#requestWidget com.jjsoft.android.simplescheduler.test/androidx.test.runner.AndroidJUnitRunner`(`weekly`, `today`, `todo`)를 돌리고, 뜨는 창에서 「Add to home screen」을 누른다. 한 쪽에 위젯 하나씩 두고, 길게 눌러 나오는 손잡이로 쪽을 가득 채우게 키운다(폰 4칸 × 5줄, 태블릿 6칸 × 5줄). 손잡이는 `input swipe`로는 잘 잡히지 않는다. `adb shell "input motionevent DOWN x y; sleep 0.3; input motionevent MOVE …; input motionevent UP …"`처럼 천천히 끈다. 키운 위젯이 쪽을 채워야 다음 위젯이 새 쪽에 놓인다.
-4. 런처의 Home settings > Suggestions > 「Suggestions on Home screen」을 끈다(아래 줄에 추천 앱이 끼어들지 않게).
+2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고, 두 APK를 `adb -s <에뮬레이터> install -r`로 **둘 다** 넣는다. 한 빌드에서 나온 짝이어야 한다. 앱만 예전 빌드면 검사가 `INSTRUMENTATION_RESULT: shortMsg=Process crashed.`로 끝난다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다. 에뮬레이터 이름은 `adb devices`로 본다(태블릿을 끄고 바로 폰을 켜면 `emulator-5556`이 될 수 있다). `Pixel_Tablet`은 `/data`가 거의 차 있어 설치가 `INSTALL_FAILED_INSUFFICIENT_STORAGE`로 실패할 수 있다. `adb shell settings put global sys_storage_threshold_percentage 2`로 잠시 낮추고, 다 찍은 뒤 `adb shell settings delete global sys_storage_threshold_percentage`로 지운다.
+3. `capture/setup-launcher.sh phone`(태블릿은 `tablet`)을 돌린다. 런처에 이 앱의 위젯 세 개(주간표, 오늘 통합, To-Do)를 쪽마다 하나씩 붙여 쪽을 가득 채우게 키우고(폰 4칸 × 5줄, 태블릿 6칸 × 5줄), 아래 줄의 추천 앱을 끈다. 스냅숏에 이 앱의 위젯 세 개가 이미 있으면 붙이지 않는다(두 벌이 되지 않게). 손으로 할 때 주의: 위젯 손잡이는 `input swipe`로는 잡히지 않고 `input motionevent DOWN/MOVE/UP`을 천천히 보내야 끌린다. 키운 위젯이 쪽을 채워야 다음 위젯이 새 쪽에 놓인다.
 
 찍기:
 
@@ -85,8 +84,10 @@ npm run capture -- --device phone --lang ko --case university   # 한 사례만
 npm run check
 ```
 
-- 스크립트가 하는 일: 날짜를 수요일 오전 9시로 맞추기, 런처 배경을 단색으로 바꾸기, 사례 데이터 넣기, 촬영 검사 실행, 그림을 WebP로·녹화를 300KB 이하 MP4로 바꾸기, 목록 파일 갱신. 끝나면 배경·시간·권한을 되돌린다.
-- 한 사례의 파일이 하나라도 빠지면 그 사례는 한 칸도 바뀌지 않는다.
+- 스크립트가 하는 일: 에뮬레이터 확인(화면 크기, 앱 버전, 위젯, 글꼴 배율 1, 화면 밀도 기본값), 에뮬레이터 시계를 그 시간대의 수요일 오전 9시로 맞추고 확인, 런처 배경을 단색으로 바꾸기, 사례 데이터 넣기, 촬영 검사 실행, 그림을 WebP로·녹화를 300KB 이하 MP4로 바꾸기(녹화 비율 확인), 목록 파일 갱신.
+- 되돌리는 것(성공·실패·Ctrl-C 모두): 런처 배경, 시계(지금 시각으로 맞춘 뒤 자동 시간 켜기), 권한(다른 앱 위 표시·정확한 알람), 사례마다 Crashlytics의 보내지 않은 기록(DEV 진단이 실제 Crashlytics로 가지 않게). 촬영 검사 쪽에서 상태 표시줄 데모 모드, 야간 모드, 앱 언어, 광고 제거 기한, 구독 진단 수집기.
+- 되돌리지 않는 것: 런처 준비(위젯, 추천 끔), 알림 권한(허용으로 둔다), 설치한 APK, 앱 데이터. 앱 데이터는 수업·To-Do·알람만 지우고, 마지막으로 찍은 사례의 시간표와 앱 설정(테마, 첫 실행 안내를 본 것으로 표시, 위젯이 보는 시간표)은 남긴다. 스냅숏을 저장하지 않고 켠 에뮬레이터는 끌 때 모두 사라진다.
+- 한 사례는 다 끝나야 한꺼번에 바뀐다: 새 그림과 녹화를 옆 폴더(`…/phone.next`)에 만든 뒤 마지막에 바꿔 넣는다. 실패하면 그 사례는 예전 그대로이고, 원본 위치를 알려 준다.
 - 화면 속 글과 수업을 바꾸려면 `capture/fixtures/`의 JSON을 고치고 다시 찍는다. 사례 글(`src/data/cases.<lang>.ts`)에 나오는 시간표·To-Do 이름과 같아야 한다(검사가 본다).
 - 하루가 한 화면에 들어오지 않거나 이름이 낱말 중간에서 줄바꿈되면 데이터의 `cellHeightDp`, `textSizeSp`를 고친다.
 - 앱 화면이 바뀌는 출시 뒤에는 다시 찍는다.

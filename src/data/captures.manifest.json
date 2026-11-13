@@ -43,17 +43,35 @@
   "en/after_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to the swim lesson."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/phone/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to Saturday's swim lesson."
+        },
+        {
+          "src": "/captures/en/after-school/phone/todo-2.webp",
+          "alt": "Screen after tapping the Saturday swim lesson on the timetable, with Pack swim bag among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/after_school/phone/unique": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/phone/unique.webp",
-      "alt": "List for switching timetables, showing two of them: Lily and Max."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/phone/unique-1.webp",
+          "alt": "List for switching timetables, showing two of them: Lily and Max."
+        },
+        {
+          "src": "/captures/en/after-school/phone/unique-2.webp",
+          "alt": "Max's weekly timetable with after-school care Monday to Friday and soccer on Tuesday and Thursday."
+        }
+      ]
     }
   },
   "en/after_school/phone/widget_done": {
@@ -63,7 +81,7 @@
       "src": "/captures/en/after-school/phone/widget_done.mp4",
       "poster": "/captures/en/after-school/phone/widget_done.webp",
       "alt": "Marking Pack swim bag as complete in the To-Do widget on the home screen.",
-      "durationMs": 5633
+      "durationMs": 5567
     }
   },
   "en/after_school/phone/widgets": {
@@ -134,17 +152,35 @@
   "en/after_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to the swim lesson."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/tablet/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to Saturday's swim lesson."
+        },
+        {
+          "src": "/captures/en/after-school/tablet/todo-2.webp",
+          "alt": "Screen after tapping the Saturday swim lesson on the timetable, with Pack swim bag among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/after_school/tablet/unique": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/tablet/unique.webp",
-      "alt": "List for switching timetables, showing two of them: Lily and Max."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/tablet/unique-1.webp",
+          "alt": "List for switching timetables, showing two of them: Lily and Max."
+        },
+        {
+          "src": "/captures/en/after-school/tablet/unique-2.webp",
+          "alt": "Max's weekly timetable with after-school care Monday to Friday and soccer on Tuesday and Thursday."
+        }
+      ]
     }
   },
   "en/after_school/tablet/widget_done": {
@@ -154,7 +190,7 @@
       "src": "/captures/en/after-school/tablet/widget_done.mp4",
       "poster": "/captures/en/after-school/tablet/widget_done.webp",
       "alt": "Marking Pack swim bag as complete in the To-Do widget on the home screen.",
-      "durationMs": 5600
+      "durationMs": 5667
     }
   },
   "en/after_school/tablet/widgets": {
@@ -225,9 +261,18 @@
   "en/elementary_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/elementary-school/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/phone/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Thursday's Art class."
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/todo-2.webp",
+          "alt": "Screen after tapping Thursday's Art class on the timetable, with Pack colored pencils among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/elementary_school/phone/unique": {
@@ -245,7 +290,7 @@
       "src": "/captures/en/elementary-school/phone/widget_done.mp4",
       "poster": "/captures/en/elementary-school/phone/widget_done.webp",
       "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
-      "durationMs": 5833
+      "durationMs": 5667
     }
   },
   "en/elementary_school/phone/widgets": {
@@ -316,9 +361,18 @@
   "en/elementary_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/elementary-school/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Art."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/tablet/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Pack colored pencils and it is linked to Thursday's Art class."
+        },
+        {
+          "src": "/captures/en/elementary-school/tablet/todo-2.webp",
+          "alt": "Screen after tapping Thursday's Art class on the timetable, with Pack colored pencils among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/elementary_school/tablet/unique": {
@@ -336,7 +390,7 @@
       "src": "/captures/en/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/en/elementary-school/tablet/widget_done.webp",
       "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
-      "durationMs": 5567
+      "durationMs": 5767
     }
   },
   "en/elementary_school/tablet/widgets": {
@@ -407,9 +461,18 @@
   "en/high_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/high-school/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to English."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/phone/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to Thursday's English class."
+        },
+        {
+          "src": "/captures/en/high-school/phone/todo-2.webp",
+          "alt": "Screen after tapping Thursday's English class on the timetable, with Prepare English presentation among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/high_school/phone/unique": {
@@ -417,7 +480,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/high-school/phone/unique.webp",
-      "alt": "Editing screen for the study block. Its alarm is on, so an alarm rings at the start time."
+      "alt": "Junior year · Fall weekly timetable with an alarm mark on the Monday to Thursday evening study blocks."
     }
   },
   "en/high_school/phone/widget_done": {
@@ -427,7 +490,7 @@
       "src": "/captures/en/high-school/phone/widget_done.mp4",
       "poster": "/captures/en/high-school/phone/widget_done.webp",
       "alt": "Marking Prepare English presentation as complete in the To-Do widget on the home screen.",
-      "durationMs": 5833
+      "durationMs": 5667
     }
   },
   "en/high_school/phone/widgets": {
@@ -498,9 +561,18 @@
   "en/high_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/high-school/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to English."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/tablet/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Prepare English presentation and it is linked to Thursday's English class."
+        },
+        {
+          "src": "/captures/en/high-school/tablet/todo-2.webp",
+          "alt": "Screen after tapping Thursday's English class on the timetable, with Prepare English presentation among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/high_school/tablet/unique": {
@@ -508,7 +580,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/high-school/tablet/unique.webp",
-      "alt": "Editing screen for the study block. Its alarm is on, so an alarm rings at the start time."
+      "alt": "Junior year · Fall weekly timetable with an alarm mark on the Monday to Thursday evening study blocks."
     }
   },
   "en/high_school/tablet/widget_done": {
@@ -518,7 +590,7 @@
       "src": "/captures/en/high-school/tablet/widget_done.mp4",
       "poster": "/captures/en/high-school/tablet/widget_done.webp",
       "alt": "Marking Prepare English presentation as complete in the To-Do widget on the home screen.",
-      "durationMs": 5800
+      "durationMs": 5633
     }
   },
   "en/high_school/tablet/widgets": {
@@ -589,9 +661,18 @@
   "en/lessons/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/lessons/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/phone/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Wednesday's Grade 8 math lesson."
+        },
+        {
+          "src": "/captures/en/lessons/phone/todo-2.webp",
+          "alt": "Screen after tapping Wednesday's Grade 8 math lesson on the timetable, with Make midterm review sheet among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/lessons/phone/unique": {
@@ -609,7 +690,7 @@
       "src": "/captures/en/lessons/phone/widget_done.mp4",
       "poster": "/captures/en/lessons/phone/widget_done.webp",
       "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
-      "durationMs": 5667
+      "durationMs": 5800
     }
   },
   "en/lessons/phone/widgets": {
@@ -680,9 +761,18 @@
   "en/lessons/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/lessons/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/tablet/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Wednesday's Grade 8 math lesson."
+        },
+        {
+          "src": "/captures/en/lessons/tablet/todo-2.webp",
+          "alt": "Screen after tapping Wednesday's Grade 8 math lesson on the timetable, with Make midterm review sheet among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/lessons/tablet/unique": {
@@ -700,7 +790,7 @@
       "src": "/captures/en/lessons/tablet/widget_done.mp4",
       "poster": "/captures/en/lessons/tablet/widget_done.webp",
       "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
-      "durationMs": 5600
+      "durationMs": 5800
     }
   },
   "en/lessons/tablet/widgets": {
@@ -771,9 +861,18 @@
   "en/middle_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/middle-school/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Science project report and it is linked to Science."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/phone/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Science project report and it is linked to Friday's Science class."
+        },
+        {
+          "src": "/captures/en/middle-school/phone/todo-2.webp",
+          "alt": "Screen after tapping Friday's Science class on the timetable, with Science project report among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/middle_school/phone/unique": {
@@ -862,9 +961,18 @@
   "en/middle_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/middle-school/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Science project report and it is linked to Science."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/tablet/todo-1.webp",
+          "alt": "To-Do editing screen. The title is Science project report and it is linked to Friday's Science class."
+        },
+        {
+          "src": "/captures/en/middle-school/tablet/todo-2.webp",
+          "alt": "Screen after tapping Friday's Science class on the timetable, with Science project report among its linked To-Dos."
+        }
+      ]
     }
   },
   "en/middle_school/tablet/unique": {
@@ -882,7 +990,7 @@
       "src": "/captures/en/middle-school/tablet/widget_done.mp4",
       "poster": "/captures/en/middle-school/tablet/widget_done.webp",
       "alt": "Marking Science project report as complete in the To-Do widget on the home screen.",
-      "durationMs": 5633
+      "durationMs": 5667
     }
   },
   "en/middle_school/tablet/widgets": {
@@ -914,7 +1022,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/phone/create.webp",
-      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 6 pm."
+      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 4 pm."
     }
   },
   "en/university/phone/fill": {
@@ -955,7 +1063,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/phone/todo.webp",
-      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Data Structures."
+      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Monday's Data Structures class."
     }
   },
   "en/university/phone/unique": {
@@ -963,7 +1071,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/phone/unique.webp",
-      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor and linked assignment."
+      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor, note and linked assignment."
     }
   },
   "en/university/phone/widget_done": {
@@ -1005,7 +1113,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/tablet/create.webp",
-      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 6 pm."
+      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 4 pm."
     }
   },
   "en/university/tablet/fill": {
@@ -1046,7 +1154,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/tablet/todo.webp",
-      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Data Structures."
+      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Monday's Data Structures class."
     }
   },
   "en/university/tablet/unique": {
@@ -1054,7 +1162,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/en/university/tablet/unique.webp",
-      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor and linked assignment."
+      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor, note and linked assignment."
     }
   },
   "en/university/tablet/widget_done": {
@@ -1064,7 +1172,7 @@
       "src": "/captures/en/university/tablet/widget_done.mp4",
       "poster": "/captures/en/university/tablet/widget_done.webp",
       "alt": "Marking Submit Data Structures lab as complete in the To-Do widget on the home screen.",
-      "durationMs": 5800
+      "durationMs": 5633
     }
   },
   "en/university/tablet/widgets": {
@@ -1135,17 +1243,35 @@
   "ko/after_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 수영 가방 챙기기이고 수영 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/phone/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 수영 가방 챙기기이고 토요일 수영 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/phone/todo-2.webp",
+          "alt": "주간표에서 토요일 수영 칸을 누른 화면. 연결된 To-Do에 수영 가방 챙기기가 보인다."
+        }
+      ]
     }
   },
   "ko/after_school/phone/unique": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/phone/unique.webp",
-      "alt": "시간표를 바꾸는 목록. 지우와 민우 두 시간표가 보인다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/phone/unique-1.webp",
+          "alt": "시간표를 바꾸는 목록. 지우와 민우 두 시간표가 보인다."
+        },
+        {
+          "src": "/captures/ko/after-school/phone/unique-2.webp",
+          "alt": "민우 주간표. 월요일부터 금요일까지 돌봄교실, 화요일과 목요일에 축구교실이 들어가 있다."
+        }
+      ]
     }
   },
   "ko/after_school/phone/widget_done": {
@@ -1155,7 +1281,7 @@
       "src": "/captures/ko/after-school/phone/widget_done.mp4",
       "poster": "/captures/ko/after-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 수영 가방 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5633
+      "durationMs": 5600
     }
   },
   "ko/after_school/phone/widgets": {
@@ -1226,17 +1352,35 @@
   "ko/after_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 수영 가방 챙기기이고 수영 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/tablet/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 수영 가방 챙기기이고 토요일 수영 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/tablet/todo-2.webp",
+          "alt": "주간표에서 토요일 수영 칸을 누른 화면. 연결된 To-Do에 수영 가방 챙기기가 보인다."
+        }
+      ]
     }
   },
   "ko/after_school/tablet/unique": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/tablet/unique.webp",
-      "alt": "시간표를 바꾸는 목록. 지우와 민우 두 시간표가 보인다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/tablet/unique-1.webp",
+          "alt": "시간표를 바꾸는 목록. 지우와 민우 두 시간표가 보인다."
+        },
+        {
+          "src": "/captures/ko/after-school/tablet/unique-2.webp",
+          "alt": "민우 주간표. 월요일부터 금요일까지 돌봄교실, 화요일과 목요일에 축구교실이 들어가 있다."
+        }
+      ]
     }
   },
   "ko/after_school/tablet/widget_done": {
@@ -1246,7 +1390,7 @@
       "src": "/captures/ko/after-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/after-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 수영 가방 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5600
+      "durationMs": 5700
     }
   },
   "ko/after_school/tablet/widgets": {
@@ -1317,9 +1461,18 @@
   "ko/elementary_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/elementary-school/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 미술 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/elementary-school/phone/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 목요일 미술 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/phone/todo-2.webp",
+          "alt": "주간표에서 목요일 미술 칸을 누른 화면. 연결된 To-Do에 색연필 챙기기가 보인다."
+        }
+      ]
     }
   },
   "ko/elementary_school/phone/unique": {
@@ -1337,7 +1490,7 @@
       "src": "/captures/ko/elementary-school/phone/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5567
+      "durationMs": 5667
     }
   },
   "ko/elementary_school/phone/widgets": {
@@ -1408,9 +1561,18 @@
   "ko/elementary_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/elementary-school/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 미술 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/elementary-school/tablet/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 색연필 챙기기이고 목요일 미술 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/tablet/todo-2.webp",
+          "alt": "주간표에서 목요일 미술 칸을 누른 화면. 연결된 To-Do에 색연필 챙기기가 보인다."
+        }
+      ]
     }
   },
   "ko/elementary_school/tablet/unique": {
@@ -1428,7 +1590,7 @@
       "src": "/captures/ko/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5633
+      "durationMs": 5533
     }
   },
   "ko/elementary_school/tablet/widgets": {
@@ -1499,9 +1661,18 @@
   "ko/high_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/high-school/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 영어 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/high-school/phone/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 목요일 영어 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/phone/todo-2.webp",
+          "alt": "주간표에서 목요일 영어 칸을 누른 화면. 연결된 To-Do에 영어 발표 준비가 보인다."
+        }
+      ]
     }
   },
   "ko/high_school/phone/unique": {
@@ -1509,7 +1680,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/high-school/phone/unique.webp",
-      "alt": "자율학습 일정의 편집 화면. 알람이 켜져 있어 시작 시간에 알람이 울린다."
+      "alt": "2학년 2학기 주간표. 월요일부터 목요일 저녁 자율학습 칸에 알람 표시가 있다."
     }
   },
   "ko/high_school/phone/widget_done": {
@@ -1519,7 +1690,7 @@
       "src": "/captures/ko/high-school/phone/widget_done.mp4",
       "poster": "/captures/ko/high-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 영어 발표 준비를 완료로 표시하는 모습.",
-      "durationMs": 5733
+      "durationMs": 5600
     }
   },
   "ko/high_school/phone/widgets": {
@@ -1590,9 +1761,18 @@
   "ko/high_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/high-school/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 영어 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/high-school/tablet/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 영어 발표 준비이고 목요일 영어 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/tablet/todo-2.webp",
+          "alt": "주간표에서 목요일 영어 칸을 누른 화면. 연결된 To-Do에 영어 발표 준비가 보인다."
+        }
+      ]
     }
   },
   "ko/high_school/tablet/unique": {
@@ -1600,7 +1780,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/high-school/tablet/unique.webp",
-      "alt": "자율학습 일정의 편집 화면. 알람이 켜져 있어 시작 시간에 알람이 울린다."
+      "alt": "2학년 2학기 주간표. 월요일부터 목요일 저녁 자율학습 칸에 알람 표시가 있다."
     }
   },
   "ko/high_school/tablet/widget_done": {
@@ -1681,9 +1861,18 @@
   "ko/lessons/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/lessons/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/lessons/phone/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 수요일 중2 수학 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/phone/todo-2.webp",
+          "alt": "주간표에서 수요일 중2 수학 칸을 누른 화면. 연결된 To-Do에 중간고사 대비 자료 만들기가 보인다."
+        }
+      ]
     }
   },
   "ko/lessons/phone/unique": {
@@ -1701,7 +1890,7 @@
       "src": "/captures/ko/lessons/phone/widget_done.mp4",
       "poster": "/captures/ko/lessons/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습.",
-      "durationMs": 5667
+      "durationMs": 5633
     }
   },
   "ko/lessons/phone/widgets": {
@@ -1772,9 +1961,18 @@
   "ko/lessons/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/lessons/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/lessons/tablet/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 수요일 중2 수학 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/tablet/todo-2.webp",
+          "alt": "주간표에서 수요일 중2 수학 칸을 누른 화면. 연결된 To-Do에 중간고사 대비 자료 만들기가 보인다."
+        }
+      ]
     }
   },
   "ko/lessons/tablet/unique": {
@@ -1792,7 +1990,7 @@
       "src": "/captures/ko/lessons/tablet/widget_done.mp4",
       "poster": "/captures/ko/lessons/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습.",
-      "durationMs": 5767
+      "durationMs": 5633
     }
   },
   "ko/lessons/tablet/widgets": {
@@ -1863,9 +2061,18 @@
   "ko/middle_school/phone/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/middle-school/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 과학 수행평가 보고서이고 과학 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/middle-school/phone/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 과학 수행평가 보고서이고 금요일 과학 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/phone/todo-2.webp",
+          "alt": "주간표에서 금요일 과학 칸을 누른 화면. 연결된 To-Do에 과학 수행평가 보고서가 보인다."
+        }
+      ]
     }
   },
   "ko/middle_school/phone/unique": {
@@ -1883,7 +2090,7 @@
       "src": "/captures/ko/middle-school/phone/widget_done.mp4",
       "poster": "/captures/ko/middle-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 과학 수행평가 보고서를 완료로 표시하는 모습.",
-      "durationMs": 5667
+      "durationMs": 5900
     }
   },
   "ko/middle_school/phone/widgets": {
@@ -1954,9 +2161,18 @@
   "ko/middle_school/tablet/todo": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/middle-school/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 과학 수행평가 보고서이고 과학 일정에 연결되어 있다."
+      "kind": "sequence",
+      "frameMs": 2500,
+      "frames": [
+        {
+          "src": "/captures/ko/middle-school/tablet/todo-1.webp",
+          "alt": "To-Do 편집 화면. 제목은 과학 수행평가 보고서이고 금요일 과학 일정에 연결되어 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/tablet/todo-2.webp",
+          "alt": "주간표에서 금요일 과학 칸을 누른 화면. 연결된 To-Do에 과학 수행평가 보고서가 보인다."
+        }
+      ]
     }
   },
   "ko/middle_school/tablet/unique": {
@@ -1974,7 +2190,7 @@
       "src": "/captures/ko/middle-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/middle-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 과학 수행평가 보고서를 완료로 표시하는 모습.",
-      "durationMs": 5400
+      "durationMs": 5667
     }
   },
   "ko/middle_school/tablet/widgets": {
@@ -2006,7 +2222,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/phone/create.webp",
-      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 18시까지로 정해져 있다."
+      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 16시까지로 정해져 있다."
     }
   },
   "ko/university/phone/fill": {
@@ -2047,7 +2263,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/phone/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 자료구조 일정에 연결되어 있다."
+      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 월요일 자료구조 일정에 연결되어 있다."
     }
   },
   "ko/university/phone/unique": {
@@ -2055,7 +2271,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/phone/unique.webp",
-      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 연결된 과제가 보인다."
+      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 메모와 연결된 과제가 보인다."
     }
   },
   "ko/university/phone/widget_done": {
@@ -2064,8 +2280,8 @@
       "kind": "video",
       "src": "/captures/ko/university/phone/widget_done.mp4",
       "poster": "/captures/ko/university/phone/widget_done.webp",
-      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출를 완료로 표시하는 모습.",
-      "durationMs": 5700
+      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출을 완료로 표시하는 모습.",
+      "durationMs": 5600
     }
   },
   "ko/university/phone/widgets": {
@@ -2086,7 +2302,7 @@
         },
         {
           "src": "/captures/ko/university/phone/widgets-3.webp",
-          "alt": "홈 화면의 To-Do 위젯. 자료구조 실습 제출를 비롯한 할 일이 목록으로 보인다.",
+          "alt": "홈 화면의 To-Do 위젯. 자료구조 실습 제출을 비롯한 할 일이 목록으로 보인다.",
           "label": "To-Do"
         }
       ]
@@ -2097,7 +2313,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/tablet/create.webp",
-      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 18시까지로 정해져 있다."
+      "alt": "시간표 설정 화면. 이름은 이번 학기, 요일은 월요일부터 금요일, 시간은 9시부터 16시까지로 정해져 있다."
     }
   },
   "ko/university/tablet/fill": {
@@ -2138,7 +2354,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/tablet/todo.webp",
-      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 자료구조 일정에 연결되어 있다."
+      "alt": "To-Do 편집 화면. 제목은 자료구조 실습 제출이고 월요일 자료구조 일정에 연결되어 있다."
     }
   },
   "ko/university/tablet/unique": {
@@ -2146,7 +2362,7 @@
     "media": {
       "kind": "image",
       "src": "/captures/ko/university/tablet/unique.webp",
-      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 연결된 과제가 보인다."
+      "alt": "자료구조 강의를 누른 화면. 요일과 시간, 강의실, 교수님, 메모와 연결된 과제가 보인다."
     }
   },
   "ko/university/tablet/widget_done": {
@@ -2155,8 +2371,8 @@
       "kind": "video",
       "src": "/captures/ko/university/tablet/widget_done.mp4",
       "poster": "/captures/ko/university/tablet/widget_done.webp",
-      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출를 완료로 표시하는 모습.",
-      "durationMs": 5767
+      "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출을 완료로 표시하는 모습.",
+      "durationMs": 5733
     }
   },
   "ko/university/tablet/widgets": {
@@ -2177,7 +2393,7 @@
         },
         {
           "src": "/captures/ko/university/tablet/widgets-3.webp",
-          "alt": "홈 화면의 To-Do 위젯. 자료구조 실습 제출를 비롯한 할 일이 목록으로 보인다.",
+          "alt": "홈 화면의 To-Do 위젯. 자료구조 실습 제출을 비롯한 할 일이 목록으로 보인다.",
           "label": "To-Do"
         }
       ]

@@ -54,3 +54,10 @@ test('화면 목록 파일에 있는 칸은 그 값이고, 없는 칸은 임시 
   const cells = allEntries().map(([key]) => key);
   for (const key of listed) expect(cells, key).toContain(key);
 });
+
+test('목록 파일의 녹화 길이와 이어 보기 간격이 말이 된다', () => {
+  for (const [key, e] of allEntries()) {
+    if (e.media.kind === 'video') expect(e.media.durationMs, key).toBeGreaterThanOrEqual(3000), expect(e.media.durationMs, key).toBeLessThanOrEqual(10000);
+    if (e.media.kind === 'sequence') expect(e.media.frameMs, key).toBe(2500), expect(e.media.frames.length, key).toBeGreaterThanOrEqual(2);
+  }
+});

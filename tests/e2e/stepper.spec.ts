@@ -243,6 +243,8 @@ async function watchVideos(page: Page) {
     const name = (v: HTMLMediaElement) => v.closest('figure')?.getAttribute('data-step') ?? '?';
     HTMLMediaElement.prototype.play = function () {
       calls.push(`play:${name(this)}`);
+      // A browser fires 'playing' once a frame is on screen; the page shows the video only then.
+      this.dispatchEvent(new Event('playing'));
       return Promise.resolve();
     };
     HTMLMediaElement.prototype.pause = function () {
@@ -287,6 +289,25 @@ test('움직임 줄이기 설정이면 녹화 단계에서도 영상을 재생�
   await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
 });
 
+// The still under a recording shows the To-Do completed. Unless the recording is already loaded when
+// its step starts, that still shows first and the recording then jumps back to before the tap.
+test('다음 단계가 녹화면 영상도 미리 받는다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await expect(doneVideo(page)).toHaveAttribute('preload', 'none');
+  await visibleSteps(page).nth(5).click();
+  await expect(doneVideo(page)).toHaveAttribute('preload', 'auto');
+});
+
+test('움직임 줄이기 설정이면 녹화를 미리 받지 않는다', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(5).click();
+  await expect(visibleSteps(page).nth(5)).toHaveAttribute('aria-current', 'step');
+  await expect(doneVideo(page)).toHaveAttribute('preload', 'none');
+});
+
 test('녹화 단계는 영상 길이만큼 머문 뒤 다음 단계로 간다', async ({ page }) => {
   await watchVideos(page);
   await openAtUniversity(page);
@@ -297,4 +318,27 @@ test('녹화 단계는 영상 길이만큼 머문 뒤 다음 단계로 간다', 
   await expect(visibleSteps(page).nth(6)).toHaveAttribute('aria-current', 'step');
   await page.clock.runFor(700);
   await expect(visibleSteps(page).nth(7)).toHaveAttribute('aria-current', 'step');
+});
+
+test('녹화 단계가 화면 밖으로 나가면 영상도 멈추고, 돌아오면 이어서 재생한다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  expect(await videoCalls(page)).toEqual(['play:widget_done']);
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect.poll(async () => (await page.clock.runFor(100), (await videoCalls(page)).join(' '))).toBe('play:widget_done pause:widget_done');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect.poll(async () => (await page.clock.runFor(100), (await videoCalls(page)).join(' '))).toBe('play:widget_done pause:widget_done play:widget_done');
+});
+
+test('녹화를 처음부터 다시 틀 때는 첫 장면이 나오기 전까지 영상을 가린다', async ({ page }) => {
+  await page.addInitScript(() => {
+    // A browser that has not shown a frame yet: play() resolves, 'playing' never fires.
+    HTMLMediaElement.prototype.play = () => Promise.resolve();
+    HTMLMediaElement.prototype.pause = () => {};
+  });
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  await expect(visibleSteps(page).nth(6)).toHaveAttribute('aria-current', 'step');
+  await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
 });

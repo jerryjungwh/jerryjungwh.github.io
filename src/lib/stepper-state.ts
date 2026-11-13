@@ -62,7 +62,7 @@ export function reduce(s: StepperState, e: StepperEvent, d: StepperDims): Steppe
       return { ...s, elapsedMs: next * e.frameMs };
     }
     case 'setDevice':
-      return { ...s, device: e.device };
+      return { ...s, device: e.device, elapsedMs: 0 };
   }
 }
 

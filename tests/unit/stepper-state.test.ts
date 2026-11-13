@@ -40,8 +40,9 @@ test('탭이 뒤에 있다 돌아와도 한 번에 MAX_TICK_MS까지만 흐른�
   expect(reduce(s0, tick(60000), d)).toMatchObject({ stepIndex: 0, elapsedMs: 250 });
 });
 
-test('기기를 바꿔도 단계와 시간은 그대로다', () => {
-  expect(reduce({ ...s0, stepIndex: 3, elapsedMs: 1200 }, { type: 'setDevice', device: 'tablet' }, d)).toMatchObject({ stepIndex: 3, elapsedMs: 1200, device: 'tablet' });
+test('기기를 바꾸면 단계는 그대로, 시간은 처음부터다', () => {
+  // The other device's screen starts over: its recording plays from the start, so the step's time does too.
+  expect(reduce({ ...s0, stepIndex: 3, elapsedMs: 1200 }, { type: 'setDevice', device: 'tablet' }, d)).toMatchObject({ stepIndex: 3, elapsedMs: 0, device: 'tablet' });
 });
 
 test('범위를 벗어난 단계·사례 번호는 무시한다', () => {

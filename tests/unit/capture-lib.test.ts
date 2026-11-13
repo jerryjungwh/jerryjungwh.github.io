@@ -17,25 +17,31 @@ test('에뮬레이터가 하나일 때만 그 시리얼을 고르고, 실제 기
   expect(pickEmulator(`${HEADER}emulator-5554\tdevice\nemulator-5556\tunauthorized\n`)).toBe('emulator-5554');
 });
 
-const ALL = ['create.png', 'fill.png', 'unique.png', 'todo.png', 'remind-1.png', 'remind-2.png', 'widgets-1.png', 'widgets-2.png', 'widgets-3.png', 'widget_done-before.png', 'widget_done.mp4', 'lock_screen.png'];
+const BASE = ['create.png', 'fill.png', 'remind-1.png', 'remind-2.png', 'widgets-1.png', 'widgets-2.png', 'widgets-3.png', 'widget_done-after.png', 'widget_done.mp4', 'lock_screen.png'];
+const ONE = [...BASE, 'unique.png', 'todo.png'];
 
-test('한 사례가 내야 하는 파일: 배경 사진이 없는 사례는 고유 단계 그림을 빼고 센다', () => {
-  expect(expectedFiles(loadFixture('ko', 'university')).sort()).toEqual([...ALL].sort());
-  const withPhoto = loadFixture('ko', 'elementary_school');
-  expect(withPhoto.steps.unique.screen).toBe('background');
-  expect(expectedFiles(withPhoto).sort()).toEqual([...ALL].sort());
-  const noPhoto = structuredClone(withPhoto);
+test('한 사례가 내야 하는 파일: 두 장인 단계는 -1, -2가 붙는다', () => {
+  // university: unique (class detail) and todo are one screen each.
+  expect(expectedFiles(loadFixture('ko', 'university')).sort()).toEqual([...ONE].sort());
+  // after_school: the switcher list then the second timetable; the To-Do then the class it is linked to.
+  expect(expectedFiles(loadFixture('ko', 'after_school')).sort()).toEqual(
+    [...BASE, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'].sort(),
+  );
+  // A background step without a photo is not captured: its screen is left out.
+  const noPhoto = structuredClone(loadFixture('ko', 'elementary_school'));
   noPhoto.timetables[0].unique = {};
-  expect(expectedFiles(noPhoto).sort()).toEqual(ALL.filter((f) => f !== 'unique.png').sort());
+  expect(expectedFiles(noPhoto)).not.toContain('unique.png');
+  expect(expectedFiles(loadFixture('ko', 'elementary_school'))).toContain('unique.png');
 });
 
 test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언어·사례·기기가 들어간다', () => {
   const f = loadFixture('ko', 'university');
-  const cells = completeCells(f, 'phone', ALL, { durationMs: 5800 });
+  const cells = completeCells(f, 'phone', ONE, { durationMs: 5800 });
   const keys = Object.keys(cells);
   expect(keys.sort()).toEqual(['create', 'fill', 'lock_screen', 'remind', 'todo', 'unique', 'widget_done', 'widgets'].map((s) => `ko/university/phone/${s}`).sort());
   for (const entry of Object.values(cells)) expect(entry.status).toBe('final');
   expect(cells['ko/university/phone/fill'].media).toEqual({ kind: 'image', src: '/captures/ko/university/phone/fill.webp', alt: f.steps.fill.alt });
+  expect(cells['ko/university/phone/todo'].media).toEqual({ kind: 'image', src: '/captures/ko/university/phone/todo.webp', alt: f.steps.todo.alts[0] });
   const remind = cells['ko/university/phone/remind'].media;
   expect(remind.kind === 'sequence' && remind.frames.map((x) => [x.src, x.alt])).toEqual([
     ['/captures/ko/university/phone/remind-1.webp', f.steps.remind.alts[0]],
@@ -43,7 +49,7 @@ test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언�
   ]);
   const widgets = cells['ko/university/phone/widgets'].media;
   expect(widgets.kind === 'sequence' && widgets.frames.map((x) => x.label)).toEqual(['주간표', '오늘 통합', 'To-Do']);
-  expect(widgets.kind === 'sequence' && widgets.frames.length).toBe(3);
+  // The still under the recording is taken after its last tap: without the video, the To-Do is seen completed.
   expect(cells['ko/university/phone/widget_done'].media).toEqual({
     kind: 'video',
     src: '/captures/ko/university/phone/widget_done.mp4',
@@ -53,23 +59,32 @@ test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언�
   });
 });
 
-test('영어·태블릿 칸은 그 언어의 위젯 이름과 그 기기의 폴더를 쓴다', () => {
-  const cells = completeCells(loadFixture('en', 'after_school'), 'tablet', ALL, { durationMs: 6000 });
+test('두 장인 단계는 이어 보기가 되고, 장마다 데이터의 대체 문장을 쓴다', () => {
+  const f = loadFixture('en', 'after_school');
+  const files = [...BASE, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'];
+  const cells = completeCells(f, 'tablet', files, { durationMs: 6000 });
+  for (const step of ['unique', 'todo'] as const) {
+    const m = cells[`en/after_school/tablet/${step}`].media;
+    expect(m.kind === 'sequence' && m.frames.map((x) => [x.src, x.alt]), step).toEqual([
+      [`/captures/en/after-school/tablet/${step}-1.webp`, f.steps[step].alts[0]],
+      [`/captures/en/after-school/tablet/${step}-2.webp`, f.steps[step].alts[1]],
+    ]);
+  }
   const widgets = cells['en/after_school/tablet/widgets'].media;
   expect(widgets.kind === 'sequence' && widgets.frames.map((x) => x.label)).toEqual(['Weekly', 'Today overview', 'To-Do']);
-  expect(widgets.kind === 'sequence' && widgets.frames[0].src).toBe('/captures/en/after-school/tablet/widgets-1.webp');
 });
 
 test('파일이 하나라도 빠지면 그 사례는 한 칸도 바뀌지 않는다', () => {
   const f = loadFixture('ko', 'university');
-  expect(completeCells(f, 'phone', ALL.filter((x) => x !== 'widgets-2.png'), { durationMs: 5800 })).toEqual({});
-  expect(completeCells(f, 'phone', ALL.filter((x) => x !== 'widget_done.mp4'), { durationMs: 5800 })).toEqual({});
+  expect(completeCells(f, 'phone', ONE.filter((x) => x !== 'widgets-2.png'), { durationMs: 5800 })).toEqual({});
+  expect(completeCells(f, 'phone', ONE.filter((x) => x !== 'widget_done.mp4'), { durationMs: 5800 })).toEqual({});
 });
 
 test('배경 사진이 없는 사례는 고유 단계만 빼고 일곱 칸이 최종이 된다', () => {
   const f = structuredClone(loadFixture('ko', 'lessons'));
   f.timetables[0].unique = {};
-  const cells = completeCells(f, 'phone', ALL.filter((x) => x !== 'unique.png'), { durationMs: 5800 });
+  const files = expectedFiles(f);
+  const cells = completeCells(f, 'phone', files, { durationMs: 5800 });
   expect(Object.keys(cells).length).toBe(7);
   expect(cells['ko/lessons/phone/unique']).toBeUndefined();
 });

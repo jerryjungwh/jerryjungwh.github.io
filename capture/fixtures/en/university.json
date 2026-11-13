@@ -7,8 +7,13 @@
       "title": "Fall semester",
       "days": "weekdays",
       "startHour": 9,
-      "endHour": 18,
+      "endHour": 16,
       "timeFormat": "12h",
+      "defaultMinutes": 90,
+      "cellHeightDp": 90,
+      "tablet": {
+        "cellHeightDp": 73
+      },
       "textSizeSp": 10,
       "schedules": [
         {
@@ -19,7 +24,8 @@
           "title": "Data Structures",
           "place": "Engineering Hall 301",
           "person": "Alex Kim",
-          "color": 0
+          "color": 0,
+          "note": "Bring a laptop to the lab."
         },
         {
           "key": "os_mon",
@@ -79,7 +85,8 @@
           "title": "Data Structures",
           "place": "Engineering Hall 301",
           "person": "Alex Kim",
-          "color": 0
+          "color": 0,
+          "note": "Bring a laptop to the lab."
         },
         {
           "key": "ui_thu",
@@ -145,7 +152,7 @@
   ],
   "steps": {
     "create": {
-      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 6 pm."
+      "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 4 pm."
     },
     "fill": {
       "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
@@ -153,11 +160,15 @@
     "unique": {
       "screen": "schedule_detail",
       "schedule": "ds_mon",
-      "alt": "Screen after tapping Data Structures, showing its day and time, room, professor and linked assignment."
+      "alts": [
+        "Screen after tapping Data Structures, showing its day and time, room, professor, note and linked assignment."
+      ]
     },
     "todo": {
       "todo": "lab",
-      "alt": "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Data Structures."
+      "alts": [
+        "To-Do editing screen. The title is Submit Data Structures lab and it is linked to Monday's Data Structures class."
+      ]
     },
     "remind": {
       "todo": "lab",

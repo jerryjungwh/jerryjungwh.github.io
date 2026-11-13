@@ -1,6 +1,7 @@
 import { load } from 'cheerio';
+import { existsSync } from 'node:fs';
 import { expect, test } from 'vitest';
-import { read } from './helpers';
+import { allHtml, read } from './helpers';
 
 const $ = load(read('dist/index.html'));
 const media = $('[data-media-kind]');
@@ -87,10 +88,20 @@ test('녹화 칸: 포스터 그림 위에 소리 없는 영상이 하나 있고,
     expect(video.attr('tabindex')).toBe('-1');
     const src = video.attr('src') ?? '';
     expect(src).toMatch(/^\/captures\/(ko|en)\/[a-z-]+\/(phone|tablet)\/widget_done\.mp4$/);
-    expect(() => read(`dist${src}`)).not.toThrow();
     const poster = $(box).find('img');
     expect(poster.length).toBe(1);
     expect((poster.attr('alt') ?? '').length).toBeGreaterThan(10);
     expect(poster.attr('data-on')).toBeDefined();
   });
+});
+
+test('모든 페이지의 녹화 파일이 빌드에 있다(한국어·영어, 홈·사례 페이지)', () => {
+  let videos = 0;
+  for (const p of allHtml())
+    p.$('video[data-video]').each((_, v) => {
+      videos += 1;
+      expect(existsSync(`dist${p.$(v).attr('src')}`), `${p.path}: ${p.$(v).attr('src')}`).toBe(true);
+    });
+  // 6 cases x 2 devices on each home, 2 devices on each case page, in two languages.
+  expect(videos).toBe(2 * (12 + 6 * 2));
 });

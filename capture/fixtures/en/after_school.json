@@ -9,10 +9,12 @@
       "startHour": 10,
       "endHour": 19,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 60,
       "textSizeSp": 10,
       "cellHeightDp": 67,
       "tablet": {
-        "cellHeightDp": 60
+        "cellHeightDp": 57
       },
       "schedules": [
         {
@@ -88,6 +90,8 @@
       "startHour": 15,
       "endHour": 19,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "cellHeightDp": 120,
       "since": "unique",
       "schedules": [
         {
@@ -186,11 +190,17 @@
     },
     "unique": {
       "screen": "second_timetable",
-      "alt": "List for switching timetables, showing two of them: Lily and Max."
+      "alts": [
+        "List for switching timetables, showing two of them: Lily and Max.",
+        "Max's weekly timetable with after-school care Monday to Friday and soccer on Tuesday and Thursday."
+      ]
     },
     "todo": {
       "todo": "bag",
-      "alt": "To-Do editing screen. The title is Pack swim bag and it is linked to the swim lesson."
+      "alts": [
+        "To-Do editing screen. The title is Pack swim bag and it is linked to Saturday's swim lesson.",
+        "Screen after tapping the Saturday swim lesson on the timetable, with Pack swim bag among its linked To-Dos."
+      ]
     },
     "remind": {
       "todo": "bag",

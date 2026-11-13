@@ -9,6 +9,8 @@
       "startHour": 7,
       "endHour": 22,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 90,
       "textSizeSp": 10,
       "cellHeightDp": 40,
       "unique": {
@@ -114,11 +116,16 @@
     },
     "unique": {
       "screen": "background",
-      "alt": "My lessons weekly timetable with a photo as its background. Lessons show on top of the photo in color."
+      "alts": [
+        "My lessons weekly timetable with a photo as its background. Lessons show on top of the photo in color."
+      ]
     },
     "todo": {
       "todo": "sheet",
-      "alt": "To-Do editing screen. The title is Make midterm review sheet and it is linked to Grade 8 math."
+      "alts": [
+        "To-Do editing screen. The title is Make midterm review sheet and it is linked to Wednesday's Grade 8 math lesson.",
+        "Screen after tapping Wednesday's Grade 8 math lesson on the timetable, with Make midterm review sheet among its linked To-Dos."
+      ]
     },
     "remind": {
       "todo": "sheet",

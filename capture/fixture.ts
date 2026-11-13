@@ -19,6 +19,8 @@ export interface FixtureSchedule {
   title: string;
   place?: string;
   person?: string;
+  /** The class's memo, shown in its detail. */
+  note?: string;
   color: number;
   /** Shown from the "unique" step on. Without it the class is there from "fill". */
   since?: 'unique';
@@ -33,11 +35,15 @@ export interface FixtureTimetable {
   startHour: number;
   endHour: number;
   timeFormat: '24h' | '12h';
+  /** Default class length in minutes, shown on the timetable settings screen (the app's default is 60). */
+  defaultMinutes?: number;
   /** Class text size and row height, when the app's defaults do not fit this timetable on the screen. */
   textSizeSp?: number;
   cellHeightDp?: number;
   /** The same two on the tablet, whose landscape screen has less height for rows. Unset: the values above. */
   tablet?: { textSizeSp?: number; cellHeightDp?: number };
+  /** Labels on the class detail: 'student' (classroom, professor; the app's default) or 'general' (location, person). */
+  fieldNameMode?: 'student' | 'general';
   /** A second timetable that appears at the "unique" step. */
   since?: 'unique';
   /** What the "unique" step changes on this timetable. */
@@ -65,8 +71,10 @@ export interface CaptureFixture {
   steps: {
     create: { alt: string };
     fill: { alt: string };
-    unique: { screen: UniqueScreen; schedule?: string; alt: string };
-    todo: { todo: string; alt: string };
+    /** Two screens for second_timetable (the switcher list, then the second timetable); one otherwise. */
+    unique: { screen: UniqueScreen; schedule?: string; alts: string[] };
+    /** One screen (the To-Do's own screen) or two (then the class it is linked to, tapped on the timetable). */
+    todo: { todo: string; alts: string[] };
     remind: { todo: string; alts: [string, string] };
     /** Weekly, Today overview, To-Do. */
     widgets: { alts: [string, string, string] };
@@ -90,8 +98,10 @@ const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
  * Height for the rows of the weekly table, measured on the capture emulators (Pixel 9 portrait, Pixel Tablet
  * landscape). Taller and the last hours scroll out of the screen. The app's default row is 60dp an hour.
  */
-const ROWS_DP = { phone: 650, tablet: 545 } as const;
+const ROWS_DP = { phone: 650, tablet: 515 } as const;
 const DEFAULT_ROW_DP = 60;
+/** The app's smallest row. A day that needs it can get no shorter, so it may scroll a little. */
+const MIN_ROW_DP = 36;
 const minutes = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
 const MIN_ALT = 10;
 
@@ -106,6 +116,7 @@ export function fixtureProblems(f: CaptureFixture): string[] {
 
   for (const t of f.timetables) {
     twice(t.schedules.map((s) => s.key), `시간표 ${t.key}`);
+    if (t.fieldNameMode !== undefined && t.fieldNameMode !== 'student' && t.fieldNameMode !== 'general') out.push(`${t.key}: fieldNameMode는 student 또는 general이다`);
     for (const [where, v] of [['', t], ['tablet.', t.tablet ?? {}]] as const) {
       // The app clamps to these ranges without a word, which would make the fit check below wrong.
       if (v.cellHeightDp !== undefined && !(v.cellHeightDp >= 36 && v.cellHeightDp <= 120)) out.push(`${t.key}: ${where}cellHeightDp는 36~120이다`);
@@ -115,7 +126,7 @@ export function fixtureProblems(f: CaptureFixture): string[] {
     const phoneRows = hours * (t.cellHeightDp ?? DEFAULT_ROW_DP);
     const tabletRows = hours * (t.tablet?.cellHeightDp ?? t.cellHeightDp ?? DEFAULT_ROW_DP);
     if (phoneRows > ROWS_DP.phone) out.push(`${t.key}: 폰에서 하루가 한 화면에 들어가지 않는다 (${phoneRows}dp > ${ROWS_DP.phone}dp)`);
-    if (tabletRows > ROWS_DP.tablet) out.push(`${t.key}: 태블릿에서 하루가 한 화면에 들어가지 않는다 (${tabletRows}dp > ${ROWS_DP.tablet}dp, tablet.cellHeightDp를 정한다)`);
+    if (tabletRows > ROWS_DP.tablet && (t.tablet?.cellHeightDp ?? t.cellHeightDp) !== MIN_ROW_DP) out.push(`${t.key}: 태블릿에서 하루가 한 화면에 들어가지 않는다 (${tabletRows}dp > ${ROWS_DP.tablet}dp, tablet.cellHeightDp를 정한다)`);
     for (const s of t.schedules) {
       const at = `${t.key}/${s.key}`;
       if (!TIME.test(s.start) || !TIME.test(s.end)) {
@@ -154,6 +165,12 @@ export function fixtureProblems(f: CaptureFixture): string[] {
   if (reminded && !reminded.reminderMinutes) out.push(`remind: To-Do ${reminded.key}에 리마인더가 없다`);
 
   const u = f.steps.unique;
+  if (u.alts.length !== (u.screen === 'second_timetable' ? 2 : 1)) out.push(`unique: 대체 문장이 ${u.screen === 'second_timetable' ? '두' : '한'} 개여야 한다`);
+  const t = f.steps.todo;
+  if (t.alts.length < 1 || t.alts.length > 2) out.push('todo: 대체 문장은 한 개(To-Do 화면) 또는 두 개(그리고 연결된 수업)다');
+  if (t.alts.length === 2 && !f.todos.find((x) => x.key === t.todo)?.schedule) out.push('todo: 두 번째 화면은 연결된 수업인데, To-Do에 연결된 수업이 없다');
+  if (f.steps.remind.alts.length !== 2) out.push('remind: 대체 문장이 두 개여야 한다');
+  if (f.steps.widgets.alts.length !== 3) out.push('widgets: 대체 문장이 세 개여야 한다');
   const focus = u.schedule ? schedule(first?.key, u.schedule) : undefined;
   if (u.schedule && !focus) out.push(`unique: 수업 ${u.schedule}가 없다`);
   if (u.screen === 'saturday' && !first?.unique?.days) out.push('unique(saturday): 늘릴 요일(unique.days)이 없다');
@@ -164,8 +181,8 @@ export function fixtureProblems(f: CaptureFixture): string[] {
   const alts: [string, string[]][] = [
     ['create', [f.steps.create.alt]],
     ['fill', [f.steps.fill.alt]],
-    ['unique', [u.alt]],
-    ['todo', [f.steps.todo.alt]],
+    ['unique', u.alts],
+    ['todo', t.alts],
     ['remind', f.steps.remind.alts],
     ['widgets', f.steps.widgets.alts],
     ['widget_done', [f.steps.widget_done.alt]],

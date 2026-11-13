@@ -9,7 +9,9 @@
       "startHour": 7,
       "endHour": 22,
       "timeFormat": "24h",
-      "textSizeSp": 10,
+      "fieldNameMode": "general",
+      "defaultMinutes": 90,
+      "textSizeSp": 9,
       "cellHeightDp": 43,
       "unique": {
         "backgroundImage": "lessons.jpg"
@@ -114,11 +116,16 @@
     },
     "unique": {
       "screen": "background",
-      "alt": "배경에 사진을 넣은 수업표 주간표. 수업 칸이 사진 위에 색으로 보인다."
+      "alts": [
+        "배경에 사진을 넣은 수업표 주간표. 수업 칸이 사진 위에 색으로 보인다."
+      ]
     },
     "todo": {
       "todo": "sheet",
-      "alt": "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 중2 수학 일정에 연결되어 있다."
+      "alts": [
+        "To-Do 편집 화면. 제목은 중간고사 대비 자료 만들기이고 수요일 중2 수학 일정에 연결되어 있다.",
+        "주간표에서 수요일 중2 수학 칸을 누른 화면. 연결된 To-Do에 중간고사 대비 자료 만들기가 보인다."
+      ]
     },
     "remind": {
       "todo": "sheet",

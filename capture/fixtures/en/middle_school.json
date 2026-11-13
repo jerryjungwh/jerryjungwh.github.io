@@ -9,13 +9,15 @@
       "startHour": 8,
       "endHour": 18,
       "timeFormat": "12h",
+      "fieldNameMode": "general",
+      "defaultMinutes": 45,
       "textSizeSp": 10,
       "cellHeightDp": 61,
       "unique": {
         "days": "weekdays_sat"
       },
       "tablet": {
-        "cellHeightDp": 54
+        "cellHeightDp": 51
       },
       "schedules": [
         {
@@ -123,6 +125,14 @@
           "color": 8
         },
         {
+          "key": "tue7",
+          "day": 1,
+          "start": "13:50",
+          "end": "14:35",
+          "title": "Art",
+          "color": 6
+        },
+        {
           "key": "wed1",
           "day": 2,
           "start": "08:15",
@@ -169,6 +179,14 @@
           "end": "13:45",
           "title": "Social Studies",
           "color": 3
+        },
+        {
+          "key": "wed7",
+          "day": 2,
+          "start": "13:50",
+          "end": "14:35",
+          "title": "Music",
+          "color": 7
         },
         {
           "key": "thu1",
@@ -275,6 +293,14 @@
           "color": 8
         },
         {
+          "key": "fri7",
+          "day": 4,
+          "start": "13:50",
+          "end": "14:35",
+          "title": "Spanish",
+          "color": 4
+        },
+        {
           "key": "soccer_mon",
           "day": 0,
           "start": "16:30",
@@ -347,11 +373,16 @@
     },
     "unique": {
       "screen": "saturday",
-      "alt": "Noah · Grade 7 Fall weekly timetable with a Saturday column added. Math tutoring runs from 10 am to noon on Saturday."
+      "alts": [
+        "Noah · Grade 7 Fall weekly timetable with a Saturday column added. Math tutoring runs from 10 am to noon on Saturday."
+      ]
     },
     "todo": {
       "todo": "report",
-      "alt": "To-Do editing screen. The title is Science project report and it is linked to Science."
+      "alts": [
+        "To-Do editing screen. The title is Science project report and it is linked to Friday's Science class.",
+        "Screen after tapping Friday's Science class on the timetable, with Science project report among its linked To-Dos."
+      ]
     },
     "remind": {
       "todo": "report",

@@ -55,11 +55,16 @@ function setFlag(el: Element | null, name: string, on: boolean): void {
   else el.removeAttribute(name);
 }
 
-/** Lazy images of a hidden screen have not been fetched. Ask for them before the screen shows. */
-function fetchNow(figure: HTMLElement | null): void {
+/**
+ * Lazy images of a hidden screen have not been fetched. Ask for them before the screen shows. With `video`, a
+ * recording there is fetched too: the still under it shows the To-Do completed, so a recording
+ * that is not loaded when its step starts would show the end first and then jump back to before the tap.
+ */
+function fetchNow(figure: HTMLElement | null, video = false): void {
   figure?.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((img) => {
     img.loading = 'eager';
   });
+  if (video) figure?.querySelectorAll<HTMLVideoElement>('video[data-video]').forEach((v) => (v.preload = 'auto'));
 }
 
 function mount(root: HTMLElement): void {
@@ -90,26 +95,41 @@ function mount(root: HTMLElement): void {
   const figureAt = (s: StepperState) => stepAt(s).figures[s.device];
   const durationOf = (s: StepperState) => Number(figureAt(s)?.dataset.duration) || DEFAULT_STEP_MS;
 
+  /** Recordings this script has asked to play and not stopped since. */
+  const started = new Set<HTMLVideoElement>();
+  const onScreen = () => inView && !document.hidden;
+
   /**
-   * Only the recording of the step in view plays, from its start, and only while the stepper runs. Pausing
-   * freezes it on the frame it reached. A visitor who asked for less motion starts paused, so sees the still.
+   * Only the recording of the step in view plays, from its start, while the stepper runs and is on screen.
+   * Pausing freezes it on the frame it reached. A visitor who asked for less motion starts paused, so sees
+   * the still. The video is shown only once a frame from its start is on screen ('playing'): until then the
+   * still image underneath stays, so neither a blank video nor the last run's final frame flashes by.
    */
   function syncVideos(placeChanged: boolean): void {
     const active = figureAt(state)?.querySelector<HTMLVideoElement>('video[data-video]') ?? null;
-    for (const video of videos) {
-      if (video === active || !video.hasAttribute('data-playing')) continue;
+    for (const video of [...started]) {
+      if (video === active) continue;
       video.pause();
       video.removeAttribute('data-playing');
+      started.delete(video);
     }
     if (!active) return;
-    if (state.paused) {
-      if (active.hasAttribute('data-playing')) active.pause();
+    if (placeChanged) {
+      active.removeAttribute('data-playing');
+      active.currentTime = 0;
+    }
+    if (state.paused || !onScreen()) {
+      if (started.delete(active)) active.pause();
       return;
     }
-    if (placeChanged) active.currentTime = 0;
-    active.setAttribute('data-playing', '');
+    if (started.has(active)) return;
+    started.add(active);
+    active.onplaying = () => active.setAttribute('data-playing', '');
     // A browser that cannot play it keeps showing the still image underneath.
-    active.play()?.catch(() => active.removeAttribute('data-playing'));
+    active.play()?.catch(() => {
+      active.removeAttribute('data-playing');
+      started.delete(active);
+    });
   }
 
   function render(): void {
@@ -134,8 +154,11 @@ function mount(root: HTMLElement): void {
       root.dataset.device = state.device;
       deviceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.device === state.device)));
       fetchNow(figureAt(state));
-      // Whatever comes next by itself: the following step, or the next case's first step.
-      fetchNow(figureAt(reduce({ ...state, paused: false }, { type: 'tick', dtMs: 0, stepDurationMs: 0 }, dims)));
+    }
+    if (placeChanged || prev?.paused !== state.paused) {
+      // Whatever comes next by itself: the following step, or the next case's first step. A paused stepper
+      // (also where less motion was asked for) plays no recording, so it does not fetch one.
+      fetchNow(figureAt(reduce({ ...state, paused: false }, { type: 'tick', dtMs: 0, stepDurationMs: 0 }, dims)), !state.paused);
     }
 
     if (!prev || prev.paused !== state.paused) {
@@ -213,7 +236,13 @@ function mount(root: HTMLElement): void {
   }
 
   let last: number | null = null;
+  let wasOnScreen = true;
   function frame(now: number): void {
+    // The recording stops with the stepper and goes on where it was when the stepper is back.
+    if (onScreen() !== wasOnScreen) {
+      wasOnScreen = onScreen();
+      syncVideos(false);
+    }
     // A hidden tab or a stepper scrolled out of view does not advance, and the gap is not counted later.
     if (document.hidden || !inView) {
       last = null;

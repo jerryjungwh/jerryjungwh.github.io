@@ -19,7 +19,7 @@ function valid(): CaptureFixture {
         title: '이번 학기',
         days: 'weekdays',
         startHour: 9,
-        endHour: 18,
+        endHour: 17,
         timeFormat: '24h',
         schedules: [
           { key: 'ds', day: 0, start: '09:00', end: '10:30', title: '자료구조', place: '공학관 301', color: 0 },
@@ -31,8 +31,8 @@ function valid(): CaptureFixture {
     steps: {
       create: { alt: '시간표 설정 화면. 이름과 요일, 시간 범위가 보인다.' },
       fill: { alt: '주간표 화면. 수업 두 개가 색으로 구분되어 있다.' },
-      unique: { screen: 'schedule_detail', schedule: 'ds', alt: '자료구조 수업을 누른 화면. 강의실이 보인다.' },
-      todo: { todo: 'lab', alt: 'To-Do 편집 화면. 자료구조에 연결되어 있다.' },
+      unique: { screen: 'schedule_detail', schedule: 'ds', alts: ['자료구조 수업을 누른 화면. 강의실이 보인다.'] },
+      todo: { todo: 'lab', alts: ['To-Do 편집 화면. 자료구조에 연결되어 있다.'] },
       remind: { todo: 'lab', alts: ['리마인더를 언제 받을지 고르는 화면이다.', '리마인더 시간이 되어 뜬 알람 화면이다.'] },
       widgets: { alts: ['홈 화면의 주간표 위젯이다. 수업이 보인다.', '홈 화면의 오늘 통합 위젯이다.', '홈 화면의 To-Do 위젯이다. 할 일이 보인다.'] },
       widget_done: { todo: 'lab', alt: 'To-Do 위젯에서 할 일을 완료로 바꾸는 모습이다.' },
@@ -62,7 +62,7 @@ test('앱에서 저장이 막히는 상태를 잡는다: 겹치는 수업, 범�
 test('고유 단계에서 늘린 요일의 수업은 그 단계부터 보이는 수업이어야 한다', () => {
   const saturday = (since?: 'unique') => (f: CaptureFixture) => {
     f.timetables[0].unique = { days: 'weekdays_sat' };
-    f.steps.unique = { screen: 'saturday', alt: '토요일 열이 더해진 주간표 화면이다.' };
+    f.steps.unique = { screen: 'saturday', alts: ['토요일 열이 더해진 주간표 화면이다.'] };
     f.timetables[0].schedules.push({ key: 'sat', day: 5, start: '10:00', end: '12:00', title: '영어학원', color: 3, since });
   };
   expect(broken(saturday('unique'))).toEqual([]);
@@ -83,9 +83,22 @@ test('리마인더는 마감 시간이 있는 To-Do에만 붙고, 리마인더 �
 });
 
 test('고유 단계의 화면 종류에 필요한 데이터가 있어야 한다', () => {
-  expect(broken((f) => (f.steps.unique = { screen: 'saturday', alt: '토요일 열이 더해진 주간표 화면이다.' })).join('\n')).toMatch(/saturday/);
-  expect(broken((f) => (f.steps.unique = { screen: 'second_timetable', alt: '시간표 두 개가 목록에 보이는 화면이다.' })).join('\n')).toMatch(/second_timetable/);
-  expect(broken((f) => (f.steps.unique = { screen: 'schedule_alarm', schedule: 'ds', alt: '수업의 알람이 켜진 화면이다.' })).join('\n')).toMatch(/schedule_alarm/);
+  expect(broken((f) => (f.steps.unique = { screen: 'saturday', alts: ['토요일 열이 더해진 주간표 화면이다.'] })).join('\n')).toMatch(/saturday/);
+  expect(broken((f) => (f.steps.unique = { screen: 'second_timetable', alts: ['시간표 두 개가 목록에 보이는 화면이다.', '둘째 시간표의 주간표 화면이다.'] })).join('\n')).toMatch(/second_timetable/);
+  expect(broken((f) => (f.steps.unique = { screen: 'schedule_alarm', schedule: 'ds', alts: ['알람 표시가 있는 주간표 화면이다.'] })).join('\n')).toMatch(/schedule_alarm/);
+});
+
+test('화면 장 수와 대체 문장 수가 맞는다: 둘째 시간표는 두 장, To-Do는 한 장 또는 연결된 수업까지 두 장', () => {
+  const second = (f: CaptureFixture) => {
+    f.timetables.push({ key: 'second', title: '다음 학기', days: 'weekdays', startHour: 9, endHour: 12, timeFormat: '24h', since: 'unique', schedules: [] });
+  };
+  expect(broken((f) => { second(f); f.steps.unique = { screen: 'second_timetable', alts: ['시간표 두 개가 목록에 보이는 화면이다.', '둘째 시간표의 주간표 화면이다.'] }; })).toEqual([]);
+  expect(broken((f) => { second(f); f.steps.unique = { screen: 'second_timetable', alts: ['시간표 두 개가 목록에 보이는 화면이다.'] }; }).join('\n')).toMatch(/unique: 대체 문장/);
+  expect(broken((f) => (f.steps.unique.alts = ['수업을 누른 화면이다. 강의실이 보인다.', '한 장 더 있는 화면이다.'])).join('\n')).toMatch(/unique: 대체 문장/);
+  expect(broken((f) => (f.steps.todo.alts = ['To-Do 편집 화면. 연결되어 있다.', '연결된 수업을 누른 화면이다.']))).toEqual([]);
+  expect(broken((f) => { f.steps.todo.alts = ['To-Do 편집 화면. 연결되어 있다.', '연결된 수업을 누른 화면이다.']; delete f.todos[0].schedule; }).join('\n')).toMatch(/연결된 수업/);
+  expect(broken((f) => (f.steps.todo.alts = [])).join('\n')).toMatch(/todo: 대체 문장/);
+  expect(broken((f) => (f.steps.widgets.alts = f.steps.widgets.alts.slice(0, 2) as never)).join('\n')).toMatch(/widgets: 대체 문장/);
 });
 
 test('대체 문장이 짧으면 잡는다', () => {
@@ -128,6 +141,17 @@ test('영어 데이터에는 한글이 없고, 어느 데이터에도 쓰지 않
   for (const lang of LANGS) for (const c of CASE_ORDER) expect(findForbidden(JSON.stringify(loadFixture(lang, c)), lang), `${lang}/${c}`).toEqual([]);
 });
 
+test('수업 상세의 이름표는 대학만 강의실·교수명(학생용)이고, 나머지 사례는 장소·담당자(일반용)다', () => {
+  for (const lang of LANGS)
+    for (const c of CASE_ORDER)
+      for (const t of loadFixture(lang, c).timetables)
+        expect(t.fieldNameMode ?? 'student', `${lang}/${c}/${t.key}`).toBe(c === 'university' ? 'student' : 'general');
+});
+
+test('이름표 모드는 student 또는 general이다', () => {
+  expect(broken((f) => ((f.timetables[0] as { fieldNameMode?: string }).fieldNameMode = 'teacher'))).toContain('main: fieldNameMode는 student 또는 general이다');
+});
+
 test('한국어는 24시간, 영어는 오전·오후로 시간을 보인다', () => {
   for (const c of CASE_ORDER) {
     expect(loadFixture('ko', c).timetables.every((t) => t.timeFormat === '24h'), c).toBe(true);
@@ -147,13 +171,17 @@ test('글에 적은 점심시간에는 수업이 없다', () => {
   }
 });
 
-test('하루가 기기 한 화면에 들어간다: 폰 650dp, 태블릿 545dp(실측), 칸 높이는 따로 정할 수 있다', () => {
-  // 9 hours at the app's default row (60dp) fit both.
+test('하루가 기기 한 화면에 들어간다: 폰 650dp, 태블릿 515dp(실측), 칸 높이는 따로 정할 수 있다', () => {
+  // 8 hours at the app's default row (60dp) fit both.
   expect(fixtureProblems(valid())).toEqual([]);
-  expect(broken((f) => (f.timetables[0].cellHeightDp = 80)).join('\n')).toMatch(/폰/);
+  expect(broken((f) => (f.timetables[0].cellHeightDp = 82)).join('\n')).toMatch(/폰/);
   expect(broken((f) => (f.timetables[0].cellHeightDp = 70)).join('\n')).toMatch(/태블릿/);
   expect(broken((f) => Object.assign(f.timetables[0], { cellHeightDp: 70, tablet: { cellHeightDp: 60 } }))).toEqual([]);
-  expect(broken((f) => (f.timetables[0].tablet = { cellHeightDp: 61 })).join('\n')).toMatch(/태블릿/);
+  expect(broken((f) => (f.timetables[0].tablet = { cellHeightDp: 65 })).join('\n')).toMatch(/태블릿/);
+  // A long day at the app's smallest row (36dp) cannot get shorter: allowed, it scrolls a little.
+  const longDay = (h: number) => (f: CaptureFixture) => Object.assign(f.timetables[0], { startHour: 7, endHour: 22, cellHeightDp: 43, tablet: { cellHeightDp: h } });
+  expect(broken(longDay(36))).toEqual([]);
+  expect(broken(longDay(37)).join('\n')).toMatch(/태블릿/);
 });
 
 test('칸 높이와 글씨 크기는 앱이 받는 범위 안이다(밖이면 앱이 말없이 바꾼다)', () => {
