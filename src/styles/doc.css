@@ -42,7 +42,8 @@
 }
 
 /* Top of a plain page (questions, about, not found). */
-.page-h1 {
+.page-h1,
+.policy > h1 {
   margin-top: clamp(16px, 4vw, 48px);
   font-size: clamp(32px, 4.6vw, 54px);
   font-weight: 800;

@@ -1,0 +1,131 @@
+/* Policy pages: the privacy policy and terms in the SimpleScheduler-Android repository (Jekyll, same host).
+   They load /policy.css = tokens + global + doc + this file. Their markup is that repository's _layouts/default.html.
+   The header and footer repeat the values of the site header and footer (Header.astro, Footer.astro scope theirs). */
+.policy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+}
+.policy-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.policy-brand img {
+  border-radius: 8px;
+}
+.policy-header nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--body);
+  text-decoration: none;
+}
+.policy-header nav a:hover {
+  color: var(--ink);
+}
+
+/* The document: Markdown rendered by kramdown, so elements are styled by position, not by class. */
+.policy > :not(table) {
+  max-width: 42em;
+}
+.policy > * + * {
+  margin-top: 16px;
+}
+.policy > h2 {
+  margin-top: 48px;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+.policy > h3 {
+  margin-top: 32px;
+  font-size: clamp(18px, 1.8vw, 20px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+.policy p,
+.policy li {
+  font-size: clamp(16px, 1.3vw, 17px);
+  line-height: 1.75;
+  color: var(--body);
+}
+.policy strong {
+  color: var(--ink);
+}
+.policy ul,
+.policy ol {
+  padding-left: 1.3em;
+}
+.policy li + li {
+  margin-top: 6px;
+}
+.policy a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+.policy > hr {
+  margin: 40px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+/* Wide tables scroll inside themselves, so the page never scrolls sideways at 360px.
+   Cells break long tokens such as (SharedPreferences·SQLite) instead of squeezing the other columns,
+   and keep 5em so the six-column table scrolls rather than breaking every character. */
+.policy > table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.policy th,
+.policy td {
+  min-width: 5em;
+  overflow-wrap: anywhere;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  color: var(--body);
+}
+.policy th {
+  background: var(--soft);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.policy-footer {
+  max-width: var(--page);
+  margin: clamp(72px, 10vw, 128px) auto 0;
+  padding: 32px var(--gutter) 48px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--body);
+}
+.policy-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.policy-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  text-underline-offset: 3px;
+}
