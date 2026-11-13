@@ -144,10 +144,27 @@ function mount(root: HTMLElement): void {
     started.add(active);
     active.onplaying = () => active.setAttribute('data-playing', '');
     // A browser that cannot play it keeps showing the still image underneath.
-    active.play()?.catch(() => {
-      active.removeAttribute('data-playing');
-      started.delete(active);
-    });
+    // iOS Safari refuses an auto-advanced step while nothing is buffered yet, and a refusal is final
+    // here: the step would sit on its still image. play() itself starts the fetch, so wait for the
+    // first frame and ask once more. Never call load(): it would rewind a part-played recording.
+    let retried = false;
+    const attempt = (): void => {
+      // The step may have moved on while we waited: syncVideos drops it from `started`.
+      if (!started.has(active)) return;
+      active.play()?.catch(() => {
+        if (!started.has(active)) return;
+        active.removeAttribute('data-playing');
+        if (retried) {
+          // A browser that cannot play it keeps showing the still image underneath.
+          started.delete(active);
+          return;
+        }
+        retried = true;
+        active.preload = 'auto';
+        active.addEventListener('canplay', attempt, { once: true });
+      });
+    };
+    attempt();
   }
 
   function render(): void {

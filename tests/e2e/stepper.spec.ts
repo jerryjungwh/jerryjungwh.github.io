@@ -564,3 +564,54 @@ test('마우스로 열고 Esc로 닫으면 자동 넘김이 이어 간다', asyn
   await page.clock.runFor(stay + 300);
   await expect(visibleSteps(page).nth(1)).toHaveAttribute('aria-current', 'step');
 });
+
+// iOS Safari refuses play() on an auto-advanced step while nothing is buffered. A single refusal used
+// to leave the step on its still image: the recording never ran unless the visitor tapped the step.
+test('첫 재생이 거부되면 받아 온 뒤 한 번 더 시도한다 (아이폰 Safari)', async ({ page }) => {
+  await page.addInitScript(() => {
+    const calls: string[] = [];
+    (window as unknown as { __videoCalls: string[] }).__videoCalls = calls;
+    const name = (v: HTMLMediaElement) => v.closest('figure')?.getAttribute('data-step') ?? '?';
+    let refused = false;
+    HTMLMediaElement.prototype.play = function () {
+      if (!refused) {
+        refused = true;
+        calls.push(`refused:${name(this)}`);
+        // The page should fetch and ask again; firing 'canplay' is what the browser does once it can.
+        setTimeout(() => this.dispatchEvent(new Event('canplay')), 0);
+        return Promise.reject(new DOMException('NotAllowedError'));
+      }
+      calls.push(`play:${name(this)}`);
+      this.dispatchEvent(new Event('playing'));
+      return Promise.resolve();
+    };
+  });
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  await expect(doneVideo(page)).toHaveAttribute('data-playing', '');
+  expect(await videoCalls(page)).toEqual(['refused:widget_done', 'play:widget_done']);
+  // The retry fetches: a video left at preload="none" would have nothing to play.
+  expect(await doneVideo(page).evaluate((v: HTMLVideoElement) => v.preload)).toBe('auto');
+});
+
+test('두 번째 재생도 거부되면 포기하고 정지 화면을 보인다', async ({ page }) => {
+  await page.addInitScript(() => {
+    const calls: string[] = [];
+    (window as unknown as { __videoCalls: string[] }).__videoCalls = calls;
+    const name = (v: HTMLMediaElement) => v.closest('figure')?.getAttribute('data-step') ?? '?';
+    HTMLMediaElement.prototype.play = function () {
+      calls.push(`refused:${name(this)}`);
+      setTimeout(() => this.dispatchEvent(new Event('canplay')), 0);
+      return Promise.reject(new DOMException('NotAllowedError'));
+    };
+  });
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  // The retry runs a tick later, so wait for the second refusal rather than reading the list once.
+  await expect.poll(() => videoCalls(page)).toEqual(['refused:widget_done', 'refused:widget_done']);
+  await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
+  await expect(page.locator('figure[data-case="university"][data-step="widget_done"][data-device="phone"] img[data-on]')).toHaveCount(1);
+  // It gives up after the second refusal: no endless retry loop.
+  await page.waitForTimeout(300);
+  expect(await videoCalls(page)).toEqual(['refused:widget_done', 'refused:widget_done']);
+});

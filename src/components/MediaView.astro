@@ -103,6 +103,12 @@ const QUALITY = 70;
   .media img[data-on] {
     opacity: 1;
   }
+  /* Without this the screens cut from one to the next and the run reads as separate slides.
+     Short enough to stay inside ②'s 0.7 s frames. Reduced motion drops it (global.css). */
+  .media img,
+  .media video {
+    transition: opacity 200ms ease;
+  }
   .media video {
     position: absolute;
     inset: 0;
