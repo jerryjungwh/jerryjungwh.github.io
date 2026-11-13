@@ -66,9 +66,10 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 ### 시험 빌드와 공개 빌드
 
-- 지금 워크플로는 시험 빌드를 올린다. 시험 빌드는 모든 페이지에 `noindex`를 넣어 검색에 잡히지 않는다(`src/lib/release.ts`).
-- 공개할 때는 `deploy.yml`의 `run: npm run check`를 `run: npm run build:release`로 바꾼다. `RELEASE=1`이 붙어 `noindex`가 빠지고, 임시 화면이 하나라도 남아 있으면 검사가 실패해 올라가지 않는다.
-- 공개 조건은 설계 19절이다: 화면이 모두 최종이고 도메인이 연결돼 있을 것.
+- 2026-11-13부터 공개 빌드를 올린다. `deploy.yml`이 `npm run build:release`(`RELEASE=1 npm run check`)를 돌린다. `noindex`가 빠져 검색에 잡히고, 임시 화면이 하나라도 남아 있으면 검사가 실패해 올라가지 않는다(`src/lib/release.ts`).
+- 404만 `noindex`로 남는다.
+- 되돌리려면 그 줄을 `npm run check`로 바꾼다. 그러면 모든 페이지가 다시 `noindex`가 된다.
+- 공개 조건(설계 19절)은 모두 채웠다: 화면이 모두 최종이고 `simganpyo.com`이 연결됐다.
 
 ## 주소 확인
 

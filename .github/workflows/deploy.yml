@@ -1,8 +1,8 @@
 name: deploy
 
 # Every push to main is checked and published to GitHub Pages.
-# Until the real screens are in, this publishes the test build (kept out of search).
-# For the public launch, change the build step as README.md describes.
+# This publishes the public build: search engines are allowed in, and the build fails
+# if any placeholder screen is left (see src/lib/release.ts).
 on:
   push:
     branches: [main]
@@ -33,7 +33,7 @@ jobs:
       - name: Set the "last updated" date
         run: echo "SITE_UPDATED=$(TZ=Asia/Seoul date +%F)" >> "$GITHUB_ENV"
       - name: Check and build
-        run: npm run check
+        run: npm run build:release
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
