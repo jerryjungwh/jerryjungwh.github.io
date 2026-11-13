@@ -147,8 +147,8 @@ export const SITE_EN: SiteStrings = {
     about: 'About',
     faq: 'FAQ',
     contact: 'Contact',
-    privacy: 'Privacy Policy (Korean)',
-    terms: 'Terms of Use (Korean)',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Use',
     maker: 'Made by Jerry Jung',
   },
 };

@@ -74,3 +74,10 @@ test('llms.txt에 영어 절과 영어 주소가 있다', () => {
   for (const path of enPaths()) expect(llms, path).toContain(`https://simganpyo.com${path}`);
   expect(decodeURIComponent(llms)).toContain('utm_campaign=site_en_llms_txt');
 });
+
+test('영어 페이지 바닥글은 영어 정책본으로 간다', () => {
+  for (const p of allHtml().filter((x) => x.lang === 'en')) {
+    expect(p.$('footer a[href="https://simganpyo.com/SimpleScheduler-Android/en/"]').text().trim(), p.path).toBe('Privacy Policy');
+    expect(p.$('footer a[href="https://simganpyo.com/SimpleScheduler-Android/en/terms"]').text().trim(), p.path).toBe('Terms of Use');
+  }
+});

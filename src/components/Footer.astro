@@ -12,8 +12,8 @@ interface Props {
 const { lang, page } = Astro.props;
 const t = siteStrings(lang);
 const other: Lang = lang === 'ko' ? 'en' : 'ko';
-// The policy pages stay in the old repository and are served under the same domain.
-const POLICY = `${SITE_ORIGIN}/SimpleScheduler-Android/`;
+// The policy pages stay in the old repository and are served under the same domain. English pages link the English version.
+const POLICY = `${SITE_ORIGIN}/SimpleScheduler-Android/${lang === 'en' ? 'en/' : ''}`;
 const EMAIL = 'jerryjung2929@gmail.com';
 ---
 

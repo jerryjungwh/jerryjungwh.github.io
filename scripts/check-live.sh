@@ -90,6 +90,11 @@ stage_test() {
   expect_text "$OLD/$POLICY/" '개인정보처리방침'
   expect_status "$OLD/$POLICY/terms" 200
   expect_text "$OLD/$POLICY/terms" '이용약관'
+  # The English footer links the English versions, so they must be live too.
+  expect_status "$OLD/$POLICY/en/" 200
+  expect_text "$OLD/$POLICY/en/" 'Privacy Policy'
+  expect_status "$OLD/$POLICY/en/terms" 200
+  expect_text "$OLD/$POLICY/en/terms" 'Terms of Use'
 }
 
 stage_connected() {
@@ -102,6 +107,8 @@ stage_connected() {
   expect_text "$OLD/$POLICY/" '개인정보처리방침'
   expect_lands "$OLD/$POLICY/terms" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/terms$'
   expect_text "$OLD/$POLICY/terms" '이용약관'
+  expect_lands "$OLD/$POLICY/en/" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/en/$'
+  expect_lands "$OLD/$POLICY/en/terms" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/en/terms$'
   expect_redirect "$OLD/" 301 '^https?://simganpyo\.com/$'
 }
 
@@ -124,6 +131,8 @@ stage_public() {
   for f in sitemap-index.xml llms.txt; do expect_status "$NEW/$f" 200; done
   expect_status "$NEW/check-live-no-such-page/" 404
   expect_text "$NEW/$POLICY/" "rel=\"canonical\" href=\"$NEW/$POLICY/\""
+  expect_text "$NEW/$POLICY/en/" 'Privacy Policy'
+  expect_text "$NEW/$POLICY/en/terms" 'Terms of Use'
 }
 
 stage_redirect() {
