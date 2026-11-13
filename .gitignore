@@ -28,3 +28,8 @@ pnpm-debug.log*
 # test output
 test-results/
 playwright-report/
+
+# AI agent and browser-tool files: this repository is public, so they never go in
+CLAUDE.md
+.claude/
+.playwright-mcp/

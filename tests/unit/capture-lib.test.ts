@@ -6,10 +6,10 @@ const HEADER = 'List of devices attached\n';
 
 test('에뮬레이터가 하나일 때만 그 시리얼을 고르고, 실제 기기는 절대 고르지 않는다', () => {
   expect(pickEmulator(`${HEADER}emulator-5554\tdevice\n\n`)).toBe('emulator-5554');
-  // A real phone over wireless adb next to the emulator: still the emulator.
-  expect(pickEmulator(`${HEADER}adb-R3KL20A4BBE-1mkePE._adb-tls-connect._tcp\tdevice\nemulator-5554\tdevice\n`)).toBe('emulator-5554');
-  expect(() => pickEmulator(`${HEADER}adb-R3KL20A4BBE-1mkePE._adb-tls-connect._tcp\tdevice\n`)).toThrow(/에뮬레이터/);
-  expect(() => pickEmulator(`${HEADER}R3KL20A4BBE\tdevice\n`)).toThrow(/에뮬레이터/);
+  // A real phone over wireless adb next to the emulator: still the emulator. (Made-up serial: this repository is public.)
+  expect(pickEmulator(`${HEADER}adb-ABC0000000X-abc123._adb-tls-connect._tcp\tdevice\nemulator-5554\tdevice\n`)).toBe('emulator-5554');
+  expect(() => pickEmulator(`${HEADER}adb-ABC0000000X-abc123._adb-tls-connect._tcp\tdevice\n`)).toThrow(/에뮬레이터/);
+  expect(() => pickEmulator(`${HEADER}ABC0000000X\tdevice\n`)).toThrow(/에뮬레이터/);
   expect(() => pickEmulator(HEADER)).toThrow(/에뮬레이터/);
   expect(() => pickEmulator(`${HEADER}emulator-5554\tdevice\nemulator-5556\tdevice\n`)).toThrow(/하나만/);
   // A booting or unauthorized emulator is not one to capture on.
