@@ -1,3 +1,4 @@
+import { load } from 'cheerio';
 import { expect, test } from 'vitest';
 import { findForbidden } from '../../src/lib/forbidden';
 import { PLAY_URL } from '../../src/lib/urls';
@@ -134,4 +135,18 @@ test('app-ads.txt는 AdMob 게시자 줄 하나를 사이트 맨 위에 둔다',
   const lines = read('dist/app-ads.txt').trimEnd().split('\n');
   expect(lines).toEqual([APP_ADS_LINE]);
   expect(lines[0]).toMatch(/^google\.com, pub-\d{16}, DIRECT, f08c47fec0942fa0$/);
+});
+
+
+// Naver verifies ownership by this tag in <head>. It is a public token, not a secret.
+// Naver asks for the check again every year: if it expires, get a new value and replace this one.
+const NAVER_VERIFICATION = '782139bf34c7e21f82e414f27f0a6664072040e7';
+
+test('모든 페이지 head에 네이버 소유확인 태그가 하나씩 있다', () => {
+  const files = [...pages.map((p) => `dist${p.path}index.html`), 'dist/404.html'];
+  for (const file of files) {
+    const $ = load(read(file));
+    const values = $('head meta[name="naver-site-verification"]').map((_, m) => $(m).attr('content')).get();
+    expect(values, file).toEqual([NAVER_VERIFICATION]);
+  }
 });
