@@ -19,6 +19,7 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 ```
 
 - Astro 7의 `astro preview`는 백그라운드로 뜨는 환경이 있다. 끌 때는 `npx astro preview stop`.
+- 브라우저 검사는 떠 있는 미리보기를 다시 쓴다. 미리보기를 끈 직후 `Process from config.webServer exited early`로 실패하면 `npm run preview -- --port 4321`로 띄운 뒤 다시 돌린다(백그라운드로 뜨면서 명령이 바로 끝나기 때문이다).
 - 속도 재기: `npm run preview` 뒤 `node scripts/measure.mjs`(느린 4G, 4배 느린 CPU로 흉내 낸 휴대폰).
 
 ## 구조
