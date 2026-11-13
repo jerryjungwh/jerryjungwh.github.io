@@ -440,3 +440,111 @@ html.js .stepper li[data-step][data-active] .step-text {
     margin-top: 28px;
   }
 }
+
+/* ── view larger ──────────────────────────────────────────────────────────────
+   A button on the screen in view opens it at its original size in a window over the page. It only exists
+   with the script and a browser that has <dialog> ([data-zoom-ready]); the script-less document has none. */
+
+.media-zoom {
+  display: none;
+}
+html.js .stepper figure[data-media] {
+  position: relative;
+}
+html.js .stepper[data-zoom-ready] .media-zoom {
+  display: inline-flex;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: zoom-in;
+}
+
+.zoom:not([open]) {
+  display: none;
+}
+.zoom {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+}
+.zoom[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  /* The column stays the window's width, so a wide picture scrolls inside instead of widening the window. */
+  grid-template-columns: minmax(0, 1fr);
+}
+.zoom::backdrop {
+  background: var(--ink);
+}
+.zoom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+}
+.zoom-title {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.zoom-bar button {
+  flex: none;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--paper);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--paper);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* The tablet picture fits the window, but never below 1024 px: narrower, the window scrolls sideways. The
+   tall phone picture would barely grow if it fitted the height, so it takes the window's width up to 540 px
+   and scrolls down. Either way class names stay readable. Pinch zoom stays the browser's. */
+.zoom-body {
+  display: flex;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0 16px 16px;
+}
+.zoom-body img {
+  flex: none;
+  margin: auto;
+  height: auto;
+  max-width: none;
+  /* 76px: the bar (36px button + 24px padding) and the 16px below the picture. */
+  width: max(var(--zoom-min), min(100%, (100vh - 76px) * var(--zoom-ratio)));
+}
+.zoom[data-device='tablet'] {
+  --zoom-min: 1024px;
+  --zoom-ratio: 1.6;
+}
+.zoom[data-device='phone'] {
+  --zoom-min: min(100%, 540px);
+  --zoom-ratio: 0.4455;
+}
+/* The site's brand-colored focus ring is too faint on the dark window. */
+.zoom :focus-visible {
+  outline-color: var(--paper);
+}

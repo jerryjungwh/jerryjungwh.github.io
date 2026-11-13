@@ -1,6 +1,7 @@
 import { load } from 'cheerio';
 import { expect, test } from 'vitest';
 import { CASES_KO } from '../../src/data/cases.ko';
+import { SITE_KO } from '../../src/data/site.ko';
 import { CASE_ORDER, STEP_ORDER } from '../../src/lib/types';
 import { read, readAllCss } from './helpers';
 
@@ -64,4 +65,29 @@ test('스크립트가 없을 때 사례를 숨기지 않는다: 숨김 규칙은
     .filter((s) => /data-stepper|data-case|data-step|data-media/.test(s));
   expect(hiding.length).toBeGreaterThan(0);
   for (const selector of hiding) expect(selector, selector).toMatch(/^html\.js\b/);
+});
+
+test('화면마다 크게 보기 단추가 하나씩 있고, 단계 단추 수는 그대로다', () => {
+  const figures = $('[data-stepper] figure[data-media]');
+  expect(figures.length).toBe(96);
+  figures.each((_, f) => expect($(f).children('button.media-zoom[data-action="zoom"]').length, $(f).attr('data-step')).toBe(1));
+  expect($('button.media-zoom').first().text().trim()).toBe(SITE_KO.stepper.zoom);
+  expect($('button.media-zoom').first().attr('aria-haspopup')).toBe('dialog');
+  expect($('[data-stepper] li[data-step] button').length).toBe(48);
+});
+
+test('단계형 사례마다 확대 창이 하나 있고, 닫혀 있으며 그림 주소가 들어 있지 않다', () => {
+  const dialog = $('[data-stepper] dialog[data-zoom]');
+  expect(dialog.length).toBe(1);
+  expect(dialog.attr('open')).toBeUndefined();
+  expect(dialog.find('img, [src], [srcset]').length).toBe(0);
+  expect(dialog.find('button[data-action="zoom-close"]').text().trim()).toBe(SITE_KO.stepper.zoomClose);
+});
+
+test('확대 창의 그림 영역은 키보드로 밀 수 있고, 어두운 창에서도 초점 테두리가 보인다', () => {
+  const body = $('[data-stepper] dialog[data-zoom] [data-zoom-body]');
+  expect(body.attr('tabindex')).toBe('0');
+  expect(body.attr('role')).toBe('group');
+  expect(body.attr('aria-labelledby')).toBe('zoom-title');
+  expect(readAllCss('dist')).toMatch(/\.zoom :focus-visible\{outline-color:var\(--paper\)\}/);
 });

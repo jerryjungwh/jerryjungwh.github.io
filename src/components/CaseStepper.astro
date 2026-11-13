@@ -70,6 +70,11 @@ const firstScreen = `(function(){var c=document.documentElement.dataset.startCas
                   aria-labelledby={`step-${c.id}-${s.id}`}
                 >
                   <MediaView entry={entry} device={device} eager={Boolean(fixedCase) && caseIndex === 0 && stepIndex === 0 && device === 'phone'} />
+                  {entry.status === 'final' && (
+                    <button type="button" class="media-zoom" data-action="zoom" aria-haspopup="dialog">
+                      {t.zoom}
+                    </button>
+                  )}
                 </figure>
               );
             }),
@@ -108,6 +113,15 @@ const firstScreen = `(function(){var c=document.documentElement.dataset.startCas
   </div>
 
   {Astro.slots.has('cta') && <div class="stepper-cta"><slot name="cta" /></div>}
+
+  {/* One window per stepper. It is empty until a screen is opened in it, so it adds no picture to the page. */}
+  <dialog class="zoom" data-zoom aria-labelledby="zoom-title">
+    <div class="zoom-bar">
+      <p class="zoom-title" id="zoom-title" data-zoom-title></p>
+      <button type="button" data-action="zoom-close" autofocus>{t.zoomClose}</button>
+    </div>
+    <div class="zoom-body" data-zoom-body tabindex="0" role="group" aria-labelledby="zoom-title"></div>
+  </dialog>
 </section>
 {!fixedCase && <script is:inline set:html={firstScreen} />}
 

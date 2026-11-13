@@ -369,7 +369,66 @@
       "alt": "Timetable settings screen. The name is Noah · Grade 7 Fall, the days are Monday to Friday and the hours are 8 am to 6 pm."
     },
     "fill": {
-      "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+      "frames": [
+        {
+          "add": [
+            "mon1",
+            "mon2",
+            "mon3",
+            "mon4",
+            "mon5",
+            "mon6",
+            "mon7"
+          ],
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with only Monday's periods filled in. Period 1 is English, 8:15 to 9:00."
+        },
+        {
+          "add": [
+            "tue1",
+            "tue2",
+            "tue3",
+            "tue4",
+            "tue5",
+            "tue6",
+            "tue7",
+            "wed1",
+            "wed2",
+            "wed3",
+            "wed4",
+            "wed5",
+            "wed6",
+            "wed7"
+          ],
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with periods from Monday to Wednesday."
+        },
+        {
+          "add": [
+            "thu1",
+            "thu2",
+            "thu3",
+            "thu4",
+            "thu5",
+            "thu6",
+            "thu7",
+            "fri1",
+            "fri2",
+            "fri3",
+            "fri4",
+            "fri5",
+            "fri6",
+            "fri7"
+          ],
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with seven 45-minute periods every day from Monday to Friday."
+        },
+        {
+          "add": [
+            "soccer_mon",
+            "soccer_wed",
+            "soccer_fri"
+          ],
+          "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+        }
+      ]
     },
     "unique": {
       "screen": "saturday",

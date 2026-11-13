@@ -186,7 +186,36 @@
       "alt": "Timetable settings screen. The name is Lily, the days are Monday to Saturday and the hours are 10 am to 7 pm."
     },
     "fill": {
-      "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+      "frames": [
+        {
+          "add": [
+            "piano_tue",
+            "piano_thu"
+          ],
+          "alt": "Weekly timetable for Lily with only piano on Tuesday and Thursday, 4:30 to 5:15."
+        },
+        {
+          "add": [
+            "karate_mon",
+            "karate_wed",
+            "karate_fri"
+          ],
+          "alt": "Weekly timetable for Lily with karate added on Monday, Wednesday and Friday, 5:00 to 6:00, in another color."
+        },
+        {
+          "add": [
+            "art_mon",
+            "art_wed"
+          ],
+          "alt": "Weekly timetable for Lily with art club added on Monday and Wednesday, 3:15 to 4:15."
+        },
+        {
+          "add": [
+            "swim_sat"
+          ],
+          "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+        }
+      ]
     },
     "unique": {
       "screen": "second_timetable",

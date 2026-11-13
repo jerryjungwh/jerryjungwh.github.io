@@ -163,6 +163,7 @@ test('스크립트가 멈추면 3초 뒤 여섯 사례가 모두 보이는 문�
   await page.goto('/');
   await expect(page.locator('html')).not.toHaveClass(/\bjs\b/, { timeout: 6000 });
   await expect(page.locator('article[data-case]:visible')).toHaveCount(6);
+  await expect(page.locator('button.media-zoom:visible')).toHaveCount(0);
 });
 
 test.describe('스크립트가 꺼져 있을 때', () => {
@@ -173,6 +174,15 @@ test.describe('스크립트가 꺼져 있을 때', () => {
     await expect(page.locator('article[data-case]:visible')).toHaveCount(6);
     await expect(page.locator('li[data-step] .step-text:visible')).toHaveCount(48);
     await expect(page.locator('[data-action="toggle-pause"]')).toBeHidden();
+    await expect(page.locator('button.media-zoom:visible')).toHaveCount(0);
+    await expect(page.locator('dialog[data-zoom]')).toBeHidden();
+  });
+
+  test('②는 다 쌓인 마지막 장이 보인다', async ({ page }) => {
+    await page.goto('/');
+    const frames = page.locator('figure[data-case="university"][data-step="fill"][data-device="phone"] img[data-frame]');
+    await expect(frames.last()).toHaveAttribute('data-on', '');
+    await expect(frames.first()).not.toHaveAttribute('data-on', '');
   });
 
   test('360px에서 가로로 넘치지 않는다', async ({ page }) => {
@@ -341,4 +351,216 @@ test('녹화를 처음부터 다시 틀 때는 첫 장면이 나오기 전까지
   await visibleSteps(page).nth(6).click();
   await expect(visibleSteps(page).nth(6)).toHaveAttribute('aria-current', 'step');
   await expect(doneVideo(page)).not.toHaveAttribute('data-playing', '');
+});
+
+// 크게 보기: a window with the screen at its original size. The stepper and the recording wait while it is open.
+const activeFigure = (page: Page) => page.locator('[data-stepper] figure[data-media][data-active]:visible');
+const zoomButton = (page: Page) => activeFigure(page).locator('button[data-action="zoom"]');
+const zoomDialog = (page: Page) => page.locator('dialog[data-zoom]');
+const zoomClose = (page: Page) => zoomDialog(page).locator('button[data-action="zoom-close"]');
+const toTablet = (page: Page) => page.locator('[data-action="device"][data-device="tablet"]').click();
+
+test('크게 보기를 누르면 지금 화면의 원본 크기 그림이 창에 열린다(태블릿 2560px, 폰 1080px)', async ({ page }) => {
+  await openAtUniversity(page);
+  for (const [device, width] of [['phone', 1080], ['tablet', 2560]] as const) {
+    if (device === 'tablet') await toTablet(page);
+    const shown = activeFigure(page).locator('img[data-on]');
+    await zoomButton(page).click();
+    await expect(zoomDialog(page)).toHaveAttribute('open', '');
+    const big = zoomDialog(page).locator('img');
+    await expect(big).toHaveAttribute('src', (await shown.getAttribute('src'))!);
+    await expect(big).toHaveAttribute('alt', (await shown.getAttribute('alt'))!);
+    await expect.poll(() => big.evaluate((i: HTMLImageElement) => i.naturalWidth), { message: device }).toBe(width);
+    await zoomClose(page).click();
+  }
+});
+
+test('확대 창은 닫기 단추·Esc·바깥 누르기로 닫히고, 초점은 크게 보기 단추로 돌아온다', async ({ page }) => {
+  await openAtUniversity(page);
+  for (const how of ['button', 'escape', 'outside'] as const) {
+    await zoomButton(page).click();
+    await expect(zoomDialog(page)).toHaveAttribute('open', '');
+    await expect(zoomClose(page), how).toBeFocused();
+    if (how === 'button') await zoomClose(page).click();
+    if (how === 'escape') await page.keyboard.press('Escape');
+    if (how === 'outside') await page.mouse.click(4, page.viewportSize()!.height - 4);
+    await expect(zoomDialog(page), how).not.toHaveAttribute('open', '');
+    await expect(zoomButton(page), how).toBeFocused();
+  }
+});
+
+test('확대 창이 열려 있는 동안 넘어가지 않고, 닫으면 그 자리에서 이어 간다', async ({ page }) => {
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(1).click();
+  const stay = Number(await activeFigure(page).getAttribute('data-duration'));
+  await page.clock.runFor(1000);
+  await zoomButton(page).click();
+  await page.clock.runFor(stay + 5000);
+  await expect(visibleSteps(page).nth(1)).toHaveAttribute('aria-current', 'step');
+  await expect(page.locator('[data-action="toggle-pause"]')).toHaveAttribute('aria-pressed', 'false');
+  await zoomClose(page).click();
+  await page.clock.runFor(stay - 1000 - 400);
+  await expect(visibleSteps(page).nth(1)).toHaveAttribute('aria-current', 'step');
+  await page.clock.runFor(800);
+  await expect(visibleSteps(page).nth(2)).toHaveAttribute('aria-current', 'step');
+});
+
+test('이어 보기는 지금 보이는 장을 크게 보이고, 멈춘 채로 눌러도 다음 장으로 넘어가지 않는다', async ({ page }) => {
+  await openAtUniversity(page);
+  await toTablet(page);
+  await visibleSteps(page).nth(4).click(); // remind: 2 frames x 2500ms
+  await page.clock.runFor(2700);
+  const second = activeFigure(page).locator('img[data-frame="1"]');
+  await expect(second).toHaveAttribute('data-on', '');
+  await zoomButton(page).click();
+  await expect(zoomDialog(page).locator('img')).toHaveAttribute('src', (await second.getAttribute('src'))!);
+  await zoomClose(page).click();
+  await page.locator('[data-action="toggle-pause"]').click();
+  await zoomButton(page).click();
+  await zoomClose(page).click();
+  await expect(second).toHaveAttribute('data-on', '');
+});
+
+test('녹화 단계에서 열면 영상이 멈추고 완료 화면을 크게 보이며, 닫으면 이어서 재생한다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  expect(await videoCalls(page)).toEqual(['play:widget_done']);
+  const still = activeFigure(page).locator('img[data-on]');
+  await zoomButton(page).click();
+  await expect(zoomDialog(page).locator('img')).toHaveAttribute('src', (await still.getAttribute('src'))!);
+  expect(await videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done']);
+  await page.keyboard.press('Escape');
+  await expect.poll(() => videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done', 'play:widget_done']);
+});
+
+test('누르기 전에는 원본 크기 그림을 받지 않고, 주소와 방문 기록도 바뀌지 않는다', async ({ page }) => {
+  const requested: string[] = [];
+  page.on('request', (r) => requested.push(new URL(r.url()).pathname));
+  await openAtUniversity(page);
+  await toTablet(page);
+  const src = (await activeFigure(page).locator('img[data-on]').getAttribute('src'))!;
+  const path = new URL(src, page.url()).pathname;
+  const before = { url: page.url(), length: await page.evaluate(() => history.length) };
+  expect(requested).not.toContain(path);
+  await zoomButton(page).click();
+  await expect.poll(() => requested.filter((x) => x === path).length).toBe(1);
+  await page.keyboard.press('Escape');
+  expect({ url: page.url(), length: await page.evaluate(() => history.length) }).toEqual(before);
+});
+
+test('움직임 줄이기 설정이면 열고 닫아도 멈춘 채로 있다', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openAtUniversity(page);
+  await zoomButton(page).click();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-action="toggle-pause"]')).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('360px에서 창이 열려도 페이지는 가로로 넘치지 않고, 태블릿 화면은 창 안에서 옆으로 민다', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await openAtUniversity(page);
+  await toTablet(page);
+  await zoomButton(page).click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
+  const body = zoomDialog(page).locator('[data-zoom-body]');
+  expect(await body.evaluate((b) => b.scrollWidth > b.clientWidth)).toBe(true);
+  expect(await zoomDialog(page).locator('img').evaluate((i) => i.getBoundingClientRect().width)).toBeGreaterThanOrEqual(1024);
+});
+
+// ② stacks the classes up: 0.7 s a screen, then it holds on the full week.
+const fillFrames = (page: Page, device = 'phone') => page.locator(`figure[data-case="university"][data-step="fill"][data-device="${device}"] img[data-frame]`);
+
+test('② 쌓이는 장면은 0.7초마다 한 장씩 켜지고, 다 쌓인 장에서 머문 뒤 ③으로 간다', async ({ page }) => {
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(1).click();
+  const frames = fillFrames(page);
+  await expect(frames).toHaveCount(3);
+  await expect(frames.nth(0)).toHaveAttribute('data-on', '');
+  await page.clock.runFor(800);
+  await expect(frames.nth(1)).toHaveAttribute('data-on', '');
+  await page.clock.runFor(700);
+  await expect(frames.nth(2)).toHaveAttribute('data-on', '');
+  await page.clock.runFor(2900);
+  await expect(visibleSteps(page).nth(1)).toHaveAttribute('aria-current', 'step');
+  await expect(frames.nth(2)).toHaveAttribute('data-on', '');
+  await page.clock.runFor(400);
+  await expect(visibleSteps(page).nth(2)).toHaveAttribute('aria-current', 'step');
+});
+
+test('움직임 줄이기면 ②를 열 때 다 쌓인 장이 보이고, 누르면 첫 장부터 다시 넘어가며, 기기를 바꿔도 다 쌓인 장이다', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(1).click();
+  await expect(fillFrames(page).nth(2)).toHaveAttribute('data-on', '');
+  await visibleSteps(page).nth(1).click();
+  await expect(fillFrames(page).nth(0)).toHaveAttribute('data-on', '');
+  await visibleSteps(page).nth(1).click();
+  await expect(fillFrames(page).nth(1)).toHaveAttribute('data-on', '');
+  await toTablet(page);
+  await expect(fillFrames(page, 'tablet').last()).toHaveAttribute('data-on', '');
+});
+
+test('아직 받지 못한 장은 받을 때까지 앞 장을 계속 보인다', async ({ page }) => {
+  let release!: () => void;
+  const held = new Promise<void>((r) => (release = r));
+  await page.route(/fill-2[^/]*\.webp/, async (route) => {
+    await held;
+    await route.continue();
+  });
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(1).click();
+  await page.clock.runFor(900);
+  await expect(fillFrames(page).nth(0)).toHaveAttribute('data-on', '');
+  await expect(fillFrames(page).nth(1)).not.toHaveAttribute('data-on', '');
+  release();
+  await expect.poll(async () => (await page.clock.runFor(50), fillFrames(page).nth(1).getAttribute('data-on'))).toBe('');
+});
+
+test('②가 쌓이는 도중에 멈추면 다 쌓인 장에서 멈춘다', async ({ page }) => {
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(1).click();
+  await page.clock.runFor(500);
+  await expect(fillFrames(page).nth(0)).toHaveAttribute('data-on', '');
+  await page.locator('[data-action="toggle-pause"]').click();
+  await expect(fillFrames(page).nth(2)).toHaveAttribute('data-on', '');
+});
+
+test('녹화가 끝난 뒤 창을 열고 닫아도 녹화를 처음부터 다시 틀지 않는다', async ({ page }) => {
+  await watchVideos(page);
+  await openAtUniversity(page);
+  await visibleSteps(page).nth(6).click();
+  expect(await videoCalls(page)).toEqual(['play:widget_done']);
+  // The recording reached its end: the browser reports it as ended and holds the last frame.
+  await doneVideo(page).evaluate((v) => Object.defineProperty(v, 'ended', { get: () => true }));
+  await zoomButton(page).click();
+  await zoomClose(page).click();
+  // The dialog's close event runs after the click: it empties the window, then syncs the recording.
+  await expect(zoomDialog(page).locator('img')).toHaveCount(0);
+  expect(await videoCalls(page)).toEqual(['play:widget_done', 'pause:widget_done']);
+});
+
+test('폰 화면을 크게 보면 데스크톱에서 페이지 안 화면의 1.5배 이상으로 보인다', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await openAtUniversity(page);
+  const small = await activeFigure(page).locator('img[data-on]').evaluate((i) => i.getBoundingClientRect().width);
+  await zoomButton(page).click();
+  const big = await zoomDialog(page).locator('img').evaluate((i) => i.getBoundingClientRect().width);
+  expect(big).toBeGreaterThanOrEqual(small * 1.5);
+});
+
+test('크게 보기를 두 번 눌러도 창이 열린 채로 있다', async ({ page }) => {
+  await openAtUniversity(page);
+  await zoomButton(page).dblclick();
+  await expect(zoomDialog(page)).toHaveAttribute('open', '');
+});
+
+test('마우스로 열고 Esc로 닫으면 자동 넘김이 이어 간다', async ({ page }) => {
+  await openAtUniversity(page);
+  const stay = Number(await activeFigure(page).getAttribute('data-duration'));
+  await zoomButton(page).click();
+  await page.keyboard.press('Escape');
+  await expect(zoomDialog(page)).not.toHaveAttribute('open', '');
+  await page.clock.runFor(stay + 300);
+  await expect(visibleSteps(page).nth(1)).toHaveAttribute('aria-current', 'step');
 });

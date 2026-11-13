@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { DEVICE_ASPECT, type CaptureEntry } from '../data/captures';
+import { restFrame } from '../lib/stepper-state';
 import type { Device } from '../lib/types';
 import pendingPhone from '../assets/captures/_pending/phone.svg?url&no-inline';
 import pendingTablet from '../assets/captures/_pending/tablet.svg?url&no-inline';
@@ -37,6 +38,8 @@ const frames =
     ? media.frames
     : [{ src: media.kind === 'video' ? media.poster : media.src, alt: media.alt, label: undefined }];
 const isSequence = media.kind === 'sequence';
+// The frame on before the script moves anything (and for good without it): ② its full week, others their first.
+const rest = restFrame(media);
 const widths = device === 'phone' ? [360, 540, 720, 1080] : [640, 960, 1280, 1920];
 const sizes = device === 'phone' ? '(max-width: 480px) 62vw, 300px' : '(max-width: 760px) 92vw, 640px';
 const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예정';
@@ -51,6 +54,7 @@ const QUALITY = 70;
   data-device={device}
   data-pending={pending ? '' : undefined}
   data-frame-ms={isSequence ? media.frameMs : undefined}
+  data-rest-frame={isSequence ? rest : undefined}
   style={`aspect-ratio: ${DEVICE_ASPECT[device]}`}
 >
   {
@@ -63,7 +67,7 @@ const QUALITY = 70;
         fetchpriority: eager && first ? ('high' as const) : undefined,
         'data-frame': isSequence ? i : undefined,
         'data-label': frame.label,
-        'data-on': !isSequence || first ? '' : undefined,
+        'data-on': !isSequence || i === rest ? '' : undefined,
       };
       const placeholder = PLACEHOLDER[frame.src];
       return placeholder ? (

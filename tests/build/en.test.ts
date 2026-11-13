@@ -64,6 +64,8 @@ test('영어 홈의 단계형 사례: 여섯 사례, 임시 화면 안내도 영
   expect($('[data-stepper] button[data-track="case_select"]').map((_, b) => $(b).text().trim()).get()).toEqual(CASES_EN.map((c) => c.tab));
   expect($('[data-stepper]').text()).toContain('Screens are from the Android app');
   expect($('[data-action="toggle-pause"]').attr('data-label-resume')).toBe('Resume auto-advance');
+  expect($('button.media-zoom').first().text().trim()).toBe('View larger');
+  expect($('button[data-action="zoom-close"]').text().trim()).toBe('Close');
 });
 
 test('llms.txt에 영어 절과 영어 주소가 있다', () => {

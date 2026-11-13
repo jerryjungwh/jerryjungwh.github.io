@@ -44,6 +44,8 @@ export const SITE_EN: SiteStrings = {
     pause: 'Pause auto-advance',
     resume: 'Resume auto-advance',
     androidNote: 'Screens are from the Android app',
+    zoom: 'View larger',
+    zoomClose: 'Close',
   },
   what: {
     heading: 'What is SimpleScheduler?',

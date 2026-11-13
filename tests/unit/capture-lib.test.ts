@@ -17,16 +17,20 @@ test('에뮬레이터가 하나일 때만 그 시리얼을 고르고, 실제 기
   expect(pickEmulator(`${HEADER}emulator-5554\tdevice\nemulator-5556\tunauthorized\n`)).toBe('emulator-5554');
 });
 
-const BASE = ['create.png', 'fill.png', 'remind-1.png', 'remind-2.png', 'widgets-1.png', 'widgets-2.png', 'widgets-3.png', 'widget_done-after.png', 'widget_done.mp4', 'lock_screen.png'];
-const ONE = [...BASE, 'unique.png', 'todo.png'];
+const BASE = ['create.png', 'remind-1.png', 'remind-2.png', 'widgets-1.png', 'widgets-2.png', 'widgets-3.png', 'widget_done-after.png', 'widget_done.mp4', 'lock_screen.png'];
+/** ② stacks the classes up: university in three screens, after-school in four. */
+const FILL3 = ['fill-1.png', 'fill-2.png', 'fill-3.png'];
+const FILL4 = [...FILL3, 'fill-4.png'];
+const ONE = [...BASE, ...FILL3, 'unique.png', 'todo.png'];
 
 test('한 사례가 내야 하는 파일: 두 장인 단계는 -1, -2가 붙는다', () => {
   // university: unique (class detail) and todo are one screen each.
   expect(expectedFiles(loadFixture('ko', 'university')).sort()).toEqual([...ONE].sort());
   // after_school: the switcher list then the second timetable; the To-Do then the class it is linked to.
   expect(expectedFiles(loadFixture('ko', 'after_school')).sort()).toEqual(
-    [...BASE, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'].sort(),
+    [...BASE, ...FILL4, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'].sort(),
   );
+  expect(expectedFiles(loadFixture('ko', 'university'))).not.toContain('fill.png');
   // A background step without a photo is not captured: its screen is left out.
   const noPhoto = structuredClone(loadFixture('ko', 'elementary_school'));
   noPhoto.timetables[0].unique = {};
@@ -40,7 +44,12 @@ test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언�
   const keys = Object.keys(cells);
   expect(keys.sort()).toEqual(['create', 'fill', 'lock_screen', 'remind', 'todo', 'unique', 'widget_done', 'widgets'].map((s) => `ko/university/phone/${s}`).sort());
   for (const entry of Object.values(cells)) expect(entry.status).toBe('final');
-  expect(cells['ko/university/phone/fill'].media).toEqual({ kind: 'image', src: '/captures/ko/university/phone/fill.webp', alt: f.steps.fill.alt });
+  // ② is a stacking sequence: 0.7 s a screen, then it holds on the full week.
+  expect(cells['ko/university/phone/fill'].media).toEqual({
+    kind: 'sequence',
+    frameMs: 700,
+    frames: f.steps.fill.frames.map((x, i) => ({ src: `/captures/ko/university/phone/fill-${i + 1}.webp`, alt: x.alt })),
+  });
   expect(cells['ko/university/phone/todo'].media).toEqual({ kind: 'image', src: '/captures/ko/university/phone/todo.webp', alt: f.steps.todo.alts[0] });
   const remind = cells['ko/university/phone/remind'].media;
   expect(remind.kind === 'sequence' && remind.frames.map((x) => [x.src, x.alt])).toEqual([
@@ -61,7 +70,7 @@ test('파일이 모두 있으면 여덟 칸이 최종이 되고, 경로에 언�
 
 test('두 장인 단계는 이어 보기가 되고, 장마다 데이터의 대체 문장을 쓴다', () => {
   const f = loadFixture('en', 'after_school');
-  const files = [...BASE, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'];
+  const files = [...BASE, ...FILL4, 'unique-1.png', 'unique-2.png', 'todo-1.png', 'todo-2.png'];
   const cells = completeCells(f, 'tablet', files, { durationMs: 6000 });
   for (const step of ['unique', 'todo'] as const) {
     const m = cells[`en/after_school/tablet/${step}`].media;
@@ -78,6 +87,7 @@ test('파일이 하나라도 빠지면 그 사례는 한 칸도 바뀌지 않는
   const f = loadFixture('ko', 'university');
   expect(completeCells(f, 'phone', ONE.filter((x) => x !== 'widgets-2.png'), { durationMs: 5800 })).toEqual({});
   expect(completeCells(f, 'phone', ONE.filter((x) => x !== 'widget_done.mp4'), { durationMs: 5800 })).toEqual({});
+  expect(completeCells(f, 'phone', ONE.filter((x) => x !== 'fill-2.png'), { durationMs: 5800 })).toEqual({});
 });
 
 test('배경 사진이 없는 사례는 고유 단계만 빼고 일곱 칸이 최종이 된다', () => {

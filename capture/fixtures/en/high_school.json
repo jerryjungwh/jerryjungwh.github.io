@@ -369,7 +369,67 @@
       "alt": "Timetable settings screen. The name is Junior year · Fall, the days are Monday to Friday and the hours are 8 am to 9 pm."
     },
     "fill": {
-      "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+      "frames": [
+        {
+          "add": [
+            "mon1",
+            "mon2",
+            "mon3",
+            "mon4",
+            "mon5",
+            "mon6",
+            "mon7"
+          ],
+          "alt": "Weekly timetable for Junior year · Fall with only Monday's periods filled in, from 8:00 until period 7 ends at 2:55."
+        },
+        {
+          "add": [
+            "tue1",
+            "tue2",
+            "tue3",
+            "tue4",
+            "tue5",
+            "tue6",
+            "tue7",
+            "wed1",
+            "wed2",
+            "wed3",
+            "wed4",
+            "wed5",
+            "wed6",
+            "wed7"
+          ],
+          "alt": "Weekly timetable for Junior year · Fall with 50-minute periods from Monday to Wednesday."
+        },
+        {
+          "add": [
+            "thu1",
+            "thu2",
+            "thu3",
+            "thu4",
+            "thu5",
+            "thu6",
+            "thu7",
+            "fri1",
+            "fri2",
+            "fri3",
+            "fri4",
+            "fri5",
+            "fri6",
+            "fri7"
+          ],
+          "alt": "Weekly timetable for Junior year · Fall with seven 50-minute periods every day from Monday to Friday."
+        },
+        {
+          "add": [
+            "study_mon",
+            "study_tue",
+            "study_wed",
+            "study_thu"
+          ],
+          "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+        }
+      ]
     },
     "unique": {
       "screen": "schedule_alarm",

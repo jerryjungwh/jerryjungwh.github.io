@@ -112,7 +112,35 @@
       "alt": "Timetable settings screen. The name is My lessons, the days are Monday to Saturday and the hours are 7 am to 10 pm."
     },
     "fill": {
-      "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+      "frames": [
+        {
+          "add": [
+            "g8_mon",
+            "g8_wed"
+          ],
+          "alt": "Weekly timetable named My lessons with only Grade 8 math on Monday and Wednesday, 4:00 to 5:30."
+        },
+        {
+          "add": [
+            "g10_tue",
+            "g10_thu"
+          ],
+          "alt": "Weekly timetable named My lessons with Grade 10 math added on Tuesday and Thursday, 5:00 to 6:30, in another color."
+        },
+        {
+          "add": [
+            "review_sat"
+          ],
+          "alt": "Weekly timetable named My lessons with the Saturday review session added, 10:00 to 12:00."
+        },
+        {
+          "add": [
+            "gym_tue",
+            "gym_thu"
+          ],
+          "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+        }
+      ]
     },
     "unique": {
       "screen": "background",

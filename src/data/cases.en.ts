@@ -30,7 +30,7 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'unique',
         title: 'Put a favorite photo behind it',
-        short: 'Emma picks a photo for the timetable background. Classes show on top of it.',
+        short: 'Put a photo Emma picked behind the timetable. Classes show on top of it.',
         long: 'Choose a background photo in the timetable settings and crop it to fit. Classes stay on top as colored blocks, so the timetable is still easy to read.',
       },
       {
@@ -126,13 +126,13 @@ export const CASES_EN: CaseDef[] = [
       {
         id: 'widget_done',
         title: 'Check off homework in the widget',
-        short: 'Report finished? Mark it complete right in the widget.',
+        short: 'Has Noah finished the report? Mark it complete right in the widget.',
         long: 'Mark the report complete in the To-Do widget. Tasks due today can be completed in the Today overview widget too. The app’s To-Do list updates with it, so there is nothing to check off twice.',
       },
       {
         id: 'lock_screen',
         title: 'See it on the lock screen',
-        short: 'Wake the phone and the timetable is there. Check the next period without opening the app.',
+        short: 'Wake the phone and the timetable is there. Check what time Noah is done today without opening the app.',
         long: 'Turn on “Show weekly table on lock screen” in settings and Noah’s timetable appears every time the phone wakes. It only shows the timetable; nothing changes until the phone is unlocked.',
       },
     ],

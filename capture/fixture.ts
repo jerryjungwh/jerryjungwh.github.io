@@ -70,7 +70,11 @@ export interface CaptureFixture {
   todos: FixtureTodo[];
   steps: {
     create: { alt: string };
-    fill: { alt: string };
+    /**
+     * ② stacks the classes up, three or four screens: each adds these classes of the first timetable to the ones
+     * before it, and the last holds every class that is there from the start (not `since`).
+     */
+    fill: { frames: { add: string[]; alt: string }[] };
     /** Two screens for second_timetable (the switcher list, then the second timetable); one otherwise. */
     unique: { screen: UniqueScreen; schedule?: string; alts: string[] };
     /** One screen (the To-Do's own screen) or two (then the class it is linked to, tapped on the timetable). */
@@ -164,6 +168,22 @@ export function fixtureProblems(f: CaptureFixture): string[] {
   const reminded = todo('remind', f.steps.remind.todo);
   if (reminded && !reminded.reminderMinutes) out.push(`remind: To-Do ${reminded.key}에 리마인더가 없다`);
 
+  const fill = f.steps.fill.frames ?? [];
+  if (fill.length < 3 || fill.length > 4) out.push('fill: 장은 3~4장이다');
+  const stacked: string[] = [];
+  fill.forEach((frame, i) => {
+    if (!frame.add?.length) out.push(`fill: ${i + 1}번째 장에 더할 수업이 없다`);
+    for (const key of frame.add ?? []) {
+      const found = first?.schedules.find((x) => x.key === key);
+      if (!found) out.push(`fill: 수업 ${key}가 없다`);
+      else if (found.since === 'unique') out.push(`fill: 수업 ${key}는 ③부터 나오는 수업이다`);
+      if (stacked.includes(key)) out.push(`fill: 수업 ${key}가 두 번 나온다`);
+      stacked.push(key);
+    }
+  });
+  for (const x of first?.schedules ?? []) if (!x.since && !stacked.includes(x.key)) out.push(`fill: 수업 ${x.key}가 ②에 들어가지 않는다`);
+  if (new Set(fill.map((x) => x.alt)).size !== fill.length) out.push('fill: 장마다 대체 문장이 달라야 한다');
+
   const u = f.steps.unique;
   if (u.alts.length !== (u.screen === 'second_timetable' ? 2 : 1)) out.push(`unique: 대체 문장이 ${u.screen === 'second_timetable' ? '두' : '한'} 개여야 한다`);
   const t = f.steps.todo;
@@ -180,7 +200,7 @@ export function fixtureProblems(f: CaptureFixture): string[] {
 
   const alts: [string, string[]][] = [
     ['create', [f.steps.create.alt]],
-    ['fill', [f.steps.fill.alt]],
+    ['fill', fill.map((x) => x.alt)],
     ['unique', u.alts],
     ['todo', t.alts],
     ['remind', f.steps.remind.alts],

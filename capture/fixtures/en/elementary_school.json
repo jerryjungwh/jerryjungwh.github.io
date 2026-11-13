@@ -335,7 +335,58 @@
       "alt": "Timetable settings screen. The name is Emma · Grade 4, the days are Monday to Friday and the hours are 8 am to 3 pm."
     },
     "fill": {
-      "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+      "frames": [
+        {
+          "add": [
+            "mon1",
+            "mon2",
+            "mon3",
+            "mon4",
+            "mon5",
+            "mon6",
+            "mon7"
+          ],
+          "alt": "Weekly timetable for Emma · Grade 4 with only Monday filled in. Reading runs 8:30 to 9:15, then Math 9:20 to 10:05 after a 5-minute break."
+        },
+        {
+          "add": [
+            "tue1",
+            "tue2",
+            "tue3",
+            "tue4",
+            "tue5",
+            "tue6",
+            "tue7",
+            "wed1",
+            "wed2",
+            "wed3",
+            "wed4",
+            "wed5",
+            "wed6",
+            "wed7"
+          ],
+          "alt": "Weekly timetable for Emma · Grade 4 with 45-minute classes from Monday to Wednesday."
+        },
+        {
+          "add": [
+            "thu1",
+            "thu2",
+            "thu3",
+            "thu4",
+            "thu5",
+            "thu6",
+            "thu7",
+            "fri1",
+            "fri2",
+            "fri3",
+            "fri4",
+            "fri5",
+            "fri6",
+            "fri7"
+          ],
+          "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+        }
+      ]
     },
     "unique": {
       "screen": "background",

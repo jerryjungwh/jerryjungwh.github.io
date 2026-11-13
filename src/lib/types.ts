@@ -88,6 +88,9 @@ export interface SiteStrings {
     pause: string;
     resume: string;
     androidNote: string;
+    /** The button on a screen that opens it at its original size, and the window's close button. */
+    zoom: string;
+    zoomClose: string;
   };
   what: {
     heading: string;

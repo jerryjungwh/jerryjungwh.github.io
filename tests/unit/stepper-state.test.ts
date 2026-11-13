@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { MAX_TICK_MS, initialState, reduce, stepDurationMs } from '../../src/lib/stepper-state';
+import { MAX_TICK_MS, initialState, reduce, restFrame, stepDurationMs } from '../../src/lib/stepper-state';
 
 const d = { cases: 6, steps: 8, fixedCase: false };
 const s0 = initialState(2, false);
@@ -97,4 +97,31 @@ test('멈춘 채로 이어 보기를 손으로 넘기면 다음 장으로 가고
   expect(sequenceFrameIndex(3, 2500, s.elapsedMs)).toBe(0);
   expect(s.stepIndex).toBe(5);
   expect(s.paused).toBe(true);
+});
+
+test('② 쌓이는 장면은 세 장이면 0.7초씩 넘기고 2.5초 머문다(4.6초)', () => {
+  const frame = { src: '/a.webp', alt: '주간표 화면이다. 수업이 있다.' };
+  expect(stepDurationMs({ kind: 'sequence', frameMs: 700, frames: [frame, frame, frame] })).toBe(4600);
+});
+
+test('멈춰 있을 때 보일 장: 쌓이는 장면(0.7초)은 다 쌓인 마지막 장, 다른 이어 보기와 그림은 첫 장', () => {
+  const frame = { src: '/a.webp', alt: '주간표 화면이다. 수업이 있다.' };
+  expect(restFrame({ kind: 'sequence', frameMs: 700, frames: [frame, frame, frame] })).toBe(2);
+  expect(restFrame({ kind: 'sequence', frameMs: 700, frames: [frame, frame, frame, frame] })).toBe(3);
+  expect(restFrame({ kind: 'sequence', frameMs: 2500, frames: [frame, frame] })).toBe(0);
+  expect(restFrame({ kind: 'image', src: '/a.webp', alt: '주간표 화면이다. 수업이 있다.' })).toBe(0);
+});
+
+test('단계나 기기를 고를 때 시작 위치(atMs)를 줄 수 있고, 주지 않으면 처음부터다', () => {
+  expect(reduce(s0, { type: 'selectStep', stepIndex: 1, atMs: 1400 }, d)).toMatchObject({ stepIndex: 1, elapsedMs: 1400 });
+  expect(reduce({ ...s0, elapsedMs: 900 }, { type: 'selectStep', stepIndex: 1 }, d)).toMatchObject({ stepIndex: 1, elapsedMs: 0 });
+  expect(reduce(s0, { type: 'setDevice', device: 'tablet', atMs: 2100 }, d)).toMatchObject({ device: 'tablet', elapsedMs: 2100 });
+  expect(reduce({ ...s0, elapsedMs: 900 }, { type: 'setDevice', device: 'tablet' }, d)).toMatchObject({ device: 'tablet', elapsedMs: 0 });
+});
+
+test('멈출 때 시작 위치(atMs)를 주면 거기서 멈추고(② 다 쌓인 장), 다시 켤 때는 시간을 그대로 둔다', () => {
+  const paused = reduce({ ...s0, elapsedMs: 500 }, { type: 'togglePause', atMs: 1400 }, d);
+  expect([paused.paused, paused.elapsedMs]).toEqual([true, 1400]);
+  expect(reduce({ ...s0, elapsedMs: 2000 }, { type: 'togglePause', atMs: 1400 }, d).elapsedMs).toBe(2000);
+  expect(reduce({ ...paused }, { type: 'togglePause', atMs: 0 }, d)).toMatchObject({ paused: false, elapsedMs: 1400 });
 });

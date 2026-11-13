@@ -10,9 +10,26 @@
   "en/after_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/phone/fill.webp",
-      "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/phone/fill-1.webp",
+          "alt": "Weekly timetable for Lily with only piano on Tuesday and Thursday, 4:30 to 5:15."
+        },
+        {
+          "src": "/captures/en/after-school/phone/fill-2.webp",
+          "alt": "Weekly timetable for Lily with karate added on Monday, Wednesday and Friday, 5:00 to 6:00, in another color."
+        },
+        {
+          "src": "/captures/en/after-school/phone/fill-3.webp",
+          "alt": "Weekly timetable for Lily with art club added on Monday and Wednesday, 3:15 to 4:15."
+        },
+        {
+          "src": "/captures/en/after-school/phone/fill-4.webp",
+          "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+        }
+      ]
     }
   },
   "en/after_school/phone/lock_screen": {
@@ -81,7 +98,7 @@
       "src": "/captures/en/after-school/phone/widget_done.mp4",
       "poster": "/captures/en/after-school/phone/widget_done.webp",
       "alt": "Marking Pack swim bag as complete in the To-Do widget on the home screen.",
-      "durationMs": 5567
+      "durationMs": 5767
     }
   },
   "en/after_school/phone/widgets": {
@@ -119,9 +136,26 @@
   "en/after_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/after-school/tablet/fill.webp",
-      "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/after-school/tablet/fill-1.webp",
+          "alt": "Weekly timetable for Lily with only piano on Tuesday and Thursday, 4:30 to 5:15."
+        },
+        {
+          "src": "/captures/en/after-school/tablet/fill-2.webp",
+          "alt": "Weekly timetable for Lily with karate added on Monday, Wednesday and Friday, 5:00 to 6:00, in another color."
+        },
+        {
+          "src": "/captures/en/after-school/tablet/fill-3.webp",
+          "alt": "Weekly timetable for Lily with art club added on Monday and Wednesday, 3:15 to 4:15."
+        },
+        {
+          "src": "/captures/en/after-school/tablet/fill-4.webp",
+          "alt": "Weekly timetable for Lily. Art club, piano, karate and a Saturday swim lesson, each activity in its own color."
+        }
+      ]
     }
   },
   "en/after_school/tablet/lock_screen": {
@@ -190,7 +224,7 @@
       "src": "/captures/en/after-school/tablet/widget_done.mp4",
       "poster": "/captures/en/after-school/tablet/widget_done.webp",
       "alt": "Marking Pack swim bag as complete in the To-Do widget on the home screen.",
-      "durationMs": 5667
+      "durationMs": 5633
     }
   },
   "en/after_school/tablet/widgets": {
@@ -228,9 +262,22 @@
   "en/elementary_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/elementary-school/phone/fill.webp",
-      "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/phone/fill-1.webp",
+          "alt": "Weekly timetable for Emma · Grade 4 with only Monday filled in. Reading runs 8:30 to 9:15, then Math 9:20 to 10:05 after a 5-minute break."
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/fill-2.webp",
+          "alt": "Weekly timetable for Emma · Grade 4 with 45-minute classes from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/elementary-school/phone/fill-3.webp",
+          "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+        }
+      ]
     }
   },
   "en/elementary_school/phone/lock_screen": {
@@ -328,9 +375,22 @@
   "en/elementary_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/elementary-school/tablet/fill.webp",
-      "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/elementary-school/tablet/fill-1.webp",
+          "alt": "Weekly timetable for Emma · Grade 4 with only Monday filled in. Reading runs 8:30 to 9:15, then Math 9:20 to 10:05 after a 5-minute break."
+        },
+        {
+          "src": "/captures/en/elementary-school/tablet/fill-2.webp",
+          "alt": "Weekly timetable for Emma · Grade 4 with 45-minute classes from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/elementary-school/tablet/fill-3.webp",
+          "alt": "Weekly timetable for Emma · Grade 4. Monday to Friday is filled with 45-minute classes, each subject in its own color."
+        }
+      ]
     }
   },
   "en/elementary_school/tablet/lock_screen": {
@@ -390,7 +450,7 @@
       "src": "/captures/en/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/en/elementary-school/tablet/widget_done.webp",
       "alt": "Marking Pack colored pencils as complete in the To-Do widget on the home screen.",
-      "durationMs": 5767
+      "durationMs": 5900
     }
   },
   "en/elementary_school/tablet/widgets": {
@@ -428,9 +488,26 @@
   "en/high_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/high-school/phone/fill.webp",
-      "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/phone/fill-1.webp",
+          "alt": "Weekly timetable for Junior year · Fall with only Monday's periods filled in, from 8:00 until period 7 ends at 2:55."
+        },
+        {
+          "src": "/captures/en/high-school/phone/fill-2.webp",
+          "alt": "Weekly timetable for Junior year · Fall with 50-minute periods from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/high-school/phone/fill-3.webp",
+          "alt": "Weekly timetable for Junior year · Fall with seven 50-minute periods every day from Monday to Friday."
+        },
+        {
+          "src": "/captures/en/high-school/phone/fill-4.webp",
+          "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+        }
+      ]
     }
   },
   "en/high_school/phone/lock_screen": {
@@ -528,9 +605,26 @@
   "en/high_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/high-school/tablet/fill.webp",
-      "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/high-school/tablet/fill-1.webp",
+          "alt": "Weekly timetable for Junior year · Fall with only Monday's periods filled in, from 8:00 until period 7 ends at 2:55."
+        },
+        {
+          "src": "/captures/en/high-school/tablet/fill-2.webp",
+          "alt": "Weekly timetable for Junior year · Fall with 50-minute periods from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/high-school/tablet/fill-3.webp",
+          "alt": "Weekly timetable for Junior year · Fall with seven 50-minute periods every day from Monday to Friday."
+        },
+        {
+          "src": "/captures/en/high-school/tablet/fill-4.webp",
+          "alt": "Weekly timetable for Junior year · Fall. Seven 50-minute periods a day, with an evening study block from Monday to Thursday."
+        }
+      ]
     }
   },
   "en/high_school/tablet/lock_screen": {
@@ -590,7 +684,7 @@
       "src": "/captures/en/high-school/tablet/widget_done.mp4",
       "poster": "/captures/en/high-school/tablet/widget_done.webp",
       "alt": "Marking Prepare English presentation as complete in the To-Do widget on the home screen.",
-      "durationMs": 5633
+      "durationMs": 5500
     }
   },
   "en/high_school/tablet/widgets": {
@@ -628,9 +722,26 @@
   "en/lessons/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/lessons/phone/fill.webp",
-      "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/phone/fill-1.webp",
+          "alt": "Weekly timetable named My lessons with only Grade 8 math on Monday and Wednesday, 4:00 to 5:30."
+        },
+        {
+          "src": "/captures/en/lessons/phone/fill-2.webp",
+          "alt": "Weekly timetable named My lessons with Grade 10 math added on Tuesday and Thursday, 5:00 to 6:30, in another color."
+        },
+        {
+          "src": "/captures/en/lessons/phone/fill-3.webp",
+          "alt": "Weekly timetable named My lessons with the Saturday review session added, 10:00 to 12:00."
+        },
+        {
+          "src": "/captures/en/lessons/phone/fill-4.webp",
+          "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+        }
+      ]
     }
   },
   "en/lessons/phone/lock_screen": {
@@ -690,7 +801,7 @@
       "src": "/captures/en/lessons/phone/widget_done.mp4",
       "poster": "/captures/en/lessons/phone/widget_done.webp",
       "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
-      "durationMs": 5800
+      "durationMs": 5767
     }
   },
   "en/lessons/phone/widgets": {
@@ -728,9 +839,26 @@
   "en/lessons/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/lessons/tablet/fill.webp",
-      "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/lessons/tablet/fill-1.webp",
+          "alt": "Weekly timetable named My lessons with only Grade 8 math on Monday and Wednesday, 4:00 to 5:30."
+        },
+        {
+          "src": "/captures/en/lessons/tablet/fill-2.webp",
+          "alt": "Weekly timetable named My lessons with Grade 10 math added on Tuesday and Thursday, 5:00 to 6:30, in another color."
+        },
+        {
+          "src": "/captures/en/lessons/tablet/fill-3.webp",
+          "alt": "Weekly timetable named My lessons with the Saturday review session added, 10:00 to 12:00."
+        },
+        {
+          "src": "/captures/en/lessons/tablet/fill-4.webp",
+          "alt": "Weekly timetable named My lessons. Grade 8 math, Grade 10 math, a Saturday review session and the morning gym, each in its own color."
+        }
+      ]
     }
   },
   "en/lessons/tablet/lock_screen": {
@@ -790,7 +918,7 @@
       "src": "/captures/en/lessons/tablet/widget_done.mp4",
       "poster": "/captures/en/lessons/tablet/widget_done.webp",
       "alt": "Marking Make midterm review sheet as complete in the To-Do widget on the home screen.",
-      "durationMs": 5800
+      "durationMs": 5700
     }
   },
   "en/lessons/tablet/widgets": {
@@ -828,9 +956,26 @@
   "en/middle_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/middle-school/phone/fill.webp",
-      "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/phone/fill-1.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with only Monday's periods filled in. Period 1 is English, 8:15 to 9:00."
+        },
+        {
+          "src": "/captures/en/middle-school/phone/fill-2.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with periods from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/middle-school/phone/fill-3.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with seven 45-minute periods every day from Monday to Friday."
+        },
+        {
+          "src": "/captures/en/middle-school/phone/fill-4.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+        }
+      ]
     }
   },
   "en/middle_school/phone/lock_screen": {
@@ -890,7 +1035,7 @@
       "src": "/captures/en/middle-school/phone/widget_done.mp4",
       "poster": "/captures/en/middle-school/phone/widget_done.webp",
       "alt": "Marking Science project report as complete in the To-Do widget on the home screen.",
-      "durationMs": 5667
+      "durationMs": 5733
     }
   },
   "en/middle_school/phone/widgets": {
@@ -928,9 +1073,26 @@
   "en/middle_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/middle-school/tablet/fill.webp",
-      "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/middle-school/tablet/fill-1.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with only Monday's periods filled in. Period 1 is English, 8:15 to 9:00."
+        },
+        {
+          "src": "/captures/en/middle-school/tablet/fill-2.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with periods from Monday to Wednesday."
+        },
+        {
+          "src": "/captures/en/middle-school/tablet/fill-3.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall with seven 45-minute periods every day from Monday to Friday."
+        },
+        {
+          "src": "/captures/en/middle-school/tablet/fill-4.webp",
+          "alt": "Weekly timetable for Noah · Grade 7 Fall. Seven 45-minute periods a day, with soccer practice on Monday, Wednesday and Friday afternoons."
+        }
+      ]
     }
   },
   "en/middle_school/tablet/lock_screen": {
@@ -990,7 +1152,7 @@
       "src": "/captures/en/middle-school/tablet/widget_done.mp4",
       "poster": "/captures/en/middle-school/tablet/widget_done.webp",
       "alt": "Marking Science project report as complete in the To-Do widget on the home screen.",
-      "durationMs": 5667
+      "durationMs": 5633
     }
   },
   "en/middle_school/tablet/widgets": {
@@ -1028,9 +1190,22 @@
   "en/university/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/university/phone/fill.webp",
-      "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/university/phone/fill-1.webp",
+          "alt": "Weekly timetable for Fall semester with only Monday's two classes. Data Structures is 9:00 to 10:30 in Engineering Hall 301."
+        },
+        {
+          "src": "/captures/en/university/phone/fill-2.webp",
+          "alt": "Weekly timetable for Fall semester with six classes from Monday to Wednesday, each in its own color."
+        },
+        {
+          "src": "/captures/en/university/phone/fill-3.webp",
+          "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+        }
+      ]
     }
   },
   "en/university/phone/lock_screen": {
@@ -1081,7 +1256,7 @@
       "src": "/captures/en/university/phone/widget_done.mp4",
       "poster": "/captures/en/university/phone/widget_done.webp",
       "alt": "Marking Submit Data Structures lab as complete in the To-Do widget on the home screen.",
-      "durationMs": 5667
+      "durationMs": 5767
     }
   },
   "en/university/phone/widgets": {
@@ -1119,9 +1294,22 @@
   "en/university/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/en/university/tablet/fill.webp",
-      "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/en/university/tablet/fill-1.webp",
+          "alt": "Weekly timetable for Fall semester with only Monday's two classes. Data Structures is 9:00 to 10:30 in Engineering Hall 301."
+        },
+        {
+          "src": "/captures/en/university/tablet/fill-2.webp",
+          "alt": "Weekly timetable for Fall semester with six classes from Monday to Wednesday, each in its own color."
+        },
+        {
+          "src": "/captures/en/university/tablet/fill-3.webp",
+          "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+        }
+      ]
     }
   },
   "en/university/tablet/lock_screen": {
@@ -1172,7 +1360,7 @@
       "src": "/captures/en/university/tablet/widget_done.mp4",
       "poster": "/captures/en/university/tablet/widget_done.webp",
       "alt": "Marking Submit Data Structures lab as complete in the To-Do widget on the home screen.",
-      "durationMs": 5633
+      "durationMs": 5600
     }
   },
   "en/university/tablet/widgets": {
@@ -1210,9 +1398,26 @@
   "ko/after_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/phone/fill.webp",
-      "alt": "지우 주간표. 방과후 미술, 피아노, 태권도, 영어학원, 토요일 수영이 학원마다 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/phone/fill-1.webp",
+          "alt": "지우 주간표. 화요일과 목요일 피아노 15:00~15:50만 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/phone/fill-2.webp",
+          "alt": "지우 주간표. 피아노에 월·수·금 태권도 16:30~17:20이 다른 색으로 더해져 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/phone/fill-3.webp",
+          "alt": "지우 주간표. 월·수 방과후 미술과 화·목 영어학원까지 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/phone/fill-4.webp",
+          "alt": "지우 주간표. 방과후 미술, 피아노, 태권도, 영어학원, 토요일 수영이 학원마다 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/after_school/phone/lock_screen": {
@@ -1281,7 +1486,7 @@
       "src": "/captures/ko/after-school/phone/widget_done.mp4",
       "poster": "/captures/ko/after-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 수영 가방 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5600
+      "durationMs": 5400
     }
   },
   "ko/after_school/phone/widgets": {
@@ -1319,9 +1524,26 @@
   "ko/after_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/after-school/tablet/fill.webp",
-      "alt": "지우 주간표. 방과후 미술, 피아노, 태권도, 영어학원, 토요일 수영이 학원마다 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/after-school/tablet/fill-1.webp",
+          "alt": "지우 주간표. 화요일과 목요일 피아노 15:00~15:50만 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/tablet/fill-2.webp",
+          "alt": "지우 주간표. 피아노에 월·수·금 태권도 16:30~17:20이 다른 색으로 더해져 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/tablet/fill-3.webp",
+          "alt": "지우 주간표. 월·수 방과후 미술과 화·목 영어학원까지 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/after-school/tablet/fill-4.webp",
+          "alt": "지우 주간표. 방과후 미술, 피아노, 태권도, 영어학원, 토요일 수영이 학원마다 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/after_school/tablet/lock_screen": {
@@ -1390,7 +1612,7 @@
       "src": "/captures/ko/after-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/after-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 수영 가방 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5700
+      "durationMs": 5800
     }
   },
   "ko/after_school/tablet/widgets": {
@@ -1428,9 +1650,22 @@
   "ko/elementary_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/elementary-school/phone/fill.webp",
-      "alt": "하윤 4학년 주간표. 월요일부터 금요일까지 40분 수업이 과목마다 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/elementary-school/phone/fill-1.webp",
+          "alt": "하윤 4학년 주간표. 월요일 수업만 들어가 있고, 1교시 국어 9:00~9:40과 2교시 수학 9:50~10:30 사이에 쉬는 시간 10분이 비어 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/phone/fill-2.webp",
+          "alt": "하윤 4학년 주간표. 월요일부터 수요일까지 40분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/phone/fill-3.webp",
+          "alt": "하윤 4학년 주간표. 월요일부터 금요일까지 40분 수업이 과목마다 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/elementary_school/phone/lock_screen": {
@@ -1490,7 +1725,7 @@
       "src": "/captures/ko/elementary-school/phone/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5667
+      "durationMs": 5567
     }
   },
   "ko/elementary_school/phone/widgets": {
@@ -1528,9 +1763,22 @@
   "ko/elementary_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/elementary-school/tablet/fill.webp",
-      "alt": "하윤 4학년 주간표. 월요일부터 금요일까지 40분 수업이 과목마다 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/elementary-school/tablet/fill-1.webp",
+          "alt": "하윤 4학년 주간표. 월요일 수업만 들어가 있고, 1교시 국어 9:00~9:40과 2교시 수학 9:50~10:30 사이에 쉬는 시간 10분이 비어 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/tablet/fill-2.webp",
+          "alt": "하윤 4학년 주간표. 월요일부터 수요일까지 40분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/elementary-school/tablet/fill-3.webp",
+          "alt": "하윤 4학년 주간표. 월요일부터 금요일까지 40분 수업이 과목마다 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/elementary_school/tablet/lock_screen": {
@@ -1590,7 +1838,7 @@
       "src": "/captures/ko/elementary-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/elementary-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 색연필 챙기기를 완료로 표시하는 모습.",
-      "durationMs": 5533
+      "durationMs": 5600
     }
   },
   "ko/elementary_school/tablet/widgets": {
@@ -1628,9 +1876,26 @@
   "ko/high_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/high-school/phone/fill.webp",
-      "alt": "2학년 2학기 주간표. 50분 수업이 7교시까지 들어가 있고 월요일부터 목요일 저녁에는 자율학습이 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/high-school/phone/fill-1.webp",
+          "alt": "2학년 2학기 주간표. 월요일 수업만 들어가 있고, 1교시 8:40~9:30부터 7교시 16:20까지다."
+        },
+        {
+          "src": "/captures/ko/high-school/phone/fill-2.webp",
+          "alt": "2학년 2학기 주간표. 월요일부터 수요일까지 50분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/phone/fill-3.webp",
+          "alt": "2학년 2학기 주간표. 월요일부터 금요일까지 50분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/phone/fill-4.webp",
+          "alt": "2학년 2학기 주간표. 50분 수업이 7교시까지 들어가 있고 월요일부터 목요일 저녁에는 자율학습이 있다."
+        }
+      ]
     }
   },
   "ko/high_school/phone/lock_screen": {
@@ -1690,7 +1955,7 @@
       "src": "/captures/ko/high-school/phone/widget_done.mp4",
       "poster": "/captures/ko/high-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 영어 발표 준비를 완료로 표시하는 모습.",
-      "durationMs": 5600
+      "durationMs": 5667
     }
   },
   "ko/high_school/phone/widgets": {
@@ -1728,9 +1993,26 @@
   "ko/high_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/high-school/tablet/fill.webp",
-      "alt": "2학년 2학기 주간표. 50분 수업이 7교시까지 들어가 있고 월요일부터 목요일 저녁에는 자율학습이 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/high-school/tablet/fill-1.webp",
+          "alt": "2학년 2학기 주간표. 월요일 수업만 들어가 있고, 1교시 8:40~9:30부터 7교시 16:20까지다."
+        },
+        {
+          "src": "/captures/ko/high-school/tablet/fill-2.webp",
+          "alt": "2학년 2학기 주간표. 월요일부터 수요일까지 50분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/tablet/fill-3.webp",
+          "alt": "2학년 2학기 주간표. 월요일부터 금요일까지 50분 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/high-school/tablet/fill-4.webp",
+          "alt": "2학년 2학기 주간표. 50분 수업이 7교시까지 들어가 있고 월요일부터 목요일 저녁에는 자율학습이 있다."
+        }
+      ]
     }
   },
   "ko/high_school/tablet/lock_screen": {
@@ -1790,7 +2072,7 @@
       "src": "/captures/ko/high-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/high-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 영어 발표 준비를 완료로 표시하는 모습.",
-      "durationMs": 5733
+      "durationMs": 5900
     }
   },
   "ko/high_school/tablet/widgets": {
@@ -1828,9 +2110,26 @@
   "ko/lessons/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/lessons/phone/fill.webp",
-      "alt": "수업표 주간표. 중2 수학, 고1 수학, 토요일 보충 수업과 아침 운동이 서로 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/lessons/phone/fill-1.webp",
+          "alt": "수업표 주간표. 월요일과 수요일 중2 수학 16:00~17:30만 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/phone/fill-2.webp",
+          "alt": "수업표 주간표. 화요일과 목요일 고1 수학 17:00~18:30이 다른 색으로 더해져 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/phone/fill-3.webp",
+          "alt": "수업표 주간표. 토요일 10:00~12:00 보충 수업까지 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/phone/fill-4.webp",
+          "alt": "수업표 주간표. 중2 수학, 고1 수학, 토요일 보충 수업과 아침 운동이 서로 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/lessons/phone/lock_screen": {
@@ -1928,9 +2227,26 @@
   "ko/lessons/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/lessons/tablet/fill.webp",
-      "alt": "수업표 주간표. 중2 수학, 고1 수학, 토요일 보충 수업과 아침 운동이 서로 다른 색으로 들어가 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/lessons/tablet/fill-1.webp",
+          "alt": "수업표 주간표. 월요일과 수요일 중2 수학 16:00~17:30만 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/tablet/fill-2.webp",
+          "alt": "수업표 주간표. 화요일과 목요일 고1 수학 17:00~18:30이 다른 색으로 더해져 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/tablet/fill-3.webp",
+          "alt": "수업표 주간표. 토요일 10:00~12:00 보충 수업까지 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/lessons/tablet/fill-4.webp",
+          "alt": "수업표 주간표. 중2 수학, 고1 수학, 토요일 보충 수업과 아침 운동이 서로 다른 색으로 들어가 있다."
+        }
+      ]
     }
   },
   "ko/lessons/tablet/lock_screen": {
@@ -1990,7 +2306,7 @@
       "src": "/captures/ko/lessons/tablet/widget_done.mp4",
       "poster": "/captures/ko/lessons/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 중간고사 대비 자료 만들기를 완료로 표시하는 모습.",
-      "durationMs": 5633
+      "durationMs": 5667
     }
   },
   "ko/lessons/tablet/widgets": {
@@ -2028,9 +2344,26 @@
   "ko/middle_school/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/middle-school/phone/fill.webp",
-      "alt": "서준 2학년 2학기 주간표. 45분 수업이 7교시까지 들어가 있고 월·수·금 저녁에는 수학학원이 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/middle-school/phone/fill-1.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일 수업만 들어가 있고, 1교시 국어는 8:40~9:25다."
+        },
+        {
+          "src": "/captures/ko/middle-school/phone/fill-2.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일부터 수요일까지 학교 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/phone/fill-3.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일부터 금요일까지 45분 학교 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/phone/fill-4.webp",
+          "alt": "서준 2학년 2학기 주간표. 45분 수업이 7교시까지 들어가 있고 월·수·금 저녁에는 수학학원이 있다."
+        }
+      ]
     }
   },
   "ko/middle_school/phone/lock_screen": {
@@ -2090,7 +2423,7 @@
       "src": "/captures/ko/middle-school/phone/widget_done.mp4",
       "poster": "/captures/ko/middle-school/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 과학 수행평가 보고서를 완료로 표시하는 모습.",
-      "durationMs": 5900
+      "durationMs": 5867
     }
   },
   "ko/middle_school/phone/widgets": {
@@ -2128,9 +2461,26 @@
   "ko/middle_school/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/middle-school/tablet/fill.webp",
-      "alt": "서준 2학년 2학기 주간표. 45분 수업이 7교시까지 들어가 있고 월·수·금 저녁에는 수학학원이 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/middle-school/tablet/fill-1.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일 수업만 들어가 있고, 1교시 국어는 8:40~9:25다."
+        },
+        {
+          "src": "/captures/ko/middle-school/tablet/fill-2.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일부터 수요일까지 학교 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/tablet/fill-3.webp",
+          "alt": "서준 2학년 2학기 주간표. 월요일부터 금요일까지 45분 학교 수업이 들어가 있다."
+        },
+        {
+          "src": "/captures/ko/middle-school/tablet/fill-4.webp",
+          "alt": "서준 2학년 2학기 주간표. 45분 수업이 7교시까지 들어가 있고 월·수·금 저녁에는 수학학원이 있다."
+        }
+      ]
     }
   },
   "ko/middle_school/tablet/lock_screen": {
@@ -2190,7 +2540,7 @@
       "src": "/captures/ko/middle-school/tablet/widget_done.mp4",
       "poster": "/captures/ko/middle-school/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 과학 수행평가 보고서를 완료로 표시하는 모습.",
-      "durationMs": 5667
+      "durationMs": 5267
     }
   },
   "ko/middle_school/tablet/widgets": {
@@ -2228,9 +2578,22 @@
   "ko/university/phone/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/university/phone/fill.webp",
-      "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/university/phone/fill-1.webp",
+          "alt": "이번 학기 주간표. 월요일 강의 두 개만 들어가 있고, 자료구조는 9:00~10:30 공학관 301이다."
+        },
+        {
+          "src": "/captures/ko/university/phone/fill-2.webp",
+          "alt": "이번 학기 주간표. 월요일부터 수요일까지 강의 여섯 개가 색으로 구분되어 있다."
+        },
+        {
+          "src": "/captures/ko/university/phone/fill-3.webp",
+          "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
+        }
+      ]
     }
   },
   "ko/university/phone/lock_screen": {
@@ -2281,7 +2644,7 @@
       "src": "/captures/ko/university/phone/widget_done.mp4",
       "poster": "/captures/ko/university/phone/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출을 완료로 표시하는 모습.",
-      "durationMs": 5600
+      "durationMs": 5800
     }
   },
   "ko/university/phone/widgets": {
@@ -2319,9 +2682,22 @@
   "ko/university/tablet/fill": {
     "status": "final",
     "media": {
-      "kind": "image",
-      "src": "/captures/ko/university/tablet/fill.webp",
-      "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
+      "kind": "sequence",
+      "frameMs": 700,
+      "frames": [
+        {
+          "src": "/captures/ko/university/tablet/fill-1.webp",
+          "alt": "이번 학기 주간표. 월요일 강의 두 개만 들어가 있고, 자료구조는 9:00~10:30 공학관 301이다."
+        },
+        {
+          "src": "/captures/ko/university/tablet/fill-2.webp",
+          "alt": "이번 학기 주간표. 월요일부터 수요일까지 강의 여섯 개가 색으로 구분되어 있다."
+        },
+        {
+          "src": "/captures/ko/university/tablet/fill-3.webp",
+          "alt": "이번 학기 주간표. 월요일부터 금요일까지 강의 열 개가 색으로 구분되어 있다."
+        }
+      ]
     }
   },
   "ko/university/tablet/lock_screen": {
@@ -2372,7 +2748,7 @@
       "src": "/captures/ko/university/tablet/widget_done.mp4",
       "poster": "/captures/ko/university/tablet/widget_done.webp",
       "alt": "홈 화면의 To-Do 위젯에서 자료구조 실습 제출을 완료로 표시하는 모습.",
-      "durationMs": 5733
+      "durationMs": 5467
     }
   },
   "ko/university/tablet/widgets": {

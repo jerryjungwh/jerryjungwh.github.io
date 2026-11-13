@@ -53,7 +53,9 @@ test('임시 화면에는 「촬영 예정」이 적혀 있고, 최종 화면에
   });
 });
 
-test('이어 보기는 장마다 차례 번호가 있고 첫 장만 켜져 있다', () => {
+// Without the script the stepper is a document, so the frame that is on is the one a reader should see:
+// ② (0.7 s, stacking) its full week, every other sequence its first screen.
+test('이어 보기는 장마다 차례 번호가 있고 한 장만 켜져 있다: ②는 다 쌓인 마지막 장, 다른 이어 보기는 첫 장', () => {
   const seq = $('[data-media-kind="sequence"]');
   expect(seq.length).toBeGreaterThan(0);
   seq.each((_, el) => {
@@ -61,8 +63,24 @@ test('이어 보기는 장마다 차례 번호가 있고 첫 장만 켜져 있�
     expect(frames.length).toBeGreaterThan(1);
     expect(frames.map((_, f) => $(f).attr('data-frame')).get()).toEqual(frames.map((i) => String(i)).get());
     expect(frames.filter('[data-on]').length).toBe(1);
-    expect(frames.first().attr('data-on')).toBeDefined();
+    const stacking = $(el).attr('data-frame-ms') === '700';
+    expect((stacking ? frames.last() : frames.first()).attr('data-on')).toBeDefined();
+    expect($(el).attr('data-rest-frame')).toBe(String(stacking ? frames.length - 1 : 0));
   });
+});
+
+test('두 언어 홈의 ② 화면 자리 24개가 모두 3~4장짜리 0.7초 이어 보기다', () => {
+  for (const file of ['dist/index.html', 'dist/en/index.html']) {
+    const page = load(read(file));
+    const fills = page('figure[data-media][data-step="fill"] [data-media-kind]');
+    expect(fills.length, file).toBe(12);
+    fills.each((_, el) => {
+      expect(page(el).attr('data-media-kind'), file).toBe('sequence');
+      expect(page(el).attr('data-frame-ms'), file).toBe('700');
+      const n = page(el).find('img[data-frame]').length;
+      expect(n >= 3 && n <= 4, `${file} ${n}`).toBe(true);
+    });
+  }
 });
 
 test('실제 캡처는 여러 너비로 내보낸다', () => {

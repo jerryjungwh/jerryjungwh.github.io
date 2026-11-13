@@ -155,7 +155,33 @@
       "alt": "Timetable settings screen. The name is Fall semester, the days are Monday to Friday and the hours are 9 am to 4 pm."
     },
     "fill": {
-      "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+      "frames": [
+        {
+          "add": [
+            "ds_mon",
+            "os_mon"
+          ],
+          "alt": "Weekly timetable for Fall semester with only Monday's two classes. Data Structures is 9:00 to 10:30 in Engineering Hall 301."
+        },
+        {
+          "add": [
+            "db_tue",
+            "eng_tue",
+            "sw_wed",
+            "proj_wed"
+          ],
+          "alt": "Weekly timetable for Fall semester with six classes from Monday to Wednesday, each in its own color."
+        },
+        {
+          "add": [
+            "ds_thu",
+            "ui_thu",
+            "stat_fri",
+            "seminar_fri"
+          ],
+          "alt": "Weekly timetable for Fall semester. Ten classes from Monday to Friday, each in its own color."
+        }
+      ]
     },
     "unique": {
       "screen": "schedule_detail",

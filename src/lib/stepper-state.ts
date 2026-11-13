@@ -10,12 +10,14 @@ export interface StepperState {
 
 export type StepperEvent =
   | { type: 'tick'; dtMs: number; stepDurationMs: number }
-  | { type: 'selectStep'; stepIndex: number }
+  /** `atMs`: where in the step to start. A paused visitor sees ② fully stacked (see restFrame). */
+  | { type: 'selectStep'; stepIndex: number; atMs?: number }
   | { type: 'selectCase'; caseIndex: number }
-  | { type: 'togglePause' }
+  /** `atMs` when pausing: a stacking screen stops on its full week (see restFrame). Resuming keeps the time. */
+  | { type: 'togglePause'; atMs?: number }
   /** A paused visitor asks for the next frame of a sequence. After the last frame comes the first. */
   | { type: 'nextFrame'; frames: number; frameMs: number }
-  | { type: 'setDevice'; device: Device };
+  | { type: 'setDevice'; device: Device; atMs?: number };
 
 export interface StepperDims {
   cases: number;
@@ -50,20 +52,33 @@ export function reduce(s: StepperState, e: StepperEvent, d: StepperDims): Steppe
     }
     case 'selectStep':
       if (e.stepIndex < 0 || e.stepIndex >= d.steps) return s;
-      return { ...s, stepIndex: e.stepIndex, elapsedMs: 0 };
+      return { ...s, stepIndex: e.stepIndex, elapsedMs: e.atMs ?? 0 };
     case 'selectCase':
       if (e.caseIndex < 0 || e.caseIndex >= d.cases) return s;
       return { ...s, caseIndex: e.caseIndex, stepIndex: 0, elapsedMs: 0 };
     case 'togglePause':
-      return { ...s, paused: !s.paused };
+      return s.paused ? { ...s, paused: false } : { ...s, paused: true, elapsedMs: Math.max(s.elapsedMs, e.atMs ?? 0) };
     case 'nextFrame': {
       if (e.frames < 2 || e.frameMs <= 0) return s;
       const next = (sequenceFrameIndex(e.frames, e.frameMs, s.elapsedMs) + 1) % e.frames;
       return { ...s, elapsedMs: next * e.frameMs };
     }
     case 'setDevice':
-      return { ...s, device: e.device, elapsedMs: 0 };
+      return { ...s, device: e.device, elapsedMs: e.atMs ?? 0 };
   }
+}
+
+/** A sequence that turns faster than it holds is ② stacking classes up (0.7 s a screen). */
+function isStacking(m: Media): boolean {
+  return m.kind === 'sequence' && m.frameMs < SEQUENCE_HOLD_MS;
+}
+
+/**
+ * The frame to show when nothing moves: without the script, paused, or with less motion asked for. A stacking
+ * sequence shows its last screen, the full week its copy talks about; any other sequence its first.
+ */
+export function restFrame(m: Media): number {
+  return isStacking(m) && m.kind === 'sequence' ? m.frames.length - 1 : 0;
 }
 
 /** How long a step stays before auto-advance. */
@@ -72,7 +87,7 @@ export function stepDurationMs(m: Media): number {
     case 'image':
       return IMAGE_MS;
     case 'sequence': {
-      const hold = m.frameMs < SEQUENCE_HOLD_MS ? SEQUENCE_HOLD_MS : 0;
+      const hold = isStacking(m) ? SEQUENCE_HOLD_MS : 0;
       return m.frames.length * m.frameMs + hold;
     }
     case 'video':

@@ -101,3 +101,16 @@ test('휴대폰 폭의 사례 페이지는 화면을 위에 붙여 두고 긴 �
   await expect(page.locator('figure[data-step="lock_screen"][data-device="phone"]')).toBeInViewport({ ratio: 0.9 });
   await expect(last).toBeInViewport();
 });
+
+test('휴대폰 폭 사례 페이지에서도 위에 붙은 화면의 크게 보기로 창을 연다', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  await page.goto('/for/university/');
+  await expect(page.locator('[data-stepper][data-ready]')).toHaveCount(1);
+  const last = page.locator('article[data-case]:visible li[data-step] button').nth(7);
+  await last.click();
+  await last.scrollIntoViewIfNeeded();
+  const zoom = page.locator('figure[data-step="lock_screen"][data-device="phone"] button[data-action="zoom"]');
+  await expect(zoom).toBeInViewport();
+  await zoom.click();
+  await expect(page.locator('dialog[data-zoom]')).toHaveAttribute('open', '');
+});

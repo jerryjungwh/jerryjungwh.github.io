@@ -29,7 +29,7 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 | `src/data/site.<lang>.ts`, `faq.<lang>.ts` | 그 밖의 문구, 질문과 답 |
 | `src/data/site.ts` | 언어 → 문구. 문구를 고르는 곳은 여기 하나다 |
 | `src/data/captures.ts`, `captures.manifest.json` | 단계마다 보일 앱 화면 목록(192칸). 목록 파일에 없는 칸은 임시 화면(`pending`)이고, 임시 화면이 남아 있으면 배포용 빌드가 실패한다 |
-| `capture/fixtures/<lang>/<case>.json` | 사례별 촬영 데이터: 앱에 넣을 시간표·수업·To-Do와 화면별 대체 문장. 화면과 글이 같은 이름을 쓰는지 검사한다 |
+| `capture/fixtures/<lang>/<case>.json` | 사례별 촬영 데이터: 앱에 넣을 시간표·수업·To-Do와 화면별 대체 문장. ②는 `steps.fill.frames`에 장마다 더할 수업을 적는다(3~4장, 0.7초씩 쌓임). 화면과 글이 같은 이름을 쓰는지 검사한다 |
 | `capture/run.ts`, `capture/lib.ts` | 에뮬레이터의 실제 앱에서 화면을 찍어 그림·녹화·목록 파일로 넣는 스크립트 |
 | `src/assets/captures/`, `public/captures/` | 찍은 그림(WebP)과 녹화(MP4). 손으로 고치지 않는다 |
 | `src/lib/stepper-state.ts` | 단계형 사례의 상태 계산(순수 함수) |
@@ -43,6 +43,8 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 - 모든 글은 빌드된 HTML에 있다. 스크립트는 무엇을 보일지만 바꾼다. 스크립트가 없어도 여섯 사례가 문서로 보인다.
 - 단계를 넘겨도 주소와 방문 기록을 바꾸지 않는다.
+- 「크게 보기」는 스크립트가 있을 때만 보인다. 누를 때 그 화면의 원본 그림 한 장만 받고, 창이 열린 동안 단계형은 멈춰 있으며, 주소와 방문 기록을 바꾸지 않는다.
+- 멈춘 상태와 스크립트가 없는 문서에서 ②는 다 쌓인 마지막 장을 보인다.
 - 바깥 서버의 글꼴·스크립트·그림을 부르지 않는다.
 - 폭 360px에서 가로로 넘치지 않는다.
 - 쓰지 않는 말(`src/lib/forbidden.ts`)이 어느 페이지에도 없다.
@@ -73,13 +75,13 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 에뮬레이터를 켤 때마다(스냅숏을 저장하지 않고 켰다면 끌 때 아래 준비가 모두 사라진다. `-no-snapshot-save`로 켰을 때가 그렇다):
 
 1. 에뮬레이터 하나만 띄운다. 폰은 `Pixel_9_API_35_2`(1080×2424), 태블릿은 `Pixel_Tablet`(2560×1600).
-2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고, 두 APK를 `adb -s <에뮬레이터> install -r`로 **둘 다** 넣는다. 한 빌드에서 나온 짝이어야 한다. 앱만 예전 빌드면 검사가 `INSTRUMENTATION_RESULT: shortMsg=Process crashed.`로 끝난다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다. 에뮬레이터 이름은 `adb devices`로 본다(태블릿을 끄고 바로 폰을 켜면 `emulator-5556`이 될 수 있다). `Pixel_Tablet`은 `/data`가 거의 차 있어 설치가 `INSTALL_FAILED_INSUFFICIENT_STORAGE`로 실패할 수 있다. `adb shell settings put global sys_storage_threshold_percentage 2`로 잠시 낮추고, 다 찍은 뒤 `adb shell settings delete global sys_storage_threshold_percentage`로 지운다.
+2. 앱 저장소(`simple-scheduler-android-kotlin`)에서 `./gradlew assembleDebug assembleDebugAndroidTest`로 빌드하고(화면은 출시된 앱이어야 한다. 앱 저장소에 출시되지 않은 변경이 있으면, dev에서 출시본과 앱 코드가 같고 `APP_MODE`가 DEV인 커밋으로 `git worktree add --detach <폴더> <커밋>`을 만든다. master의 출시 병합 커밋은 `APP_MODE`가 PROD라 촬영 검사가 「Site captures require DEV」로 멈춘다. `local.properties`는 복사하지 말고 링크로 걸고, 촬영 검사 파일을 옮겨 그 폴더에서 빌드한다. 11-13 촬영은 `c84b8e1`로 했다), 두 APK를 `adb -s <에뮬레이터> install -r`로 **둘 다** 넣는다. 한 빌드에서 나온 짝이어야 한다. 앱만 예전 빌드면 검사가 `INSTRUMENTATION_RESULT: shortMsg=Process crashed.`로 끝난다. 앱 버전 코드는 `capture/run.ts`의 `APP_VERSION_CODE`와 같아야 한다. 에뮬레이터 이름은 `adb devices`로 본다(태블릿을 끄고 바로 폰을 켜면 `emulator-5556`이 될 수 있다). `Pixel_Tablet`은 `/data`가 거의 차 있어 설치가 `INSTALL_FAILED_INSUFFICIENT_STORAGE`로 실패할 수 있다. `adb shell settings put global sys_storage_threshold_percentage 2`로 잠시 낮추고, 다 찍은 뒤 `adb shell settings delete global sys_storage_threshold_percentage`로 지운다.
 3. `capture/setup-launcher.sh phone`(태블릿은 `tablet`)을 돌린다. 런처에 이 앱의 위젯 세 개(주간표, 오늘 통합, To-Do)를 쪽마다 하나씩 붙여 쪽을 가득 채우게 키우고(폰 4칸 × 5줄, 태블릿 6칸 × 5줄), 아래 줄의 추천 앱을 끈다. 스냅숏에 이 앱의 위젯 세 개가 이미 있으면 붙이지 않는다(두 벌이 되지 않게). 손으로 할 때 주의: 위젯 손잡이는 `input swipe`로는 잡히지 않고 `input motionevent DOWN/MOVE/UP`을 천천히 보내야 끌린다. 키운 위젯이 쪽을 채워야 다음 위젯이 새 쪽에 놓인다.
 
 찍기:
 
 ```bash
-npm run capture -- --device phone --lang ko          # 사례 여섯 개 (약 8분)
+npm run capture -- --device phone --lang ko          # 사례 여섯 개 (약 10분)
 npm run capture -- --device phone --lang ko --case university   # 한 사례만
 npm run check
 ```
@@ -94,16 +96,16 @@ npm run check
 
 ## 속도
 
-2026-11-12, `node scripts/measure.mjs`(Pixel 7 흉내, 느린 4G, CPU 4배 느리게, 세 번 중 가운데 값):
+2026-11-13, 실제 화면 192칸과 ② 이어 보기·크게 보기가 들어간 공개용 빌드, `node scripts/measure.mjs`(Pixel 7 흉내, 느린 4G, CPU 4배 느리게, 세 번 중 가운데 값):
 
 | 페이지 | 가장 큰 것이 뜨는 시간(LCP) | 화면 밀림(CLS) |
 |---|---|---|
-| `/` | 0.62초 | 0.012 |
-| `/en/` | 0.58초 | 0.000 |
-| `/for/university/` | 0.58초 | 0.000 |
-| `/faq/` | 0.57초 | 0.000 |
+| `/` | 0.78초 | 0.012 |
+| `/en/` | 0.93초 | 0.000 |
+| `/for/university/` | 0.71초 | 0.000 |
+| `/faq/` | 0.55초 | 0.000 |
 
-목표는 LCP 2.5초 이하다. 지금은 화면이 대부분 임시 그림이라 가장 큰 것이 제목 글자다. 실제 캡처가 들어온 뒤 다시 잰다. Lighthouse로는 재지 않았다.
+목표는 LCP 2.5초 이하다. 임시 그림이던 11-12에는 0.57~0.62초였다. Lighthouse로는 재지 않았다.
 
 ## 아직 없는 것
 

@@ -26,6 +26,8 @@ export const SITE_KO: SiteStrings = {
     pause: '자동 넘김 멈추기',
     resume: '자동 넘김 켜기',
     androidNote: 'Android 앱 화면이에요',
+    zoom: '크게 보기',
+    zoomClose: '닫기',
   },
   what: {
     heading: '심간표는 어떤 앱인가요?',

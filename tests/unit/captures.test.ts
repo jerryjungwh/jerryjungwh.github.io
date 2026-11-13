@@ -58,6 +58,16 @@ test('화면 목록 파일에 있는 칸은 그 값이고, 없는 칸은 임시 
 test('목록 파일의 녹화 길이와 이어 보기 간격이 말이 된다', () => {
   for (const [key, e] of allEntries()) {
     if (e.media.kind === 'video') expect(e.media.durationMs, key).toBeGreaterThanOrEqual(3000), expect(e.media.durationMs, key).toBeLessThanOrEqual(10000);
-    if (e.media.kind === 'sequence') expect(e.media.frameMs, key).toBe(2500), expect(e.media.frames.length, key).toBeGreaterThanOrEqual(2);
+    // ② stacks classes up at 0.7 s a screen; the other sequences turn every 2.5 s.
+    if (e.media.kind === 'sequence') expect(e.media.frameMs, key).toBe(key.endsWith('/fill') ? 700 : 2500), expect(e.media.frames.length, key).toBeGreaterThanOrEqual(2);
+  }
+});
+
+test('② 24칸은 모두 3~4장짜리 0.7초 이어 보기다', () => {
+  const fills = allEntries().filter(([key]) => key.endsWith('/fill'));
+  expect(fills.length).toBe(24);
+  for (const [key, e] of fills) {
+    expect(e.media.kind, key).toBe('sequence');
+    if (e.media.kind === 'sequence') expect(e.media.frames.length, key).toBeGreaterThanOrEqual(3), expect(e.media.frames.length, key).toBeLessThanOrEqual(4);
   }
 });

@@ -32,6 +32,8 @@ const STEPS: StepId[] = ['create', 'fill', 'unique', 'todo', 'remind', 'widgets'
 function stepFiles(f: CaptureFixture, step: StepId): string[] {
   const frames = (n: number) => (n === 1 ? [`${step}.png`] : Array.from({ length: n }, (_, i) => `${step}-${i + 1}.png`));
   switch (step) {
+    case 'fill':
+      return frames(f.steps.fill.frames.length);
     case 'unique':
       return frames(f.steps.unique.alts.length);
     case 'todo':
@@ -52,6 +54,8 @@ const WIDGET_LABELS: Record<Lang, [string, string, string]> = {
   en: ['Weekly', 'Today overview', 'To-Do'],
 };
 const FRAME_MS = 2500;
+/** ② stacks classes up: a screen every 0.7 s, then the stepper holds on the full week (design 6, Jerry Q12). */
+const STACK_FRAME_MS = 700;
 
 /** The steps this fixture can be captured for. A background step without a photo is left as a placeholder. */
 function capturedSteps(f: CaptureFixture): StepId[] {
@@ -72,13 +76,13 @@ export function completeCells(f: CaptureFixture, device: Device, presentFiles: s
   const dir = `/captures/${f.lang}/${CASE_SLUG[f.case]}/${device}/`;
   const image = (name: string, alt: string) => ({ kind: 'image' as const, src: `${dir}${name}.webp`, alt });
   /** One alt: a single screen. More: a sequence, one frame per alt, in the files' order. */
-  const screens = (step: StepId, alts: string[]): CaptureEntry['media'] =>
+  const screens = (step: StepId, alts: string[], frameMs = FRAME_MS): CaptureEntry['media'] =>
     alts.length === 1
       ? image(step, alts[0])
-      : { kind: 'sequence', frameMs: FRAME_MS, frames: alts.map((alt, i) => ({ src: `${dir}${step}-${i + 1}.webp`, alt })) };
+      : { kind: 'sequence', frameMs, frames: alts.map((alt, i) => ({ src: `${dir}${step}-${i + 1}.webp`, alt })) };
   const media: Record<StepId, CaptureEntry['media']> = {
     create: image('create', f.steps.create.alt),
-    fill: image('fill', f.steps.fill.alt),
+    fill: screens('fill', f.steps.fill.frames.map((x) => x.alt), STACK_FRAME_MS),
     unique: screens('unique', f.steps.unique.alts),
     todo: screens('todo', f.steps.todo.alts),
     remind: screens('remind', f.steps.remind.alts),

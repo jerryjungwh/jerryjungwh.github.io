@@ -24,13 +24,20 @@ function valid(): CaptureFixture {
         schedules: [
           { key: 'ds', day: 0, start: '09:00', end: '10:30', title: '자료구조', place: '공학관 301', color: 0 },
           { key: 'os', day: 0, start: '13:00', end: '14:30', title: '운영체제', color: 1 },
+          { key: 'db', day: 1, start: '10:00', end: '11:30', title: 'DB 설계', color: 2 },
         ],
       },
     ],
     todos: [{ key: 'lab', title: '자료구조 실습 제출', timetable: 'main', schedule: 'ds', due: { day: 2, time: '18:00' }, reminderMinutes: 60, color: 2 }],
     steps: {
       create: { alt: '시간표 설정 화면. 이름과 요일, 시간 범위가 보인다.' },
-      fill: { alt: '주간표 화면. 수업 두 개가 색으로 구분되어 있다.' },
+      fill: {
+        frames: [
+          { add: ['ds'], alt: '주간표 화면. 월요일 자료구조만 들어가 있다.' },
+          { add: ['os'], alt: '주간표 화면. 월요일 강의 두 개가 들어가 있다.' },
+          { add: ['db'], alt: '주간표 화면. 강의 세 개가 색으로 구분되어 있다.' },
+        ],
+      },
       unique: { screen: 'schedule_detail', schedule: 'ds', alts: ['자료구조 수업을 누른 화면. 강의실이 보인다.'] },
       todo: { todo: 'lab', alts: ['To-Do 편집 화면. 자료구조에 연결되어 있다.'] },
       remind: { todo: 'lab', alts: ['리마인더를 언제 받을지 고르는 화면이다.', '리마인더 시간이 되어 뜬 알람 화면이다.'] },
@@ -102,8 +109,26 @@ test('화면 장 수와 대체 문장 수가 맞는다: 둘째 시간표는 두 
 });
 
 test('대체 문장이 짧으면 잡는다', () => {
-  expect(broken((f) => (f.steps.fill.alt = '주간표')).join('\n')).toMatch(/fill/);
+  expect(broken((f) => (f.steps.fill.frames[0].alt = '주간표')).join('\n')).toMatch(/fill/);
   expect(broken((f) => (f.steps.widgets.alts[1] = '위젯')).join('\n')).toMatch(/widgets/);
+});
+
+test('② 이어 보기는 3~4장이고, 장마다 새 수업이 있으며, 모두 모으면 처음부터 있는 수업 전부다', () => {
+  const frame = (add: string[]) => ({ add, alt: '주간표 화면. 강의가 들어가 있다.' });
+  expect(broken((f) => (f.steps.fill.frames = f.steps.fill.frames.slice(0, 2))).join('\n')).toMatch(/fill: 장은 3~4장이다/);
+  expect(broken((f) => f.steps.fill.frames.push(frame(['x']), frame(['y']))).join('\n')).toMatch(/fill: 장은 3~4장이다/);
+  expect(broken((f) => (f.steps.fill.frames[1].add = [])).join('\n')).toMatch(/fill: 2번째 장에 더할 수업이 없다/);
+  expect(broken((f) => f.steps.fill.frames[2].add.push('nope')).join('\n')).toMatch(/fill: 수업 nope가 없다/);
+  expect(broken((f) => (f.timetables[0].schedules[2].since = 'unique')).join('\n')).toMatch(/fill: 수업 db는 ③부터 나오는 수업이다/);
+  expect(broken((f) => f.steps.fill.frames[2].add.push('ds')).join('\n')).toMatch(/fill: 수업 ds가 두 번 나온다/);
+  expect(broken((f) => f.timetables[0].schedules.push({ key: 'ui', day: 2, start: '14:00', end: '15:30', title: 'UI 디자인', color: 3 })).join('\n')).toMatch(/fill: 수업 ui가 ②에 들어가지 않는다/);
+  expect(broken((f) => (f.steps.fill.frames[1].alt = f.steps.fill.frames[0].alt)).join('\n')).toMatch(/fill: 장마다 대체 문장이 달라야 한다/);
+});
+
+const FILL_FRAMES: Record<CaseId, number> = { elementary_school: 3, middle_school: 4, high_school: 4, university: 3, after_school: 4, lessons: 4 };
+
+test('사례별 ② 장 수: 초등·대학 3장, 중·고·아이 학원·레슨 4장(한·영)', () => {
+  for (const lang of LANGS) for (const c of CASE_ORDER) expect(loadFixture(lang, c).steps.fill.frames.length, `${lang}/${c}`).toBe(FILL_FRAMES[c]);
 });
 
 const UNIQUE_SCREEN: Record<CaseId, CaptureFixture['steps']['unique']['screen']> = {

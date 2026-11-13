@@ -63,3 +63,16 @@ test('사례 페이지의 긴 설명은 사례마다 다르다: 같은 문장이
         }
   }
 });
+
+// Elementary and middle school and after-school are told by a parent making the child's timetable (design 7-1,
+// Jerry 11-12: no under-16 audience). Words that put the student at the desk belong to the older cases only.
+const PARENT_CASES: string[] = ['elementary_school', 'middle_school', 'after_school'];
+const STUDENT_VOICE = { ko: ['다음 교시', '다음 수업', '쉬는 시간에'], en: ['next period', 'next class', 'between classes'] } as const;
+
+test('부모가 말하는 사례(초등학교·중학교·아이 학원)에는 학생 본인 시점 말이 없다', () => {
+  for (const [lang, cases] of [['ko', CASES_KO], ['en', CASES_EN]] as const)
+    for (const c of cases.filter((x) => PARENT_CASES.includes(x.id))) {
+      const text = JSON.stringify(c).toLowerCase();
+      expect(STUDENT_VOICE[lang].filter((w) => text.includes(w)), `${lang}/${c.id}`).toEqual([]);
+    }
+});
