@@ -126,3 +126,12 @@ test('llms.txt에 앱 소개, 주요 페이지, 질문, 설치 주소가 있다'
   expect(decodeURIComponent(llms)).toContain('utm_source=llms_txt');
   expect(findForbidden(llms, 'ko')).toEqual([]);
 });
+
+// The AdMob publisher line Jerry copied from AdMob (2026-11-13). It is public by design: app-ads.txt exists to publish it.
+const APP_ADS_LINE = 'google.com, pub-7361277844669159, DIRECT, f08c47fec0942fa0';
+
+test('app-ads.txt는 AdMob 게시자 줄 하나를 사이트 맨 위에 둔다', () => {
+  const lines = read('dist/app-ads.txt').trimEnd().split('\n');
+  expect(lines).toEqual([APP_ADS_LINE]);
+  expect(lines[0]).toMatch(/^google\.com, pub-\d{16}, DIRECT, f08c47fec0942fa0$/);
+});

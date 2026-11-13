@@ -14,6 +14,12 @@ set -uo pipefail
 OLD='https://jerryjungwh.github.io'
 NEW='https://simganpyo.com'
 POLICY='SimpleScheduler-Android'
+# Where simplebase.co.kr redirects to. Until simganpyo.com is connected it is the test address:
+#   REDIRECT_TO=https://jerryjungwh.github.io bash scripts/check-live.sh redirect
+REDIRECT_TO="${REDIRECT_TO:-$NEW}"
+REDIRECT_RE=$(printf '%s' "$REDIRECT_TO" | sed 's/[.]/\\./g')
+# The AdMob publisher line served at /app-ads.txt (Play's website field points AdMob there).
+APP_ADS='google.com, pub-7361277844669159, DIRECT, f08c47fec0942fa0'
 GITHUB_A='185.199.108.153;185.199.109.153;185.199.110.153;185.199.111.153'
 GITHUB_AAAA='2606:50c0:8000::153;2606:50c0:8001::153;2606:50c0:8002::153;2606:50c0:8003::153'
 # simplebase.co.kr mail records before the redirect (2026-11-13). The redirect must leave them as they are.
@@ -88,7 +94,8 @@ stage_test() {
     expect_text "$OLD$p" 'name="robots" content="noindex"'
   done
   # policy.css styles the policy pages (their layout loads it from this site).
-  for f in robots.txt sitemap-index.xml llms.txt policy.css; do expect_status "$OLD/$f" 200; done
+  for f in robots.txt sitemap-index.xml llms.txt policy.css app-ads.txt; do expect_status "$OLD/$f" 200; done
+  expect_text "$OLD/app-ads.txt" "$APP_ADS"
   expect_status "$OLD/$POLICY/" 200
   expect_text "$OLD/$POLICY/" '개인정보처리방침'
   expect_status "$OLD/$POLICY/terms" 200
@@ -133,7 +140,9 @@ stage_public() {
     expect_text "$NEW$p" "rel=\"canonical\" href=\"$NEW$p\""
   done
   expect_text "$NEW/robots.txt" "Sitemap: $NEW/sitemap-index.xml"
-  for f in sitemap-index.xml llms.txt policy.css; do expect_status "$NEW/$f" 200; done
+  for f in sitemap-index.xml llms.txt policy.css app-ads.txt; do expect_status "$NEW/$f" 200; done
+  expect_text "$NEW/app-ads.txt" "$APP_ADS"
+  expect_redirect "$OLD/app-ads.txt" 301 '^https://simganpyo\.com/app-ads\.txt$'
   expect_status "$NEW/check-live-no-such-page/" 404
   expect_text "$NEW/$POLICY/" "rel=\"canonical\" href=\"$NEW/$POLICY/\""
   expect_text "$NEW/$POLICY/en/" 'Privacy Policy'
@@ -143,8 +152,11 @@ stage_public() {
 stage_redirect() {
   for u in https://simplebase.co.kr/ http://simplebase.co.kr/ https://www.simplebase.co.kr/; do
     expect_redirect "$u" 301 '.'
-    expect_lands "$u" 200 '^https://simganpyo\.com/$'
+    expect_lands "$u" 200 "^$REDIRECT_RE/\$"
   done
+  # AdMob reads app-ads.txt from the Play website field (http://simplebase.co.kr) and may follow one redirect.
+  expect_lands http://simplebase.co.kr/app-ads.txt 200 "^$REDIRECT_RE/app-ads\\.txt\$"
+  expect_text http://simplebase.co.kr/app-ads.txt "$APP_ADS"
   expect_dns simplebase.co.kr MX "$SIMPLEBASE_MX"
 }
 
