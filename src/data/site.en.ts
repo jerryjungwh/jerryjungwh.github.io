@@ -102,7 +102,7 @@ export const SITE_EN: SiteStrings = {
     heading: 'Get SimpleScheduler',
     play: 'Get it on Google Play',
     appStore: 'Download on the App Store',
-    iosNote: 'A new version of the iPhone app is on the way. The current iPhone version has fewer features than the Android app.',
+    iosNote: 'A fuller version of the iPhone app is on the way.',
   },
   casePage: {
     crumbsLabel: 'You are here',

@@ -37,7 +37,7 @@ test('App Store 링크도 진짜 링크이고 준비 중이라는 안내가 붙�
   const ios = $('a[data-track="store_click"][data-store="app_store"]');
   expect(ios.length).toBe(2);
   ios.each((_, a) => expect($(a).attr('href')).toBe(APP_STORE_URL));
-  expect($('body').text()).toContain('iPhone 앱은 새 버전을 준비하고 있어요. 지금 버전은 Android 앱보다 기능이 적어요.');
+  expect($('body').text()).toContain('iPhone 앱은 기능을 더 채운 새 버전을 준비하고 있어요.');
   expect($('body').text()).toContain('Android 앱 화면이에요');
 });
 

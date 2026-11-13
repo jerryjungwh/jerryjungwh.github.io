@@ -92,7 +92,7 @@ export const SITE_KO: SiteStrings = {
     heading: '심간표 받기',
     play: 'Google Play에서 받기',
     appStore: 'App Store에서 받기',
-    iosNote: 'iPhone 앱은 새 버전을 준비하고 있어요. 지금 버전은 Android 앱보다 기능이 적어요.',
+    iosNote: 'iPhone 앱은 기능을 더 채운 새 버전을 준비하고 있어요.',
   },
   casePage: {
     crumbsLabel: '현재 위치',
