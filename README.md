@@ -54,12 +54,13 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 `main`에 푸시하면 `.github/workflows/deploy.yml`이 `npm run check`를 돌리고 `dist/`를 GitHub Pages에 올린다.
 
-### Jerry가 처음 한 번 할 일
+### 처음 한 번 (2026-11-13에 했다)
 
-1. GitHub에 `jerryjungwh/jerryjungwh.github.io` 저장소를 만든다(비어 있게).
-2. 이 폴더에서 `git remote add origin git@github.com:jerryjungwh/jerryjungwh.github.io.git` 뒤 `git push -u origin main`.
-3. 저장소 Settings → Pages → Source를 **GitHub Actions**로 바꾼다.
-4. Actions 탭에서 `deploy`가 끝나면 `https://jerryjungwh.github.io/`에서 열린다.
+1. GitHub에 `jerryjungwh/jerryjungwh.github.io` 저장소를 만들었다(public, Jerry).
+2. Pages의 Source는 **GitHub Actions**다(`build_type: workflow`).
+3. origin은 SSH 주소 `git@github.com:jerryjungwh/jerryjungwh.github.io.git`다. HTTPS 주소로 푸시하면 GitHub가 계정 비밀번호를 거절한다.
+4. 이 Mac에서는 Claude의 `git push`가 막혀 있어서 푸시는 Jerry가 한다: `git push -u origin main`.
+5. Actions 탭에서 `deploy`가 끝나면 `https://jerryjungwh.github.io/`에서 열린다.
 
 이 시험 주소는 도메인을 연결하기 전이라 정책 페이지 주소(`jerryjungwh.github.io/SimpleScheduler-Android/`)에 영향을 주지 않는다.
 
@@ -68,6 +69,20 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 - 지금 워크플로는 시험 빌드를 올린다. 시험 빌드는 모든 페이지에 `noindex`를 넣어 검색에 잡히지 않는다(`src/lib/release.ts`).
 - 공개할 때는 `deploy.yml`의 `run: npm run check`를 `run: npm run build:release`로 바꾼다. `RELEASE=1`이 붙어 `noindex`가 빠지고, 임시 화면이 하나라도 남아 있으면 검사가 실패해 올라가지 않는다.
 - 공개 조건은 설계 19절이다: 화면이 모두 최종이고 도메인이 연결돼 있을 것.
+
+## 주소 확인
+
+`scripts/check-live.sh <단계>`가 바깥에서 실제 주소를 확인한다. 줄마다 PASS나 FAIL을 찍고, 실패 수를 종료 코드로 돌려준다. 네트워크가 필요해서 `npm run check`에는 들어 있지 않다. 단계는 공개 계획(앱 저장소 `claude-docs/website/plan-publish-2026-11-13.md`)의 순서를 따른다.
+
+| 단계 | 언제 | 무엇을 보나 |
+|---|---|---|
+| `test` | 도메인 연결 전 | 시험 주소가 열리고 noindex다. 정책 두 쪽이 열린다 |
+| `connected` | 도메인을 건 직후 | DNS가 GitHub를 가리킨다. 옛 정책 주소가 301로 새 도메인에 가서 열린다 |
+| `https` | 인증서가 나온 뒤 | 모든 넘김이 https로 간다. www가 정점으로 간다 |
+| `public` | 공개 빌드 배포 뒤 | noindex가 없고 canonical·robots·sitemap이 맞다 |
+| `redirect` | Cloudflare 넘김 규칙 뒤 | simplebase.co.kr이 simganpyo.com으로 가고, 메일 레코드(MX)가 그대로다 |
+
+예: `bash scripts/check-live.sh test`
 
 ## 다시 찍는 방법
 
