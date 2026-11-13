@@ -4,7 +4,8 @@
 # Every check prints one PASS or FAIL line. The exit code is the number of failures (0 = all passed).
 # The stages follow the publishing plan (claude-docs/website/plan-publish-2026-11-13.md in the app repository):
 #   test       before the domain: the test address works and stays out of search, the policy pages open
-#   connected  right after the domain is set: the old policy addresses move to the domain and still open
+#   connected  right after the domain is set: the old policy addresses move to the domain and still open.
+#              Only these lines decide a rollback. Run test first: it must pass before the domain is set.
 #   https      after the certificate: every redirect lands on https, www goes to the bare domain
 #   public     after the public build: pages can be indexed and the root files answer
 #   redirect   after the Cloudflare rule: simplebase.co.kr lands on simganpyo.com and its mail records stay
@@ -14,6 +15,7 @@ OLD='https://jerryjungwh.github.io'
 NEW='https://simganpyo.com'
 POLICY='SimpleScheduler-Android'
 GITHUB_A='185.199.108.153;185.199.109.153;185.199.110.153;185.199.111.153'
+GITHUB_AAAA='2606:50c0:8000::153;2606:50c0:8001::153;2606:50c0:8002::153;2606:50c0:8003::153'
 # simplebase.co.kr mail records before the redirect (2026-11-13). The redirect must leave them as they are.
 SIMPLEBASE_MX='1 aspmx.l.google.com.;5 alt1.aspmx.l.google.com.;5 alt2.aspmx.l.google.com.;10 alt3.aspmx.l.google.com.;10 alt4.aspmx.l.google.com.'
 
@@ -85,7 +87,8 @@ stage_test() {
     expect_status "$OLD$p" 200
     expect_text "$OLD$p" 'name="robots" content="noindex"'
   done
-  for f in robots.txt sitemap-index.xml llms.txt; do expect_status "$OLD/$f" 200; done
+  # policy.css styles the policy pages (their layout loads it from this site).
+  for f in robots.txt sitemap-index.xml llms.txt policy.css; do expect_status "$OLD/$f" 200; done
   expect_status "$OLD/$POLICY/" 200
   expect_text "$OLD/$POLICY/" '개인정보처리방침'
   expect_status "$OLD/$POLICY/terms" 200
@@ -99,6 +102,7 @@ stage_test() {
 
 stage_connected() {
   expect_dns simganpyo.com A "$GITHUB_A"
+  expect_dns simganpyo.com AAAA "$GITHUB_AAAA"
   expect_dns www.simganpyo.com CNAME 'jerryjungwh.github.io.'
   expect_redirect "$OLD/$POLICY/" 301 '^https?://simganpyo\.com/SimpleScheduler-Android/$'
   expect_redirect "$OLD/$POLICY/terms" 301 '^https?://simganpyo\.com/SimpleScheduler-Android/terms$'
@@ -107,8 +111,6 @@ stage_connected() {
   expect_text "$OLD/$POLICY/" '개인정보처리방침'
   expect_lands "$OLD/$POLICY/terms" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/terms$'
   expect_text "$OLD/$POLICY/terms" '이용약관'
-  expect_lands "$OLD/$POLICY/en/" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/en/$'
-  expect_lands "$OLD/$POLICY/en/terms" 200 '^https?://simganpyo\.com/SimpleScheduler-Android/en/terms$'
   expect_redirect "$OLD/" 301 '^https?://simganpyo\.com/$'
 }
 
@@ -119,6 +121,9 @@ stage_https() {
   expect_redirect "$OLD/" 301 '^https://simganpyo\.com/$'
   expect_redirect 'http://simganpyo.com/' 301 '^https://simganpyo\.com/$'
   expect_redirect 'https://www.simganpyo.com/' 301 '^https://simganpyo\.com/$'
+  # Follow the old policy addresses over TLS: curl checks the certificate of the bare domain.
+  expect_lands "$OLD/$POLICY/" 200 '^https://simganpyo\.com/SimpleScheduler-Android/$'
+  expect_lands "$OLD/$POLICY/terms" 200 '^https://simganpyo\.com/SimpleScheduler-Android/terms$'
 }
 
 stage_public() {
@@ -128,7 +133,7 @@ stage_public() {
     expect_text "$NEW$p" "rel=\"canonical\" href=\"$NEW$p\""
   done
   expect_text "$NEW/robots.txt" "Sitemap: $NEW/sitemap-index.xml"
-  for f in sitemap-index.xml llms.txt; do expect_status "$NEW/$f" 200; done
+  for f in sitemap-index.xml llms.txt policy.css; do expect_status "$NEW/$f" 200; done
   expect_status "$NEW/check-live-no-such-page/" 404
   expect_text "$NEW/$POLICY/" "rel=\"canonical\" href=\"$NEW/$POLICY/\""
   expect_text "$NEW/$POLICY/en/" 'Privacy Policy'

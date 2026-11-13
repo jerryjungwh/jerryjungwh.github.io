@@ -76,10 +76,10 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 | 단계 | 언제 | 무엇을 보나 |
 |---|---|---|
-| `test` | 도메인 연결 전 | 시험 주소가 열리고 noindex다. 정책 두 쪽이 열린다 |
-| `connected` | 도메인을 건 직후 | DNS가 GitHub를 가리킨다. 옛 정책 주소가 301로 새 도메인에 가서 열린다 |
-| `https` | 인증서가 나온 뒤 | 모든 넘김이 https로 간다. www가 정점으로 간다 |
-| `public` | 공개 빌드 배포 뒤 | noindex가 없고 canonical·robots·sitemap이 맞다 |
+| `test` | 도메인 연결 전 | 시험 주소가 열리고 noindex다. `/policy.css`와 정책 한·영 네 쪽이 열린다. 모두 통과해야 도메인을 연결한다 |
+| `connected` | 도메인을 건 직후 | DNS(A·AAAA·www)가 GitHub를 가리킨다. 옛 정책 주소가 301로 새 도메인에 가서 열린다. 되돌릴지는 이 단계로만 정한다 |
+| `https` | 인증서가 나온 뒤 | 모든 넘김이 https로 간다. www가 정점으로 간다. 옛 정책 주소를 https로 끝까지 열어 인증서까지 확인한다 |
+| `public` | 공개 빌드 배포 뒤 | noindex가 없고 canonical·robots·sitemap이 맞다. `/policy.css`와 영어 정책본이 열린다 |
 | `redirect` | Cloudflare 넘김 규칙 뒤 | simplebase.co.kr이 simganpyo.com으로 가고, 메일 레코드(MX)가 그대로다 |
 
 예: `bash scripts/check-live.sh test`
