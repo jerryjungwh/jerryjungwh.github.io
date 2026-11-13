@@ -78,7 +78,7 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 |---|---|---|
 | `test` | 도메인 연결 전 | 시험 주소가 열리고 noindex다. `/policy.css`, `/app-ads.txt`(AdMob 게시자 줄), 정책 한·영 네 쪽이 열린다. 모두 통과해야 도메인을 연결한다 |
 | `connected` | 도메인을 건 직후 | DNS(A·AAAA·www)가 GitHub를 가리킨다. 옛 정책 주소가 301로 새 도메인에 가서 열린다. 되돌릴지는 이 단계로만 정한다 |
-| `https` | 인증서가 나온 뒤 | 모든 넘김이 https로 간다. www가 정점으로 간다. 옛 정책 주소를 https로 끝까지 열어 인증서까지 확인한다 |
+| `https` | 인증서가 나온 뒤 | 모든 넘김이 https로 간다. www가 정점으로 간다. 옛 정책 주소를 https로 끝까지 열어 인증서까지 확인한다. github.io → 새 도메인 넘김이 http로 남는 것은 HTTPS 강제가 GitHub에 퍼지는 데 시간이 걸리는 것이다(11-13 관측). 마지막 단계가 https 200이면 사용자에게는 문제가 없다 |
 | `public` | 공개 빌드 배포 뒤 | noindex가 없고 canonical·robots·sitemap이 맞다. `/policy.css`와 영어 정책본이 열린다 |
 | `redirect` | Cloudflare 넘김 규칙 뒤 | simplebase.co.kr이 넘김 대상으로 가고, 그 주소로 `app-ads.txt`가 열리며, 메일 레코드(MX)가 그대로다. 도메인 연결 전에는 `REDIRECT_TO=https://jerryjungwh.github.io`를 붙여 돌린다 |
 
