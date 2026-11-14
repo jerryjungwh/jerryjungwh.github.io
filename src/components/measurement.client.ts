@@ -98,12 +98,24 @@ export function writeStoreLinks(): void {
   document.querySelectorAll<HTMLAnchorElement>('a[data-store="google_play"][data-cta]').forEach((link) => {
     link.href = playUrlWith(source, page, link.dataset.cta!);
   });
-  document.dispatchEvent(new CustomEvent('simganpyo:source', { detail: source }));
 }
+
+/** The banner's own rules, added with it. Kept out of the stylesheet every visitor downloads. */
+const BANNER_CSS =
+  '.consent{position:fixed;right:16px;bottom:16px;left:16px;z-index:20;display:flex;align-items:center;gap:12px;' +
+  'max-width:640px;margin:auto;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:var(--paper)}' +
+  '.consent p{flex:1;margin:0;font-size:14px;line-height:1.5;color:var(--body)}' +
+  '.consent div{display:flex;gap:8px}' +
+  '.consent button{appearance:none;min-height:40px;padding:0 16px;border:1px solid var(--ink);border-radius:999px;' +
+  'background:var(--ink);color:var(--paper);font:inherit;font-size:14px;font-weight:600;cursor:pointer}' +
+  '.consent button[data-consent-choice=denied]{border-color:var(--line);background:none;color:var(--body)}';
 
 function mountBanner(lang: Lang): void {
   const banner = document.querySelector<HTMLElement>('[data-consent]');
   if (!banner) return;
+  const style = document.createElement('style');
+  style.textContent = BANNER_CSS;
+  document.head.append(style);
   const copy = CONSENT_COPY[lang];
   banner.setAttribute('aria-label', copy.label);
   const policy = `${SITE_ORIGIN}/SimpleScheduler-Android/${lang === 'en' ? 'en/' : ''}`;
@@ -130,7 +142,7 @@ function mountBanner(lang: Lang): void {
     const choice = (event.target as Element).closest<HTMLElement>('[data-consent-choice]')?.dataset.consentChoice;
     if (choice !== 'granted' && choice !== 'denied') return;
     writeStore('local', CONSENT_KEY, choice);
-    banner.hidden = true;
+    banner.remove();
     if (choice !== 'granted') return;
     grantAnalyticsConsent();
     writeStoreLinks();
