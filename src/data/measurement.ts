@@ -8,7 +8,7 @@
  *
  * The policy pages are a separate repository (Jekyll) and have no container by design.
  */
-export const GTM_ID = '';
+export const GTM_ID = 'GTM-K26JMP72';
 
 /**
  * Where a visitor is, for the consent default. The site is static, so it cannot know the country;
