@@ -615,3 +615,36 @@ test('두 번째 재생도 거부되면 포기하고 정지 화면을 보인다'
   await page.waitForTimeout(300);
   expect(await videoCalls(page)).toEqual(['refused:widget_done', 'refused:widget_done']);
 });
+
+// ── a phone: one step at a time ──────────────────────────────────────────────
+
+const universitySteps = (page: Page) => page.locator('article[data-case="university"] li[data-step]');
+const stepRowsOnView = (page: Page) => page.locator('article[data-case] li[data-step]:visible');
+
+test.describe('폰 폭에서는 단계를 하나씩 보여 준다', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test('보이는 단계는 하나뿐이고 그 아래에 1 / 8 이 있다', async ({ page }) => {
+    await openAtUniversity(page);
+    await expect(page.locator('[data-step-nav]')).toBeVisible();
+    await expect(page.locator('[data-step-now]')).toHaveText('1');
+    await expect(stepRowsOnView(page)).toHaveCount(1);
+  });
+
+  test('다음·이전 단추로 단계를 넘기고, 첫 단계에서 이전은 마지막으로 간다', async ({ page }) => {
+    await openAtUniversity(page);
+    await page.locator('[data-action="step-next"]').click();
+    await expect(page.locator('[data-step-now]')).toHaveText('2');
+    await expect(universitySteps(page).nth(1)).toHaveAttribute('data-active', '');
+    await page.locator('[data-action="step-prev"]').click();
+    await page.locator('[data-action="step-prev"]').click();
+    await expect(page.locator('[data-step-now]')).toHaveText('8');
+    await expect(universitySteps(page).nth(7)).toHaveAttribute('data-active', '');
+  });
+});
+
+test('넓은 화면에서는 단계 넘김 단추가 없고 여덟 단계가 모두 보인다', async ({ page }) => {
+  await openAtUniversity(page);
+  await expect(page.locator('[data-step-nav]')).toBeHidden();
+  await expect(stepRowsOnView(page)).toHaveCount(8);
+});

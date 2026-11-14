@@ -91,3 +91,23 @@ test('확대 창의 그림 영역은 키보드로 밀 수 있고, 어두운 창�
   expect(body.attr('aria-labelledby')).toBe('zoom-title');
   expect(readAllCss('dist')).toMatch(/\.zoom :focus-visible\{outline-color:var\(--paper\)\}/);
 });
+
+test('폰에서 단계를 넘기는 단추와 번호가 HTML에 있다', () => {
+  const nav = $('[data-stepper] [data-step-nav]');
+  expect(nav.length).toBe(1);
+  expect(nav.find('button[data-action="step-prev"]').length).toBe(1);
+  expect(nav.find('button[data-action="step-next"]').length).toBe(1);
+  expect(nav.find('[data-step-now]').text()).toBe('1');
+  expect(nav.text().replace(/\s+/g, ' ')).toContain('1 / 8');
+});
+
+test('폰 화면마다 어디를 보여 줄지가 HTML에 들어 있다', () => {
+  const figures = $('[data-stepper] figure[data-media][data-device="phone"]');
+  expect(figures.length).toBe(48);
+  figures.each((_, f) => {
+    const where = `${$(f).attr('data-case')}/${$(f).attr('data-step')}`;
+    expect($(f).attr('data-focus'), where).toMatch(/^(whole|\d+% at \d+%)$/);
+    expect($(f).attr('style'), where).toMatch(/--show: [\d.]+; --focus-y: \d+%/);
+    expect(['none', 'top', 'bottom', 'both'], where).toContain($(f).attr('data-cut'));
+  });
+});

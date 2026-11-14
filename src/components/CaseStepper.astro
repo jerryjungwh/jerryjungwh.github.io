@@ -3,6 +3,7 @@ import '../styles/stepper.css';
 import { getCapture, pendingCaptures } from '../data/captures';
 import { siteStrings } from '../data/site';
 import { IS_RELEASE, assertReleasable } from '../lib/release';
+import { screenCut, screenFocus, screenFocusLabel } from '../lib/screen-focus';
 import { stepDurationMs, stepStayMs } from '../lib/stepper-state';
 import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
 import MediaView from './MediaView.astro';
@@ -59,12 +60,16 @@ const firstScreen = `(function(){var c=document.documentElement.dataset.startCas
           {c.steps.flatMap((s, stepIndex) =>
             DEVICES.map((device) => {
               const entry = getCapture(lang, c.id, device, s.id);
+              const focus = screenFocus(c.id, s.id);
               return (
                 <figure
                   data-media
                   data-case={c.id}
                   data-step={s.id}
                   data-device={device}
+                  data-focus={screenFocusLabel(focus)}
+                  data-cut={screenCut(focus)}
+                  style={`--show: ${focus.show}; --focus-y: ${focus.at}%`}
                   data-duration={detail === 'long' ? stepStayMs(entry.media, s.long) : stepDurationMs(entry.media)}
                   data-active={stepIndex === 0 && device === 'phone' ? '' : undefined}
                   aria-labelledby={`step-${c.id}-${s.id}`}
@@ -100,6 +105,14 @@ const firstScreen = `(function(){var c=document.documentElement.dataset.startCas
       </article>
     ))
   }
+
+  {/* A phone shows one step at a time, so it needs a way to move between them. Hidden on wider screens,
+      where the whole list is on view and each step is its own button. */}
+  <div class="step-nav" data-step-nav role="group" aria-label={t.stepNavLabel}>
+    <button type="button" data-action="step-prev" aria-label={t.prevStep}>&lsaquo;</button>
+    <p class="step-count"><span data-step-now>1</span> / {shown[0].steps.length}</p>
+    <button type="button" data-action="step-next" aria-label={t.nextStep}>&rsaquo;</button>
+  </div>
 
   <p class="stepper-note">
     <span class="stepper-frame-label" data-frame-label></span>

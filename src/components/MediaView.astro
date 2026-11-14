@@ -41,7 +41,8 @@ const isSequence = media.kind === 'sequence';
 // The frame on before the script moves anything (and for good without it): ② its full week, others their first.
 const rest = restFrame(media);
 const widths = device === 'phone' ? [360, 540, 720, 1080] : [640, 960, 1280, 1920];
-const sizes = device === 'phone' ? '(max-width: 480px) 62vw, 300px' : '(max-width: 760px) 92vw, 640px';
+// A phone screen takes the whole column below 720px (the window over it is cut, not scaled down).
+const sizes = device === 'phone' ? '(max-width: 719px) calc(100vw - 32px), 300px' : '(max-width: 760px) 92vw, 640px';
 const note = Astro.currentLocale === 'en' ? 'Screen coming soon' : '촬영 예정';
 // Flat app screens stay sharp at this setting, and the densest one (an English weekly widget) stays under
 // the size budget the build tests hold: 60KB a phone screen, 150KB a tablet screen.

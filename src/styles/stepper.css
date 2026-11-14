@@ -187,6 +187,39 @@ html:not(.js) .stepper-frame-label {
   display: none;
 }
 
+/* Moving between steps by hand. Only a phone shows it: wider screens list every step as its own button. */
+.step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 14px;
+}
+.step-nav button {
+  appearance: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--body);
+  cursor: pointer;
+}
+.step-count {
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--body);
+}
+@media (min-width: 720px) {
+  .step-nav {
+    display: none;
+  }
+}
+
 .stepper-controls {
   margin-top: 18px;
 }
@@ -210,6 +243,7 @@ html:not(.js) .stepper-frame-label {
 /* Buttons that only do something with the script stay out of the script-less document. */
 html:not(.js) .stepper-tabs,
 html:not(.js) .stepper-switch,
+html:not(.js) .step-nav,
 html:not(.js) .stepper-controls {
   display: none;
 }
@@ -348,6 +382,60 @@ html.js .stepper li[data-step][data-active] .step-text {
   color: var(--ink);
 }
 
+/* 시안 C, tablet: the screen fills its column and is cut to the height of the steps beside it, so the
+   column never ends in empty space. */
+@media (min-width: 720px) and (max-width: 959.98px) {
+  .stepper {
+    --phone-w: 300px;
+    --pad: 0px;
+  }
+  html.js .stepper:not([data-device='tablet']) {
+    /* About as tall as the eight steps beside it, so neither column ends in empty space. */
+    --stage-h: 480px;
+    --screen-r: 22px;
+  }
+  /* Each screen is a window of the stage's height over the capture. `data-focus` says where the window
+     sits (set in src/lib/screen-focus.ts, checked against all 96 screens); 'whole' makes the window
+     exactly as wide as the capture is at that height, so nothing is cut. The soft edge marks a cut side. */
+  html.js .stepper:not([data-device='tablet']) .case-screens {
+    padding: 0;
+    place-items: center;
+    overflow: visible;
+  }
+  /* The window is as wide as it must be for `--show` of the capture's height to fit in it: the whole
+     column at 0.7, and only as wide as the capture is tall at 1. */
+  html.js .stepper:not([data-device='tablet']) figure[data-media] {
+    width: min(100%, calc(var(--stage-h) / (2.2445 * var(--show))));
+    height: var(--stage-h);
+  }
+  html.js .stepper:not([data-device='tablet']) .media {
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='bottom'] .media {
+    border-radius: var(--screen-r) var(--screen-r) 0 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='both'] .media {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30px, #000 calc(100% - 30px), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 30px, #000 calc(100% - 30px), transparent);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='top'] .media {
+    border-radius: 0 0 var(--screen-r) var(--screen-r);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px);
+    mask-image: linear-gradient(to bottom, transparent, #000 48px);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-focus='whole'] .media {
+    border-radius: var(--screen-r);
+    box-shadow: 0 0 0 6px var(--ink);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-media] .media :is(img, video) {
+    object-position: center var(--focus-y);
+  }
+}
+
 @media (max-width: 959.98px) {
   html.js .stepper .case-screens {
     border-radius: 0;
@@ -389,32 +477,133 @@ html.js .stepper li[data-step][data-active] .step-text {
   }
 }
 
-/* Case pages on a phone: each step has two or three sentences, too much for a narrow column.
-   The screen stays stuck to the top and the steps run full width below it. The section is a plain
-   block here (not a grid) so that the stuck screen can travel the whole length of the step list. */
+/* A phone: the stepper is a carousel, not two columns.
+   The screen fills about two thirds of the view, so an eight-step list under it would put the screen
+   and the step that explains it too far apart to read together, whichever of the two is stuck to the
+   top. Here one step shows at a time, right under its screen, with 1 / 8 and two arrows to move
+   between them. The other seven stay in the HTML (and in the script-less document), out of sight.
+   The section is a flex column so that the order of the parts can differ from the document's. */
 @media (max-width: 719.98px) {
-  html.js .stepper[data-detail='long'] {
-    --phone-w: min(34vw, 150px);
-    display: block;
+  html.js .stepper {
+    --stage-top: 12px;
+    display: flex;
+    flex-direction: column;
   }
-  html.js .stepper[data-detail='long'] .stepper-switch {
+  /* The screen takes the whole width and shows the part of the capture the step is about, so it reads
+     about three times the size of the two-column one without pushing its own words off the view. */
+  html.js .stepper:not([data-device='tablet']) {
+    --phone-w: 100%;
+    --screen-r: 24px;
+    --stage-h: calc((100vw - var(--gutter) * 2) * 2.2445 * 0.7);
+  }
+  /* Each screen is a window of the stage's height over the capture. `data-focus` says where the window
+     sits (set in src/lib/screen-focus.ts, checked against all 96 screens); 'whole' makes the window
+     exactly as wide as the capture is at that height, so nothing is cut. The soft edge marks a cut side. */
+  html.js .stepper:not([data-device='tablet']) .case-screens {
+    padding: 0;
+    place-items: center;
+    overflow: visible;
+  }
+  /* The window is as wide as it must be for `--show` of the capture's height to fit in it: the whole
+     column at 0.7, and only as wide as the capture is tall at 1. */
+  html.js .stepper:not([data-device='tablet']) figure[data-media] {
+    width: min(100%, calc(var(--stage-h) / (2.2445 * var(--show))));
+    height: var(--stage-h);
+  }
+  html.js .stepper:not([data-device='tablet']) .media {
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='bottom'] .media {
+    border-radius: var(--screen-r) var(--screen-r) 0 0;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='both'] .media {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30px, #000 calc(100% - 30px), transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 30px, #000 calc(100% - 30px), transparent);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-cut='top'] .media {
+    border-radius: 0 0 var(--screen-r) var(--screen-r);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px);
+    mask-image: linear-gradient(to bottom, transparent, #000 48px);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-focus='whole'] .media {
+    border-radius: var(--screen-r);
+    box-shadow: 0 0 0 6px var(--ink);
+  }
+  html.js .stepper:not([data-device='tablet']) figure[data-media] .media :is(img, video) {
+    object-position: center var(--focus-y);
+  }
+  html.js .stepper .stepper-lead {
+    order: 1;
+  }
+  html.js .stepper .stepper-tabs {
+    order: 2;
+  }
+  /* The screen comes first here. A tablet capture on a phone is too small to read anyway, so the
+     switch that calls it up waits below the steps, next to the other control. */
+  html.js .stepper .stepper-switch {
+    order: 7;
     display: flex;
     width: max-content;
-    margin: var(--stage-top) auto 0;
+    margin: 16px auto 0;
   }
-  html.js .stepper[data-detail='long'] .case-screens {
-    position: sticky;
-    top: 0;
-    z-index: 2;
+  /* A flex item does not take the whole width with the `align-self: start` the two-column layout
+     gives it, and a tablet screen is sized as a share of that width. */
+  html.js .stepper .case-screens {
+    order: 4;
+    align-self: stretch;
+    margin-top: var(--stage-top);
+  }
+  /* The step and its screen come first: they are what the section is for. The arrows follow, so a
+     phone that cannot show both at once keeps the words rather than the control. */
+  html.js .stepper .case-text {
+    order: 5;
     margin-top: 12px;
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
   }
-  html.js .stepper[data-detail='long'] .case-text {
-    margin-top: 16px;
+  html.js .stepper .step-nav {
+    order: 6;
+    margin-top: 10px;
   }
-  html.js .stepper[data-detail='long'] .stepper-note {
+  html.js .stepper .stepper-note {
+    order: 8;
+    align-self: stretch;
+    margin-top: 10px;
+  }
+  html.js .stepper .stepper-controls {
+    order: 9;
     margin-top: 12px;
+    text-align: center;
+  }
+  html.js .stepper .stepper-cta {
+    order: 10;
+  }
+
+  /* One step, so the row loses the list's rules and the number that 1 / 8 already gives. */
+  html.js .stepper li[data-step]:not([data-active]) {
+    display: none;
+  }
+  html.js .stepper .case-name {
+    font-size: 18px;
+  }
+  html.js .stepper ol[data-steps] {
+    margin-top: 8px;
+    border-top: 0;
+  }
+  html.js .stepper li[data-step] {
+    padding-left: 0;
+    border-bottom: 0;
+  }
+  html.js .stepper li[data-step]::before {
+    display: none;
+  }
+  html.js .stepper li[data-step][data-active] .step-cell {
+    margin: 0;
+  }
+  html.js .stepper .step-text {
+    max-width: none;
   }
 }
 
@@ -468,6 +657,15 @@ html.js .stepper[data-zoom-ready] .media-zoom {
   font-size: 14px;
   font-weight: 600;
   cursor: zoom-in;
+}
+
+/* 시안 C cuts the screen off at the bottom, so the button that opens it sits at its top instead. */
+@media (max-width: 959.98px) {
+  html.js .stepper:not([data-device='tablet'])[data-zoom-ready] .media-zoom {
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+  }
 }
 
 .zoom:not([open]) {

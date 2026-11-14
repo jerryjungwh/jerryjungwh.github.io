@@ -89,6 +89,7 @@ function mount(root: HTMLElement): void {
   const pauseButton = root.querySelector<HTMLElement>('[data-action="toggle-pause"]');
   const deviceButtons = [...root.querySelectorAll<HTMLElement>('[data-action="device"]')];
   const frameLabel = root.querySelector<HTMLElement>('[data-frame-label]');
+  const stepNow = root.querySelector<HTMLElement>('[data-step-now]');
   const videos = [...root.querySelectorAll<HTMLVideoElement>('video[data-video]')];
 
   const startId = document.documentElement.dataset.startCase;
@@ -186,6 +187,7 @@ function mount(root: HTMLElement): void {
           setFlag(step.figures.tablet, 'data-active', stepOn && state.device === 'tablet');
         });
       });
+      if (stepNow) stepNow.textContent = String(state.stepIndex + 1);
       root.dataset.device = state.device;
       deviceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.device === state.device)));
       fetchNow(figureAt(state));
@@ -304,6 +306,15 @@ function mount(root: HTMLElement): void {
     if (action?.dataset.action === 'device') {
       const device = action.dataset.device as Device;
       return send({ type: 'setDevice', device, atMs: state.paused ? restMs(stepAt(state).figures[device]) : undefined });
+    }
+
+    // On a phone only the step in view is on screen; these move to the one before or after it, and
+    // wrap, so neither end of the eight is a dead button.
+    if (action?.dataset.action === 'step-prev' || action?.dataset.action === 'step-next') {
+      const steps = cases[state.caseIndex].steps;
+      const delta = action.dataset.action === 'step-next' ? 1 : steps.length - 1;
+      const stepIndex = (state.stepIndex + delta) % steps.length;
+      return send({ type: 'selectStep', stepIndex, atMs: state.paused ? restMs(steps[stepIndex].figures[state.device]) : undefined });
     }
 
     const item = target.closest<HTMLElement>('li[data-step]');
