@@ -14,8 +14,12 @@ export const GTM_ID = 'GTM-K26JMP72';
  * Where a visitor is, for the consent default. The site is static, so it cannot know the country;
  * the browser's time zone is what it has. These are the zones of the 32 places Google's EU user
  * consent policy covers (EEA, the UK, Switzerland), including the islands that belong to them.
+ *
+ * The rule — this list, or a zone under `Europe/` — is applied in one place: the small script
+ * `Layout.astro` puts in the <head>, which runs before the container and marks the document. The
+ * rest of the site reads that mark rather than working it out again.
  */
-const EUROPE_EXTRA = new Set([
+export const EUROPE_EXTRA_ZONES = [
   'Atlantic/Azores',
   'Atlantic/Madeira',
   'Atlantic/Canary',
@@ -27,12 +31,7 @@ const EUROPE_EXTRA = new Set([
   'America/Martinique',
   'America/Cayenne',
   'America/Miquelon',
-]);
-
-export function isEuropeTimeZone(zone: string | undefined): boolean {
-  if (!zone) return false;
-  return zone.startsWith('Europe/') || EUROPE_EXTRA.has(zone);
-}
+] as const;
 
 /** The key the visitor's own choice is kept under. 'granted' or 'denied'; nothing else is stored. */
 export const CONSENT_KEY = 'simganpyo.consent';

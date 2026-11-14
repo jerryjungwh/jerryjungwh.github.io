@@ -7,7 +7,7 @@ import '../styles/doc.css';
 import { IS_RELEASE, robotsFor } from '../lib/release';
 import { pageJsonLd, pageMeta } from '../lib/seo';
 import { CASE_ORDER, type CaseId, type FaqItem, type Lang, type PageKey } from '../lib/types';
-import { GTM_ID } from '../data/measurement';
+import { EUROPE_EXTRA_ZONES, GTM_ID } from '../data/measurement';
 import { alternates, pageLabel, pagePath } from '../lib/urls';
 import ConsentBanner from './ConsentBanner.astro';
 import JsonLd from './JsonLd.astro';
@@ -36,6 +36,11 @@ const robots = robotsFor({ release: IS_RELEASE, notFound: !page });
 const stepperBoot = `(function(){var d=document.documentElement,c=${JSON.stringify(CASE_ORDER)};d.classList.add('js');if(!d.dataset.startCase)d.dataset.startCase=c[Math.floor(Math.random()*c.length)];setTimeout(function(){if(!document.querySelector('[data-stepper][data-ready]'))d.classList.remove('js')},3000)})();`;
 // The page's own label, read by the script that writes where a visit came from into the Play links.
 const pageName = page ? pageLabel(page) : 'notfound';
+// The container decides the consent default by the visitor's IP; this page can only see the browser's
+// time zone. Where they disagree — a European time zone on an address the container does not read as
+// European — the banner would promise that nothing is collected while the tag collected it anyway.
+// So the page sets its own default first, before the container loads. Either signal holds it back.
+const consentBoot = `(function(){var d=document.documentElement,z;try{z=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){return}if(!z||(z.indexOf('Europe/')!==0&&${JSON.stringify(EUROPE_EXTRA_ZONES)}.indexOf(z)<0))return;d.dataset.consentNeeded='';try{if(localStorage.getItem('simganpyo.consent')==='granted')return}catch(e){}window.dataLayer=window.dataLayer||[];function g(){dataLayer.push(arguments)}g('consent','default',{analytics_storage:'denied',wait_for_update:500})})();`;
 // Google Tag Manager, as its own install screen prints it, as high in <head> as the metadata allows.
 // Never deferred: a container loaded after a click loses what brought the visit in.
 const gtmBoot = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GTM_ID}');`;
@@ -74,6 +79,7 @@ const gtmBoot = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new D
     <meta name="naver-site-verification" content="782139bf34c7e21f82e414f27f0a6664072040e7" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {GTM_ID && <script is:inline set:html={consentBoot} />}
     {GTM_ID && <script is:inline set:html={gtmBoot} />}
     {jsonLd.map((data) => <JsonLd data={data} />)}
     {stepper && <script is:inline set:html={stepperBoot} />}

@@ -111,3 +111,17 @@ test('폰 화면마다 어디를 보여 줄지가 HTML에 들어 있다', () => 
     expect(['none', 'top', 'bottom', 'both'], where).toContain($(f).attr('data-cut'));
   });
 });
+
+test('머리말의 동의 스크립트가 유럽 판정 규칙을 가지고 있다', () => {
+  const boot = $('head script')
+    .map((_, s) => $(s).html() ?? '')
+    .get()
+    .find((code) => code.includes('consentNeeded'));
+  expect(boot, '동의 기본값 스크립트').toBeTruthy();
+  // 시간대로 판정하고, Europe/ 로 시작하지 않는 지역도 목록으로 함께 본다.
+  expect(boot).toContain("z.indexOf('Europe/')");
+  for (const zone of ['Atlantic/Azores', 'Atlantic/Canary', 'America/Martinique']) expect(boot).toContain(zone);
+  // 동의 전에는 analytics_storage 를 거부로 둔다. 컨테이너보다 먼저 올라가야 한다.
+  expect(boot).toContain("analytics_storage:'denied'");
+  expect($('head').html()!.indexOf(boot!)).toBeLessThan($('head').html()!.indexOf('googletagmanager.com/gtm.js'));
+});

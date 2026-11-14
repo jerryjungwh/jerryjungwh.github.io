@@ -1,5 +1,5 @@
 import { CONSENT_COPY } from '../data/consent-copy';
-import { CONSENT_KEY, isEuropeTimeZone } from '../data/measurement';
+import { CONSENT_KEY } from '../data/measurement';
 import { SITE_ORIGIN } from '../lib/origins';
 import { playUrlWith } from '../lib/urls';
 import type { Lang } from '../lib/types';
@@ -46,17 +46,13 @@ function storedSource(): StoredSource | null {
   }
 }
 
-function timeZone(): string | undefined {
-  try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone;
-  } catch {
-    return undefined;
-  }
-}
-
-/** True where Google's EU user consent policy applies, so nothing may run before a yes. */
+/**
+ * True where Google's EU user consent policy applies, so nothing may run before a yes. The script in
+ * the <head> works this out from the time zone before the container loads and marks the document;
+ * reading its mark keeps the rule in one place.
+ */
 export function consentNeeded(): boolean {
-  return isEuropeTimeZone(timeZone());
+  return document.documentElement.dataset.consentNeeded !== undefined;
 }
 
 export function consentChoice(): 'granted' | 'denied' | null {
@@ -65,16 +61,23 @@ export function consentChoice(): 'granted' | 'denied' | null {
 }
 
 /**
- * Tells the container the visitor said yes. This is the documented shim: gtag.js itself is not
- * loaded (GTM loads GA4), and what the container reads off dataLayer is an `arguments` object,
- * not a plain array, so the push has to come from a real function call.
+ * Tells the container the visitor said yes, twice over.
+ *
+ * The first is the documented shim: gtag.js itself is not loaded (GTM loads GA4), and what the
+ * container reads off dataLayer is an `arguments` object, not a plain array, so the push has to come
+ * from a real function call.
+ *
+ * The second is an ordinary event. A tag held back by a consent requirement does not fire by itself
+ * when the state later changes — its trigger has already been and gone — so the Google tag listens
+ * for this event as well as for initialization.
  */
 function grantAnalyticsConsent(): void {
-  const w = window as unknown as { dataLayer?: IArguments[] };
+  const w = window as unknown as { dataLayer?: unknown[] };
   w.dataLayer = w.dataLayer ?? [];
   (function gtag(..._args: unknown[]) {
     w.dataLayer!.push(arguments);
   })('consent', 'update', { analytics_storage: 'granted' });
+  w.dataLayer.push({ event: 'consent_granted' });
 }
 
 /**
