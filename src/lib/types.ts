@@ -88,6 +88,10 @@ export interface SiteStrings {
     pause: string;
     resume: string;
     androidNote: string;
+    /** The group that moves between steps on a phone, and its two arrows. */
+    stepNavLabel: string;
+    prevStep: string;
+    nextStep: string;
     /** The button on a screen that opens it at its original size, and the window's close button. */
     zoom: string;
     zoomClose: string;
