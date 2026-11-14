@@ -116,3 +116,17 @@ test('휴대폰 폭 사례 페이지에서도 화면의 크게 보기로 창을 
   await zoom.click();
   await expect(page.locator('dialog[data-zoom]')).toHaveAttribute('open', '');
 });
+
+test('넓은 화면에서는 설치 영역에 QR이 보이고, 좁은 화면에서는 보이지 않는다', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const qr = page.locator('.install-qr img');
+  await qr.scrollIntoViewIfNeeded();
+  await expect(qr).toBeVisible();
+  // 주소만 맞고 파일이 없으면 빈 칸이 된다. SVG에는 가로세로가 없어 naturalWidth 로는 알 수 없다.
+  const file = await page.request.get(new URL(await qr.getAttribute('src')!, page.url()).href);
+  expect(file.status()).toBe(200);
+  expect(await file.text()).toContain('<svg');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(qr).toBeHidden();
+});

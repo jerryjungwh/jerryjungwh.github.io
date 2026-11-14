@@ -1,3 +1,4 @@
+import { readFileSync, statSync } from 'node:fs';
 import { load } from 'cheerio';
 import { expect, test } from 'vitest';
 import { findForbidden } from '../../src/lib/forbidden';
@@ -148,5 +149,20 @@ test('모든 페이지 head에 네이버 소유확인 태그가 하나씩 있다
     const $ = load(read(file));
     const values = $('head meta[name="naver-site-verification"]').map((_, m) => $(m).attr('content')).get();
     expect(values, file).toEqual([NAVER_VERIFICATION]);
+  }
+});
+
+test('QR은 홈과 사례 페이지의 설치 영역에만 있고, 그림 파일이 실제로 있다', () => {
+  for (const p of allHtml()) {
+    const qr = p.$('.install-qr img');
+    const wanted = p.path === '/' || p.path === '/en/' || p.path.includes('/for/');
+    expect(qr.length, p.path).toBe(wanted ? 1 : 0);
+    if (!wanted) continue;
+    const src = qr.attr('src')!;
+    expect(src, p.path).toMatch(/^\/qr\/(ko|en)\/[a-z_-]+\.svg$/);
+    expect(src.startsWith(p.path.startsWith('/en/') ? '/qr/en/' : '/qr/ko/'), p.path).toBe(true);
+    const file = `dist${src}`;
+    expect(statSync(file).size, file).toBeGreaterThan(2000);
+    expect(readFileSync(file, 'utf8'), file).toContain('<svg');
   }
 });

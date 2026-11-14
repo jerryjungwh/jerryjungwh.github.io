@@ -96,6 +96,8 @@ export const SITE_KO: SiteStrings = {
     play: 'Google Play에서 받기',
     appStore: 'App Store에서 받기',
     iosNote: 'iPhone 앱은 기능을 더 채운 새 버전을 준비하고 있어요.',
+    qr: '휴대폰으로 찍어서 받기',
+    qrAlt: 'Google Play 주소가 담긴 QR 코드',
   },
   casePage: {
     crumbsLabel: '현재 위치',

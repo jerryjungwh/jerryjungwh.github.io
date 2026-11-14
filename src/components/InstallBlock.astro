@@ -1,7 +1,8 @@
 ---
 import type { CtaId } from '../data/cta';
 import { siteStrings } from '../data/site';
-import { APP_STORE_URL, staticPlayUrl } from '../lib/urls';
+import { QR_PAGES } from '../data/cta';
+import { APP_STORE_URL, pageLabel, staticPlayUrl } from '../lib/urls';
 import type { Lang, PageKey } from '../lib/types';
 
 interface Props {
@@ -12,6 +13,9 @@ interface Props {
 
 const { lang, page, cta } = Astro.props;
 const t = siteStrings(lang).install;
+// The QR is for someone reading on a computer, so it goes with the install area at the foot of the
+// page, not the one in the first screen. Its picture is written at build time (src/pages/qr).
+const qr = cta === 'page_end' && QR_PAGES.includes(page) ? `/qr/${lang}/${pageLabel(page)}.svg` : undefined;
 ---
 
 {/* Both are real links written at build time. Tags read data-track / data-store / data-cta and the fixed ids. */}
@@ -35,6 +39,14 @@ const t = siteStrings(lang).install;
     >
   </div>
   <p class="install-note">{t.iosNote}</p>
+  {
+    qr && (
+      <figure class="install-qr">
+        <img src={qr} width="132" height="132" alt={t.qrAlt} loading="lazy" decoding="async" />
+        <figcaption>{t.qr}</figcaption>
+      </figure>
+    )
+  }
 </div>
 
 <style>
@@ -42,6 +54,22 @@ const t = siteStrings(lang).install;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+  }
+  /* Only a computer shows it: a phone is already the thing that would scan it. */
+  .install-qr {
+    display: none;
+  }
+  @media (min-width: 960px) {
+    .install-qr {
+      display: block;
+      margin: 20px 0 0;
+      font-size: 13px;
+      text-align: center;
+      width: 132px;
+    }
+    .install-qr img {
+      display: block;
+    }
   }
   .store {
     display: inline-flex;

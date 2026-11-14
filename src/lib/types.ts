@@ -116,7 +116,15 @@ export interface SiteStrings {
     caption(year: number, month: number): string;
   };
   faq: { heading: string; all: string };
-  install: { heading: string; play: string; appStore: string; iosNote: string };
+  install: {
+    heading: string;
+    play: string;
+    appStore: string;
+    iosNote: string;
+    /** The QR beside the buttons on a wide screen, and what it is for someone who cannot see it. */
+    qr: string;
+    qrAlt: string;
+  };
   casePage: {
     crumbsLabel: string;
     title(caseName: string): string;

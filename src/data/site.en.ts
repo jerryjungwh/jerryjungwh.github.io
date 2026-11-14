@@ -106,6 +106,8 @@ export const SITE_EN: SiteStrings = {
     play: 'Get it on Google Play',
     appStore: 'Download on the App Store',
     iosNote: 'A fuller version of the iPhone app is on the way.',
+    qr: 'Scan it with your phone',
+    qrAlt: 'QR code holding the Google Play address',
   },
   casePage: {
     crumbsLabel: 'You are here',
