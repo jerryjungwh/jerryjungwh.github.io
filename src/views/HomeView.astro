@@ -41,9 +41,9 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
 
     <section id="what" class="doc">
       <h2>{t.what.heading}</h2>
-      <Guide pose="basic" line={t.guide.what} size="md" class="what-guide" />
       <Definition text={t.what.definition} />
       <FactsTable lang={lang} />
+      <Guide pose="basic" line={t.guide.what} size="md" class="what-guide" />
     </section>
 
     {FEATURES.characterDeco && <CharacterDeco lang={lang} />}
@@ -78,8 +78,14 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
   #what {
     position: relative;
   }
+  /* After the facts on narrow screens, right-aligned, with room for the bubble above it. */
   #what :global(.what-guide) {
-    margin-left: auto;
+    margin: 52px 0 0 auto;
+  }
+  @media (max-width: 767.98px) {
+    #what :global(.what-guide) {
+      margin-top: 16px;
+    }
   }
   #install {
     display: grid;
@@ -125,6 +131,12 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
   }
   .home-h1 span {
     display: block;
+  }
+  /* Beside the stage the lead column is narrow: the English title shrinks so "SimpleScheduler" never breaks. */
+  @media (min-width: 960px) {
+    .home-h1:lang(en) {
+      font-size: min(clamp(30px, 4.6vw, 54px), 11vw - 68px);
+    }
   }
   .home-lead {
     margin-top: 18px;
