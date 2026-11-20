@@ -8,7 +8,16 @@
   /* brand at about 12% on white: the step in view */
   --brand-tint: #ECEBFA;
   --now: #D9534F;
-  --paper: #FFFFFF;
+  --paper: #FBFBFE;
+  /* Simgani (character) ring colours, canon 11-19 Q26. */
+  --ring-start: #61D9EF;
+  --ring-end: #889DFE;
+  /* Redesign 11-20: faint light at the top of the first screen, the step in view, the install block, the device ring. */
+  --glow-sky: #E8F8FD;
+  --glow-lilac: #EEF0FF;
+  --step-on: #F1F1FC;
+  --install-bg: #F4F4FB;
+  --device: #1F2029;
   --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
     'Noto Sans KR', 'Malgun Gothic', sans-serif;
   --gutter: clamp(16px, 4vw, 48px);

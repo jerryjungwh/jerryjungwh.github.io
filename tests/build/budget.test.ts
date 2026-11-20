@@ -48,15 +48,16 @@ test('바깥 서버에서 불러오는 스크립트·글꼴·그림이 없다', 
   for (const css of filesUnder('dist', /\.css$/)) expect(readFileSync(css, 'utf8'), css).not.toMatch(/url\(["']?https?:/);
 });
 
-// 24KB since 11-13 (Jerry): ② stacking screens and the 'view larger' buttons put the Korean home over 20KB.
-test('페이지가 처음 받는 것의 크기: HTML 24KB(gzip), 스크립트 12KB, 스타일 20KB(gzip) 이하', () => {
+// HTML 24KB since 11-13 (Jerry): ② stacking screens and the 'view larger' buttons put the Korean home over 20KB.
+// Styles 24KB since 11-20 (Jerry): redesign. Pretendard @font-face rules alone are 13.8KB gzip.
+test('페이지가 처음 받는 것의 크기: HTML 24KB(gzip), 스크립트 12KB, 스타일 24KB(gzip) 이하', () => {
   for (const p of pages) {
     const file = `dist${p.path}index.html`;
     expect(gzipSync(readFileSync(file)).length, `${p.path} html`).toBeLessThanOrEqual(24 * KB);
     const scripts = p.$('script[src]').map((_, s) => fileOf(p.$(s).attr('src')!)).get();
     expect(scripts.reduce((n, f) => n + statSync(f).size, 0), `${p.path} js`).toBeLessThanOrEqual(12 * KB);
     const styles = p.$('link[rel="stylesheet"]').map((_, s) => fileOf(p.$(s).attr('href')!)).get();
-    expect(styles.reduce((n, f) => n + gzipSync(readFileSync(f)).length, 0), `${p.path} css`).toBeLessThanOrEqual(20 * KB);
+    expect(styles.reduce((n, f) => n + gzipSync(readFileSync(f)).length, 0), `${p.path} css`).toBeLessThanOrEqual(24 * KB);
   }
 });
 
