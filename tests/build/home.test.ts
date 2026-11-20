@@ -124,3 +124,10 @@ test('설치 절의 심간이는 말없이 웃는다', () => {
 test('머리글 로고는 지금 앱 아이콘 그대로다', () => {
   for (const p of allHtml()) expect(p.$('header .brand img').attr('src'), p.path).toMatch(/app-icon/);
 });
+
+test('꺼 둔 꾸미기 절은 어느 페이지에도 없다', () => {
+  for (const p of allHtml()) {
+    expect(p.$('#character').length, p.path).toBe(0);
+    expect(p.$.html(), p.path).not.toMatch(/deco-|grow-\d/);
+  }
+});

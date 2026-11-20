@@ -102,6 +102,12 @@ export const SITE_EN: SiteStrings = {
   },
   faq: { heading: 'Frequently asked questions', all: 'See all questions' },
   guide: { what: "Questions? They're right below.", about: 'Here with you since 2017' },
+  deco: {
+    heading: 'Make Simgani yours',
+    intro: 'Change its shape, eyes, hats and shoes. It grows with you as you use the app.',
+    looks: ['Cloud + beanie', 'Star + ribbon', 'Heart + heart eyes', 'Block + glasses', 'Boots + umbrella', 'Headphones + coffee'],
+    stages: ['Baby', 'Toddler', 'Kid', 'Teen', 'Grown-up'],
+  },
   install: {
     heading: 'Get SimpleScheduler',
     play: 'Get it on Google Play',

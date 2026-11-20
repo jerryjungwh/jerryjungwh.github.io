@@ -123,6 +123,8 @@ export interface SiteStrings {
   faq: { heading: string; all: string };
   /** Simgani's lines outside the stepper (redesign 11-20). Decorative, aria-hidden. */
   guide: { what: string; about: string };
+  /** The 8.0.0 "make Simgani yours" section (off until release, src/lib/features.ts). */
+  deco: { heading: string; intro: string; looks: string[]; stages: string[] };
   install: {
     heading: string;
     play: string;

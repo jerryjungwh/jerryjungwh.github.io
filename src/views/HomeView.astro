@@ -3,6 +3,7 @@ import CaseStepper from '../components/CaseStepper.astro';
 import Definition from '../components/Definition.astro';
 import FactsTable from '../components/FactsTable.astro';
 import FaqList from '../components/FaqList.astro';
+import CharacterDeco from '../components/CharacterDeco.astro';
 import Guide from '../components/Guide.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -11,6 +12,7 @@ import Layout from '../components/Layout.astro';
 import LinkList from '../components/LinkList.astro';
 import Reviews from '../components/Reviews.astro';
 import { caseDefs, homeFaq, siteStrings } from '../data/site';
+import { FEATURES } from '../lib/features';
 import { pagePath } from '../lib/urls';
 import type { Lang } from '../lib/types';
 
@@ -43,6 +45,8 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
       <Definition text={t.what.definition} />
       <FactsTable lang={lang} />
     </section>
+
+    {FEATURES.characterDeco && <CharacterDeco lang={lang} />}
 
     <section id="by-case" class="doc">
       <h2>{t.byCase.heading}</h2>

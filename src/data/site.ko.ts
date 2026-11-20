@@ -92,6 +92,12 @@ export const SITE_KO: SiteStrings = {
   },
   faq: { heading: '자주 묻는 질문', all: '질문 전체 보기' },
   guide: { what: '궁금한 건 아래에 있어요', about: '2017년부터 함께했어요' },
+  deco: {
+    heading: '심간이를 내 맘대로',
+    intro: '모양, 눈, 모자, 신발을 바꿔 나만의 심간이를 만들어요. 쓸수록 함께 자라요.',
+    looks: ['구름 + 비니', '별 + 리본', '하트 + 하트 눈', '블록 + 안경', '장화 + 우산', '헤드폰 + 커피'],
+    stages: ['아기', '걸음마', '어린이', '청소년', '다 자람'],
+  },
   install: {
     heading: '심간표 받기',
     play: 'Google Play에서 받기',

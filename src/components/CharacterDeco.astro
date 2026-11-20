@@ -1,0 +1,61 @@
+---
+// The "make Simgani yours" section for 8.0.0 (redesign 11-20, spec §7). Rendered only when FEATURES.characterDeco
+// is on. Drawings come from the canon drawing code (src/assets/character/manifest.json); decorative, empty alt,
+// the text under each drawing says what it shows. Real captures of the app's decorate screen go here at release.
+import d1 from '../assets/character/deco-cloud-beanie.svg?url';
+import d2 from '../assets/character/deco-star-ribbon.svg?url';
+import d3 from '../assets/character/deco-heart-hearteyes.svg?url';
+import d4 from '../assets/character/deco-block-glasses.svg?url';
+import d5 from '../assets/character/deco-boots-umbrella.svg?url';
+import d6 from '../assets/character/deco-phones-coffee.svg?url';
+import g1 from '../assets/character/grow-1.svg?url';
+import g2 from '../assets/character/grow-2.svg?url';
+import g3 from '../assets/character/grow-3.svg?url';
+import g4 from '../assets/character/grow-4.svg?url';
+import g5 from '../assets/character/grow-5.svg?url';
+import { siteStrings } from '../data/site';
+import type { Lang } from '../lib/types';
+
+interface Props {
+  lang: Lang;
+}
+const t = siteStrings(Astro.props.lang).deco;
+const LOOKS = [d1, d2, d3, d4, d5, d6];
+const STAGES = [g1, g2, g3, g4, g5];
+---
+
+<section id="character" class="doc">
+  <h2>{t.heading}</h2>
+  <p class="doc-text">{t.intro}</p>
+  <ul class="deco-grid">
+    {LOOKS.map((src, i) => <li><img src={src} alt="" width="240" height="240" loading="lazy" /><span>{t.looks[i]}</span></li>)}
+  </ul>
+  <ol class="deco-grow">
+    {STAGES.map((src, i) => <li><img src={src} alt="" width="240" height="240" loading="lazy" /><span>{t.stages[i]}</span></li>)}
+  </ol>
+</section>
+
+<style>
+  .deco-grid,
+  .deco-grow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    width: 128px;
+    font-size: 14px;
+    color: var(--body);
+    text-align: center;
+  }
+  img {
+    width: 120px;
+    height: auto;
+  }
+</style>
