@@ -2,6 +2,8 @@ import { load } from 'cheerio';
 import { expect, test } from 'vitest';
 import { CASES_KO } from '../../src/data/cases.ko';
 import { FAQ_KO } from '../../src/data/faq.ko';
+import { SITE_EN } from '../../src/data/site.en';
+import { SITE_KO } from '../../src/data/site.ko';
 import { findForbidden } from '../../src/lib/forbidden';
 import { CASE_ORDER, CASE_SLUG } from '../../src/lib/types';
 import { allHtml, read } from './helpers';
@@ -109,4 +111,26 @@ test('CSS 없이 읽어도 제목 두 줄과 링크 목록의 낱말이 붙지 �
   expect(first).toBe('초등학교 시간표 40분 수업과 준비물을 부모가 아이 대신 챙겨요.');
   const en = load(read('dist/en/for/university/index.html'));
   expect(en('h1').text().replace(/\s+/g, ' ').trim()).toBe('College class schedule Rooms and assignments on one page');
+});
+
+test('자주 묻는 질문 머리의 심간이는 말없이 집중한다', () => {
+  for (const file of ['dist/faq/index.html', 'dist/en/faq/index.html']) {
+    const $p = load(read(file));
+    expect($p('.guide[data-guide="focus"]').length, file).toBe(1);
+    expect($p('.guide-bubble').length, file).toBe(0);
+  }
+});
+
+test('소개 머리의 심간이가 한마디 한다', () => {
+  for (const [file, line] of [['dist/about/index.html', SITE_KO.guide.about], ['dist/en/about/index.html', SITE_EN.guide.about]]) {
+    expect(load(read(file))('.guide[data-guide="basic"] .guide-bubble').text().trim(), file).toBe(line);
+  }
+});
+
+test('404의 심간이는 놀란 얼굴로 제목과 같은 말을 한다', () => {
+  expect(load(read('dist/404.html'))('.guide[data-guide="oops"] .guide-bubble').text().trim()).toBe(SITE_KO.notFound.h1);
+});
+
+test('사례 밖 심간이는 한 페이지에 2개 이하', () => {
+  for (const p of allHtml()) expect(p.$('.guide').filter((_, g) => p.$(g).closest('[data-stepper]').length === 0).length, p.path).toBeLessThanOrEqual(2);
 });

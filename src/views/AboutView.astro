@@ -2,6 +2,7 @@
 import Definition from '../components/Definition.astro';
 import FactsTable from '../components/FactsTable.astro';
 import Footer from '../components/Footer.astro';
+import Guide from '../components/Guide.astro';
 import Header from '../components/Header.astro';
 import InstallBlock from '../components/InstallBlock.astro';
 import Layout from '../components/Layout.astro';
@@ -20,7 +21,10 @@ const EMAIL = 'jerryjung2929@gmail.com';
 <Layout lang={lang} page="about">
   <Header lang={lang} page="about" />
   <main class="page">
-    <h1 class="page-h1">{t.about.h1}</h1>
+    <div class="page-head">
+      <h1 class="page-h1">{t.about.h1}</h1>
+      <Guide pose="basic" line={t.guide.about} size="sm" />
+    </div>
     <div class="page-lead"><Definition text={t.what.definition} /></div>
     <FactsTable lang={lang} />
 

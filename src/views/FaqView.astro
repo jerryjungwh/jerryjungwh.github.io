@@ -1,6 +1,7 @@
 ---
 import FaqList from '../components/FaqList.astro';
 import Footer from '../components/Footer.astro';
+import Guide from '../components/Guide.astro';
 import Header from '../components/Header.astro';
 import InstallBlock from '../components/InstallBlock.astro';
 import Layout from '../components/Layout.astro';
@@ -19,7 +20,10 @@ const groups = faqGroups(lang);
 <Layout lang={lang} page="faq" faq={groups.flatMap((g) => g.items.map(({ q, a }) => ({ q, a })))}>
   <Header lang={lang} page="faq" />
   <main class="page">
-    <h1 class="page-h1">{t.faqPage.h1}</h1>
+    <div class="page-head">
+      <h1 class="page-h1">{t.faqPage.h1}</h1>
+      <Guide pose="focus" size="sm" />
+    </div>
     <p class="doc-text page-lead">{t.faqPage.lead}</p>
     {
       groups.map((g) => (

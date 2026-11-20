@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/Footer.astro';
+import Guide from '../components/Guide.astro';
 import Header from '../components/Header.astro';
 import Layout from '../components/Layout.astro';
 import LinkList from '../components/LinkList.astro';
@@ -15,7 +16,10 @@ const links = caseDefs(lang).map((c) => ({ href: pagePath(lang, `for_${c.id}`), 
 <Layout lang={lang} notFound={{ title: t.notFound.title, description: t.notFound.text }}>
   <Header lang={lang} />
   <main class="page">
-    <h1 class="page-h1">{t.notFound.h1}</h1>
+    <div class="page-head">
+      <h1 class="page-h1">{t.notFound.h1}</h1>
+      <Guide pose="oops" line={t.notFound.h1} size="md" />
+    </div>
     <p class="doc-text page-lead">{t.notFound.text}</p>
     <a class="doc-more" href={pagePath(lang, 'home')}>{t.notFound.home}</a>
     <div class="not-found-links"><LinkList items={links} /></div>

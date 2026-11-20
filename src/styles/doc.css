@@ -53,3 +53,18 @@
 .page-lead {
   margin-top: 18px;
 }
+
+/* Page title with Simgani beside it (FAQ, about, 404; redesign 11-20). */
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-head .page-h1 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.page-head .guide {
+  flex: 0 0 auto;
+}
