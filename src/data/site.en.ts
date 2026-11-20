@@ -105,7 +105,7 @@ export const SITE_EN: SiteStrings = {
   deco: {
     heading: 'Make Simgani yours',
     intro: 'Change its shape, eyes, hats and shoes. It grows with you as you use the app.',
-    looks: ['Cloud + beanie', 'Star + ribbon', 'Heart + heart eyes', 'Block + glasses', 'Boots + umbrella', 'Headphones + coffee'],
+    looks: ['Fluffy + beanie', 'Star + ribbon', 'Heart + heart eyes', 'Block + glasses', 'Boots + umbrella', 'Headphones + coffee'],
     stages: ['Baby', 'Toddler', 'Kid', 'Teen', 'Grown-up'],
   },
   install: {
