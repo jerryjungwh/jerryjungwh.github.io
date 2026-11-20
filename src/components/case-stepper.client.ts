@@ -187,6 +187,7 @@ function mount(root: HTMLElement): void {
           setFlag(step.figures.tablet, 'data-active', stepOn && state.device === 'tablet');
         });
       });
+      if (prev && prev.caseIndex !== state.caseIndex) root.dataset.moved = '';
       if (stepNow) stepNow.textContent = String(state.stepIndex + 1);
       root.dataset.device = state.device;
       deviceButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.device === state.device)));

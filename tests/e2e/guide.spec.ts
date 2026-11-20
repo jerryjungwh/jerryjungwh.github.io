@@ -56,12 +56,47 @@ test('동작 줄이기에서는 움직이지 않는다', async ({ page }) => {
   expect(name).toBe('none');
 });
 
-for (const [width, height] of [[390, 844], [768, 900]] as const) {
-  test(`좁은 너비에서 심간이가 사례 버튼·단계 글·크게 보기를 가리지 않는다 (${width}px)`, async ({ page }) => {
-    await open(page, width, height);
-    const g = (await guide(page).boundingBox())!;
-    for (const sel of ['.stepper-tabs button:visible', 'article[data-case] .case-text:visible', 'figure[data-media][data-active]:visible .media-zoom']) {
-      for (const el of await page.locator(sel).all()) expect(overlap(g, (await el.boundingBox())!), sel).toBe(0);
-    }
+const NARROW = [
+  [390, 844, '/'],
+  [768, 900, '/'],
+  [900, 900, '/en/'],
+  [390, 844, '/for/university/'],
+  [768, 900, '/for/university/'],
+] as const;
+const covered = ['.stepper-tabs button:visible', '.stepper-switch:visible', '.stepper-lead > :not(.hero-decor):visible', 'article[data-case] .case-text:visible', 'figure[data-media][data-active]:visible .media-zoom'];
+for (const [width, height, path] of NARROW) {
+  for (const device of ['phone', 'tablet'] as const) {
+    test(`좁은 너비에서 심간이는 화면 위에 서고, 화면·사례 버튼·단계 글·크게 보기를 가리지 않는다 (${width}px ${path} ${device})`, async ({ page }) => {
+      await open(page, width, height, path);
+      if (device === 'tablet') await page.locator('button[data-device="tablet"]').first().click();
+      const g = (await guide(page).locator('img').boundingBox())!;
+      const screen = (await page.locator('figure[data-media][data-active]:visible .media').first().boundingBox())!;
+      expect(g.y + g.height * 0.85, 'feet on or above the screen').toBeLessThanOrEqual(screen.y + 2);
+      for (const sel of covered) {
+        for (const el of await page.locator(sel).all()) expect(overlap(g, (await el.boundingBox())!), sel).toBe(0);
+      }
+    });
+  }
+}
+
+for (const [width, path] of [[1440, '/'], [1440, '/en/'], [1024, '/en/'], [960, '/en/']] as const) {
+  test(`태블릿을 고르면 심간이가 태블릿 틀 오른쪽 위 모서리에 앉고 말풍선이 스위치를 덮지 않는다 (${width}px ${path})`, async ({ page }) => {
+    await open(page, width, 900, path);
+    await page.locator('button[data-device="tablet"]').first().click();
+    const shot = (await page.locator('figure[data-media][data-active][data-device="tablet"]:visible .media').first().boundingBox())!;
+    const g = (await guide(page).locator('img').boundingBox())!;
+    expect(Math.abs(g.y + g.height * 0.85 - shot.y), 'feet on the top edge').toBeLessThanOrEqual(24);
+    expect(Math.abs(g.x + g.width / 2 - (shot.x + shot.width)), 'centre near the right edge').toBeLessThanOrEqual(g.width * 0.6);
+    const bubble = (await page.locator('.case-screens .guide-bubble:visible').boundingBox())!;
+    expect(overlap(bubble, (await page.locator('.stepper-switch').boundingBox())!), 'switch').toBe(0);
+    expect(overlap(bubble, shot), 'tablet screen').toBe(0);
   });
 }
+
+test('심간이는 처음 한 번만 튀고, 사례를 바꾸면 다시 튀지 않는다', async ({ page }) => {
+  await open(page, 1440, 900);
+  const hop = () => guide(page).locator('img').evaluate((img) => getComputedStyle(img).animationName);
+  expect(await hop()).toBe('guide-hop');
+  await page.locator('.stepper-tabs button[aria-pressed="false"]').first().click();
+  expect(await hop()).toBe('none');
+});

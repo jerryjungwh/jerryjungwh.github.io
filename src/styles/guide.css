@@ -19,6 +19,10 @@
   height: auto;
   animation: guide-hop 0.6s ease-out 1 both;
 }
+/* Once per page: after the first change of case the stepper carries data-moved (case-stepper.client.ts). */
+[data-moved] .guide img {
+  animation: none;
+}
 @keyframes guide-hop {
   0% {
     transform: translateY(-8px);
@@ -76,26 +80,37 @@
 html:not(.js) .case-screens .guide {
   display: none;
 }
+/* Tablet: the tablet (width --tablet-w, 16:10) is centred in the stage, so its top-right corner is at
+   (50% + tablet-w / 2, (stage-h - tablet-h) / 2). Simgani's feet are 85% down the drawing. */
 @media (min-width: 960px) {
   html.js [data-stepper][data-device='tablet'] .case-screens .guide {
     --guide-w: 96px;
-    left: auto;
-    right: calc(var(--pad) - 40px);
-    top: calc(var(--pad) + 24px);
+    left: calc(50% + var(--tablet-w) / 2 - 48px);
+    top: calc((var(--stage-h) - var(--tablet-w) * 0.625) / 2 + 14px);
   }
 }
-/* Below 960px the screen fills its column: the zoom button holds the top-right corner and the case buttons and
-   steps sit right next to it. Simgani moves to the top-left corner of the screen, smaller, without the bubble. */
+/* Below 960px the zoom button holds the screen's top-right corner and the case buttons and steps sit right next
+   to it. Simgani stands, smaller and without the bubble, on the top edge at the right end of the stage: above the
+   screen, never on it. On a phone the case buttons keep that corner free (padding below). */
 @media (max-width: 959.98px) {
   html.js .stepper .case-screens .guide {
     --guide-w: 60px;
-    left: 8px;
-    right: auto;
-    top: -8px;
+    left: auto;
+    right: 0;
+    top: -51px;
     transform: none;
   }
   .case-screens .guide-bubble {
     display: none;
+  }
+}
+@media (max-width: 719.98px) {
+  html.js .stepper .stepper-tabs {
+    padding-right: 64px;
+  }
+  /* Case pages have no case buttons: the gap under the lead holds Simgani instead. */
+  html.js .stepper[data-fixed-case] .case-screens {
+    margin-top: 20px;
   }
 }
 @media (max-width: 767.98px) {
