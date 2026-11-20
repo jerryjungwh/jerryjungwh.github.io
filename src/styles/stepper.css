@@ -627,9 +627,12 @@ html.js .stepper li[data-step][data-active] .step-text {
     --tablet-w: 472px;
     --pad: 24px;
     --stage-top: 0px;
+    /* The stage column and the gap after it. The hero blocks (decor.css) are placed from these too. */
+    --stage-col: 520px;
+    --col-gap: clamp(40px, 6vw, 96px);
   }
   html.js .stepper {
-    grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--stage-col)) minmax(0, 1fr);
     grid-template-areas:
       'stage lead'
       'stage tabs'
@@ -637,7 +640,7 @@ html.js .stepper li[data-step][data-active] .step-text {
       'stage controls'
       'stage cta';
     grid-template-rows: auto auto auto auto 1fr;
-    column-gap: clamp(40px, 6vw, 96px);
+    column-gap: var(--col-gap);
   }
   html.js .stepper .case-text {
     margin-top: 28px;

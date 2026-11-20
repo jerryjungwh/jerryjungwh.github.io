@@ -1,37 +1,43 @@
 /* First screen: faint light and floating timetable blocks (redesign 11-20, spec §5). */
 .stepper {
   isolation: isolate;
+  /* closest-side: each light fades out before it reaches the section's edges, so no rectangle shows. */
   background:
-    radial-gradient(60% 50% at 10% 0%, var(--glow-sky), transparent 70%),
-    radial-gradient(50% 50% at 95% 20%, var(--glow-lilac), transparent 70%);
+    radial-gradient(closest-side at 20% 18%, var(--glow-sky), transparent),
+    radial-gradient(closest-side at 82% 18%, var(--glow-lilac), transparent);
 }
 .stepper-lead {
   position: relative;
 }
+/* Above the stage card (z-index 1), below Simgani and the zoom button (z-index 2). */
 .hero-decor {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
+/* Narrow screens and the script-less document: the first three blocks in the 32px band under the lead. */
 .hero-block {
   position: absolute;
-  left: var(--dx);
-  top: var(--dy);
-  width: var(--w);
-  height: var(--h);
+  left: var(--mx);
+  top: calc(100% + 5px);
+  width: var(--mw);
+  height: var(--mh);
   border-radius: calc(min(var(--w), var(--h)) * 0.28);
   background: radial-gradient(120% 120% at 30% 20%, var(--cl), var(--c) 60%, var(--cd));
   transform: rotate(var(--r));
 }
-@media (max-width: 767px) {
-  .hero-block {
-    left: var(--mx);
-    top: calc(100% + 5px);
-    width: var(--mw);
-    height: var(--mh);
-  }
-  .hero-block:nth-child(n + 4) {
-    display: none;
+.hero-block:nth-child(n + 4) {
+  display: none;
+}
+/* Beside the stage: (x, y) is a point on the stage card. The lead starts one stage column and one gap to the
+   right of the card and level with the device switch above it (stepper.css). */
+@media (min-width: 960px) {
+  html.js .hero-block {
+    display: block;
+    left: calc(var(--x) - var(--stage-col) - var(--col-gap));
+    top: calc(var(--y) + var(--stage-top) + var(--switch-h) + 12px);
+    width: var(--w);
+    height: var(--h);
   }
 }
