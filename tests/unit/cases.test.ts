@@ -92,7 +92,7 @@ const GUIDE_LINES = {
     middle_school: "Let's sort out this term together",
     high_school: 'Classes and assignments, together',
     university: "Let's build this semester together",
-    after_school: 'Never miss an academy day',
+    after_school: 'Never miss an activity day',
     lessons: 'Your weekly plans, sorted together',
   },
 } as const;

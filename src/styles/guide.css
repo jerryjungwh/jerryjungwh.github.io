@@ -108,9 +108,9 @@ html:not(.js) .case-screens .guide {
   html.js .stepper .stepper-tabs {
     padding-right: 64px;
   }
-  /* Case pages have no case buttons: the gap under the lead holds Simgani instead. */
+  /* Case pages have no case buttons: the gap under the lead holds Simgani instead, with room for the 8px hop. */
   html.js .stepper[data-fixed-case] .case-screens {
-    margin-top: 20px;
+    margin-top: 28px;
   }
 }
 @media (max-width: 767.98px) {

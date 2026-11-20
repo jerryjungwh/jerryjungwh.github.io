@@ -303,7 +303,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'after_school',
     name: 'Kids’ activities schedule',
     tab: 'Kids’ activities',
-    guideLine: 'Never miss an academy day',
+    guideLine: 'Never miss an activity day',
     h1: ['Kids’ activities schedule', 'One timetable per child, in one app'],
     intro:
       'An example of a parent organizing after-school activities for two children. Each child has their own timetable, and things to pack are linked to the activity that needs them.',

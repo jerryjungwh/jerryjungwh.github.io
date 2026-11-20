@@ -85,6 +85,8 @@ npm run preview                   # dist를 http://localhost:4321 에서 본다
 
 예: `bash scripts/check-live.sh test`
 
+Search Console의 「리디렉션이 포함된 페이지」에 `http://simganpyo.com/`, `http://www.simganpyo.com/`, `https://www.simganpyo.com/`가 뜨는 것은 정상이다(2026-11-17 처음 감지, 11-20 확인). 셋 다 301로 `https://simganpyo.com/`에 가고, 사이트의 canonical·sitemap·링크는 모두 `https://simganpyo.com`만 쓴다. 고칠 것이 없으니 「수정 결과 확인」을 누르지 않는다(넘김은 계속되므로 확인이 실패로 끝난다). 이 목록에 정점 주소 `https://simganpyo.com/…`가 들어오면 그때 원인을 찾는다.
+
 ## 다시 찍는 방법
 
 화면은 모두 Android 에뮬레이터의 실제 앱(DEV 디버그 빌드)에서 찍는다. **실제 폰에서는 찍지 않는다.** 스크립트는 켜져 있는 에뮬레이터가 정확히 하나일 때만 돌고, USB나 무선으로 붙은 실제 기기는 고르지 않는다.
