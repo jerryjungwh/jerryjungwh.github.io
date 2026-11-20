@@ -48,12 +48,17 @@ export interface StepDef {
   long: string;
 }
 
+/** Simgani's poses on the site (canon expression table, redesign 11-20). */
+export type GuidePose = 'basic' | 'done' | 'focus' | 'oops';
+
 export interface CaseDef {
   id: CaseId;
   /** Full name, used as the case heading and in links: '초등학교 시간표'. */
   name: string;
   /** Short label for the case button: '초등학교'. */
   tab: string;
+  /** Simgani's one line beside the case screen. Decorative (aria-hidden), never a heading or body text. */
+  guideLine: string;
   h1: [string, string];
   intro: string;
   steps: StepDef[];

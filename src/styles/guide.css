@@ -1,0 +1,105 @@
+/* Simgani, the guide (redesign 11-20, spec §6). */
+.guide {
+  position: relative;
+  width: var(--guide-w, 120px);
+  pointer-events: none;
+}
+.guide-lg {
+  --guide-w: 120px;
+}
+.guide-md {
+  --guide-w: 112px;
+}
+.guide-sm {
+  --guide-w: 88px;
+}
+.guide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: guide-hop 0.6s ease-out 1 both;
+}
+@keyframes guide-hop {
+  0% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: none;
+  }
+  80% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: none;
+  }
+}
+.guide-bubble {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% - 4px);
+  padding: 8px 14px;
+  border: 1.5px solid #DADDEA;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(39, 39, 51, 0.06);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.guide-bubble::after {
+  content: '';
+  position: absolute;
+  right: 44px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  border-right: 1.5px solid #DADDEA;
+  border-bottom: 1.5px solid #DADDEA;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+/* Beside the case screen: Simgani sits on the top-right shoulder of the phone frame. */
+.case-screens {
+  position: relative;
+}
+.case-screens .guide {
+  position: absolute;
+  z-index: 2;
+  /* The phone is centred in the stage: its top-right corner is at (50% + phone-w / 2, pad). */
+  left: calc(50% + var(--phone-w) / 2 - 64px);
+  top: calc(var(--pad) + 34px);
+  transform: translateY(-100%);
+}
+html:not(.js) .case-screens .guide {
+  display: none;
+}
+@media (min-width: 960px) {
+  html.js [data-stepper][data-device='tablet'] .case-screens .guide {
+    --guide-w: 96px;
+    left: auto;
+    right: calc(var(--pad) - 40px);
+    top: calc(var(--pad) + 24px);
+  }
+}
+/* Below 960px the screen fills its column: the zoom button holds the top-right corner and the case buttons and
+   steps sit right next to it. Simgani moves to the top-left corner of the screen, smaller, without the bubble. */
+@media (max-width: 959.98px) {
+  html.js .stepper .case-screens .guide {
+    --guide-w: 60px;
+    left: 8px;
+    right: auto;
+    top: -8px;
+    transform: none;
+  }
+  .case-screens .guide-bubble {
+    display: none;
+  }
+}
+@media (max-width: 767.98px) {
+  .guide-bubble {
+    display: none;
+  }
+}

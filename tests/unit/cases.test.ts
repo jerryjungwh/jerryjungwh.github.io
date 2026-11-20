@@ -76,3 +76,28 @@ test('부모가 말하는 사례(초등학교·중학교·아이 학원)에는 �
       expect(STUDENT_VOICE[lang].filter((w) => text.includes(w)), `${lang}/${c.id}`).toEqual([]);
     }
 });
+
+// Simgani's one line beside each case (redesign 11-20, spec §6). Decorative: not a heading, not body text.
+const GUIDE_LINES = {
+  ko: {
+    elementary_school: '아이 시간표, 같이 챙겨요',
+    middle_school: '이번 학기, 같이 정리해요',
+    high_school: '수업도 수행평가도 같이 챙겨요',
+    university: '이번 학기 시간표, 같이 만들어요',
+    after_school: '학원 가는 날, 같이 챙겨요',
+    lessons: '매주 일정, 같이 정리해요',
+  },
+  en: {
+    elementary_school: "Let's keep the school schedule together",
+    middle_school: "Let's sort out this term together",
+    high_school: 'Classes and assignments, together',
+    university: "Let's build this semester together",
+    after_school: 'Never miss an academy day',
+    lessons: 'Your weekly plans, sorted together',
+  },
+} as const;
+
+test('사례마다 말풍선 한 줄이 있다', () => {
+  for (const c of CASES_KO) expect(c.guideLine, c.id).toBe(GUIDE_LINES.ko[c.id]);
+  for (const c of CASES_EN) expect(c.guideLine, c.id).toBe(GUIDE_LINES.en[c.id]);
+});

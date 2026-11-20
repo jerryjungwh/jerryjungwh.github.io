@@ -11,6 +11,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'elementary_school',
     name: 'Elementary school timetable',
     tab: 'Elementary',
+    guideLine: "Let's keep the school schedule together",
     h1: ['Elementary school timetable', 'Your child’s school day, to the minute'],
     intro:
       'An example of a parent making a timetable for a fourth grader. Classes go in with their real start and end times, and things to pack are linked to the class that needs them.',
@@ -83,6 +84,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'middle_school',
     name: 'Middle school timetable',
     tab: 'Middle school',
+    guideLine: "Let's sort out this term together",
     h1: ['Middle school timetable', 'Classes and practice on one page'],
     intro:
       'An example of a parent and a seventh grader making a timetable together: 45-minute periods, soccer practice on weekdays and tutoring on Saturday, all on one page.',
@@ -155,6 +157,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'high_school',
     name: 'High school timetable',
     tab: 'High school',
+    guideLine: 'Classes and assignments, together',
     h1: ['High school timetable', 'Seven periods and study time at a glance'],
     intro:
       'An example of a high school junior making their own timetable: seven 50-minute periods, an evening study block, and projects and presentations linked to the classes they are for.',
@@ -227,6 +230,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'university',
     name: 'College class schedule',
     tab: 'College',
+    guideLine: "Let's build this semester together",
     h1: ['College class schedule', 'Rooms and assignments on one page'],
     intro:
       'An example of a college student setting up this semester’s classes. Each class has its room and professor, and assignments are linked to the class until they are due.',
@@ -299,6 +303,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'after_school',
     name: 'Kids’ activities schedule',
     tab: 'Kids’ activities',
+    guideLine: 'Never miss an academy day',
     h1: ['Kids’ activities schedule', 'One timetable per child, in one app'],
     intro:
       'An example of a parent organizing after-school activities for two children. Each child has their own timetable, and things to pack are linked to the activity that needs them.',
@@ -371,6 +376,7 @@ export const CASES_EN: CaseDef[] = [
     id: 'lessons',
     name: 'Lessons & personal schedule',
     tab: 'Lessons & personal',
+    guideLine: 'Your weekly plans, sorted together',
     h1: ['Lessons & personal schedule', 'Your lessons and your own time on one page'],
     intro:
       'An example of a private tutor keeping their weekly lessons. Lessons and gym time that repeat every week go on one timetable, and prep work is linked to the lesson it is for.',

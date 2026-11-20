@@ -1,0 +1,24 @@
+---
+import '../styles/guide.css';
+import basic from '../assets/character/guide-basic.svg?url';
+import done from '../assets/character/guide-done.svg?url';
+import focus from '../assets/character/guide-focus.svg?url';
+import oops from '../assets/character/guide-oops.svg?url';
+import type { GuidePose } from '../lib/types';
+
+// Simgani as the site's guide (redesign 11-20, spec §6). Decorative: hidden from screen readers, empty alt.
+// The drawings come from the canon drawing code (src/assets/character/manifest.json).
+interface Props {
+  pose: GuidePose;
+  line?: string;
+  size: 'lg' | 'md' | 'sm';
+  class?: string;
+}
+const { pose, line, size, class: extra } = Astro.props;
+const SRC: Record<GuidePose, string> = { basic, done, focus, oops };
+---
+
+<div class:list={['guide', `guide-${size}`, extra]} aria-hidden="true" data-guide={pose}>
+  {line && <p class="guide-bubble">{line}</p>}
+  <img src={SRC[pose]} alt="" width="240" height="240" loading={size === 'lg' ? 'eager' : 'lazy'} decoding="async" />
+</div>
