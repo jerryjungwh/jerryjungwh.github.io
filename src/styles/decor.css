@@ -1,0 +1,37 @@
+/* First screen: faint light and floating timetable blocks (redesign 11-20, spec §5). */
+.stepper {
+  isolation: isolate;
+  background:
+    radial-gradient(60% 50% at 10% 0%, var(--glow-sky), transparent 70%),
+    radial-gradient(50% 50% at 95% 20%, var(--glow-lilac), transparent 70%);
+}
+.stepper-lead {
+  position: relative;
+}
+.hero-decor {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero-block {
+  position: absolute;
+  left: var(--dx);
+  top: var(--dy);
+  width: var(--w);
+  height: var(--h);
+  border-radius: calc(min(var(--w), var(--h)) * 0.28);
+  background: radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--c) 55%, #fff), var(--c) 60%, color-mix(in srgb, var(--c) 92%, #000));
+  transform: rotate(var(--r));
+}
+@media (max-width: 767px) {
+  .hero-block {
+    left: var(--mx);
+    top: calc(100% + 5px);
+    width: var(--mw);
+    height: var(--mh);
+  }
+  .hero-block:nth-child(n + 4) {
+    display: none;
+  }
+}

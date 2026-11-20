@@ -7,6 +7,7 @@ import { screenCut, screenFocus, screenFocusLabel } from '../lib/screen-focus';
 import { stepDurationMs, stepStayMs } from '../lib/stepper-state';
 import type { CaseDef, CaseId, Device, Lang } from '../lib/types';
 import MediaView from './MediaView.astro';
+import HeroDecor from './HeroDecor.astro';
 
 interface Props {
   lang: Lang;
@@ -34,7 +35,7 @@ const firstScreen = `(function(){var c=document.documentElement.dataset.startCas
 
 {/* Every case, step and screen is in the HTML. The script only switches which one is shown. */}
 <section id="cases" class="stepper" data-stepper data-fixed-case={fixedCase} data-detail={detail} aria-label={t.sectionLabel}>
-  {Astro.slots.has('lead') && <div class="stepper-lead"><slot name="lead" /></div>}
+  {Astro.slots.has('lead') && <div class="stepper-lead"><slot name="lead" /><HeroDecor /></div>}
 
   {
     !fixedCase && (
