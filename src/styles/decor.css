@@ -21,7 +21,7 @@
   width: var(--w);
   height: var(--h);
   border-radius: calc(min(var(--w), var(--h)) * 0.28);
-  background: radial-gradient(120% 120% at 30% 20%, color-mix(in srgb, var(--c) 55%, #fff), var(--c) 60%, color-mix(in srgb, var(--c) 92%, #000));
+  background: radial-gradient(120% 120% at 30% 20%, var(--cl), var(--c) 60%, var(--cd));
   transform: rotate(var(--r));
 }
 @media (max-width: 767px) {
