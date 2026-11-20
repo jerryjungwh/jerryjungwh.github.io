@@ -101,6 +101,7 @@ export const SITE_EN: SiteStrings = {
     caption: (year, month) => `Google Play review · ${MONTHS[month - 1]} ${year}`,
   },
   faq: { heading: 'Frequently asked questions', all: 'See all questions' },
+  guide: { what: "Questions? They're right below.", about: 'Here with you since 2017' },
   install: {
     heading: 'Get SimpleScheduler',
     play: 'Get it on Google Play',

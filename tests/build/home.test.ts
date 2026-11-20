@@ -3,7 +3,7 @@ import { expect, test } from 'vitest';
 import { SITE_KO } from '../../src/data/site.ko';
 import { APP_STORE_URL } from '../../src/lib/urls';
 import { CASE_ORDER, CASE_SLUG } from '../../src/lib/types';
-import { read } from './helpers';
+import { allHtml, read } from './helpers';
 
 const $ = load(read('dist/index.html'));
 
@@ -109,4 +109,18 @@ test('바닥글: 사례 6, 질문, 소개, 정책 두 주소, 문의, 언어 전
 test('앱 아이콘이 파비콘이다 (Astro 기본 그림이 아니다)', () => {
   expect($('link[rel="icon"]').attr('href')).toMatch(/\.png$/);
   expect($('link[rel="apple-touch-icon"]').length).toBe(1);
+});
+
+test('어떤 앱인가요 절에 심간이가 한마디 한다', () => {
+  expect($('#what .guide[data-guide="basic"] .guide-bubble').text().trim()).toBe(SITE_KO.guide.what);
+  expect($('#what .guide').attr('aria-hidden')).toBe('true');
+});
+
+test('설치 절의 심간이는 말없이 웃는다', () => {
+  expect($('#install .guide[data-guide="done"]').length).toBe(1);
+  expect($('#install .guide-bubble').length).toBe(0);
+});
+
+test('머리글 로고는 지금 앱 아이콘 그대로다', () => {
+  for (const p of allHtml()) expect(p.$('header .brand img').attr('src'), p.path).toMatch(/app-icon/);
 });

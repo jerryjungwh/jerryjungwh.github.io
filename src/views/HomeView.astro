@@ -3,6 +3,7 @@ import CaseStepper from '../components/CaseStepper.astro';
 import Definition from '../components/Definition.astro';
 import FactsTable from '../components/FactsTable.astro';
 import FaqList from '../components/FaqList.astro';
+import Guide from '../components/Guide.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import InstallBlock from '../components/InstallBlock.astro';
@@ -38,6 +39,7 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
 
     <section id="what" class="doc">
       <h2>{t.what.heading}</h2>
+      <Guide pose="basic" line={t.guide.what} size="md" class="what-guide" />
       <Definition text={t.what.definition} />
       <FactsTable lang={lang} />
     </section>
@@ -59,6 +61,7 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
     </section>
 
     <section id="install" class="doc">
+      <Guide pose="done" size="md" class="install-guide" />
       <h2>{t.install.heading}</h2>
       <InstallBlock lang={lang} page="home" cta="page_end" />
     </section>
@@ -67,6 +70,49 @@ const caseLinks = cases.map((c) => ({ href: pagePath(lang, `for_${c.id}`), title
 </Layout>
 
 <style>
+  /* Simgani beside "what is it" and in the install block (redesign 11-20, spec §6). */
+  #what {
+    position: relative;
+  }
+  #what :global(.what-guide) {
+    margin-left: auto;
+  }
+  #install {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 40px;
+    align-items: center;
+    padding: 44px 48px;
+    border-top: 0;
+    border-radius: 32px;
+    background: var(--install-bg);
+  }
+  #install > :global(*) {
+    grid-column: 2;
+  }
+  #install > :global(.install-guide) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  @media (min-width: 960px) {
+    #what :global(.what-guide) {
+      position: absolute;
+      top: calc(clamp(28px, 4vw, 44px) + 56px);
+      right: 24px;
+      margin: 0;
+    }
+  }
+  @media (max-width: 719.98px) {
+    #install {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 28px 20px;
+    }
+    #install > :global(*),
+    #install > :global(.install-guide) {
+      grid-column: 1;
+      grid-row: auto;
+    }
+  }
   .home-h1 {
     font-size: clamp(30px, 4.6vw, 54px);
     font-weight: 900;

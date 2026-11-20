@@ -81,3 +81,11 @@ test('영어 페이지 바닥글은 영어 정책본으로 간다', () => {
     expect(p.$('footer a[href="https://simganpyo.com/SimpleScheduler-Android/en/terms"]').text().trim(), p.path).toBe('Terms of Use');
   }
 });
+
+test('영어 홈의 어떤 앱 절과 설치 절에도 심간이가 있다', async () => {
+  const { SITE_EN } = await import('../../src/data/site.en');
+  const $en = load(read('dist/en/index.html'));
+  expect($en('#what .guide[data-guide="basic"] .guide-bubble').text().trim()).toBe(SITE_EN.guide.what);
+  expect($en('#install .guide[data-guide="done"]').length).toBe(1);
+  expect($en('#install .guide-bubble').length).toBe(0);
+});

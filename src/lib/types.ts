@@ -121,6 +121,8 @@ export interface SiteStrings {
     caption(year: number, month: number): string;
   };
   faq: { heading: string; all: string };
+  /** Simgani's lines outside the stepper (redesign 11-20). Decorative, aria-hidden. */
+  guide: { what: string; about: string };
   install: {
     heading: string;
     play: string;

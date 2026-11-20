@@ -91,6 +91,7 @@ export const SITE_KO: SiteStrings = {
     caption: (year, month) => `Google Play 리뷰 · ${year}년 ${month}월`,
   },
   faq: { heading: '자주 묻는 질문', all: '질문 전체 보기' },
+  guide: { what: '궁금한 건 아래에 있어요', about: '2017년부터 함께했어요' },
   install: {
     heading: '심간표 받기',
     play: 'Google Play에서 받기',
